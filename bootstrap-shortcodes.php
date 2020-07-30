@@ -3,7 +3,7 @@
 Plugin Name: Bootstrap 4 Shortcodes
 Plugin URI: (https://github.com/MWDelaney/bootstrap-shortcodes)
 Description: The plugin adds shortcodes for all Bootstrap 4 elements.
-Version: 4.0.0
+Version: 4.5.0
 Author: Uwe Jacobs; Michael W. Delaney, Filip Stefansson, and Simon Yeldon until 3.3.12
 Author URI:
 License: MIT
@@ -93,6 +93,7 @@ License: MIT
 		$shortcodes = array(
 			'alert',
 			'badge',
+			'br',
 			'blockquote',
 			'blockquote-footer',
 			'breadcrumb',
@@ -121,14 +122,14 @@ License: MIT
 			'dropdown-header',
 			'dropdown-item',
 			'emphasis',
-			'fa-icon',
-			'fa-icon-stack',
             'flex',
             'flex-item',
+			'icon',
+			'icon-stack',
 			'img',
+			'img-gen',
 			'embed-responsive',
 			'jumbotron',
-			'label',
 			'lead',
 			'list-group',
 			'list-group-item',
@@ -136,6 +137,7 @@ License: MIT
 			'list-group-item-text',
 			'media',
 			'media-body',
+			'media-object',
 			'modal',
 			'modal-header',
 			'modal-body',
@@ -167,7 +169,7 @@ License: MIT
 		*
 		* @author Filip Stefansson, Nicolas Jonas
 		* @since 1.0
-		* //DW mod added xclass var
+		* 
 		*-------------------------------------------------------------------------------------*/
 	function bs_button( $atts, $content = null ) {
 
@@ -176,33 +178,33 @@ License: MIT
 			"size"     => false,
 			"block"    => false,
 			"dropdown" => false,
-			"link"     => '',
+			"link"     => '#',
 			"target"   => false,
 			"disabled" => false,
 			"active"   => false,
-			"xclass"   => false,
+			"class"    => false,
 			"title"    => false,
 			"data"     => false
 		), $atts );
 
-		$class  = 'btn';
-		$class .= ( $atts['type'] )     ? ' btn-' . $atts['type'] : '';
-		$class .= ( $atts['size'] && $atts['size'] != "xs" )     ? ' btn-' . $atts['size'] : '';
-		$class .= ( $atts['block'] == 'true' )    ? ' btn-block' : '';
-		$class .= ( $atts['dropdown']   == 'true' ) ? ' dropdown-toggle' : '';
-		$class .= ( $atts['disabled']   == 'true' ) ? ' disabled' : '';
-		$class .= ( $atts['active']     == 'true' )   ? ' active' : '';
-		$class .= ( $atts['xclass'] )   ? ' ' . $atts['xclass'] : '';
+        $class = array();
+		$class[] = 'btn';
+		$class[] = ( $atts['type'] )     ? 'btn-' . $atts['type'] : '';
+		$class[] = ( $atts['size'] && $atts['size'] != "xs" )     ? 'btn-' . $atts['size'] : '';
+		$class[] = ( $atts['block'] == 'true' )    ? 'btn-block' : '';
+		$class[] = ( $atts['dropdown']   == 'true' ) ? 'dropdown-toggle' : '';
+		$class[] = ( $atts['disabled']   == 'true' ) ? 'disabled' : '';
+		$class[] = ( $atts['active']     == 'true' )   ? 'active' : '';
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
 		return sprintf(
-			'<a href="%s" class="%s"%s%s%s>%s</a>',
+			'<a href="%s"%s%s%s%s>%s</a>',
 			esc_url( $atts['link'] ),
-			esc_attr( trim($class) ),
+			$this->class_output ( $class, $atts["class"] ),
 			( $atts['target'] )     ? sprintf( ' target="%s"', esc_attr( $atts['target'] ) ) : '',
 			( $atts['title'] )      ? sprintf( ' title="%s"',  esc_attr( $atts['title'] ) )  : '',
-			( $data_props ) ? ' ' . $data_props : '',
+			$data_props,
 			do_shortcode( $content )
 		);
 
@@ -222,23 +224,23 @@ License: MIT
 				"vertical"  => false,
 				"justified" => false,
 				"dropup"    => false,
-				"xclass"    => false,
+				"class"     => false,
 				"data"      => false
 		), $atts );
 
-		$class  = 'btn-group';
-		$class .= ( $atts['size'] && $atts['size'] != "xs" )         ? ' btn-group-' . $atts['size'] : '';
-		$class .= ( $atts['vertical']   == 'true' )     ? ' btn-group-vertical' : '';
-		$class .= ( $atts['justified']  == 'true' )    ? ' btn-group-justified' : '';
-		$class .= ( $atts['dropup']     == 'true' )       ? ' dropup' : '';
-		$class .= ( $atts['xclass'] )       ? ' ' . $atts['xclass'] : '';
+        $class = array();
+		$class[] = 'btn-group';
+		$class[] = ( $atts['size'] && $atts['size'] != "xs" ) ? 'btn-group-' . $atts['size'] : '';
+		$class[] = ( $atts['vertical']   == 'true' )          ? 'btn-group-vertical' : '';
+		$class[] = ( $atts['justified']  == 'true' )          ? 'btn-group-justified' : '';
+		$class[] = ( $atts['dropup']     == 'true' )          ? 'dropup' : '';
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
 		return sprintf(
-			'<div class="%s"%s>%s</div>',
-			esc_attr( trim($class) ),
-			( $data_props ) ? ' ' . $data_props : '',
+			'<div%s%s>%s</div>',
+			$this->class_output ( $class, $atts["class"] ),
+			$data_props,
 			do_shortcode( $content )
 		);
 	}
@@ -252,19 +254,19 @@ License: MIT
 	function bs_button_toolbar( $atts, $content = null ) {
 
 		$atts = shortcode_atts( array(
-				"xclass" => false,
+				"class"  => false,
 				"data"   => false
 		), $atts );
 
-		$class  = 'btn-toolbar';
-		$class .= ( $atts['xclass'] )   ? ' ' . $atts['xclass'] : '';
+        $class = array();
+		$class[] = 'btn-toolbar';
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
 		return sprintf(
-			'<div class="%s"%s>%s</div>',
-			esc_attr( trim($class) ),
-			( $data_props ) ? ' ' . $data_props : '',
+			'<div%s%s>%s</div>',
+			$this->class_output ( $class, $atts["class"] ),
+			$data_props,
 			do_shortcode( $content )
 		);
 	}
@@ -281,19 +283,19 @@ License: MIT
 
 		$atts = shortcode_atts( array(
 				"fluid"  => false,
-				"xclass" => false,
+				"class"  => false,
 				"data"   => false
 		), $atts );
 
-		$class  = ( $atts['fluid']   == 'true' )  ? 'container-fluid' : 'container';
-		$class .= ( $atts['xclass'] )   ? ' ' . $atts['xclass'] : '';
+        $class = array();
+		$class[] = ( $atts['fluid']   == 'true' )  ? 'container-fluid' : 'container';
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
 		return sprintf(
-			'<div class="%s"%s>%s</div>',
-			esc_attr( trim($class) ),
-			( $data_props ) ? ' ' . $data_props : '',
+			'<div%s%s>%s</div>',
+			$this->class_output ( $class, $atts["class"] ),
+			$data_props,
 			do_shortcode( $content )
 		);
 	}
@@ -307,24 +309,24 @@ License: MIT
 		 * @since 3.0.3.3
 		 *
 		 *-------------------------------------------------------------------------------------*/
-	 function bs_container_fluid( $atts, $content = null ) {
+	function bs_container_fluid( $atts, $content = null ) {
 
-		 $atts = shortcode_atts( array(
-				 "xclass" => false,
+		$atts = shortcode_atts( array(
+				 "class"  => false,
 				 "data"   => false
-		 ), $atts );
+		), $atts );
 
-		 $class  = 'container-fluid';
-		 $class .= ( $atts['xclass'] )   ? ' ' . $atts['xclass'] : '';
+        $class = array();
+		$class[] = 'container-fluid';
 
-		 $data_props = $this->parse_data_attributes( $atts['data'] );
+		$data_props = $this->parse_data_attributes( $atts['data'] );
 
-		 return sprintf(
-			 '<div class="%s"%s>%s</div>',
-			 esc_attr( trim($class) ),
-			 ( $data_props ) ? ' ' . $data_props : '',
-			 do_shortcode( $content )
-		 );
+		return sprintf(
+		    '<div%s%s>%s</div>',
+			$this->class_output ( $class, $atts["class"] ),
+		    $data_props,
+		    do_shortcode( $content )
+		);
 	 }
 
 	/*--------------------------------------------------------------------------------------
@@ -337,19 +339,19 @@ License: MIT
 	function bs_dropdown( $atts, $content = null ) {
 
 		$atts = shortcode_atts( array(
-				"xclass" => false,
+				"class"  => false,
 				"data"   => false
 		), $atts );
 
-		$class  = 'dropdown-menu';
-		$class .= ( $atts['xclass'] )   ? ' ' . $atts['xclass'] : '';
+        $class = array();
+		$class[] = 'dropdown-menu';
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
 		return sprintf(
-			'<div role="menu" class="%s"%s>%s</div>',
-			esc_attr( trim($class) ),
-			( $data_props ) ? ' ' . $data_props : '',
+			'<div role="menu"%s%s>%s</div>',
+			$this->class_output ( $class, $atts["class"] ),
+			$data_props,
 			do_shortcode( $content )
 		);
 	}
@@ -364,23 +366,23 @@ License: MIT
 	function bs_dropdown_item( $atts, $content = null ) {
 
 		$atts = shortcode_atts( array(
-				"link"        => false,
+				"link"        => '#',
 				"disabled"    => false,
-				"xclass"      => false,
+				"class"       => false,
 				"data"        => false
 		), $atts );
 
-		$class  = 'dropdown-item';
-		$class .= ( $atts['disabled']  == 'true' ) ? ' disabled' : '';
-		$class .= ( $atts['xclass'] ) ? ' ' . $atts['xclass'] : '';
+        $class = array();
+		$class[] = 'dropdown-item';
+		$class[] = ( $atts['disabled']  == 'true' ) ? 'disabled' : '';
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
 		return sprintf(
-			'<a role="menuitem" href="%s" class="%s"%s>%s</a>',
+			'<a role="menuitem" href="%s"%s%s>%s</a>',
 			esc_url( $atts['link'] ),
-			esc_attr( $class ),
-			( $data_props ) ? ' ' . $data_props : '',
+			$this->class_output ( $class, $atts["class"] ),
+			$data_props,
 			do_shortcode( $content )
 		);
 	}
@@ -395,19 +397,19 @@ License: MIT
 	function bs_divider( $atts, $content = null ) {
 
 		$atts = shortcode_atts( array(
-				"xclass" => false,
-				"data" => false
+				"class" => false,
+				"data"  => false
 		), $atts );
 
-		$class  = 'dropdown-divider';
-		$class .= ( $atts['xclass'] )   ? ' ' . $atts['xclass'] : '';
+        $class = array();
+		$class[] = 'dropdown-divider';
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
 		return sprintf(
-			'<div class="%s"%s>%s</div>',
-			esc_attr( trim($class) ),
-			( $data_props ) ? ' ' . $data_props : '',
+			'<div%s%s>%s</div>',
+			$this->class_output ( $class, $atts["class"] ),
+			$data_props,
 			do_shortcode( $content )
 		);
 	}
@@ -422,19 +424,19 @@ License: MIT
 	function bs_dropdown_header( $atts, $content = null ) {
 
 		$atts = shortcode_atts( array(
-				"xclass" => false,
+				"class"  => false,
 				"data"   => false
 		), $atts );
 
-		$class  = 'dropdown-header';
-		$class .= ( $atts['xclass'] ) ? ' ' . $atts['xclass'] : '';
+        $class = array();
+		$class[] = 'dropdown-header';
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
 		return sprintf(
-			'<div class="%s"%s>%s</div>',
-			esc_attr( trim($class) ),
-			( $data_props ) ? ' ' . $data_props : '',
+			'<div%s%s>%s</div>',
+			$this->class_output ( $class, $atts["class"] ),
+			$data_props,
 			do_shortcode( $content )
 		);
 	}
@@ -451,22 +453,22 @@ License: MIT
 					"type"      => false,
 					"stacked"   => false,
 					"justified" => false,
-					"xclass"    => false,
+					"class"     => false,
 					"data"      => false
 		), $atts );
 
-		$class  = 'nav';
-		$class .= ( $atts['type'] )         ? ' nav-' . $atts['type'] : ' nav-tabs';
-		$class .= ( $atts['stacked']   == 'true' )      ? ' nav-stacked' : '';
-		$class .= ( $atts['justified'] == 'true' )    ? ' nav-justified' : '';
-		$class .= ( $atts['xclass'] )       ? ' ' . $atts['xclass'] : '';
+        $class = array();
+		$class[] = 'nav';
+		$class[] = ( $atts['type'] )                ? 'nav-' . $atts['type'] : 'nav-tabs';
+		$class[] = ( $atts['stacked']   == 'true' ) ? 'nav-stacked' : '';
+		$class[] = ( $atts['justified'] == 'true' ) ? 'nav-justified' : '';
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
 		return sprintf(
-			'<ul class="%s"%s>%s</ul>',
-			esc_attr( trim($class) ),
-			( $data_props ) ? ' ' . $data_props : '',
+			'<ul%s%s>%s</ul>',
+			$this->class_output ( $class, $atts["class"] ),
+			$data_props,
 			do_shortcode( $content )
 		);
 	}
@@ -480,38 +482,34 @@ License: MIT
 	function bs_nav_item( $atts, $content = null ) {
 
 		$atts = shortcode_atts( array(
-				"link"     => false,
+				"link"     => '#',
 				"active"   => false,
 				"disabled" => false,
 				"dropdown" => false,
-				"xclass"   => false,
+				"class"    => false,
 				"data"     => false,
 		), $atts );
 
-		$li_classes  = '';
-		$li_classes .= ( $atts['dropdown'] ) ? 'dropdown' : '';
-		$li_classes .= ( $atts['active']   == 'true' )   ? ' active' : '';
-		$li_classes .= ( $atts['disabled'] == 'true' ) ? ' disabled' : '';
+        $li_class = array();
+		$li_class[] = ( $atts['dropdown'] )           ? 'dropdown' : '';
+		$li_class[] = ( $atts['active']   == 'true' ) ? 'active' : '';
+		$li_class[] = ( $atts['disabled'] == 'true' ) ? 'disabled' : '';
 
-		$a_classes  = '';
-		$a_classes .= ( $atts['dropdown']   == 'true' ) ? ' dropdown-toggle' : '';
-		$a_classes .= ( $atts['xclass'] )   ? ' ' . $atts['xclass'] : '';
+		$a_class = array();
+		$a_class[] = ( $atts['dropdown']   == 'true' ) ? 'dropdown-toggle' : '';
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
-
-		# Wrong idea I guess ....
-		#$pattern = ( $dropdown ) ? '<nav-item%1$s><nav-link href="%2$s"%3$s%4$s%5$s></nav-link>%6$s</nav-item>' : '<li%1$s><a href="%2$s"%3$s%4$s%5$s>%6$s</a></li>';
 
 		//* If we have a dropdown shortcode inside the content we end the link before the dropdown shortcode, else all content goes inside the link
 		$content = ( $atts['dropdown'] ) ? str_replace( '[dropdown]', '</nav-link>[dropdown]', $content ) : $content . '</nav-link>';
 
 		return sprintf(
 			'<nav-item%1$s><nav-link href="%2$s"%3$s%4$s%5$s>%6$s</nav-item>',
-			( ! empty( $li_classes ) ) ? sprintf( ' class="%s"', esc_attr( $li_classes ) ) : '',
+			$this->class_output ( $li_class ),
 			esc_url( $atts['link'] ),
-			( ! empty( $a_classes ) )  ? sprintf( ' class="%s"', esc_attr( $a_classes ) )  : '',
+			$this->class_output ( $a_class, $atts["class"] ),
 			( $atts['dropdown'] )   ? ' data-toggle="dropdown"' : '',
-			( $data_props ) ? ' ' . $data_props : '',
+			$data_props,
 			do_shortcode( $content )
 		);
 
@@ -528,19 +526,19 @@ License: MIT
 	function bs_card_deck( $atts, $content = null ) {
 
 		$atts = shortcode_atts( array(
-				"xclass"  => false,
+				"class"   => null,
 				"data"    => false
 		), $atts );
 
-		$class  = 'card-deck';
-		$class .= ( $atts['xclass'] )   ? ' ' . $atts['xclass'] : '';
+        $class = array();
+		$class[] = 'card-deck';
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
 		return sprintf(
-			'<div class="%s"%s>%s</div>',
-			esc_attr( trim($class) ),
-			( $data_props ) ? ' ' . $data_props : '',
+			'<div%s%s>%s</div>',
+			$this->class_output ( $class, $atts["class"] ),
+			$data_props,
 			do_shortcode( $content )
 		);
 	}
@@ -556,19 +554,19 @@ License: MIT
 	function bs_card_columns( $atts, $content = null ) {
 
 		$atts = shortcode_atts( array(
-				"xclass"  => false,
+				"class"   => false,
 				"data"    => false
 		), $atts );
 
-		$class  = 'card-columns';
-		$class .= ( $atts['xclass'] )   ? ' ' . $atts['xclass'] : '';
+        $class = array();
+		$class[] = 'card-columns';
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
 		return sprintf(
-			'<div class="%s"%s>%s</div>',
-			esc_attr( trim($class) ),
-			( $data_props ) ? ' ' . $data_props : '',
+			'<div%s%s>%s</div>',
+			$this->class_output ( $class, $atts["class"] ),
+			$data_props,
 			do_shortcode( $content )
 		);
 	}
@@ -584,19 +582,19 @@ License: MIT
 	function bs_card_group( $atts, $content = null ) {
 
 		$atts = shortcode_atts( array(
-				"xclass"  => false,
+				"class"   => false,
 				"data"    => false
 		), $atts );
 
-		$class  = 'card-group';
-		$class .= ( $atts['xclass'] )   ? ' ' . $atts['xclass'] : '';
+		$class = array();
+		$class[] = 'card-group';
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
 		return sprintf(
-			'<div class="%s"%s>%s</div>',
-			esc_attr( trim($class) ),
-			( $data_props ) ? ' ' . $data_props : '',
+			'<div%s%s>%s</div>',
+			$this->class_output ( $class, $atts["class"] ),
+			$data_props,
 			do_shortcode( $content )
 		);
 	}
@@ -612,19 +610,19 @@ License: MIT
 	function bs_card( $atts, $content = null ) {
 
 		$atts = shortcode_atts( array(
-				"xclass"  => false,
+				"class"   => false,
 				"data"    => false
 		), $atts );
 
-		$class  = 'card';
-		$class .= ( $atts['xclass'] )   ? ' ' . $atts['xclass'] : '';
+        $class = array();
+		$class[] = 'card';
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
 		return sprintf(
-			'<div class="%s"%s>%s</div>',
-			esc_attr( trim($class) ),
-			( $data_props ) ? ' ' . $data_props : '',
+			'<div%s%s>%s</div>',
+			$this->class_output ( $class, $atts["class"] ),
+			$data_props,
 			do_shortcode( $content )
 		);
 	}
@@ -640,19 +638,19 @@ License: MIT
 	function bs_card_header( $atts, $content = null ) {
 
 		$atts = shortcode_atts( array(
-				"xclass"  => false,
+				"class"   => false,
 				"data"    => false
 		), $atts );
 
-		$class  = 'card-header';
-		$class .= ( $atts['xclass'] )   ? ' ' . $atts['xclass'] : '';
+        $class = array();
+		$class[] = 'card-header';
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
 		return sprintf(
-			'<div class="%s"%s>%s</div>',
-			esc_attr( trim($class) ),
-			( $data_props ) ? ' ' . $data_props : '',
+			'<div%s%s>%s</div>',
+			$this->class_output ( $class, $atts["class"] ),
+			$data_props,
 			do_shortcode( $content )
 		);
 	}
@@ -668,19 +666,19 @@ License: MIT
 	function bs_card_body( $atts, $content = null ) {
 
 		$atts = shortcode_atts( array(
-				"xclass"  => false,
+				"class"   => false,
 				"data"    => false
 		), $atts );
 
-		$class  = 'card-body';
-		$class .= ( $atts['xclass'] )   ? ' ' . $atts['xclass'] : '';
+        $class = array();
+		$class[] = 'card-body';
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
 		return sprintf(
-			'<div class="%s"%s>%s</div>',
-			esc_attr( trim($class) ),
-			( $data_props ) ? ' ' . $data_props : '',
+			'<div%s%s>%s</div>',
+			$this->class_output ( $class, $atts["class"] ),
+			$data_props,
 			do_shortcode( $content )
 		);
 	}
@@ -696,19 +694,19 @@ License: MIT
 	function bs_card_footer( $atts, $content = null ) {
 
 		$atts = shortcode_atts( array(
-				"xclass"  => false,
+				"class"   => false,
 				"data"    => false
 		), $atts );
 
-		$class  = 'card-footer';
-		$class .= ( $atts['xclass'] )   ? ' ' . $atts['xclass'] : '';
+        $class = array();
+		$class[] = 'card-footer';
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
 		return sprintf(
-			'<div class="%s"%s>%s</div>',
-			esc_attr( trim($class) ),
-			( $data_props ) ? ' ' . $data_props : '',
+			'<div%s%s>%s</div>',
+			$this->class_output ( $class, $atts["class"] ),
+			$data_props,
 			do_shortcode( $content )
 		);
 	}
@@ -724,19 +722,19 @@ License: MIT
 	function bs_img_overlay( $atts, $content = null ) {
 
 		$atts = shortcode_atts( array(
-				"xclass"  => false,
+				"class"   => false,
 				"data"    => false
 		), $atts );
 
-		$class  = 'card-img-overlay';
-		$class .= ( $atts['xclass'] )   ? ' ' . $atts['xclass'] : '';
+		$class = array();
+		$class[] = 'card-img-overlay';
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
 		return sprintf(
-			'<div class="%s"%s>%s</div>',
-			esc_attr( trim($class) ),
-			( $data_props ) ? ' ' . $data_props : '',
+			'<div%s%s>%s</div>',
+			$this->class_output ( $class, $atts["class"] ),
+			$data_props,
 			do_shortcode( $content )
 		);
 	}
@@ -754,23 +752,23 @@ License: MIT
 		$atts = shortcode_atts( array(
 				"type"          => false,
 				"dismissable"   => false,
-				"xclass"        => false,
+				"class"         => false,
 				"data"          => false
 		), $atts );
 
-		$class  = 'alert';
-		$class .= ( $atts['type'] )         ? ' alert-' . $atts['type'] : ' alert-success';
-		$class .= ( $atts['dismissable']   == 'true' )  ? ' alert-dismissable' : '';
-		$class .= ( $atts['xclass'] )       ? ' ' . $atts['xclass'] : '';
+		$class = array();
+		$class[] = 'alert';
+		$class[] = ( $atts['type'] )                   ? 'alert-' . $atts['type'] : 'alert-success';
+		$class[] = ( $atts['dismissable'] == 'true' )  ? 'alert-dismissable' : '';
 
-		$dismissable = ( $atts['dismissable'] ) ? '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' : '';
+		$dismissable = ( $atts['dismissable'] ) ? '<button type="button" class="close" data-dismiss="alert" aria-label="Close">&times;</button>' : '';
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
 		return sprintf(
-			'<div class="%s"%s>%s%s</div>',
-			esc_attr( trim($class) ),
-			( $data_props )  ? ' ' . $data_props : '',
+			'<div%s%s>%s%s</div>',
+			$this->class_output ( $class, $atts["class"] ),
+			$data_props,
 			$dismissable,
 			do_shortcode( $content )
 		);
@@ -787,21 +785,21 @@ License: MIT
 		$atts = shortcode_atts( array(
 				"striped"   => false,
 				"animated"  => false,
-				"xclass"    => false,
+				"class"     => false,
 				"data"      => false
 		), $atts );
 
-		$class  = 'progress';
-		$class .= ( $atts['striped']  == 'true' )  ? ' progress-striped' : '';
-		$class .= ( $atts['animated']  == 'true' ) ? ' progress-bar-animated' : '';
-		$class .= ( $atts['xclass'] )   ? ' ' . $atts['xclass'] : '';
+		$class = array();
+		$class[] = 'progress';
+		$class[] = ( $atts['striped']  == 'true' )  ? 'progress-striped' : '';
+		$class[] = ( $atts['animated']  == 'true' ) ? 'progress-bar-animated' : '';
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
 		return sprintf(
-			'<div class="%s"%s>%s</div>',
-			esc_attr( trim($class) ),
-			( $data_props )  ? ' ' . $data_props : '',
+			'<div%s%s>%s</div>',
+			$this->class_output ( $class, $atts["class"] ),
+			$data_props,
 			do_shortcode( $content )
 		);
 	}
@@ -818,21 +816,21 @@ License: MIT
 					"type"      => false,
 					"percent"   => false,
 					"label"     => false,
-					"xclass"    => false,
+					"class"     => false,
 					"data"      => false
 		), $atts );
 
-		$class  = 'progress-bar';
-		$class .= ( $atts['type'] )   ? ' bg-' . $atts['type'] : '';
-		$class .= ( $atts['xclass'] ) ? ' ' . $atts['xclass'] : '';
+		$class = array();
+		$class[] = 'progress-bar';
+		$class[] = ( $atts['type'] ) ? 'bg-' . $atts['type'] : '';
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
 		return sprintf(
-			'<div class="%s" role="progressbar" %s%s>%s</div>',
-			esc_attr( trim($class) ),
+			'<div%s role="progressbar" %s%s>%s</div>',
+			$this->class_output ( $class, $atts["class"] ),
 			( $atts['percent'] )      ? ' aria-value="' . (int) $atts['percent'] . '" aria-valuemin="0" aria-valuemax="100" style="width: ' . (int) $atts['percent'] . '%;"' : '',
-			( $data_props )   ? ' ' . $data_props : '',
+			$data_props,
 			( $atts['percent'] )      ? sprintf('<span%s>%s</span>', ( !$atts['label'] ) ? ' class="sr-only"' : '', (int) $atts['percent'] . '% Complete') : ''
 		);
 	}
@@ -850,21 +848,21 @@ License: MIT
 		$atts = shortcode_atts( array(
 					"inline"      => false,
 					"scrollable"  => false,
-					"xclass"      => false,
+					"class"       => false,
 					"data"        => false
 		), $atts );
 
-		$class  = '';
-		$class .= ( $atts['scrollable']   == 'true' )  ? ' pre-scrollable' : '';
-		$class .= ( $atts['xclass'] )   ? ' ' . $atts['xclass'] : '';
+		$class = array();
+		$class[] = '';
+		$class[] = ( $atts['scrollable']   == 'true' )  ? 'pre-scrollable' : '';
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
 		return sprintf(
-			'<%1$s class="%2$s"%3$s>%4$s</%1$s>',
+			'<%1$s%2$s%3$s>%4$s</%1$s>',
 			( $atts['inline'] ) ? 'code' : 'pre',
-			esc_attr( trim($class) ),
-			( $data_props ) ? ' ' . $data_props : '',
+			$this->class_output ( $class, $atts["class"] ),
+			$data_props,
 			do_shortcode( $content )
 		);
 	}
@@ -880,19 +878,19 @@ License: MIT
 	function bs_row( $atts, $content = null ) {
 
 		$atts = shortcode_atts( array(
-				"xclass" => false,
+				"class"  => false,
 				"data"   => false
 		), $atts );
 
-		$class  = 'row';
-		$class .= ( $atts['xclass'] )   ? ' ' . $atts['xclass'] : '';
+		$class = array();
+		$class[] = 'row';
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
 		return sprintf(
-			'<div class="%s"%s>%s</div>',
-			esc_attr( trim($class) ),
-			( $data_props ) ? ' ' . $data_props : '',
+			'<div%s%s>%s</div>',
+			$this->class_output ( $class, $atts["class"] ),
+			$data_props,
 			do_shortcode( $content )
 		);
 	}
@@ -922,34 +920,34 @@ License: MIT
 				"order_md"    => false,
 				"order_sm"    => false,
 				"order_xs"    => false,
-				"xclass"      => false,
+				"class"       => false,
 				"data"        => false
 		), $atts );
 
-		$class  = '';
-		$class .= ( $atts['xl'] )			                    ? ' col-xl-' . $atts['xl'] : '';
-		$class .= ( $atts['lg'] )			                    ? ' col-lg-' . $atts['lg'] : '';
-		$class .= ( $atts['md'] )                                           ? ' col-md-' . $atts['md'] : '';
-		$class .= ( $atts['sm'] )                                           ? ' col-sm-' . $atts['sm'] : '';
-		$class .= ( $atts['xs'] )                                           ? ' col-' . $atts['xs'] : '';
-		$class .= ( $atts['offset_xl'] || $atts['offset_xl'] === "0" )      ? ' offset-xl-' . $atts['offset_xl'] : '';
-		$class .= ( $atts['offset_lg'] || $atts['offset_lg'] === "0" )      ? ' offset-lg-' . $atts['offset_lg'] : '';
-		$class .= ( $atts['offset_md'] || $atts['offset_md'] === "0" )      ? ' offset-md-' . $atts['offset_md'] : '';
-		$class .= ( $atts['offset_sm'] || $atts['offset_sm'] === "0" )      ? ' offset-sm-' . $atts['offset_sm'] : '';
-		$class .= ( $atts['offset_xs'] || $atts['offset_xs'] === "0" )      ? ' offset-' . $atts['offset_xs'] : '';
-		$class .= ( $atts['order_xl']  || $atts['order_xl'] === "0" )       ? ' order-xl-' . $atts['pull_xl'] : '';
-		$class .= ( $atts['order_lg']  || $atts['order_lg'] === "0" )       ? ' order-lg-' . $atts['pull_lg'] : '';
-		$class .= ( $atts['order_md']  || $atts['order_md'] === "0" )       ? ' order-md-' . $atts['pull_md'] : '';
-		$class .= ( $atts['order_sm']  || $atts['order_sm'] === "0" )       ? ' order-sm-' . $atts['pull_sm'] : '';
-		$class .= ( $atts['order_xs']  || $atts['order_xs'] === "0" )       ? ' order-' . $atts['pull_xs'] : '';
-		$class .= ( $atts['xclass'] )                                       ? ' ' . $atts['xclass'] : '';
+		$class = array();
+		$class[] = '';
+		$class[] = ( $atts['xl'] )			                            ? 'col-xl-' . $atts['xl'] : '';
+		$class[] = ( $atts['lg'] )			                            ? 'col-lg-' . $atts['lg'] : '';
+		$class[] = ( $atts['md'] )                                      ? 'col-md-' . $atts['md'] : '';
+		$class[] = ( $atts['sm'] )                                      ? 'col-sm-' . $atts['sm'] : '';
+		$class[] = ( $atts['xs'] )                                      ? 'col-' . $atts['xs'] : '';
+		$class[] = ( $atts['offset_xl'] || $atts['offset_xl'] === "0" ) ? 'offset-xl-' . $atts['offset_xl'] : '';
+		$class[] = ( $atts['offset_lg'] || $atts['offset_lg'] === "0" ) ? 'offset-lg-' . $atts['offset_lg'] : '';
+		$class[] = ( $atts['offset_md'] || $atts['offset_md'] === "0" ) ? 'offset-md-' . $atts['offset_md'] : '';
+		$class[] = ( $atts['offset_sm'] || $atts['offset_sm'] === "0" ) ? 'offset-sm-' . $atts['offset_sm'] : '';
+		$class[] = ( $atts['offset_xs'] || $atts['offset_xs'] === "0" ) ? 'offset-' . $atts['offset_xs'] : '';
+		$class[] = ( $atts['order_xl']  || $atts['order_xl']  === "0" ) ? 'order-xl-' . $atts['pull_xl'] : '';
+		$class[] = ( $atts['order_lg']  || $atts['order_lg']  === "0" ) ? 'order-lg-' . $atts['pull_lg'] : '';
+		$class[] = ( $atts['order_md']  || $atts['order_md']  === "0" ) ? 'order-md-' . $atts['pull_md'] : '';
+		$class[] = ( $atts['order_sm']  || $atts['order_sm']  === "0" ) ? 'order-sm-' . $atts['pull_sm'] : '';
+		$class[] = ( $atts['order_xs']  || $atts['order_xs']  === "0" ) ? 'order-' . $atts['pull_xs'] : '';
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
 		return sprintf(
-			'<div class="%s"%s>%s</div>',
-			esc_attr( trim($class) ),
-			( $data_props ) ? ' ' . $data_props : '',
+			'<div%s%s>%s</div>',
+			$this->class_output ( $class, $atts["class"] ),
+			$data_props,
 			do_shortcode( $content )
 		);
 	}
@@ -973,64 +971,65 @@ License: MIT
 				"wrap"                  => false,
 				"no-wrap"               => false,
 				"wrap-reverse"          => false,
-				"xclass"                => false,
+				"class"                 => false,
 				"data"                  => false
 		), $atts );
 
-		$class  = 'd';
-		$class .= ( $atts['size'] && $atts['size'] != "xs" )       ? '-' . $atts['size'] : '';
-		$class .= ( $atts['inline'] || $atts['inline'] === "1" )   ? '-inline' : '';
-		$class .= '-flex';
+		$class = array();
+		$class_str  = 'd';
+		$class_str .= ( $atts['size']   && $atts['size']   !=  "xs" )  ? '-' . $atts['size'] : '';
+		$class_str .= ( $atts['inline'] || $atts['inline'] === "1"  )  ? '-inline' : '';
+		$class_str .= '-flex';
+        $class[] = $class_str;
 		if ($atts['row']) {
             $opts = explode(' ', $atts['row']);
             foreach($opts as $opt) {
-		        $class .= ' flex' . ( $opt == "xs" ? '' : $opt ) . '-row';
+		        $class[] = 'flex' . ( $opt == "xs" ? '' : $opt ) . '-row';
             }
 		}
 		if ($atts['row-reverse']) {
             $opts = explode(' ', $atts['row-reverse']);
             foreach($opts as $opt) {
-		        $class .= ' flex' . ( $opt == "xs" ? '' : '-' . $opt ) . '-row-reverse';
+		        $class[] = 'flex' . ( $opt == "xs" ? '' : '-' . $opt ) . '-row-reverse';
             }
 		}
 		if ($atts['column']) {
             $opts = explode(' ', $atts['column']);
             foreach($opts as $opt) {
-		        $class .= ' flex' . ( $opt == "xs" ? '' : '-' . $opt ) . '-column';
+		        $class[] = 'flex' . ( $opt == "xs" ? '' : '-' . $opt ) . '-column';
             }
 		}
 		if ($atts['column-reverse']) {
             $opts = explode(' ', $atts['column-reverse']);
             foreach($opts as $opt) {
-		        $class .= ' flex' . ( $opt == "xs" ? '' : '-' . $opt ) . '-column-reverse';
+		        $class[] = 'flex' . ( $opt == "xs" ? '' : '-' . $opt ) . '-column-reverse';
             }
 		}
 		if ($atts['wrap']) {
             $opts = explode(' ', $atts['wrap']);
             foreach($opts as $opt) {
-		        $class .= ' flex' . ( $opt == "xs" ? '' : '-' . $opt ) . '-wrap';
+		        $class[] = 'flex' . ( $opt == "xs" ? '' : '-' . $opt ) . '-wrap';
             }
 		}
 		if ($atts['no-wrap']) {
             $opts = explode(' ', $atts['no-wrap']);
             foreach($opts as $opt) {
-		        $class .= ' flex' . ( $opt == "xs" ? '' : '-' . $opt ) . '-nowrap';
+		        $class[] = 'flex' . ( $opt == "xs" ? '' : '-' . $opt ) . '-nowrap';
             }
 		}
 		if ($atts['wrap-reverse']) {
             $opts = explode(' ', $atts['wrap-reverse']);
             foreach($opts as $opt) {
-		        $class .= ' flex' . ( $opt == "xs" ? '' : '-' . $opt ) . '-wrap-reverse';
+		        $class[] = 'flex' . ( $opt == "xs" ? '' : '-' . $opt ) . '-wrap-reverse';
             }
 		}
-		$class .= ( $atts['xclass'] )                              ? ' ' . $atts['xclass'] : '';
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
 		return sprintf(
-			'<div class="%s"%s>%s</div>',
-			esc_attr( trim($class) ),
-			( $data_props ) ? ' ' . $data_props : '',
+			'<div%s%s>%s</div>',
+			$this->class_output ( $class, $atts["class"] ),
+			$data_props,
 			do_shortcode( $content )
 		);
 	}
@@ -1050,49 +1049,49 @@ License: MIT
 				"no-grow"             => false,
 				"shrink"              => false,
 				"no-shrink"           => false,
-				"xclass"              => false,
+				"class"               => false,
 				"data"                => false
 		), $atts );
 
-		$class  = '';
+		$class = array();
+
 		if ($atts['fill']) {
             $opts = explode(' ', $atts['fill']);
             foreach($opts as $opt) {
-		        $class .= ' flex' . ( $opt == "xs" ? '' : $opt ) . '-fill';
+		        $class[] = 'flex' . ( $opt == "xs" ? '' : $opt ) . '-fill';
             }
 		}
 		if ($atts['grow']) {
             $opts = explode(' ', $atts['grow']);
             foreach($opts as $opt) {
-		        $class .= ' flex' . ( $opt == "xs" ? '' : '-' . $opt ) . '-grow-1';
+		        $class[] = 'flex' . ( $opt == "xs" ? '' : '-' . $opt ) . '-grow-1';
             }
 		}
 		if ($atts['no-grow']) {
             $opts = explode(' ', $atts['no-grow']);
             foreach($opts as $opt) {
-		        $class .= ' flex' . ( $opt == "xs" ? '' : '-' . $opt ) . '-grow-0';
+		        $class[] = 'flex' . ( $opt == "xs" ? '' : '-' . $opt ) . '-grow-0';
             }
 		}
 		if ($atts['shrink']) {
             $opts = explode(' ', $atts['shrink']);
             foreach($opts as $opt) {
-		        $class .= ' flex' . ( $opt == "xs" ? '' : '-' . $opt ) . '-shrink-1';
+		        $class[] = 'flex' . ( $opt == "xs" ? '' : '-' . $opt ) . '-shrink-1';
             }
 		}
 		if ($atts['no-shrink']) {
             $opts = explode(' ', $atts['no-shrink']);
             foreach($opts as $opt) {
-		        $class .= ' flex' . ( $opt == "xs" ? '' : '-' . $opt ) . '-shrink-0';
+		        $class[] = 'flex' . ( $opt == "xs" ? '' : '-' . $opt ) . '-shrink-0';
             }
 		}
-		$class .= ( $atts['xclass'] )                              ? ' ' . $atts['xclass'] : '';
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
 		return sprintf(
-			'<div class="%s"%s>%s</div>',
-			esc_attr( trim($class) ),
-			( $data_props ) ? ' ' . $data_props : '',
+			'<div%s%s>%s</div>',
+			$this->class_output ( $class, $atts["class"] ),
+			$data_props,
 			do_shortcode( $content )
 		);
 	}
@@ -1108,20 +1107,20 @@ License: MIT
 
 		$atts = shortcode_atts( array(
 				"linked" => false,
-				"xclass" => false,
+				"class"  => false,
 				"data"   => false
 		), $atts );
 
-		$class  = 'list-group';
-		$class .= ( $atts['xclass'] )   ? ' ' . $atts['xclass'] : '';
+		$class = array();
+		$class[] = 'list-group';
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
 		return sprintf(
-			'<%1$s class="%2$s"%3$s>%4$s</%1$s>',
+			'<%1$s%2$s%3$s>%4$s</%1$s>',
 			( $atts['linked'] == 'true' ) ? 'div' : 'ul',
-			esc_attr( trim($class) ),
-			( $data_props ) ? ' ' . $data_props : '',
+			$this->class_output ( $class, $atts["class"] ),
+			$data_props,
 			do_shortcode( $content )
 		);
 	}
@@ -1136,28 +1135,28 @@ License: MIT
 	function bs_list_group_item( $atts, $content = null ) {
 
 		$atts = shortcode_atts( array(
-				"link"    => false,
+				"link"    => '#',
 				"type"    => false,
 				"active"  => false,
-				"target"   => false,
-				"xclass"  => false,
+				"target"  => false,
+				"class"   => false,
 				"data"    => false
 		), $atts );
 
-		$class  = 'list-group-item';
-		$class .= ( $atts['type'] )     ? ' list-group-item-' . $atts['type'] : '';
-		$class .= ( $atts['active']   == 'true' )   ? ' active' : '';
-		$class .= ( $atts['xclass'] )   ? ' ' . $atts['xclass'] : '';
+		$class = array();
+		$class[] = 'list-group-item';
+		$class[] = ( $atts['type'] )                 ? 'list-group-item-' . $atts['type'] : '';
+		$class[] = ( $atts['active']   == 'true' )   ? 'active' : '';
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
 		return sprintf(
-			'<%1$s %2$s %3$s class="%4$s"%5$s>%6$s</%1$s>',
+			'<%1$s %2$s %3$s%4$s%5$s>%6$s</%1$s>',
 			( $atts['link'] )     ? 'a' : 'li',
 			( $atts['link'] )     ? 'href="' . esc_url( $atts['link'] ) . '"' : '',
 			( $atts['target'] )   ? sprintf( ' target="%s"', esc_attr( $atts['target'] ) ) : '',
-			esc_attr( trim($class) ),
-			( $data_props ) ? ' ' . $data_props : '',
+			$this->class_output ( $class, $atts["class"] ),
+			$data_props,
 			do_shortcode( $content )
 		);
 	}
@@ -1171,19 +1170,19 @@ License: MIT
 	function bs_list_group_item_heading( $atts, $content = null ) {
 
 		$atts = shortcode_atts( array(
-				"xclass" => false,
+				"class"  => false,
 				"data"   => false
 		), $atts );
 
-		$class  = 'list-group-item-heading';
-		$class .= ( $atts['xclass'] )   ? ' ' . $atts['xclass'] : '';
+		$class = array();
+		$class[] = 'list-group-item-heading';
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
 		return sprintf(
-			'<h4 class="%s"%s>%s</h4>',
-			esc_attr( trim($class) ),
-			( $data_props ) ? ' ' . $data_props : '',
+			'<h4%s%s>%s</h4>',
+			$this->class_output ( $class, $atts["class"] ),
+			$data_props,
 			do_shortcode( $content )
 		);
 	}
@@ -1197,19 +1196,19 @@ License: MIT
 	function bs_list_group_item_text( $atts, $content = null ) {
 
 		$atts = shortcode_atts( array(
-				"xclass" => false,
+				"class"  => false,
 				"data"   => false
 		), $atts );
 
-		$class  = 'list-group-item-text';
-		$class .= ( $atts['xclass'] )   ? ' ' . $atts['xclass'] : '';
+		$class = array();
+		$class[] = 'list-group-item-text';
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
 		return sprintf(
-			'<p class="%s"%s>%s</p>',
-			esc_attr( trim($class) ),
-			( $data_props ) ? ' ' . $data_props : '',
+			'<p%s%s>%s</p>',
+			$this->class_output ( $class, $atts["class"] ),
+			$data_props,
 			do_shortcode( $content )
 		);
 	}
@@ -1223,19 +1222,19 @@ License: MIT
 	function bs_breadcrumb( $atts, $content = null ) {
 
 		$atts = shortcode_atts( array(
-				"xclass" => false,
+				"class"  => false,
 				"data"   => false
 		), $atts );
 
-		$class  = 'breadcrumb';
-		$class .= ( $atts['xclass'] )   ? ' ' . $atts['xclass'] : '';
+		$class = array();
+		$class[] = 'breadcrumb';
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
 		return sprintf(
-			'<ul class="%s"%s>%s</ul>',
-			esc_attr( trim($class) ),
-			( $data_props ) ? ' ' . $data_props : '',
+			'<ul%s%s>%s</ul>',
+			$this->class_output ( $class, $atts["class"] ),
+			$data_props,
 			do_shortcode( $content )
 		);
 	}
@@ -1250,63 +1249,33 @@ License: MIT
 	function bs_breadcrumb_item( $atts, $content = null ) {
 
 		$atts = shortcode_atts( array(
-				"link" => false,
-				"xclass" => false,
+				"link" => '#',
+				"class"  => false,
 				"active" => false,
 				"data" => false
 		), $atts );
 
-		$class  = '';
-		$class .= ( $atts['xclass'] )   ? ' ' . $atts['xclass'] : '';
+		$class = array();
 
-		$li_class  = 'breadcrumb-item';
-		$li_class .= ( $atts['active'] == 'true' )  ? ' active' : '';
+        $li_class = array();
+		$li_class[] = 'breadcrumb-item';
+		$li_class[] = ( $atts['active'] == 'true' )  ? 'active' : '';
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 		
         $content = do_shortcode( $content );
 		$link = sprintf(
-			'<a href="%s" class="%s"%s>%s</a>',
+			'<a href="%s"%s%s>%s</a>',
 			esc_url( $atts['link'] ),
-			esc_attr( trim($class) ),
-			( $data_props ) ? ' ' . $data_props : '',
+			$this->class_output ( $class, $atts["class"] ),
+			$data_props,
 			$content
 		);
 
 		return sprintf(
-			'<li class="%s">%s</li>',
-			esc_attr( trim($li_class) ),
+			'<li%s>%s</li>',
+			$this->class_output ( $li_class ),
 		    ( $atts['active'] == 'true' ) ? $content : $link
-		);
-	}
-
-	/*--------------------------------------------------------------------------------------
-		*
-		* bs_label
-		*
-		* @author Filip Stefansson
-		* @since 1.0
-		*
-		*-------------------------------------------------------------------------------------*/
-	function bs_label( $atts, $content = null ) {
-
-		$atts = shortcode_atts( array(
-				"type"      => false,
-				"xclass"    => false,
-				"data"      => false
-		), $atts );
-
-		$class  = 'label';
-		$class .= ( $atts['type'] )     ? ' label-' . $atts['type'] : ' label-default';
-		$class .= ( $atts['xclass'] )   ? ' ' . $atts['xclass'] : '';
-
-		$data_props = $this->parse_data_attributes( $atts['data'] );
-
-		return sprintf(
-			'<span class="%s"%s>%s</span>',
-			esc_attr( trim($class) ),
-			( $data_props ) ? ' ' . $data_props : '',
-			do_shortcode( $content )
 		);
 	}
 
@@ -1322,80 +1291,79 @@ License: MIT
 
 		$atts = shortcode_atts( array(
 				"right"   => false,
-				"xclass"  => false,
+				"class"   => false,
 				"data"    => false
 		), $atts );
 
-		$class  = 'badge';
-		$class .= ( $atts['right']   == 'true' )    ? ' pull-right' : '';
-		$class .= ( $atts['xclass'] )   ? ' ' . $atts['xclass'] : '';
+		$class = array();
+		$class[] = 'badge';
+		$class[] = ( $atts['right']   == 'true' ) ? 'pull-right' : '';
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
 		return sprintf(
-			'<span class="%s"%s>%s</span>',
-			esc_attr( trim($class) ),
-			( $data_props ) ? ' ' . $data_props : '',
+			'<span%s%s>%s</span>',
+			$this->class_output ( $class, $atts["class"] ),
+			$data_props,
 			do_shortcode( $content )
 		);
 	}
 
 	/*--------------------------------------------------------------------------------------
 		*
-		* bs_fa_icon (Font Awesome 5)
+		* bs_icon (Font Awesome)
 		*
 		* @author Uwe Jacobs
-		* @since 4.0
+		* @since 4.5.0
 		*
 		*-------------------------------------------------------------------------------------*/
-	function bs_fa_icon( $atts, $content = null ) {
+	function bs_icon( $atts, $content = null ) {
 
 		$atts = shortcode_atts( array(
 				"prefix" => false,
 				"type"   => false,
-				"xclass" => false,
+				"class"  => false,
 				"data"   => false
 		), $atts );
 
-		$class = ( $atts['prefix'] )    ? $atts['prefix'] : 'fa';
-		$class .= ( $atts['type'] )     ? ' fa-' . $atts['type'] : '';
-		$class .= ( $atts['xclass'] )   ? ' ' . $atts['xclass'] : '';
+        $class = array();
+		$class[] = ( $atts['prefix'] )   ? $atts['prefix'] : 'fas';
+		$class[] = ( $atts['type'] )     ? 'fa-' . $atts['type'] : '';
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
 		return sprintf(
-			'<i class="%s"%s>%s</i>',
-			esc_attr( trim($class) ),
-			( $data_props ) ? ' ' . $data_props : '',
+			'<i%s%s>%s</i>',
+			$this->class_output ( $class, $atts["class"] ),
+			$data_props,
 			do_shortcode( $content )
 		);
 	}
 
 	/*--------------------------------------------------------------------------------------
 		*
-		* bs_fa_icon_stack (Font Awesome 5)
+		* bs_icon_stack (Font Awesome)
 		*
 		* @author Uwe Jacobs
-		* @since 4.0
+		* @since 4.5.0
 		*
 		*-------------------------------------------------------------------------------------*/
-	function bs_fa_icon_stack( $atts, $content = null ) {
+	function bs_icon_stack( $atts, $content = null ) {
 
 		$atts = shortcode_atts( array(
-				"type"   => false,
-				"xclass" => false,
+				"class"  => false,
 				"data"   => false
 		), $atts );
 
-		$class = 'fa-stack';
-		$class .= ( $atts['xclass'] )   ? ' ' . $atts['xclass'] : '';
+        $class = array();
+		$class[] = 'fa-stack';
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
 		return sprintf(
-			'<span class="%s"%s>%s</span>',
-			esc_attr( trim($class) ),
-			( $data_props ) ? ' ' . $data_props : '',
+			'<span%s%s>%s</span>',
+			$this->class_output ( $class, $atts["class"] ),
+			$data_props,
 			do_shortcode( $content )
 		);
 	}
@@ -1412,21 +1380,21 @@ License: MIT
 	function bs_table_wrap( $atts, $content = null ) {
 
 		$atts = shortcode_atts( array(
-				'bordered'   => false,
-				'striped'    => false,
-				'hover'      => false,
-				'condensed'  => false,
-				'responsive' => false,
-				'xclass'     => false,
-				'data'       => false
+				"bordered"   => false,
+				"striped"    => false,
+				"hover"      => false,
+				"condensed"  => false,
+				"responsive" => false,
+				"class"      => false,
+				"data"       => false
 		), $atts );
 
 		$class  = 'table';
-		$class .= ( $atts['bordered']  == 'true' )    ? ' table-bordered' : '';
-		$class .= ( $atts['striped']   == 'true' )    ? ' table-striped' : '';
-		$class .= ( $atts['hover']     == 'true' )    ? ' table-hover' : '';
-		$class .= ( $atts['condensed'] == 'true' )    ? ' table-sm' : '';
-		$class .= ( $atts['xclass'] )                 ? ' ' . $atts['xclass'] : '';
+		$class .= ( $atts['bordered']  == 'true' ) ? ' table-bordered' : '';
+		$class .= ( $atts['striped']   == 'true' ) ? ' table-striped' : '';
+		$class .= ( $atts['hover']     == 'true' ) ? ' table-hover' : '';
+		$class .= ( $atts['condensed'] == 'true' ) ? ' table-sm' : '';
+		$class .= ( $atts['class'] )               ? ' ' . $atts['class'] : '';
 
 		$tag = array('table');
 		$content = do_shortcode($content);
@@ -1459,16 +1427,17 @@ License: MIT
 
 		$atts = shortcode_atts( array(
 				"type"    => false,
-				"xclass"  => false,
+				"class"   => false,
 				"data"    => false,
 				"name"    => false,
 		), $atts );
 
-		$ul_class  = 'nav';
-		$ul_class .= ( $atts['type'] )     ? ' nav-' . $atts['type'] : ' nav-tabs';
-		$ul_class .= ( $atts['xclass'] )   ? ' ' . $atts['xclass'] : '';
+        $ul_class = array();
+		$ul_class[] = 'nav';
+		$ul_class[] = ( $atts['type'] )     ? 'nav-' . $atts['type'] : 'nav-tabs';
 
-		$div_class = 'tab-content';
+        $div_class = array();
+        $div_class[] = 'tab-content';
 
 		// If user defines name of group, use that for ID for tab history purposes
 		if(isset($atts['name'])) {
@@ -1476,7 +1445,6 @@ License: MIT
 		} else {
 			$id = 'custom-tabs-' . $GLOBALS['tabs_count'];
 		}
-
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
@@ -1494,9 +1462,10 @@ License: MIT
 			$i = 0;
 			foreach( $atts_map as $tab ) {
 
-				$class  ='nav-item';
-				$class .= ( !empty($tab["tab"]["active"]) || ($GLOBALS['tabs_default_active'] && $i == 0) ) ? ' active' : '';
-				$class .= ( !empty($tab["tab"]["xclass"]) ) ? ' ' . esc_attr($tab["tab"]["xclass"]) : '';
+                $li_class = array();
+				$li_class[] ='nav-item';
+				$li_class[] = ( !empty($tab["tab"]["active"]) || ($GLOBALS['tabs_default_active'] && $i == 0) ) ? 'active' : '';
+				$li_class[] = ( !empty($tab["tab"]["class"]) )                                                  ? esc_attr($tab["tab"]["class"]) : '';
 
 				if(!isset($tab["tab"]["link"])) {
 					$tab_id = 'custom-tab-' . $GLOBALS['tabs_count'] . '-' . md5( $tab["tab"]["title"] );
@@ -1506,7 +1475,7 @@ License: MIT
 
 				$tabs[] = sprintf(
 					'<li%s><a class="nav-link" href="#%s" data-toggle="tab" >%s</a></li>',
-					( !empty($class) ) ? ' class="' . $class . '"' : '',
+        			$this->class_output ( $li_class ),
 					sanitize_html_class($tab_id),
 					$tab["tab"]["title"]
 				);
@@ -1514,12 +1483,12 @@ License: MIT
 			}
 		}
 		$output = sprintf(
-			'<ul class="%s" id="%s"%s>%s</ul><div class="%s">%s</div>',
-			esc_attr( $ul_class ),
+			'<ul%s id="%s"%s>%s</ul><div%s>%s</div>',
+			$this->class_output ( $ul_class, $atts["class"] ),
 			sanitize_html_class( $id ),
-			( $data_props ) ? ' ' . $data_props : '',
+			$data_props,
 			( $tabs )  ? implode( $tabs ) : '',
-			sanitize_html_class( $div_class ),
+			$this->class_output ( $div_class ),
 			do_shortcode( $content )
 		);
 
@@ -1537,12 +1506,12 @@ License: MIT
 	function bs_tab( $atts, $content = null ) {
 
 		$atts = shortcode_atts( array(
-				'title'   => false,
-				'active'  => false,
-				'fade'    => false,
-				'xclass'  => false,
-				'data'    => false,
-				'link'    => false
+				"title"   => false,
+				"active"  => false,
+				"fade"    => false,
+				"class"   => false,
+				"data"    => false,
+				"link"    => false
 		), $atts );
 
 		if( $GLOBALS['tabs_default_active'] && $GLOBALS['tabs_default_count'] == 0 ) {
@@ -1550,12 +1519,11 @@ License: MIT
 		}
 		$GLOBALS['tabs_default_count']++;
 
-		$class  = 'tab-pane';
-		$class .= ( $atts['fade']   == 'true' )                            ? ' fade' : '';
-		$class .= ( $atts['active'] == 'true' )                            ? ' active' : '';
-		$class .= ( $atts['active'] == 'true' && $atts['fade'] == 'true' ) ? ' in' : '';
-		$class .= ( $atts['xclass'] )                                      ? ' ' . $atts['xclass'] : '';
-
+        $class = array();
+		$class[] = 'tab-pane';
+		$class[] = ( $atts['fade']   == 'true' )                            ? 'fade' : '';
+		$class[] = ( $atts['active'] == 'true' )                            ? 'active' : '';
+		$class[] = ( $atts['active'] == 'true' && $atts['fade'] == 'true' ) ? 'in' : '';
 
 		if(!isset($atts['link']) || $atts['link'] == NULL) {
 			$id = 'custom-tab-' . $GLOBALS['tabs_count'] . '-' . md5( $atts['title'] );
@@ -1565,13 +1533,12 @@ License: MIT
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
 		return sprintf(
-			'<div id="%s" class="%s"%s>%s</div>',
+			'<div id="%s"%s%s>%s</div>',
 			sanitize_html_class($id),
-			esc_attr( trim($class) ),
-			( $data_props ) ? ' ' . $data_props : '',
+			$this->class_output ( $class, $atts["class"] ),
+			$data_props,
 			do_shortcode( $content )
 		);
-
 	}
 
 
@@ -1591,22 +1558,21 @@ License: MIT
 			$GLOBALS['collapsibles_count'] = 0;
 
 		$atts = shortcode_atts( array(
-				"xclass" => false,
+				"class"  => false,
 				"data"   => false
 		), $atts );
 
-		$class = '';
-		$class .= ( $atts['xclass'] )   ? ' ' . $atts['xclass'] : '';
+		$class = array();
 
 		$id = 'custom-collapse-'. $GLOBALS['collapsibles_count'];
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
 		return sprintf(
-			'<div class="%s" id="%s"%s>%s</div>',
-				esc_attr( trim($class) ),
-				esc_attr($id),
-			( $data_props ) ? ' ' . $data_props : '',
+			'<div%s id="%s"%s>%s</div>',
+			$this->class_output ( $class, $atts["class"] ),
+			esc_attr($id),
+			$data_props,
 			do_shortcode( $content )
 		);
 
@@ -1632,24 +1598,29 @@ License: MIT
 				"title"   => false,
 				"type"    => false,
 				"active"  => false,
-				"xclass"  => false,
+				"class"   => false,
 				"lclass"  => false,
 				"bclass"  => false,
+				"hclass"  => false,
 				"data"    => false
 		), $atts );
 
-		$card_class = 'card';
-		$card_class .= ( $atts['type'] )     ? ' bg-' . $atts['type'] : '';
-		$card_class .= ( $atts['xclass'] )   ? ' ' . $atts['xclass'] : '';
+        $card_class = array();
+		$card_class[] = 'card';
+		$card_class[] = ( $atts['type'] )     ?  'bg-' . $atts['type'] : '';
 
-		$collapse_class = 'collapse';
-		$collapse_class .= ( $atts['active'] == 'true' )  ? ' show' : '';
+        $collapse_class = array();
+		$collapse_class[] = 'collapse';
+		$collapse_class[] = ( $atts['active'] == 'true' )  ? 'show' : '';
 
-		$a_class = 'card-link';
-		$a_class .= ( $atts['lclass'] )   ? ' ' . $atts['lclass'] : '';
+        $a_class = array();
+		$a_class[] = 'card-link';
 
-		$b_class = '';
-		$b_class .= ( $atts['bclass'] )   ? ' ' . $atts['bclass'] : '';
+		$b_class = array();
+		$b_class[] = 'card-body';
+
+		$h_class = array();
+		$h_class[] = 'card-header';
 
 		$parent = isset( $GLOBALS['collapsibles_count'] ) ? 'custom-collapse-' . $GLOBALS['collapsibles_count'] : 'single-collapse';
 		$current_collapse = $parent . '-' . $GLOBALS['single_collapse_count'];
@@ -1657,26 +1628,26 @@ License: MIT
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
 		return sprintf(
-			'<div class="%1$s"%2$s>
-				<div class="card-header">
+			'<div%1$s%2$s>
+				<div%10$s>
 					<h4 class="card-title">
-						<a class="%3$s" data-toggle="collapse" href="#%5$s">%6$s</a>
+						<a%3$s data-toggle="collapse" href="#%5$s">%6$s</a>
 					</h4>
 				</div>
-				<div id="%5$s" class="%7$s"%4$s>
-					<div class="card-body%9$s">%8$s</div>
+				<div id="%5$s"%7$s%4$s>
+					<div%9$s>%8$s</div>
 				</div>
 			</div>',
-			esc_attr( $card_class ),
-			( $data_props )   ? ' ' . $data_props : '',
-			$a_class,
+			$this->class_output ( $card_class, $atts["class"] ),
+			$data_props,
+			$this->class_output ( $a_class, $atts["lclass"] ),
 			( $parent && $parent != 'single-collapse' )       ? ' data-parent="#' . $parent . '"' : '',
 			$current_collapse,
 			$atts['title'],
-			esc_attr( $collapse_class ),
+			$this->class_output ( $collapse_class ),
 			do_shortcode( $content ),
-			esc_attr( $b_class )
-
+			$this->class_output ( $b_class, $atts["bclass"] ),
+			$this->class_output ( $h_class, $atts["hclass"] )
 		);
 	}
 
@@ -1698,17 +1669,20 @@ License: MIT
 		$GLOBALS['carousel_default_count'] = 0;
 
 		$atts = shortcode_atts( array(
-				"interval" => false,
-				"pause"    => false,
-				"wrap"     => false,
-				"xclass"   => false,
-				"data"     => false,
+				"interval"  => false,
+				"pause"     => 'hover',
+				"wrap"      => false,
+				"indicator" => 'true',
+				"arrows"    => 'true',
+				"class"     => false,
+				"data"      => false,
 		), $atts );
 
-		$div_class  = 'carousel slide';
-		$div_class .= ( $atts['xclass'] ) ? ' ' . $atts['xclass'] : '';
+        $div_class = array();
+		$div_class[] = 'carousel slide';
 
-		$inner_class = 'carousel-inner';
+        $inner_class = array();
+		$inner_class[] = 'carousel-inner';
 
 		$id = 'custom-carousel-'. $GLOBALS['carousel_count'];
 
@@ -1717,7 +1691,7 @@ License: MIT
 		$atts_map = bs_attribute_map( $content );
 
 		// Extract the slide titles for use in the carousel widget.
-		if ( $atts_map ) {
+		if ( ( $atts['indicator'] && $atts['indicator'] == "true" ) && $atts_map ) {
 			$indicators = array();
 			$GLOBALS['carousel_default_active'] = true;
 			foreach( $atts_map as $check ) {
@@ -1728,7 +1702,7 @@ License: MIT
 			$i = 0;
 			foreach( $atts_map as $slide ) {
 				$indicators[] = sprintf(
-					'<li class="%s" data-target="%s" data-slide-to="%s"></li>',
+					'<li%s data-target="%s" data-slide-to="%s"></li>',
 					( !empty($slide["carousel-item"]["active"]) || ($GLOBALS['carousel_default_active'] && $i == 0) ) ? 'active' : '',
 					esc_attr( '#' . $id ),
 					esc_attr( $i )
@@ -1737,18 +1711,19 @@ License: MIT
 			}
 		}
 		return sprintf(
-			'<div class="%s" id="%s" data-ride="carousel"%s%s%s%s>%s<div class="%s">%s</div>%s%s</div>',
-			esc_attr( $div_class ),
+			'<div%s id="%s" data-ride="carousel"%s%s%s%s>%s<div%s>%s%s',
+			$this->class_output ( $div_class, $atts["class"] ),
 			esc_attr( $id ),
 			( $atts['interval'] )   ? sprintf( ' data-interval="%d"', $atts['interval'] ) : '',
 			( $atts['pause'] )      ? sprintf( ' data-pause="%s"', esc_attr( $atts['pause'] ) ) : '',
 			( $atts['wrap'] == 'true' )       ? sprintf( ' data-wrap="%s"', esc_attr( $atts['wrap'] ) ) : '',
-			( $data_props ) ? ' ' . $data_props : '',
+			$data_props,
 			( $indicators ) ? '<ol class="carousel-indicators">' . implode( $indicators ) . '</ol>' : '',
-			esc_attr( $inner_class ),
+			$this->class_output ( $inner_class ),
 			do_shortcode( $content ),
-			'<a class="left carousel-control"  href="' . esc_url( '#' . $id ) . '" data-slide="prev"><i class="fa fa-chevron-left" aria-hidden="true"></i></a>',
-			'<a class="right carousel-control" href="' . esc_url( '#' . $id ) . '" data-slide="next"><i class="fa fa-chevron-right" aria-hidden="true"></i></a>'
+			( $atts['arrows'] && $atts['arrows'] == "false" ) ? '' :
+			'<div><a class="carousel-control-prev"  href="' . esc_url( '#' . $id ) . '" data-slide="prev"><span class="carousel-control-prev-icon"></span></a>' .
+			'<a class="carousel-control-next" href="' . esc_url( '#' . $id ) . '" data-slide="next"><span class="carousel-control-next-icon"></span></a></div>'
 		);
 	}
 
@@ -1766,7 +1741,7 @@ License: MIT
 		$atts = shortcode_atts( array(
 				"active"  => false,
 				"caption" => false,
-				"xclass"  => false,
+				"class"   => false,
 				"data"    => false
 		), $atts );
 
@@ -1775,9 +1750,9 @@ License: MIT
 		}
 		$GLOBALS['carousel_default_count']++;
 
-		$class  = 'carousel-item';
-		$class .= ( $atts['active']   == 'true' ) ? ' active' : '';
-		$class .= ( $atts['xclass'] ) ? ' ' . $atts['xclass'] : '';
+		$class = array();
+		$class[] = 'carousel-item';
+		$class[] = ( $atts['active']   == 'true' ) ? 'active' : '';
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
@@ -1788,9 +1763,9 @@ License: MIT
 		$content = preg_replace('/aligncenter/', '', $content);
 
 		return sprintf(
-			'<div class="%s"%s>%s%s</div>',
-			esc_attr( trim($class) ),
-			( $data_props ) ? ' ' . $data_props : '',
+			'<div%s%s>%s%s</div>',
+			$this->class_output ( $class, $atts["class"] ),
+			$data_props,
 			do_shortcode( $content ),
 			( $atts['caption'] ) ? '<div class="carousel-caption">' . esc_html( $atts['caption'] ) . '</div>' : ''
 		);
@@ -1816,7 +1791,7 @@ License: MIT
 			 'data'      => ''
 		), $atts );
 
-		$class  = 'bs-tooltip';
+		$class = 'bs-tooltip';
 
 		$atts['data']   .= $this->check_for_data($atts['data']) . 'toggle,tooltip';
 		$atts['data']   .= ( $atts['animation'] ) ? $this->check_for_data($atts['data']) . 'animation,' . $atts['animation'] : '';
@@ -1851,11 +1826,11 @@ License: MIT
 
 		$class = 'bs-popover';
 
-		$atts['data']   .= $this->check_for_data($atts['data']) . 'toggle,popover';
-		$atts['data']   .= $this->check_for_data($atts['data']) . 'content,' . str_replace(',', '&#44;', $atts['text']);
-		$atts['data']   .= ( $atts['animation'] ) ? $this->check_for_data($atts['data']) . 'animation,' . $atts['animation'] : '';
-		$atts['data']   .= ( $atts['placement'] ) ? $this->check_for_data($atts['data']) . 'placement,' . $atts['placement'] : '';
-		$atts['data']   .= ( $atts['html'] )      ? $this->check_for_data($atts['data']) . 'html,'      . $atts['html']      : '';
+		$atts['data'] .= $this->check_for_data($atts['data']) . 'toggle,popover';
+		$atts['data'] .= $this->check_for_data($atts['data']) . 'content,' . str_replace(',', '&#44;', $atts['text']);
+		$atts['data'] .= ( $atts['animation'] ) ? $this->check_for_data($atts['data']) . 'animation,' . $atts['animation'] : '';
+		$atts['data'] .= ( $atts['placement'] ) ? $this->check_for_data($atts['data']) . 'placement,' . $atts['placement'] : '';
+		$atts['data'] .= ( $atts['html'] )      ? $this->check_for_data($atts['data']) . 'html,'      . $atts['html']      : '';
 
 		$return = '';
 		$tag = 'span';
@@ -1878,44 +1853,63 @@ License: MIT
 	function bs_media( $atts, $content = null ) {
 
 		$atts = shortcode_atts( array(
-				"xclass" => false,
+				"class"  => false,
 				"data"   => false
 		), $atts );
 
-		$class  = 'media';
-		$class .= ( $atts['xclass'] )   ? ' ' . $atts['xclass']: '';
+		$class = array();
+		$class[] = 'media';
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
 		return sprintf(
-			'<div class="%s"%s>%s</div>',
-			esc_attr( trim($class) ),
-			( $data_props ) ? ' ' . $data_props : '',
+			'<div%s%s>%s</div>',
+			$this->class_output ( $class, $atts["class"] ),
+			$data_props,
 			do_shortcode( $content )
 		);
+	}
+
+    function bs_media_object( $atts, $content = null ) {
+
+		$atts = shortcode_atts( array(
+				"align " => false,
+				"class"  => false,
+				"data"   => false
+		), $atts );
+
+		$class  = '';
+		$class .= ( $atts['align'] )   ? 'align-self-' . $atts['align']: '';
+
+		$return = '';
+
+		$tag = array('figure', 'div', 'img', 'i', 'span');
+		$content = do_shortcode(preg_replace('/(<br>)+$/', '', $content));
+		$return .= $this->scrape_dom_element($tag, $content, $class, '', $atts['data']);
+		return $return;
 	}
 
 	function bs_media_body( $atts, $content = null ) {
 
 		$atts = shortcode_atts( array(
 				"title"  => false,
-				"xclass" => false,
+				"class"  => false,
 				"data"   => false
 		), $atts );
 
-		$div_class  = 'media-body';
-		$div_class .= ( $atts['xclass'] )   ? ' ' . $atts['xclass'] : '';
+        $div_class = array();
+		$div_class[] = 'media-body';
 
-		$h4_class  = 'media-heading';
-		$h4_class .= ( $atts['xclass'] )   ? ' ' . $atts['xclass'] : '';
+        $h4_heading = array();
+		$h4_class[] = 'media-heading';
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
 		return sprintf(
-			'<div class="%s"%s><h4 class="%s">%s</h4>%s</div>',
-			esc_attr( $div_class ),
-			( $data_props ) ? ' ' . $data_props : '',
-			esc_attr( $h4_class ),
+			'<div%s%s><h4%s>%s</h4>%s</div>',
+			$this->class_output ( $div_class, $atts["class"] ),
+			$data_props,
+			$this->class_output ( $h4_class ),
 			esc_html(  $atts['title']),
 			do_shortcode( $content )
 		);
@@ -1931,19 +1925,19 @@ License: MIT
 
 		$atts = shortcode_atts( array(
 					"title"  => false,
-					"xclass" => false,
+					"class"  => false,
 					"data"   => false
 		), $atts );
 
-		$class  = 'jumbotron';
-		$class .= ( $atts['xclass'] )   ? ' ' . $atts['xclass'] : '';
+		$class = array();
+		$class[] = 'jumbotron';
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
 		return sprintf(
-			'<div class="%s"%s>%s%s</div>',
-			esc_attr( trim($class) ),
-			( $data_props ) ? ' ' . $data_props : '',
+			'<div%s%s>%s%s</div>',
+			$this->class_output ( $class, $atts["class"] ),
+			$data_props,
 			( $atts['title'] ) ? '<h1>' . esc_html( $atts['title'] ) . '</h1>' : '',
 			do_shortcode( $content )
 		);
@@ -1958,21 +1952,34 @@ License: MIT
 	function bs_lead( $atts, $content = null ) {
 
 		$atts = shortcode_atts( array(
-				"xclass" => false,
+				"class"  => false,
 				"data"   => false
 		), $atts );
 
-		$class  = 'lead';
-		$class .= ( $atts['xclass'] )   ? ' ' . $atts['xclass'] : '';
+		$class = array();
+		$class[] = 'lead';
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
 		return sprintf(
-			'<p class="%s"%s>%s</p>',
-			esc_attr( trim($class) ),
-			( $data_props ) ? ' ' . $data_props : '',
+			'<p%s%s>%s</p>',
+			$this->class_output ( $class, $atts["class"] ),
+			$data_props,
 			do_shortcode( $content )
 		);
+	}
+
+	/*--------------------------------------------------------------------------------------
+		*
+		* bs_br
+		*
+		* @author Uwe Jacobs
+		* @since 4.5.0
+		*
+		*-------------------------------------------------------------------------------------*/
+	function bs_br( $atts, $content = null ) {
+
+		return '<br>';
 	}
 
 	/*--------------------------------------------------------------------------------------
@@ -1984,21 +1991,22 @@ License: MIT
 	function bs_emphasis( $atts, $content = null ) {
 
 		$atts = shortcode_atts( array(
-				"type"   => false,
-				"xclass" => false,
-				"data"   => false
+				"type"    => false,
+				"bgtype"  => false,
+				"class"   => false,
+				"data"    => false
 		), $atts );
 
-		$class  = '';
-		$class .= ( $atts['type'] )   ? 'text-' . $atts['type'] : 'text-muted';
-		$class .= ( $atts['xclass'] ) ? ' ' . $atts['xclass'] : '';
+		$class = array();
+		$class[] = ( $atts['type'] )     ? 'text-' . $atts['type'] : 'text-muted';
+		$class[] = ( $atts['bgtype'] )   ? 'bg-' . $atts['bgtype'] : '';
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
 		return sprintf(
-			'<span class="%s"%s>%s</span>',
-			esc_attr( trim($class) ),
-			( $data_props ) ? ' ' . $data_props : '',
+			'<span%s%s>%s</span>',
+			$this->class_output ( $class, $atts["class"] ),
+			$data_props,
 			do_shortcode( $content )
 		);
 	}
@@ -2014,22 +2022,22 @@ License: MIT
 		$atts = shortcode_atts( array(
 				"type"       => false,
 				"responsive" => false,
-				"xclass"     => false,
+				"class"      => false,
 				"data"       => false
 		), $atts );
 
-                if ($atts['type']) {
-                        if ($atts['type'] == 'circle') {
-                        	$atts['type'] = 'rounded-circle';
-                        } else if ($atts['type'] == 'thumbnail') {
-                        	$atts['type'] = 'img-thumbnail';
-                        }
+        if ($atts['type']) {
+            if ($atts['type'] == 'circle') {
+            	$atts['type'] = 'rounded-circle';
+            } else if ($atts['type'] == 'thumbnail') {
+            	$atts['type'] = 'img-thumbnail';
+            }
 		}
 
 		$class  = '';
-		$class .= ( $atts['type'] )       ? $atts['type'] : '';
+		$class .= ( $atts['type'] )                   ? ' ' . $atts['type'] : '';
 		$class .= ( $atts['responsive']   == 'true' ) ? ' img-fluid' : '';
-		$class .= ( $atts['xclass'] )     ? ' ' . $atts['xclass'] : '';
+		$class .= ( $atts['class'] )                  ? ' ' . $atts['class'] : '';
 
 		$return = '';
 		$tag = array('img');
@@ -2040,6 +2048,193 @@ License: MIT
 	}
 
 	/*--------------------------------------------------------------------------------------
+     * bs_img_gen
+     *
+     * Based on:
+     * Dynamic Dummy Image Generator — as seen on DummyImage.com by Fabian Beiner
+     *
+     * (Original idea by Russel Heimlich. When I first published this script,
+     * DummyImage.com was not Open Source, so I had to write a small script to
+     * replace the function on my own server.)
+     *
+	 *-------------------------------------------------------------------------------------*/
+	function bs_img_gen( $atts, $content = null ) {
+		$atts = shortcode_atts( array(
+				"type"          => false,
+				"responsive"    => false,
+				"size"          => false,
+				"file"          => false,
+				"text"          => false,
+				"bg"            => false,
+				"color"         => false,
+				"data"          => false
+		), $atts );
+
+        if ($atts['type']) {
+            if ($atts['type'] == 'circle') {
+            	$atts['type'] = 'rounded-circle';
+            } else if ($atts['type'] == 'thumbnail') {
+            	$atts['type'] = 'img-thumbnail';
+            }
+		}
+
+		$class = array();
+		$class[] = ( $atts['type'] )                   ? $atts['type'] : '';
+		$class[] = ( $atts['responsive']   == 'true' ) ? 'img-fluid' : '';
+
+		$data_props = $this->parse_data_attributes( $atts['data'] );
+
+        /**
+         * Handle the “size” parameter.
+         */
+        $size = '640x480';
+        if (isset($atts['size'])) {
+            $size = $atts['size'];
+        }
+        list($imgWidth, $imgHeight) = explode('x', $size . 'x');
+        if ($imgHeight === '') {
+            $imgHeight = $imgWidth;
+        }
+        $filterOptions = [
+            'options' => [
+                'min_range' => 0,
+                'max_range' => 9999
+            ]
+        ];
+        if (filter_var($imgWidth, FILTER_VALIDATE_INT, $filterOptions) === false) {
+            $imgWidth = '640';
+        }
+        if (filter_var($imgHeight, FILTER_VALIDATE_INT, $filterOptions) === false) {
+            $imgHeight = '480';
+        }
+
+        /**
+         * Handle the “file” parameter.
+         */
+        $filetype = 'png';
+        if (isset($atts['file']) && in_array(strtolower($atts['file']), ['png', 'gif', 'jpg', 'jpeg'])) {
+            $filetype = strtolower($atts['file']);
+        }
+
+        /**
+         * Handle the “text” parameter.
+         */
+        $text = $imgWidth . '×' . $imgHeight;
+        if (isset($atts['text']) && strlen($atts['text'])) {
+            $text = filter_var(trim($atts['text']), FILTER_SANITIZE_STRING);
+        }
+        $encoding = mb_detect_encoding($text, 'UTF-8, ISO-8859-1');
+        if ($encoding !== 'UTF-8') {
+            $text = mb_convert_encoding($text, 'UTF-8', $encoding);
+        }
+        $text = mb_encode_numericentity($text,
+                                        [0x0, 0xffff, 0, 0xffff],
+                                        'UTF-8');
+
+        /**
+         * Handle the “bg” parameter.
+         */
+        $bg = '000080';
+        if (isset($atts['bg']) && (strlen($atts['bg']) === 6 || strlen($atts['bg']) === 3)) {
+            $bg = strtoupper($atts['bg']);
+            if (strlen($atts['bg']) === 3) {
+                $bg =
+                    strtoupper($atts['bg'][0] .
+                               $atts['bg'][0] .
+                               $atts['bg'][1] .
+                               $atts['bg'][1] .
+                               $atts['bg'][2] .
+                               $atts['bg'][2]);
+            }
+        }
+        list($bgRed, $bgGreen, $bgBlue) = sscanf($bg, "%02x%02x%02x");
+
+        /**
+         * Handle the “color” parameter.
+         */
+        $color = 'FFFFFF';
+        if (isset($atts['color']) && (strlen($atts['color']) === 6 || strlen($atts['color']) === 3)) {
+            $color = strtoupper($atts['color']);
+            if (strlen($atts['color']) === 3) {
+                $color =
+                    strtoupper($atts['color'][0] .
+                               $atts['color'][0] .
+                               $atts['color'][1] .
+                               $atts['color'][1] .
+                               $atts['color'][2] .
+                               $atts['color'][2]);
+            }
+        }
+        list($colorRed, $colorGreen, $colorBlue) = sscanf($color, "%02x%02x%02x");
+
+        /**
+         * Define the typeface settings.
+         */
+        $fontFile = plugin_dir_path( __FILE__ ) . '/includes/fonts/RobotoMono-Regular.ttf';
+        if ( ! is_readable($fontFile)) {
+            $fontFile = 'arial';
+        }
+        
+        $fontSize = round(($imgWidth - 50) / 8);
+        if ($fontSize <= 9) {
+            $fontSize = 9;
+        }
+
+        /**
+         * Generate the image.
+         */
+        $image     = imagecreatetruecolor($imgWidth, $imgHeight);
+        $colorFill = imagecolorallocate($image, $colorRed, $colorGreen, $colorBlue);
+        $bgFill    = imagecolorallocate($image, $bgRed, $bgGreen, $bgBlue);
+        imagefill($image, 0, 0, $bgFill);
+        $textBox = imagettfbbox($fontSize, 0, $fontFile, $text);
+
+        while ($textBox[4] >= $imgWidth) {
+            $fontSize -= round($fontSize / 2);
+            $textBox  = imagettfbbox($fontSize, 0, $fontFile, $text);
+            if ($fontSize <= 9) {
+                $fontSize = 9;
+                break;
+            }
+        }
+        $textWidth  = abs($textBox[4] - $textBox[0]);
+        $textHeight = abs($textBox[5] - $textBox[1]);
+        $textX      = ($imgWidth - $textWidth) / 2;
+        $textY      = ($imgHeight + $textHeight) / 2;
+        imagettftext($image, $fontSize, 0, $textX, $textY, $colorFill, $fontFile, $text);
+
+        /**
+         * Return the image and destroy it afterwards.
+         */
+        ob_start(); 
+        switch ($filetype) {
+            case 'png':
+                $img_type = 'image/png';
+                imagepng($image, null, 9);
+                break;
+            case 'gif':
+                $img_type = 'image/gif';
+                imagegif($image);
+                break;
+            case 'jpg':
+            case 'jpeg':
+                $img_type = 'image/jpeg';
+                imagejpeg($image);
+                break;
+        }
+        imagedestroy($image);
+        $img_data = ob_get_clean();
+
+		return sprintf(
+			'<img src="data:%s;base64,%s"%s%s alt="Generated Dummy Image" />',
+			$img_type,
+			base64_encode( $img_data ),
+			$this->class_output ( $class, $atts["class"] ),
+			$data_props
+		);
+    }
+
+	/*--------------------------------------------------------------------------------------
 		*
 		* bs_blockquote
 		*
@@ -2048,19 +2243,19 @@ License: MIT
 	function bs_blockquote( $atts, $content = null ) {
 
 		$atts = shortcode_atts( array(
-					"xclass" => false,
+					"class"  => false,
 					"data"   => false
 		), $atts );
 
-		$class  = 'blockquote';
-		$class .= ( $atts['xclass'] )   ? ' ' . $atts['xclass'] : '';
+		$class = array();
+		$class[] = 'blockquote';
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
 		return sprintf(
-			'<blockquote class="%s"%s>%s</blockquote>',
-			esc_attr( trim($class) ),
-			( $data_props ) ? ' ' . $data_props : '',
+			'<blockquote%s%s>%s</blockquote>',
+			$this->class_output ( $class, $atts["class"] ),
+			$data_props,
 			do_shortcode( $content )
 		);
 	}
@@ -2074,19 +2269,19 @@ License: MIT
 	function bs_blockquote_footer( $atts, $content = null ) {
 
 		$atts = shortcode_atts( array(
-					"xclass" => false,
+					"class"  => false,
 					"data"   => false
 		), $atts );
 
-		$class  = 'blockquote-footer';
-		$class .= ( $atts['xclass'] )   ? ' ' . $atts['xclass'] : '';
+		$class = array();
+		$class[] = 'blockquote-footer';
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
 		return sprintf(
-			'<footer class="%s"%s>%s</footer>',
-			esc_attr( trim($class) ),
-			( $data_props ) ? ' ' . $data_props : '',
+			'<footer%s%s>%s</footer>',
+			$this->class_output ( $class, $atts["class"] ),
+			$data_props,
 			do_shortcode( $content )
 		);
 	}
@@ -2101,13 +2296,13 @@ License: MIT
 
 		$atts = shortcode_atts( array(
 				"ratio"      => false,
-				"xclass"     => false,
+				"class"      => false,
 				"data"       => false
 		), $atts );
 
-		$class  = 'embed-responsive ';
-		$class .= ( $atts['ratio'] )       ? ' embed-responsive-' . $atts['ratio'] . ' ' : '';
-		$class .= ( $atts['xclass'] )     ? ' ' . $atts['xclass'] : '';
+		$class = array();
+		$class[] = 'embed-responsive ';
+		$class[] = ( $atts['ratio'] )       ? 'embed-responsive-' . $atts['ratio'] . ' ' : '';
 
 		$embed_class = 'embed-responsive-item';
 
@@ -2116,9 +2311,9 @@ License: MIT
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
 		return sprintf(
-			'<div class="%s"%s>%s</div>',
-			esc_attr( trim($class) ),
-			( $data_props ) ? ' ' . $data_props : '',
+			'<div%s%s>%s</div>',
+			$this->class_output ( $class, $atts["class"] ),
+			$data_props,
 			$this->scrape_dom_element($tag, $content, $embed_class, '', '')
 		);
 
@@ -2138,43 +2333,42 @@ License: MIT
 				"block"  => false,
 				"inline"  => false,
 				"inline_block"  => false,
-				"xclass"  => false,
+				"class"   => false,
 				"data"    => false
 		), $atts );
 
-		$class = '';
+		$class = array();
 		if( $atts['hidden'] ) {
 			$hidden = explode( ' ', $atts['hidden'] );
 			foreach( $hidden as $h ):
-				$class .= ( $h == "xs" ? "d-none " : "d-$h-none " );
+				$class[] = ( $h == "xs" ? "d-none" : "d-$h-none" );
 			endforeach;
 		}
 		if( $atts['block'] ) {
 			$block = explode( ' ', $atts['block'] );
 			foreach( $block as $b ):
-				$class .= ( $b == "xs" ? "d-block " : "d-$b-block " );
+				$class[] = ( $b == "xs" ? "d-block" : "d-$b-block" );
 			endforeach;
 		}
 		if( $atts['inline'] ) {
 			$inline = explode( ' ', $atts['inline'] );
 			foreach( $inline as $i ):
-				$class .= ( $i == "xs" ? "d-inline " : "d-$i-inline " );
+				$class[] = ( $i == "xs" ? "d-inline" : "d-$i-inline" );
 			endforeach;
 		}
 		if( $atts['inline_block'] ) {
 			$inline_block = explode( ' ', $atts['inline_block'] );
 			foreach( $inline_block as $ib ):
-				$class .= ( $ib == "xs" ? "d-inline-block " : "d-$ib-inline-block " );
+				$class[] = ( $ib == "xs" ? "d-inline-block" : "d-$ib-inline-block" );
 			endforeach;
 		}
-		$class .= ( $atts['xclass'] ) ? ' ' . $atts['xclass'] : '';
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
 		return sprintf(
-			'<span class="%s"%s>%s</span>',
-			esc_attr( trim($class) ),
-			( $data_props ) ? ' ' . $data_props : '',
+			'<span%s%s>%s</span>',
+			$this->class_output ( $class, $atts["class"] ),
+			$data_props,
 			do_shortcode( $content )
 		);
 	}
@@ -2198,29 +2392,31 @@ License: MIT
 				"text"    => false,
 				"title"   => false,
 				"size"    => false,
-				"xclass"  => false,
+				"class"   => false,
 				"data"    => false
 		), $atts );
 
-		$a_class  = '';
-		$a_class .= ( $atts['xclass'] )   ? ' ' . $atts['xclass'] : '';
+		$a_class = array();
 
-		$div_class  = 'modal fade';
-		$div_class .= ( $atts['size'] ) ? ' bs-modal-' . $atts['size'] : '';
+        $div_class = array();
+		$div_class[] = 'modal fade';
+		$div_class[] = ( $atts['size'] ) ? 'bs-modal-' . $atts['size'] : '';
 
-		$div_size = ( $atts['size'] ) ? ' modal-' . $atts['size'] : '';
+        $md_class = array();
+        $md_class[] = 'modal-dialog';
+		$md_class[] = ( $atts['size'] ) ? ' modal-' . $atts['size'] : '';
 
 		$id = 'custom-modal-' . $GLOBALS['modal_count'];
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
 		$modal_output = sprintf(
-				'<div class="%1$s" id="%2$s" tabindex="-1" role="dialog" aria-hidden="true">
-						<div class="modal-dialog %3$s">
+				'<div%1$s id="%2$s" tabindex="-1" role="dialog" aria-hidden="true">
+						<div%3$s">
 								<div class="modal-content">
 										<div class="modal-header">
 												%4$s
-												<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close">&times;</button>
 										</div>
 										<div class="modal-body">
 												%5$s
@@ -2229,9 +2425,9 @@ License: MIT
 						</div>
 				</div>
 				',
-			esc_attr( $div_class ),
+			$this->class_output ( $div_class ),
 			esc_attr( $id ),
-			esc_attr( $div_size ),
+			$this->class_output ( $md_class ),
 			( $atts['title'] ) ? '<h4 class="modal-title">' . $atts['title'] . '</h4>' : '',
 			do_shortcode( $content )
 		);
@@ -2241,10 +2437,10 @@ License: MIT
 		}, 100,0);
 
 		return sprintf(
-			'<a data-toggle="modal" href="#%1$s" class="%2$s"%3$s>%4$s</a>',
+			'<a data-toggle="modal" href="#%1$s"%2$s%3$s>%4$s</a>',
 			esc_attr( $id ),
-			esc_attr( $a_class ),
-			( $data_props ) ? ' ' . $data_props : '',
+			$this->class_output ( $a_class, $atts["class"] ),
+			$data_props,
 			esc_html( $atts['text'] )
 		);
 	}
@@ -2260,19 +2456,19 @@ License: MIT
 	function bs_modal_header( $atts, $content = null ) {
 
 		$atts = shortcode_atts( array(
-				"xclass" => false,
+				"class"  => false,
 				"data"   => false,
 		), $atts );
 
-		$class  = 'modal-header';
-		$class .= ( $atts['xclass'] ) ? ' ' . $atts['xclass'] : '';
+		$class = array();
+		$class[] = 'modal-header';
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
 		return sprintf(
-			'</div><div class="%s"%s>%s',
-			esc_attr( trim($class) ),
-			( $data_props ) ? ' ' . $data_props : '',
+			'</div><div%s%s>%s',
+			$this->class_output ( $class, $atts["class"] ),
+			$data_props,
 			do_shortcode( $content )
 		);
 	}
@@ -2288,19 +2484,19 @@ License: MIT
 	function bs_modal_body( $atts, $content = null ) {
 
 		$atts = shortcode_atts( array(
-				"xclass" => false,
+				"class"  => false,
 				"data"   => false,
 		), $atts );
 
-		$class  = 'modal-body';
-		$class .= ( $atts['xclass'] ) ? ' ' . $atts['xclass'] : '';
+		$class = array();
+		$class[] = 'modal-body';
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
 		return sprintf(
-			'</div><div class="%s"%s>%s',
-			esc_attr( trim($class) ),
-			( $data_props ) ? ' ' . $data_props : '',
+			'</div><div%s%s>%s',
+			$this->class_output ( $class, $atts["class"] ),
+			$data_props,
 			do_shortcode( $content )
 		);
 	}
@@ -2316,19 +2512,19 @@ License: MIT
 	function bs_modal_footer( $atts, $content = null ) {
 
 		$atts = shortcode_atts( array(
-				"xclass" => false,
+				"class"  => false,
 				"data"   => false,
 		), $atts );
 
-		$class  = 'modal-footer';
-		$class .= ( $atts['xclass'] ) ? ' ' . $atts['xclass'] : '';
+		$class = array();
+		$class[] = 'modal-footer';
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
 		return sprintf(
-			'</div><div class="%s"%s>%s',
-			esc_attr( trim($class) ),
-			( $data_props ) ? ' ' . $data_props : '',
+			'</div><div%s%s>%s',
+			$this->class_output ( $class, $atts["class"] ),
+			$data_props,
 			do_shortcode( $content )
 		);
 	}
@@ -2347,15 +2543,26 @@ License: MIT
 
 			foreach( $data as $d ) {
 				$d = explode( ',', $d );
-				$data_props .= sprintf( 'data-%s="%s" ', esc_html( $d[0] ), esc_attr( trim( $d[1] ) ) );
+				$data_props .= sprintf( ' data-%s="%s"', esc_html( $d[0] ), esc_attr( trim( $d[1] ) ) );
 			}
 		}
-		else {
-			$data_props = false;
-		}
+
 		return $data_props;
 	}
-
+	
+	/*--------------------------------------------------------------------------------------
+	    * Convert class  string array into complete class="..." string and return the string
+	    * @param  array $class Array with classes
+	    * @param  string $xclass Optional string with extra classes
+	    * @return class="..." string or empty string
+		*-------------------------------------------------------------------------------------*/
+	function class_output($class, $xclass = null) {
+        if ($xclass) {
+    		$class = array_merge($class, explode(' ', $xclass));
+    	}
+		return (empty($class) ? '' : ' class="' .  esc_attr( trim( implode( ' ', $class ) ) ) . '"');
+	}
+		
 	/*--------------------------------------------------------------------------------------
 		*
 		* get DOMDocument element and apply shortcode parameters to it. Create the element if it doesn't exist

@@ -117,7 +117,7 @@ $html = file_get_contents(dirname(__FILE__) . '/help/README.html');
                         //      * Add "Insert Example" buttons after code examples
                         // ======================================================================== //
                         
-                        $html = preg_replace('/(<a href="http:[^"]+")>/is','\\1 target="_blank">',$html);
+                        $html = preg_replace('/(<a href="https:[^"]+")>/is','\\1 target="_blank">',$html);
                         $html = str_replace('<table>', '<table class="table table-striped">', $html);
                         $html = str_replace('<ul>', '<div class="list-group">', $html);
                         $html = str_replace('</ul>', '</div>', $html);
@@ -126,7 +126,7 @@ $html = file_get_contents(dirname(__FILE__) . '/help/README.html');
                         $html = str_replace('href="#', 'href="#bs-', $html);
                         $html = str_replace('<hr>', '<hr><a class="btn btn-link btn-default pull-right" href="#bs-top"><i class="fas fa-long-arrow-alt-up text-muted"></i></a>', $html);
                         $html = str_replace('<h3 id="', '<h3 id="bs-', $html);
-                        $html = str_replace('</pre>', '</pre><p><button data-dismiss="modal" class="btn btn-primary btn-sm insert-code">Insert Example <i class="fas fa-share-square ml-2"></i></button></p>', $html);
+                        $html = str_replace('</pre>', '</pre><p><button data-dismiss="modal" class="btn btn-primary btn-sm insert-code"><i class="fas fa-share-square"></i> Insert Example</button></p>', $html);
                         $html = preg_replace("/<img[^>]+\>/i", "", $html);
                         //Insert the HTML now that we're done editing it
                         echo $html;

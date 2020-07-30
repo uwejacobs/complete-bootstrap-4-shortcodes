@@ -1,15 +1,20 @@
 {
-  "name": "mwdelaney/bootstrap-4-shortcodes",
-  "description": "WordPress shortcodes for easier use of Bootstrap elements in your content.",
+  "name": "uwejacobs/bootstrap-4-shortcodes",
+  "description": "WordPress shortcodes for easier use of Bootstrap 4 elements in your content.",
   "keywords": [
     "bootstrap",
     "shortcodes",
     "wordpress",
     "plugin"
   ],
-  "homepage": "https://github.com/mwdelaney/bootstrap-4-shortcodes",
-  "license": "GPL2",
+  "homepage": "https://github.com/uwejacobs/bootstrap-4-shortcodes",
+  "license": "MIT",
   "authors": [
+    {
+      "name": "Uwe Jacobs",
+      "homepage": "https://www.uwejacobs.com",
+      "role": "Developer"
+    },
     {
       "name": "Filip Stefansson",
       "email": "filip.stefansson@gmail.com",
