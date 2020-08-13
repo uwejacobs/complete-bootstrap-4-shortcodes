@@ -1,5 +1,5 @@
 === Bootstrap Shortcodes for WordPress ===
-Contributors: Uwe Jacobs, FoolsRun, filipstefansson, nodley
+Contributors: Uwe Jacobs
 Tags: bootstrap, shortcode, shortcodes, responsive, grid
 Requires at least: 3.8
 Tested up to: 5.4.2

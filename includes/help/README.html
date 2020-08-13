@@ -1,17 +1,12 @@
 <!-- TODO
 - New Tags
-accordion (compare with collapse)
-card
-card-body
-card-columns
-card-deck
-card-footer
-card-group
-card-header
-card-img-overlay
 flex
-flex-item
+figure*
+*-outer
 - aria
+Bugs:
+- dropdown-menu can't be nested
+- nav with dropdown menu
 -->
 <h1 id="bootstrap-4-shortcodes-for-wordpress">Bootstrap 4 Shortcodes for WordPress</h1>
 <p><img src="https://img.shields.io/wordpress/plugin/r/bootstrap-4-shortcodes.svg" alt="WordPress Rating"> <img src="https://img.shields.io/wordpress/plugin/dt/bootstrap-4-shortcodes.svg" alt="WordPress Downloads"></p>
@@ -20,49 +15,60 @@ flex-item
 <h2 id="requirements">Requirements</h2>
 <p><img src="https://img.shields.io/wordpress/v/bootstrap-4-shortcodes.svg" alt="Tested in WordPress"> <img src="https://img.shields.io/badge/PHP-5.3%2B-blue.svg" alt="PHP 5.3+"> <img src="https://img.shields.io/badge/Bootstrap-4.5.x-6f5499.svg" alt="Bootstrap"></p>
 <p>This plugin won&#39;t do anything if you don&#39;t have WordPress theme built with the <a href="https://getbootstrap.com/">Bootstrap</a> framework. <strong>This plugin does not include the Bootstrap framework</strong>. The icon shortcodes require Font Awesome 5 or better.</p>
-<p>The plugin is tested to work with <code>Bootstrap 4</code> and <code>WordPress 4.5</code> and <strong>requires PHP 5.3 or later</strong>.</p>
+<p>The plugin is tested to work with <code class="d-block p-4">Bootstrap 4</code> and <code class="d-block p-4">WordPress 4.5</code> and <strong>requires PHP 5.3 or later</strong>.</p>
+<p>Wordpress is not able to process nested shortcodes - like a <code class="d-block p-4">card</code> inside a <code class="d-block p-4">card</code> - correctly; see <a href="https://codex.wordpress.org/Shortcode_API#Nested_Shortcodes" target="_blank">Wordpress: Nested Shortcodes</a>. Some of the shortcodes have aliases with the extension <code>-outer</code> to allow nesting.</p>
 <h2 id="shortcode-reference">Shortcode Reference</h2>
-<h3 id="css-header">CSS</h3>
+<a id="layout-header" class="text-decoration-none" href="#layout"><h3>Layout</h3></a>
 <ul>
-<li><a href="#grid">Grid</a></li>
-<li><a href="#lead-body-copy">Lead body copy</a></li>
-<li><a href="#emphasis-classes">Emphasis classes</a></li>
-<li><a href="#code">Code</a></li>
-<li><a href="#tables">Tables</a></li>
-<li><a href="#buttons">Buttons</a></li>
-<li><a href="#images">Images</a></li>
-<li><a href="#responsive-embeds">Responsive Embeds</a></li>
-<li><a href="#responsive-utilities">Responsive utilities</a></li>
-<li><a href="#br">Line break</a></li>
+    <li><a href="#grid">Grid</a></li>
+    <li><a href="#responsive-embeds">Responsive Embeds</a></li>
+    <li><a href="#responsive-utilities">Responsive Utilities</a></li>
 </ul>
-<h3 id="components-header">Components</h3>
+<a id="components-header" class="text-decoration-none" href="#components"><h3>Components</h3></a>
 <ul>
-<li><a href="#icons">Icons</a></li>
-<li><a href="#button-groups">Button Groups</a></li>
-<li><a href="#button-dropdowns">Button Dropdowns</a></li>
-<li><a href="#navs">Navs</a></li>
-<li><a href="#breadcrumbs">Breadcrumbs</a></li>
-<li><a href="#badges">Badges</a></li>
-<li><a href="#blockquote">Blockquote</a></li>
-<li><a href="#jumbotron">Jumbotron</a></li>
-<li><a href="#alerts">Alerts</a></li>
-<li><a href="#progress-bars">Progress Bars</a></li>
-<li><a href="#media-objects">Media Objects</a></li>
-<li><a href="#list-groups">List Groups</a></li>
+    <li><a href="#cards">Cards</a></li>
+    <li><a href="#icons">Icons</a></li>
+    <li><a href="#buttons">Buttons</a></li>
+    <li><a href="#button-groups">Button Groups</a></li>
+    <li><a href="#button-dropdowns">Button Dropdowns</a></li>
+    <li><a href="#navs">Navs</a></li>
+    <li><a href="#breadcrumbs">Breadcrumbs</a></li>
+    <li><a href="#badges">Badges</a></li>
+    <li><a href="#jumbotron">Jumbotron</a></li>
+    <li><a href="#alerts">Alerts</a></li>
+    <li><a href="#progress-bars">Progress Bars</a></li>
+    <li><a href="#media-objects">Media Objects</a></li>
+    <li><a href="#list-groups">List Groups</a></li>
 </ul>
-<h3 id="javascript-header">JavaScript</h3>
+<a id="content-header" class="text-decoration-none" href="#content"><h3>Content</h3></a>
 <ul>
-<li><a href="#tabs">Tabs</a></li>
-<li><a href="#tooltip">Tooltip</a></li>
-<li><a href="#popover">Popover</a></li>
-<li><a href="#collapse">Collapse</a></li>
-<li><a href="#carousel">Carousel</a></li>
-<li><a href="#modal">Modal</a></li>
+    <li><a href="#code">Code</a></li>
+    <li><a href="#tables">Tables</a></li>
+    <li><a href="#images">Images</a></li>
+    <li><a href="#blockquote">Blockquote</a></li>
+    <li><a href="#lead-body-copy">Lead body copy</a></li>
+</ul>
+<a id="utilities-header" class="text-decoration-none" href="#utilities"><h3>Utilities</h3></a>
+<ul>
+    <li><a href="#border-classes">Border</a></li>
+    <li><a href="#color-classes">Color</a></li>
+    <li><a href="#flex">Flex</a></li>
+    <li><a href="#html">HTML snippets</a></li>
+    <li><a href="#lorem-ipsum">Lorem Ipsum Text Generator</a></li>
+</ul>
+<a id="javascript-header" class="text-decoration-none" href="#javascript"><h3>Javascript</h3></a>
+<ul>
+    <li><a href="#tooltip">Tooltip</a></li>
+    <li><a href="#popover">Popover</a></li>
+    <li><a href="#collapse">Collapse</a></li>
+    <li><a href="#carousel">Carousel</a></li>
+    <li><a href="#modal">Modal</a></li>
 </ul>
 <h1 id="usage">Usage</h1>
-<h3 id="css">CSS</h3>
+<h3 id="layout">Layout</h3>
 <h3 id="grid">Grid</h3>
-<pre><code>[row]
+<pre><code class="d-block p-4">
+[row]
     [column md=&quot;6&quot;]
         ...
     [/column]
@@ -70,8 +76,10 @@ flex-item
         ...
     [/column]
 [/row]
-</code></pre><p>The container component is also supported in case your theme doesn&#39;t include a container.</p>
-<pre><code>[container]
+</code></pre>
+<p>The container component is also supported in case your theme doesn&#39;t include a container.</p>
+<pre><code class="d-block p-4">
+[container]
     [row]
         [column md=&quot;6&quot;]
             ...
@@ -81,8 +89,10 @@ flex-item
         [/column]
     [/row]
 [/container]
-</code></pre><p>The container-fluid component is supported as a discrete shortcode for cases where you want to wrap a container.</p>
-<pre><code>[container-fluid]
+</code></pre>
+<p>The container-fluid component is supported as a discrete shortcode for cases where you want to wrap a container.</p>
+<pre><code class="d-block p-4">
+[container-fluid]
     [container]
         [row]
             [column md=&quot;6&quot;]
@@ -94,1099 +104,1308 @@ flex-item
         [/row]
     [/container]
 [/container-fluid]
-</code></pre><h4 id="-container-parameters">[container] parameters</h4>
+</code></pre>
+<h4 id="-container-parameters">[container] parameters</h4>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th>Required</th>
-<th>Values</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>fluid</td>
-<td>Is the container fluid? (see <a href="https://getbootstrap.com/docs/4.5/layout/overview/#fluid">Bootstrap documentation</a> for details)</td>
-<td>optional</td>
-<td>true, false</td>
-<td>false</td>
-</tr>
-<tr>
-<td>class</td>
-<td>Any extra classes you want to add</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-<tr>
-<td>data</td>
-<td>Data attribute and value pairs separated by a comma. Pairs separated by pipe (see example at <a href="#button-dropdowns">Button Dropdowns</a>).</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-</tbody>
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>fluid</td>
+            <td>Create a full width container, spanning the entire width of the viewport. (see <a href="https://getbootstrap.com/docs/4.5/layout/overview/#fluid">Bootstrap documentation</a> for details)</td>
+            <td>optional</td>
+            <td>🚩 (flag)</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe. Example: <code>data="columns,3|index,1"</code> expands to <code>data-columns="3" data-index="1"</code>.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+    </tbody>
 </table>
 <h4 id="-container-fluid-parameters">[container-fluid] parameters</h4>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th>Required</th>
-<th>Values</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>class</td>
-<td>Any extra classes you want to add</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-<tr>
-<td>data</td>
-<td>Data attribute and value pairs separated by a comma. Pairs separated by pipe (see example at <a href="#button-dropdowns">Button Dropdowns</a>).</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-</tbody>
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at <a href="#container-parameters">[container] parameters</a>).</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+    </tbody>
 </table>
 <h4 id="-row-parameters">[row] parameters</h4>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th>Required</th>
-<th>Values</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>class</td>
-<td>Any extra classes you want to add</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-<tr>
-<td>data</td>
-<td>Data attribute and value pairs separated by a comma. Pairs separated by pipe (see example at <a href="#button-dropdowns">Button Dropdowns</a>).</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-</tbody>
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at <a href="#container-parameters">[container] parameters</a>.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+    </tbody>
 </table>
 <h4 id="-column-parameters">[column] parameters</h4>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th>Required</th>
-<th>Values</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>xs</td>
-<td>Size of column on extra small screens (less than 576px)</td>
-<td>optional</td>
-<td>1-12</td>
-<td>false</td>
-</tr>
-<tr>
-<td>sm</td>
-<td>Size of column on small screens (greater than 576px)</td>
-<td>optional</td>
-<td>1-12</td>
-<td>false</td>
-</tr>
-<tr>
-<td>md</td>
-<td>Size of column on medium screens (greater than 768px)</td>
-<td>optional</td>
-<td>1-12</td>
-<td>false</td>
-</tr>
-<tr>
-<td>lg</td>
-<td>Size of column on large screens (greater than 992px)</td>
-<td>optional</td>
-<td>1-12</td>
-<td>false</td>
-</tr>
-<tr>
-<td>xl</td>
-<td>Size of column on extra large screens (greater than 1200px)</td>
-<td>optional</td>
-<td>1-12</td>
-<td>false</td>
-</tr>
-<tr>
-<td>offset_xs</td>
-<td>Offset on extra small screens</td>
-<td>optional</td>
-<td>1-12</td>
-<td>false</td>
-</tr>
-<tr>
-<td>offset_sm</td>
-<td>Offset on small screens</td>
-<td>optional</td>
-<td>1-12</td>
-<td>false</td>
-</tr>
-<tr>
-<td>offset_md</td>
-<td>Offset on column on medium screens</td>
-<td>optional</td>
-<td>1-12</td>
-<td>false</td>
-</tr>
-<tr>
-<td>offset_lg</td>
-<td>Offset on column on large screens</td>
-<td>optional</td>
-<td>1-12</td>
-<td>false</td>
-</tr>
-<tr>
-<td>order_xs</td>
-<td>Visual order on extra small screens</td>
-<td>optional</td>
-<td>1-12</td>
-<td>false</td>
-</tr>
-<tr>
-<td>order_sm</td>
-<td>Visual order on small screens</td>
-<td>optional</td>
-<td>1-12</td>
-<td>false</td>
-</tr>
-<tr>
-<td>order_md</td>
-<td>Visual order on column on medium screens</td>
-<td>optional</td>
-<td>1-12</td>
-<td>false</td>
-</tr>
-<tr>
-<td>order_lg</td>
-<td>Visual order on column on large screens</td>
-<td>optional</td>
-<td>1-12</td>
-<td>false</td>
-</tr>
-<tr>
-<td>class</td>
-<td>Any extra classes you want to add</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-<tr>
-<td>data</td>
-<td>Data attribute and value pairs separated by a comma. Pairs separated by pipe (see example at <a href="#button-dropdowns">Button Dropdowns</a>).</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-</tbody>
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>xs</td>
+            <td>Size of column on extra small screens (less than 576px)</td>
+            <td>optional</td>
+            <td>1-12</td>
+            <td>false</td>
+        </tr>
+        <tr>
+            <td>sm</td>
+            <td>Size of column on small screens (greater than 576px)</td>
+            <td>optional</td>
+            <td>1-12</td>
+            <td>false</td>
+        </tr>
+        <tr>
+            <td>md</td>
+            <td>Size of column on medium screens (greater than 768px)</td>
+            <td>optional</td>
+            <td>1-12</td>
+            <td>false</td>
+        </tr>
+        <tr>
+            <td>lg</td>
+            <td>Size of column on large screens (greater than 992px)</td>
+            <td>optional</td>
+            <td>1-12</td>
+            <td>false</td>
+        </tr>
+        <tr>
+            <td>xl</td>
+            <td>Size of column on extra large screens (greater than 1200px)</td>
+            <td>optional</td>
+            <td>1-12</td>
+            <td>false</td>
+        </tr>
+        <tr>
+            <td>offset-xs</td>
+            <td>Offset on extra small screens</td>
+            <td>optional</td>
+            <td>1-12</td>
+            <td>false</td>
+        </tr>
+        <tr>
+            <td>offset-sm</td>
+            <td>Offset on small screens</td>
+            <td>optional</td>
+            <td>1-12</td>
+            <td>false</td>
+        </tr>
+        <tr>
+            <td>offset-md</td>
+            <td>Offset on column on medium screens</td>
+            <td>optional</td>
+            <td>1-12</td>
+            <td>false</td>
+        </tr>
+        <tr>
+            <td>offset-lg</td>
+            <td>Offset on column on large screens</td>
+            <td>optional</td>
+            <td>1-12</td>
+            <td>false</td>
+        </tr>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at <a href="#container-parameters">[container] parameters</a>.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+    </tbody>
 </table>
 <p><a href="https://getbootstrap.com/docs/4.5/layout/grid/">Bootstrap grid documentation</a>.</p>
 <hr>
-<h3 id="lead-body-copy">Lead body copy</h3>
-<pre><code>[lead] ... [/lead]
-</code></pre><h4 id="-lead-parameters">[lead] parameters</h4>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th>Required</th>
-<th>Values</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>class</td>
-<td>Any extra classes you want to add</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-<tr>
-<td>data</td>
-<td>Data attribute and value pairs separated by a comma. Pairs separated by pipe (see example at <a href="#button-dropdowns">Button Dropdowns</a>).</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-</tbody>
-</table>
-<p><a href="https://getbootstrap.com/docs/4.5/content/typography/#lead">Bootstrap lead documentation</a></p>
-<hr>
-<h3 id="emphasis-classes">Emphasis classes</h3>
-<pre><code>[emphasis ttype=&quot;success&quot;] ... [/emphasis]
-</code></pre><h4 id="-emphasis-parameters">[emphasis] parameters</h4>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th>Required</th>
-<th>Values</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>type</td>
-<td>The text color of label to display</td>
-<td>required</td>
-<td>primary, secondary, success, danger, warning, info, light, dark, body, muted, white, black-50, white-50</td>
-<td>muted</td>
-</tr>
-<tr>
-<td>bgtype</td>
-<td>The background color of label to display</td>
-<td>required</td>
-<td>primary, secondary, success, danger, warning, info, light, dark, white, transparent</td>
-<td>none</td>
-</tr>
-<tr>
-<td>class</td>
-<td>Any extra classes you want to add</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-<tr>
-<td>data</td>
-<td>Data attribute and value pairs separated by a comma. Pairs separated by pipe (see example at <a href="#button-dropdowns">Button Dropdowns</a>).</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-</tbody>
-</table>
-<p><a href="https://getbootstrap.com/docs/4.5/utilities/colors/">Bootstrap color emphasis classes documentation</a></p>
-<hr>
-<h3 id="code">Code</h3>
-<pre><code>[code] ... [/code]
-</code></pre><h4 id="-code-parameters">[code] parameters</h4>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th>Required</th>
-<th>Values</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>inline</td>
-<td>Display inline code</td>
-<td>optional</td>
-<td>true, false</td>
-<td>false</td>
-</tr>
-<tr>
-<td>scrollable</td>
-<td>Set a max height of 350px and provide a scroll bar. Not usable with inline=&quot;true&quot;.</td>
-<td>optional</td>
-<td>true, false</td>
-<td>false</td>
-</tr>
-<tr>
-<td>class</td>
-<td>Any extra classes you want to add</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-<tr>
-<td>data</td>
-<td>Data attribute and value pairs separated by a comma. Pairs separated by pipe (see example at <a href="#button-dropdowns">Button Dropdowns</a>).</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-</tbody>
-</table>
-<p><a href="https://getbootstrap.com/docs/4.5/content/code/">Bootstrap code documentation</a></p>
-<hr>
-<h3 id="tables">Tables</h3>
-<pre><code>[table-wrap bordered=&quot;true&quot; striped=&quot;true&quot;]
-
-            Standard HTML table code goes here.
-
-[/table-wrap]
-</code></pre><h4 id="-table-wrap-parameters">[table-wrap] parameters</h4>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th>Required</th>
-<th>Values</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>bordered</td>
-<td>Set &quot;bordered&quot; table style (see Bootstrap documentation)</td>
-<td>optional</td>
-<td>true, false</td>
-<td>false</td>
-</tr>
-<tr>
-<td>striped</td>
-<td>Set &quot;striped&quot; table style (see Bootstrap documentation)</td>
-<td>optional</td>
-<td>true, false</td>
-<td>false</td>
-</tr>
-<tr>
-<td>hover</td>
-<td>Set &quot;hover&quot; table style (see Bootstrap documentation)</td>
-<td>optional</td>
-<td>true, false</td>
-<td>false</td>
-</tr>
-<tr>
-<td>condensed</td>
-<td>Set &quot;condensed&quot; table style (see Bootstrap documentation)</td>
-<td>optional</td>
-<td>true, false</td>
-<td>false</td>
-</tr>
-<tr>
-<td>responsive</td>
-<td>Wrap the table in a div with the class &quot;table-responsive&quot; (see Bootstrap documentation)</td>
-<td>optional</td>
-<td>true, false</td>
-<td>false</td>
-</tr>
-<tr>
-<td>class</td>
-<td>Any extra classes you want to add</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-<tr>
-<td>data</td>
-<td>Data attribute and value pairs separated by a comma. Pairs separated by pipe (see example at <a href="#button-dropdowns">Button Dropdowns</a>).</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-</tbody>
-</table>
-<p><a href="https://getbootstrap.com/docs/4.5/content/tables/">Bootstrap table documentation</a></p>
-<hr>
-<h3 id="buttons">Buttons</h3>
-<pre><code>[button type=&quot;success&quot; size=&quot;lg&quot; link=&quot;#&quot;] ... [/button]
-</code></pre><h4 id="-button-parameters">[button] parameters</h4>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th>Required</th>
-<th>Values</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>type</td>
-<td>The type of the button</td>
-<td>optional</td>
-<td>primary, secondary, success, info, warning, danger, dark, light, link</td>
-<td>default</td>
-</tr>
-<tr>
-<td>size</td>
-<td>The size of the button</td>
-<td>optional</td>
-<td>sm, md, lg</td>
-<td>md</td>
-</tr>
-<tr>
-<td>block</td>
-<td>Whether the button should be a block-level button</td>
-<td>optional</td>
-<td>true, false</td>
-<td>false</td>
-</tr>
-<tr>
-<td>dropdown</td>
-<td>Whether the button triggers a dropdown menu (see <a href="#button-dropdowns">Button Dropdowns</a>)</td>
-<td>optional</td>
-<td>true, false</td>
-<td>false</td>
-</tr>
-<tr>
-<td>active</td>
-<td>Apply the &quot;active&quot; style</td>
-<td>optional</td>
-<td>true, false</td>
-<td>false</td>
-</tr>
-<tr>
-<td>disabled</td>
-<td>Whether the button be disabled</td>
-<td>optional</td>
-<td>true, false</td>
-<td>false</td>
-</tr>
-<tr>
-<td>class</td>
-<td>Any extra classes you want to add</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-<tr>
-<td>link</td>
-<td>The url you want the button to link to</td>
-<td>optional</td>
-<td>any valid link</td>
-<td>#</td>
-</tr>
-<tr>
-<td>target</td>
-<td>Target for the link</td>
-<td>optional</td>
-<td>any valid target</td>
-<td>none</td>
-</tr>
-<tr>
-<td>data</td>
-<td>Data attribute and value pairs separated by a comma. Pairs separated by pipe (see example at <a href="#button-dropdowns">Button Dropdowns</a>).</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-</tbody>
-</table>
-<p><a href="https://getbootstrap.com/docs/4.5/components/buttons/">Bootstrap button documentation</a></p>
-<hr>
-<h3 id="images">Image</h3>
-<pre><code>[img type=&quot;circle&quot; responsive=&quot;true&quot;] ... [/img]
-</code></pre><p>Wrap any number of HTML image tags or images inserted via the WordPress media manager.</p>
-<h4 id="-img-parameters">[img] parameters</h4>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th>Required</th>
-<th>Values</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>type</td>
-<td>The effect to apply to wrapped images</td>
-<td>optional</td>
-<td>rounded, circle, thumbnail</td>
-<td>false</td>
-</tr>
-<tr>
-<td>responsive</td>
-<td>Make the wrapped images responsive</td>
-<td>optional</td>
-<td>true, false</td>
-<td>false</td>
-</tr>
-<tr>
-<td>class</td>
-<td>Any extra classes you want to add</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-<tr>
-<td>data</td>
-<td>Data attribute and value pairs separated by a comma. Pairs separated by pipe (see example at <a href="#button-dropdowns">Button Dropdowns</a>).</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-</tbody>
-</table>
-<p><a href="https://getbootstrap.com/docs/4.5/content/images/">Bootstrap images documentation</a></p>
-<hr>
-<h3 id="images-gen">Dynamic Dummy Image Generator</h3>
-<pre><code>[img-gen type=&quot;circle&quot; responsive=&quot;true&quot; size=&quot;800x600&quot; text=&quot;Hello&quot;]
-</code></pre><p>Generate dynamic dummy images with selectable colors and text.</p>
-<h4 id="-img-gen-parameters">[img-gen] parameters</h4>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th>Required</th>
-<th>Values</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>type</td>
-<td>The effect to apply to wrapped images</td>
-<td>optional</td>
-<td>rounded, circle, thumbnail</td>
-<td>false</td>
-</tr>
-<tr>
-<td>responsive</td>
-<td>Make the wrapped images responsive</td>
-<td>optional</td>
-<td>true, false</td>
-<td>false</td>
-</tr>
-<tr>
-<td>size</td>
-<td>The size of the image in pixels</td>
-<td>optional</td>
-<td>Examples: 500x250 (= 500px width, 250px height)<br>
-500 (= 500px square) </td>
-<td>640x480</td>
-</tr>
-<tr>
-<td>file</td>
-<td>The image file type</td>
-<td>optional</td>
-<td>png, gif, jpg or jpeg</td>
-<td>png</td>
-</tr>
-<tr>
-<td>text</td>
-<td>The text shown on top of the image</td>
-<td>optional</td>
-<td>Any text</td>
-<td>{Width-Of-Image} x {Hight-Of-Image}</td>
-</tr>
-<tr>
-<td>bg</td>
-<td>The background color of the image</td>
-<td>optional</td>
-<td>Examples:<br>
-f00 (= #FF0000 as background color)<br>
-FF0855 (= #FF0855 as background color)</td>
-<td>000080</td>
-</tr>
-<tr>
-<td>color</td>
-<td>The font color of the image</td>
-<td>optional</td>
-<td>see bg color</td>
-<td>FFFFFF</td>
-</tr>
-<tr>
-<td>class</td>
-<td>Any extra classes you want to add</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-<tr>
-<td>data</td>
-<td>Data attribute and value pairs separated by a comma. Pairs separated by pipe (see example at <a href="#button-dropdowns">Button Dropdowns</a>).</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-</tbody>
-</table>
-<p><a href="https://getbootstrap.com/docs/4.5/content/images/">Bootstrap images documentation</a></p>
-<hr>
 <h3 id="responsive-embeds">Responsive Embeds</h3>
-<pre><code>[embed-responsive ratio=&quot;16by9&quot;] ... [/embed-responsive]
-</code></pre><p>Wrap <code>&lt;iframe&gt;</code>, <code>&lt;embed&gt;</code>, <code>&lt;video&gt;</code>, and <code>&lt;object&gt;</code> elements to make them responsive.</p>
+<pre><code class="d-block p-4">
+[embed-responsive ratio=&quot;16by9&quot;] ... [/embed-responsive]
+</code></pre>
+<p>Wrap <code class="d-block p-4">&lt;iframe&gt;</code>, <code class="d-block p-4">&lt;embed&gt;</code>, <code class="d-block p-4">&lt;video&gt;</code>, and <code class="d-block p-4">&lt;object&gt;</code> elements to make them responsive.</p>
 <h4 id="-responsive-embed-parameters">[responsive-embed] parameters</h4>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th>Required</th>
-<th>Values</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>ratio</td>
-<td>Maintain the aspect ratio of the embed</td>
-<td>optional</td>
-<td>1by1, 4by3, 16by9, 21by9</td>
-<td>false</td>
-</tr>
-<tr>
-<td>class</td>
-<td>Any extra classes you want to add</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-<tr>
-<td>data</td>
-<td>Data attribute and value pairs separated by a comma. Pairs separated by pipe (see example at <a href="#button-dropdowns">Button Dropdowns</a>).</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-</tbody>
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>ratio</td>
+            <td>Maintain the aspect ratio of the embed</td>
+            <td>optional</td>
+            <td>1by1, 4by3, 16by9, 21by9</td>
+            <td>false</td>
+        </tr>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at <a href="#container-parameters">[container] parameters</a>.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+    </tbody>
 </table>
 <p><a href="https://getbootstrap.com/docs/4.5/utilities/embed/">Bootstrap responsive embed documentation</a></p>
 <hr>
 <h3 id="responsive-utilities">Responsive Utilities</h3>
-<pre><code>[responsive block=&quot;xl lg md&quot; hidden=&quot;sn xs&quot;] ... [/responsive]
-</code></pre><h4 id="-reponsive-parameters">[reponsive] parameters</h4>
+<pre><code class="d-block p-4">
+[responsive block=&quot;xl lg md&quot; hidden=&quot;sm xs&quot;] ... [/responsive]
+</code></pre>
+<h4 id="-reponsive-parameters">[reponsive] parameters</h4>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th>Required</th>
-<th>Values</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>hidden</td>
-<td>Sizes at which this element is hidden (separated by spaces)</td>
-<td>optional</td>
-<td>xs, sm, md, lg, xl</td>
-<td>false</td>
-</tr>
-<tr>
-<td>block</td>
-<td>Sizes at which this element is visible and displayed as a &quot;block&quot; element (separated by spaces)</td>
-<td>optional</td>
-<td>xs, sm, md, lg, xl</td>
-<td>false</td>
-</tr>
-<tr>
-<td>inline</td>
-<td>Sizes at which this element is visible and displayed as an &quot;inline&quot; element (separated by spaces)</td>
-<td>optional</td>
-<td>xs, sm, md, lg, xl</td>
-<td>false</td>
-</tr>
-<tr>
-<td>inline_block</td>
-<td>Sizes at which this element is visible and displayed as an &quot;inline-block&quot; element (separated by spaces)</td>
-<td>optional</td>
-<td>xs, sm, md, lg, xl</td>
-<td>false</td>
-</tr>
-<tr>
-<td>class</td>
-<td>Any extra classes you want to add</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-<tr>
-<td>data</td>
-<td>Data attribute and value pairs separated by a comma. Pairs separated by pipe (see example at <a href="#button-dropdowns">Button Dropdowns</a>).</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-</tbody>
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>hidden</td>
+            <td>Sizes at which this element is hidden (separated by spaces)</td>
+            <td>optional</td>
+            <td>xs, sm, md, lg, xl</td>
+            <td>false</td>
+        </tr>
+        <tr>
+            <td>block</td>
+            <td>Sizes at which this element is visible and displayed as a &quot;block&quot; element (separated by spaces)</td>
+            <td>optional</td>
+            <td>xs, sm, md, lg, xl</td>
+            <td>false</td>
+        </tr>
+        <tr>
+            <td>inline</td>
+            <td>Sizes at which this element is visible and displayed as an &quot;inline&quot; element (separated by spaces)</td>
+            <td>optional</td>
+            <td>xs, sm, md, lg, xl</td>
+            <td>false</td>
+        </tr>
+        <tr>
+            <td>inline_block</td>
+            <td>Sizes at which this element is visible and displayed as an &quot;inline-block&quot; element (separated by spaces)</td>
+            <td>optional</td>
+            <td>xs, sm, md, lg, xl</td>
+            <td>false</td>
+        </tr>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at <a href="#container-parameters">[container] parameters</a>.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+    </tbody>
 </table>
 <p><a href="https://getbootstrap.com/docs/4.5/utilities/display/#hiding-elements">Bootstrap display properties documentation</a></p>
 <hr>
-<h3 id="br">Line Break</h3>
-<pre><code>[br]
-</code></pre>
-<p>Insert line break to format text. This shortcode has no parameters.</p>
-<hr>
 <h3 id="components">Components</h3>
-<h3 id="icons">Icons</h3>
-<pre><code>[icon type=&quot;arrow-right&quot;]
-</code></pre><h4 id="-icon-parameters">[icon] parameters</h4>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th>Required</th>
-<th>Values</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>prefix</td>
-<td>The icon set of the icon you want to display</td>
-<td>optional</td>
-<td>fab, fas (free)<br>fad, fal, far (pro)</td>
-<td>fas</td>
-</tr>
-<tr>
-<td>type</td>
-<td>The type of icon you want to display</td>
-<td>required</td>
-<td>See <a href="https://fontawesome.com/icons?d=gallery&m=free">Font Awesome Searchable Gallery</a></td>
-<td>none</td>
-</tr>
-<tr>
-<td>class</td>
-<td>Any extra classes you want to add</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-<tr>
-<td>data</td>
-<td>Data attribute and value pairs separated by a comma. Pairs separated by pipe (see example at <a href="#button-dropdowns">Button Dropdowns</a>).</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-</tbody>
+<h3 id="cards">Cards</h3>
+<pre><code class="d-block p-4">[card]
+  [list-group]
+    [list-group-item]Cras justo odio[/list-group-item]
+    [list-group-item]Dapibus ac facilisis in[/list-group-item]
+    [list-group-item]Vestibulum at eros[/list-group-item]
+  [/list-group]
+[/card]</code></pre>
+<h5>Kitchen sink</h5>
+<pre><code class="d-block p-4">
+[card]
+  [card-img top]
+    [img-gen bg="f00" text=" " class="img-fluid"]
+  [/card-img]
+  [card-body]
+    [card-title]
+      Card Title
+    [/card-title]
+      Some quick example text to build on the card title and make up the bulk of the card's content.
+  [/card-body]
+  [list-group flush]
+    [list-group-item]Cras justo odio[/list-group-item]
+    [list-group-item]Dapibus ac facilisis in[/list-group-item]
+    [list-group-item]Vestibulum at eros[/list-group-item]
+  [/list-group]
+  [card-body]
+    &lt;a href="#"&gt;Lorem Ipsup&lt;/a&gt; &lt;a href="#">Dolor Sit&lt;/a&gt;
+  [/card-body]
+[/card]</code></pre>
+<h5>Card with image cap</h5>
+<p>Image caps are supported with the <code>[card-img]</code> shortcode and the <code>top</code> or <code>bottom</code> flag.</p>
+<pre><code class="d-block p-4">
+[card]
+  [card-img top]
+    [img-gen bg="f00"  text=" " class="img-fluid"]
+  [/card-img]
+  [card-body]
+    [card-title]
+      Card Title
+    [/card-title]
+    Lorem ipsum dolor sit.
+  [/card-body]
+[/card]</code></pre>
+<h5>Card with image overlay</h5>
+<p>Image overlay cards are supported with the <code>[card-img-overlay]</code> shortcode.</p>
+<pre><code class="d-block p-4">
+[card]
+  [card-img]
+    [img-gen bg="f00" text=" " class="img-fluid"]
+  [/card-img]
+  [card-img-overlay]
+    [card-title]
+      Card Title
+    [/card-title]
+    Lorem ipsum dolor sit.
+  [/card-img-overlay]
+[/card]</code></pre>
+<h5>Card with Header and Footer</h5>
+<p>Card header and card footers are supported with the <code>[card-header]</code> and <code>[card-footer]</code> shortcodes.</p>
+<pre><code class="d-block p-4">
+[card]
+  [card-header]
+    Example Header
+  [/card-header]
+  [card-body]
+    [card-title]
+      Card Title
+    [/card-title]
+    Lorem ipsum dolor sit.
+  [/card-body]
+  [card-footer]
+    Example footer.
+  [/card-footer]
+[/card]</code></pre>
+<h5>Card group</h5>
+<p>Use card groups to render cards as a single, attached element with equal width and height columns.</p>
+<pre><code class="d-block p-4">
+[card-group]
+  [card]
+    [card-body]
+      [card-title]
+        Card Title
+      [/card-title]
+      Lorem ipsum dolor sit.
+    [/card-body]
+  [/card]
+  [card]
+    [card-body]
+      [card-title]
+        Card Title
+      [/card-title]
+      Cras justo odio.
+    [/card-body]
+  [/card]
+  [card]
+    [card-body]
+      [card-title]
+        Card Title
+      [/card-title]
+      Dapibus ac facilisis in.
+    [/card-body]
+  [/card]
+[/card-group]</code></pre>
+<h5>Card deck</h5>
+<p>Use a card deck for a set of equal width and height cards that aren’t attached to one another.</p>
+<pre><code class="d-block p-4">
+[card-deck]
+  [card]
+    [card-body]
+      [card-title]
+        Card Title
+      [/card-title]
+      Lorem ipsum dolor sit.
+    [/card-body]
+  [/card]
+  [card]
+    [card-body]
+      [card-title]
+        Card Title
+      [/card-title]
+      Cras justo odio.
+    [/card-body]
+  [/card]
+  [card]
+    [card-body]
+      [card-title]
+        Card Title
+      [/card-title]
+      Dapibus ac facilisis in.
+    [/card-body]
+  [/card]
+[/card-deck]</code></pre>
+<h5>Card columns</h5>
+<p>Cards can be organized into Masonry-like columns with just CSS by wrapping them in <code>[card-columns]</code></p>
+<pre><code class="d-block p-4">
+[card-columns]
+  [card]
+    [card-body]
+      [card-title]
+        Card Title
+      [/card-title]
+      Lorem ipsum dolor sit.
+    [/card-body]
+  [/card]
+  [card]
+    [card-body]
+      [card-title]
+        Card Title
+      [/card-title]
+      Cras justo odio.
+    [/card-body]
+  [/card]
+  [card]
+    [card-body]
+      [card-title]
+        Card Title
+      [/card-title]
+      Dapibus ac facilisis in.
+    [/card-body]
+  [/card]
+[/card-columns]</code></pre>
+<h4 id="-card-parameters">[card] parameters</h4>
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>show</td>
+            <td>Show the collapsible card content by default.</td>
+            <td>optional</td>
+            <td>🚩 (flag)</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td></td>
+        </tr>
+    </tbody>
 </table>
-<p><a href="https://fontawesome.com/how-to-use/on-the-web/referencing-icons/basic-use">Font Awesome Documenmtation</a></p>
+<h4 id="-card-body-parameters">[card-body] parameters</h4>
+<div class="alert alert-warning"><strong>Note:</strong> Any <code>p</code>, <code>a</code> or <code>blockquote</code> tags within <code>[card-body]</code> will automatically receive <code>card-text</code>, <code>card-link</code> or <code>card-bodyquote</code> classes respectively.</div>
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<h4 id="-card-title-parameters">[card-title] parameters</h4>
+<div class="alert alert-warning"><strong>Note:</strong> <code>[card-title]</code> should contain a heading tag (<code>h1</code>, <code>h2</code>, <code>h3</code>, <code>h4</code>, <code>h5</code>, or <code>h6</code>), inserted using the WordPress editor. If a heading tag is not added <code>h4</code> will be inserted automatically.</div>
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<h4 id="-card-subtitle-parameters">[card-subtitle] parameters</h4>
+<div class="alert alert-warning"><strong>Note:</strong> <code>[card-subtitle]</code> should contain a heading tag (<code>h1</code>, <code>h2</code>, <code>h3</code>, <code>h4</code>, <code>h5</code>, or <code>h6</code>), inserted using the WordPress editor. If a heading tag is not added <code>h6</code> will be inserted automatically.</div>
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<h4 id="-card-img-parameters">[card-img] parameters</h4>
+<div class="alert alert-warning"><strong>Note:</strong> <code>[card-img]</code> should contain an image inserted using the WordPress editor or the [code inline]img-gen[/code] tag.</div>
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>top</td>
+            <td>Flag whether this image cap is at the top of the card.</td>
+            <td>optional</td>
+            <td>🚩 (flag)</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>bottom</td>
+            <td>Flag whether this image cap is at the bottom of the card.</td>
+            <td>optional</td>
+            <td>🚩 (flag)</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<h4 id="-card-img-overlay-parameters">[card-img-overlay] parameters</h4>
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<h4 id="-card-header-parameters">[card-header] parameters</h4>
+<div class="alert alert-warning"><strong>Note:</strong> <code>[card-header]</code> should contain a heading tag (<code>h1</code>, <code>h2</code>, <code>h3</code>, <code>h4</code>, <code>h5</code>, or <code>h6</code>), inserted using the WordPress editor. If a heading tag is not added <code>div</code> (no heading) will be inserted automatically.</div>
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<h4 id="-card-footer-parameters">[card-footer] parameters</h4>
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<h4 id="-card-group-parameters">[card-group] parameters</h4>
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<h4 id="-card-deck-parameters">[card-deck] parameters</h4>
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<h4 id="-card-columns-parameters">[card-columns] parameters</h4>
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<p><a href="https://getbootstrap.com/docs/4.5/components/card/">Bootstrap card documentation</a></p>
+<hr>
+<h3 id="icons">Icons</h3>
+<pre><code class="d-block p-4">
+[icon type=&quot;arrow-right&quot;]
+</code></pre>
+<h4 id="-icon-parameters">[icon] parameters</h4>
+<table>
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>prefix</td>
+            <td>The icon set of the icon you want to display</td>
+            <td>optional</td>
+            <td>fab, fas (free)
+                <br>fad, fal, far (pro)</td>
+            <td>fas</td>
+        </tr>
+        <tr>
+            <td>type</td>
+            <td>The type of icon you want to display</td>
+            <td>required</td>
+            <td>See <a href="https://fontawesome.com/icons?d=gallery&m=free">Font Awesome Searchable Gallery</a></td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at <a href="#container-parameters">[container] parameters</a>.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+    </tbody>
+</table>
+<p><a href="https://fontawesome.com/how-to-use/on-the-web/referencing-icons/basic-use">Font Awesome Documentation</a></p>
 <hr>
 <h3 id="icon-stack">Icon Stacks</h3>
-<pre><code>[icon-stack]
+<p>Print multiple icons on top of each other.</p>
+<pre><code class="d-block p-4">
+[icon-stack]
     [icon type=&quot;camera&quot; class=&quot;fa-stack-1x&quot;]
     [icon type=&quot;ban&quot; class=&quot;fa-stack-2x text-danger&quot;]
 [/icon-stack]
-</code></pre><h4 id="-icon-stack-parameters">[icon-stack] parameters</h4>
+</code></pre>
+<h4 id="-icon-stack-parameters">[icon-stack] parameters</h4>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th>Required</th>
-<th>Values</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>class</td>
-<td>Any extra classes you want to add</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-<tr>
-<td>data</td>
-<td>Data attribute and value pairs separated by a comma. Pairs separated by pipe (see example at <a href="#button-dropdowns">Button Dropdowns</a>).</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-</tbody>
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at <a href="#container-parameters">[container] parameters</a>.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+    </tbody>
 </table>
-<p><a href="https://fontawesome.com/how-to-use/on-the-web/referencing-icons/basic-use">Font Awesome Documenmtation</a></p>
+<p><a href="https://fontawesome.com/how-to-use/on-the-web/referencing-icons/basic-use">Font Awesome Documentation</a></p>
+<hr>
+<h3 id="buttons">Buttons</h3>
+<pre><code class="d-block p-4">
+[button type=&quot;success&quot; size=&quot;lg&quot;] Action [/button]
+</code></pre>
+<h4 id="-button-parameters">[button] parameters</h4>
+<table>
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>type</td>
+            <td>The type of the button</td>
+            <td>optional</td>
+            <td>primary, secondary, success, info, warning, danger, dark, light, link</td>
+            <td>primary</td>
+        </tr>
+        <tr>
+            <td>size</td>
+            <td>The size of the button</td>
+            <td>optional</td>
+            <td>sm, md, lg</td>
+            <td>md</td>
+        </tr>
+        <tr>
+            <td>block</td>
+            <td>Whether the button should be a block-level button</td>
+            <td>optional</td>
+            <td>🚩 (flag)</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>dropdown</td>
+            <td>Whether the button triggers a dropdown menu (see <a href="#button-dropdowns">Button Dropdowns</a>)</td>
+            <td>optional</td>
+            <td>🚩 (flag)</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>modal</td>
+            <td>Whether the button triggers a modal popup (see <a href="#modal">Modal</a>)</td>
+            <td>optional</td>
+            <td>The id of the modal</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>active</td>
+            <td>Apply the &quot;active&quot; style</td>
+            <td>optional</td>
+            <td>🚩 (flag)</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>disabled</td>
+            <td>Whether the button will be disabled</td>
+            <td>optional</td>
+            <td>🚩 (flag)</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>split</td>
+            <td>Create a split button dropdown next to another button or link</td>
+            <td>optional</td>
+            <td>🚩 (flag)</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>outline</td>
+            <td>Turn the button into a bordered/outlined button</td>
+            <td>optional</td>
+            <td>🚩 (flag)</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at <a href="#container-parameters">[container] parameters</a>.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+    </tbody>
+</table>
+<p><a href="https://getbootstrap.com/docs/4.5/components/buttons/">Bootstrap button documentation</a></p>
 <hr>
 <h3 id="button-groups">Button Groups</h3>
 <h4 id="basic-example-btn-grp">Basic example</h4>
-<pre><code>[button-group size=&quot;lg&quot; justified=&quot;&quot; vertical=&quot;&quot;]
-    [button link=&quot;#&quot;] ... [/button]
-    [button link=&quot;#&quot;] ... [/button]
-    [button link=&quot;#&quot;] ... [/button]
+<pre><code class="d-block p-4">
+[button-group size=&quot;lg&quot; justified]
+    [button] Left [/button]
+    [button] Middle [/button]
+    [button] Right [/button]
 [/button-group]
-</code></pre><h4 id="button-toolbar">Button toolbar</h4>
-<pre><code>[button-toolbar]
-    [button-group]
-        [button link=&quot;#&quot;] ... [/button]
-        [button link=&quot;#&quot;] ... [/button]
-        [button link=&quot;#&quot;] ... [/button]
+</code></pre>
+<h4 id="button-toolbar">Button toolbar</h4>
+<pre><code class="d-block p-4">
+[button-toolbar]
+    [button-group class=&quot;mr-2&quot;]
+        [button] Left 1 [/button]
+        [button] Middle 1 [/button]
+        [button] Right 1 [/button]
+    [/button-group]
+    [button-group class=&quot;mr-2&quot;]
+        [button] Left 2 [/button]
+        [button] Middle 2 [/button]
+        [button] Right 2 [/button]
     [/button-group]
     [button-group]
-        [button link=&quot;#&quot;] ... [/button]
-        [button link=&quot;#&quot;] ... [/button]
-        [button link=&quot;#&quot;] ... [/button]
-    [/button-group]
-    [button-group]
-        [button link=&quot;#&quot;] ... [/button]
+        [button] Single [/button]
     [/button-group]
 [/button-toolbar]
-</code></pre><h4 id="-button-group-parameters">[button-group] parameters</h4>
+</code></pre>
+<h4 id="-button-group-parameters">[button-group] parameters</h4>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th>Required</th>
-<th>Values</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>size</td>
-<td>The size of the button group</td>
-<td>optional</td>
-<td>xs, sm, lg</td>
-<td>none</td>
-</tr>
-<tr>
-<td>justified</td>
-<td>Whether button group is justified</td>
-<td>optional</td>
-<td>true, false</td>
-<td>false</td>
-</tr>
-<tr>
-<td>vertical</td>
-<td>Whether button group is vertical</td>
-<td>optional</td>
-<td>true, false</td>
-<td>false</td>
-</tr>
-<tr>
-<td>dropup</td>
-<td><strong>Must correspond with the use of [dropdown]</strong></td>
-<td>optional</td>
-<td>true, false</td>
-<td>false</td>
-</tr>
-<tr>
-<td>class</td>
-<td>Any extra classes you want to add</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-<tr>
-<td>data</td>
-<td>Data attribute and value pairs separated by a comma. Pairs separated by pipe (see example at <a href="#button-dropdowns">Button Dropdowns</a>).</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-</tbody>
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>size</td>
+            <td>The size of the button group</td>
+            <td>optional</td>
+            <td>sm, md, lg</td>
+            <td>md</td>
+        </tr>
+        <tr>
+            <td>justified</td>
+            <td>Whether button group is justified</td>
+            <td>optional</td>
+            <td>🚩 (flag)</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>vertical</td>
+            <td>Whether button group is vertical</td>
+            <td>optional</td>
+            <td>🚩 (flag)</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>drop</td>
+            <td><strong>Must correspond with the use of [dropdown]</strong></td>
+            <td>optional</td>
+            <td>up, left, right</td>
+            <td>(down)</td>
+        </tr>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at <a href="#container-parameters">[container] parameters</a>.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+    </tbody>
 </table>
 <h4 id="-button-toolbar-parameters">[button-toolbar] parameters</h4>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th>Required</th>
-<th>Values</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>class</td>
-<td>Any extra classes you want to add</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-<tr>
-<td>data</td>
-<td>Data attribute and value pairs separated by a comma. Pairs separated by pipe (see example at <a href="#button-dropdowns">Button Dropdowns</a>).</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-</tbody>
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at <a href="#container-parameters">[container] parameters</a>.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+    </tbody>
 </table>
 <p><a href="https://getbootstrap.com/docs/4.5/components/button-group/">Bootstrap button groups documentation</a></p>
 <hr>
 <h3 id="button-dropdowns">Button Dropdowns</h3>
-<p>Button Dropdowns can be accomplished by combining the [button-group] shortcode, the &quot;data&quot; parameters of the [button] shortcode, and [dropdown] shortcode as follows.</p>
+<p>Button Dropdowns can be accomplished by combining the [button-group] shortcode, the &quot;data&quot; parameters of the [button] shortcode, and [dropdown] or [dropdown-menu] shortcode as follows.</p>
 <h4 id="single-button-dropdowns">Single button dropdowns</h4>
-<pre><code>[button-group]
-    [button link=&quot;#&quot; dropdown=&quot;true&quot; data=&quot;toggle,dropdown&quot;] ... [/button]
-        [dropdown]
-            [dropdown-header] ... [/dropdown-header]
-            [dropdown-item link=&quot;#&quot;] ... [/dropdown-item]
-            [dropdown-item link=&quot;#&quot;] ... [/dropdown-item]
-            [dropdown-item link=&quot;#&quot;] ... [/dropdown-item]
-            [divider]
-            [dropdown-item link=&quot;#&quot;] ... [/dropdown-item]
-        [/dropdown]
+<pre><code class="d-block p-4">
+[button-group]
+    [button type="warning" dropdown] Action[/button]
+    [dropdown-menu]
+        [dropdown-header] Header[/dropdown-header]
+        [dropdown-item link="#"]Action[/dropdown-item]
+        [dropdown-item link="#"]Another action[/dropdown-item]
+        [dropdown-item link="#"]Something else here[/dropdown-item]
+        [dropdown-divider]
+        [dropdown-item link="#"]Separated link[/dropdown-item]
+    [/dropdown-menu]
 [/button-group]
-</code></pre><h4 id="split-button-dropdowns">Split button dropdowns</h4>
-<pre><code>[button-group]
-    [button link=&quot;#&quot;] ... [/button]
-    [button dropdown=&quot;true&quot; data=&quot;toggle,dropdown&quot;][/button]
-    [dropdown]
-        [dropdown-item link=&quot;#&quot;] ... [/dropdown-item]
-        [divider]
-        [dropdown-item link=&quot;#&quot;] ... [/dropdown-item]
-    [/dropdown]
+</code></pre>
+<h4 id="split-button-dropdowns">Split button dropdowns</h4>
+<pre><code class="d-block p-4">
+[button-group]
+    [button type="danger"] Split Action[/button]
+    [button type="danger" dropdown split][/button]
+        [dropdown-menu]
+            [dropdown-item link="#"]Action[/dropdown-item]
+            [dropdown-item link="#"]Another action[/dropdown-item]
+            [dropdown-item link="#"]Something else here[/dropdown-item]
+            [dropdown-divider]
+            [dropdown-item link="#"]Separated link[/dropdown-item]
+        [/dropdown-menu]
 [/button-group]
-</code></pre><h4 id="dropup-variation">Dropup variation</h4>
-<pre><code>[button-group dropup=&quot;true&quot;]
-    [button link=&quot;#&quot;] ... [/button]
-    [button dropdown=&quot;true&quot; data=&quot;toggle,dropdown&quot;][/button]
-    [dropdown]
-        [dropdown-item link=&quot;#&quot;] ... [/dropdown-item]
-        [divider]
-        [dropdown-item link=&quot;#&quot;] ... [/dropdown-item]
-    [/dropdown]
-[/button-group]  
-</code></pre><h4 id="-dropdown-parameters">[dropdown] parameters</h4>
+</code></pre>
+<h4 id="dropup-variation">Drop variation</h4>
+<pre><code class="d-block p-4">
+[button-group drop=&quot;up&quot;]
+    [button] Drop Up [/button]
+    [button dropdown][/button]
+    [dropdown-menu]
+        [dropdown-item link="#"] Action 1 [/dropdown-item]
+        [dropdown-item link="#"] Action 2 [/dropdown-item]
+        [dropdown-divider]
+        [dropdown-item link="#"] Separated Action [/dropdown-item]
+    [/dropdown-menu]
+[/button-group]
+</code></pre>
+<h4 id="-dropdown-parameters">[dropdown] parameters</h4>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th>Required</th>
-<th>Values</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>class</td>
-<td>Any extra classes you want to add</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-<tr>
-<td>data</td>
-<td>Data attribute and value pairs separated by a comma. Pairs separated by pipe (see example at <a href="#button-dropdowns">Button Dropdowns</a>).</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-</tbody>
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at <a href="#container-parameters">[container] parameters</a>.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+    </tbody>
 </table>
+<h4 id="-dropdown-menu-parameters">[dropdown-menu] parameters</h4>
+<table>
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>right</td>
+            <td>To right-align the menu with the button or link</td>
+            <td>optional</td>
+            <td>🚩 (flag)</td>
+            <td>(left)</td>
+        </tr>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at <a href="#container-parameters">[container] parameters</a>.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+    </tbody>
+</table>
+<hr>
 <h4 id="-dropdown-item-parameters">[dropdown-item] parameters</h4>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th>Required</th>
-<th>Values</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>link</td>
-<td>The url you want the dropdown-item to link to</td>
-<td>optional</td>
-<td>any valid link</td>
-<td>#</td>
-</tr>
-<tr>
-<td>disabled</td>
-<td>Whether this menu-item is disabled</td>
-<td>optional</td>
-<td>true, false</td>
-<td>false</td>
-</tr>
-<tr>
-<td>class</td>
-<td>Any extra classes you want to add</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-<tr>
-<td>data</td>
-<td>Data attribute and value pairs separated by a comma. Pairs separated by pipe (see example at <a href="#button-dropdowns">Button Dropdowns</a>).</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-</tbody>
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>link</td>
+            <td>The url you want the dropdown-item to link to</td>
+            <td>optional</td>
+            <td>any valid link</td>
+            <td>#</td>
+        </tr>
+        <tr>
+            <td>disabled</td>
+            <td>Whether this menu-item is disabled</td>
+            <td>optional</td>
+            <td>🚩 (flag)</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at <a href="#container-parameters">[container] parameters</a>.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+    </tbody>
 </table>
 <h4 id="-dropdown-header-parameters">[dropdown-header] parameters</h4>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th>Required</th>
-<th>Values</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>class</td>
-<td>Any extra classes you want to add</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-<tr>
-<td>data</td>
-<td>Data attribute and value pairs separated by a comma. Pairs separated by pipe (see example at <a href="#button-dropdowns">Button Dropdowns</a>).</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-</tbody>
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at <a href="#container-parameters">[container] parameters</a>.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+    </tbody>
 </table>
-<h4 id="-divider-parameters">[divider] parameters</h4>
+<h4 id="-dropdown-divider-parameters">[dropdown-divider] parameters</h4>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th>Required</th>
-<th>Values</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>class</td>
-<td>Any extra classes you want to add</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-<tr>
-<td>data</td>
-<td>Data attribute and value pairs separated by a comma. Pairs separated by pipe (see example at <a href="#button-dropdowns">Button Dropdowns</a>).</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-</tbody>
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at <a href="#container-parameters">[container] parameters</a>.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+    </tbody>
 </table>
 <p><a href="https://getbootstrap.com/docs/4.5/components/dropdowns/">Bootstrap button dropdowns documentation</a></p>
 <hr>
 <h3 id="navs">Navs</h3>
-<pre><code>[nav type=&quot;pills&quot;]
+<pre><code class="d-block p-4">
+[nav type=&quot;pills&quot;]
     [nav-item link=&quot;#&quot;] ... [/nav-item]
     [nav-item link=&quot;#&quot;] ... [/nav-item]
     [nav-item link=&quot;#&quot;] ... [/nav-item]
 [/nav]
-</code></pre><h4 id="nav-with-dropdowns">Nav with dropdowns</h4>
-<pre><code>[nav type=&quot;pills&quot;]
+</code></pre>
+<h4 id="nav-with-dropdowns">Nav with dropdowns</h4>
+<pre><code class="d-block p-4">
+[nav type=&quot;pills&quot;]
     [nav-item link=&quot;#&quot; active=&quot;true&quot;] ... [/nav-item]
     [nav-item dropdown=&quot;true&quot; link=&quot;#&quot;] ...
         [dropdown]
@@ -1195,473 +1414,427 @@ FF0855 (= #FF0855 as background color)</td>
         [/dropdown]
     [/nav-item]
 [/nav]
-</code></pre><h4 id="-nav-parameters">[nav] parameters</h4>
+</code></pre>
+<h4 id="-nav-parameters">[nav] parameters</h4>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th>Required</th>
-<th>Values</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>type</td>
-<td>The type of nav</td>
-<td>required</td>
-<td>tabs, pills</td>
-<td>tabs</td>
-</tr>
-<tr>
-<td>stacked</td>
-<td>Whether the nav is stacked (should be used with &quot;pills&quot; type</td>
-<td>optional</td>
-<td>true, false</td>
-<td>false</td>
-</tr>
-<tr>
-<td>justified</td>
-<td>Whether the nav is justified</td>
-<td>optional</td>
-<td>true, false</td>
-<td>false</td>
-</tr>
-<tr>
-<td>class</td>
-<td>Any extra classes you want to add</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-<tr>
-<td>data</td>
-<td>Data attribute and value pairs separated by a comma. Pairs separated by pipe (see example at <a href="#button-dropdowns">Button Dropdowns</a>).</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-</tbody>
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>type</td>
+            <td>The type of nav</td>
+            <td>required</td>
+            <td>tabs, pills</td>
+            <td>tabs</td>
+        </tr>
+        <tr>
+            <td>stacked</td>
+            <td>Whether the nav is stacked (should be used with &quot;pills&quot; type</td>
+            <td>optional</td>
+            <td>true, false</td>
+            <td>false</td>
+        </tr>
+        <tr>
+            <td>justified</td>
+            <td>Whether the nav is justified</td>
+            <td>optional</td>
+            <td>true, false</td>
+            <td>false</td>
+        </tr>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at <a href="#container-parameters">[container] parameters</a>.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+    </tbody>
 </table>
 <h4 id="-nav-item-parameters">[nav-item] parameters</h4>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th>Required</th>
-<th>Values</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>link</td>
-<td>The url you want the dropdown-item to link to</td>
-<td>optional</td>
-<td>any valid link</td>
-<td>#</td>
-</tr>
-<tr>
-<td>active</td>
-<td>Whether the item has the &quot;active&quot; style applied</td>
-<td>optional</td>
-<td>true, false</td>
-<td>false</td>
-</tr>
-<tr>
-<td>disabled</td>
-<td>Whether the item is disabled</td>
-<td>optional</td>
-<td>true, false</td>
-<td>false</td>
-</tr>
-<tr>
-<td>class</td>
-<td>Any extra classes you want to add</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-<tr>
-<td>data</td>
-<td>Data attribute and value pairs separated by a comma. Pairs separated by pipe (see example at <a href="#button-dropdowns">Button Dropdowns</a>).</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-</tbody>
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>link</td>
+            <td>The url you want the dropdown-item to link to</td>
+            <td>optional</td>
+            <td>any valid link</td>
+            <td>#</td>
+        </tr>
+        <tr>
+            <td>active</td>
+            <td>Whether the item has the &quot;active&quot; style applied</td>
+            <td>optional</td>
+            <td>true, false</td>
+            <td>false</td>
+        </tr>
+        <tr>
+            <td>disabled</td>
+            <td>Whether the item is disabled</td>
+            <td>optional</td>
+            <td>true, false</td>
+            <td>false</td>
+        </tr>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at <a href="#container-parameters">[container] parameters</a>.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+    </tbody>
 </table>
 <p><a href="https://getbootstrap.com/docs/4.5/components/navs/">Bootstrap button navs documentation</a></p>
 <hr>
 <h3 id="breadcrumbs">Breadcrumbs</h3>
-<pre><code>[breadcrumb]
+<pre><code class="d-block p-4">
+[breadcrumb]
     [breadcrumb-item link=&quot;#&quot;] ... [/breadcrumb-item]
     [breadcrumb-item link=&quot;#&quot;] ... [/breadcrumb-item]
     [breadcrumb-item link=&quot;#&quot;] ... [/breadcrumb-item]
 [/breadcrumb]
-</code></pre><h4 id="-breadcrumb-parameters">[breadcrumb] parameters</h4>
+</code></pre>
+<h4 id="-breadcrumb-parameters">[breadcrumb] parameters</h4>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th>Required</th>
-<th>Values</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>class</td>
-<td>Any extra classes you want to add</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-<tr>
-<td>data</td>
-<td>Data attribute and value pairs separated by a comma. Pairs separated by pipe (see example at <a href="#button-dropdowns">Button Dropdowns</a>).</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-</tbody>
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at <a href="#container-parameters">[container] parameters</a>.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+    </tbody>
 </table>
 <h4 id="-breadcrumb-item-parameters">[breadcrumb-item] parameters</h4>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th>Required</th>
-<th>Values</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>link</td>
-<td>The url you want the breadcrumb-item to link to</td>
-<td>optional</td>
-<td>any valid link</td>
-<td>#</td>
-</tr>
-<tr>
-<td>active</td>
-<td>Whether the item has the &quot;active&quot; style applied</td>
-<td>optional</td>
-<td>true, false</td>
-<td>false</td>
-</tr>
-<tr>
-<td>class</td>
-<td>Any extra classes you want to add</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-<tr>
-<td>data</td>
-<td>Data attribute and value pairs separated by a comma. Pairs separated by pipe (see example at <a href="#button-dropdowns">Button Dropdowns</a>).</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-</tbody>
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>link</td>
+            <td>The url you want the breadcrumb-item to link to</td>
+            <td>optional</td>
+            <td>any valid link</td>
+            <td>#</td>
+        </tr>
+        <tr>
+            <td>active</td>
+            <td>Whether the item has the &quot;active&quot; style applied</td>
+            <td>optional</td>
+            <td>true, false</td>
+            <td>false</td>
+        </tr>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at <a href="#container-parameters">[container] parameters</a>.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+    </tbody>
 </table>
 <p><a href="https://getbootstrap.com/docs/4.5/components/breadcrumb/">Bootstrap breadcrumb documentation</a></p>
 <hr>
 <h3 id="badges">Badges</h3>
-<pre><code>[badge right=&quot;true&quot;] ... [/badge]
-</code></pre><h4 id="-badge-parameters">[badge] parameters</h4>
+<pre><code class="d-block p-4">
+[badge right] ... [/badge]
+</code></pre>
+<h4 id="-badge-parameters">[badge] parameters</h4>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th>Required</th>
-<th>Values</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>right</td>
-<td>Whether the badge should align to the right of its container</td>
-<td>optional</td>
-<td>true, false</td>
-<td>false</td>
-</tr>
-<tr>
-<td>class</td>
-<td>Any extra classes you want to add</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-<tr>
-<td>data</td>
-<td>Data attribute and value pairs separated by a comma. Pairs separated by pipe (see example at <a href="#button-dropdowns">Button Dropdowns</a>).</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-</tbody>
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>right</td>
+            <td>Whether the badge should align to the right of its container</td>
+            <td>optional</td>
+            <td>🚩 (flag)</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at <a href="#container-parameters">[container] parameters</a>.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+    </tbody>
 </table>
 <p><a href="https://getbootstrap.com/docs/4.5/components/badge/">Bootstrap badge documentation</a></p>
 <hr>
-<h3 id="blockquote">Blockquote</h3>
-<pre><code>[blockquote]
-    ...
-    [blockquote-footer]
-        ...
-    [/blockquote-footer]
-[/blockquote]
-</code></pre><h4 id="-blockquote-parameters">[blockquote] parameters</h4>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th>Required</th>
-<th>Values</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>class</td>
-<td>Any extra classes you want to add</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-<tr>
-<td>data</td>
-<td>Data attribute and value pairs separated by a comma. Pairs separated by pipe (see example at <a href="#button-dropdowns">Button Dropdowns</a>).</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-</tbody>
-</table>
-<h4 id="-blockquote-footer-parameters">[blockquote-footer] parameters</h4>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th>Required</th>
-<th>Values</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>class</td>
-<td>Any extra classes you want to add</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-<tr>
-<td>data</td>
-<td>Data attribute and value pairs separated by a comma. Pairs separated by pipe (see example at <a href="#button-dropdowns">Button Dropdowns</a>).</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-</tbody>
-</table>
-<p><a href="https://getbootstrap.com/docs/4.5/content/typography/#blockquotes">Bootstrap blockquote documentation</a></p>
-<hr>
 <h3 id="jumbotron">Jumbotron</h3>
-<pre><code>[jumbotron title=&quot;My Jumbotron&quot;] ... [/jumbotron]
-</code></pre><h4 id="-jumbotron-parameters">[jumbotron] parameters</h4>
+<pre><code class="d-block p-4">
+[jumbotron] ... [/jumbotron]
+</code></pre>
+<h4 id="-jumbotron-parameters">[jumbotron] parameters</h4>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th>Required</th>
-<th>Values</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>title</td>
-<td>The jumbotron title</td>
-<td>optional</td>
-<td>Any text</td>
-<td>none</td>
-</tr>
-<tr>
-<td>class</td>
-<td>Any extra classes you want to add</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-<tr>
-<td>data</td>
-<td>Data attribute and value pairs separated by a comma. Pairs separated by pipe (see example at <a href="#button-dropdowns">Button Dropdowns</a>).</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-</tbody>
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>fluid</td>
+            <td>Make jumbotron occupy the entire horizontal space of its parent</td>
+            <td>optional</td>
+            <td>🚩 (flag)</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at <a href="#container-parameters">[container] parameters</a>.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+    </tbody>
 </table>
 <p><a href="https://getbootstrap.com/docs/4.5/components/jumbotron/">Bootstrap jumbotron documentation</a></p>
 <hr>
 <h3 id="alerts">Alerts</h3>
-<pre><code>[alert type=&quot;success&quot;] ... [/alert]
-</code></pre><h4 id="-alert-parameters">[alert] parameters</h4>
+<pre><code class="d-block p-4">
+[alert type=&quot;success&quot;] ... [/alert]
+</code></pre>
+<h4 id="-alert-parameters">[alert] parameters</h4>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th>Required</th>
-<th>Values</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>type</td>
-<td>The type of the alert</td>
-<td>required</td>
-<td>success, info, warning, danger</td>
-<td>success</td>
-</tr>
-<tr>
-<td>dismissable</td>
-<td>If the alert should be dismissable</td>
-<td>optional</td>
-<td>true, false</td>
-<td>false</td>
-</tr>
-<tr>
-<td>class</td>
-<td>Any extra classes you want to add</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-<tr>
-<td>data</td>
-<td>Data attribute and value pairs separated by a comma. Pairs separated by pipe (see example at <a href="#button-dropdowns">Button Dropdowns</a>).</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-</tbody>
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>type</td>
+            <td>The type of the alert</td>
+            <td>required</td>
+            <td>primary, secondary, success, info, warning, danger, dark, light</td>
+            <td>primary</td>
+        </tr>
+        <tr>
+            <td>dismissable</td>
+            <td>If the alert should be dismissable</td>
+            <td>optional</td>
+            <td>🚩 (flag)</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>fade</td>
+            <td>If the alert should be animated when dismissed</td>
+            <td>optional</td>
+            <td>🚩 (flag)</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at <a href="#container-parameters">[container] parameters</a>.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+    </tbody>
 </table>
 <p><a href="https://getbootstrap.com/docs/4.5/components/alerts/">Bootstrap alert documentation</a></p>
 <hr>
 <h3 id="progress-bars">Progress Bars</h3>
-<pre><code>[progress striped=&quot;true&quot;]
-    [progress-bar percent=&quot;50&quot;]
-    [progress-bar percent=&quot;25&quot; type=&quot;success&quot;]
+<pre><code class="d-block p-4">
+[progress]
+    [progress-bar striped percent=&quot;50&quot;]
+    [progress-bar striped percent=&quot;25&quot; type=&quot;success&quot;]
 [/progress]
-</code></pre><h4 id="-progress-parameters">[progress] parameters</h4>
+</code></pre>
+<h4 id="-progress-parameters">[progress] parameters</h4>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th>Required</th>
-<th>Values</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>striped</td>
-<td>Whether enclosed progress bars will be striped</td>
-<td>optional</td>
-<td>true, false</td>
-<td>false</td>
-</tr>
-<tr>
-<td>animated</td>
-<td>Whether enclosed progress bars will be animated</td>
-<td>optional</td>
-<td>true, false</td>
-<td>false</td>
-</tr>
-<tr>
-<td>class</td>
-<td>Any extra classes you want to add</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-<tr>
-<td>data</td>
-<td>Data attribute and value pairs separated by a comma. Pairs separated by pipe (see example at <a href="#button-dropdowns">Button Dropdowns</a>).</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-</tbody>
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at <a href="#container-parameters">[container] parameters</a>.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+    </tbody>
 </table>
 <h4 id="-progress-bar-parameters">[progress-bar] parameters</h4>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th>Required</th>
-<th>Values</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>percent</td>
-<td>The percentage amount to show in the progress bar</td>
-<td>required</td>
-<td>any number between 0 and 100</td>
-<td>false</td>
-</tr>
-<tr>
-<td>label</td>
-<td>Whether to show the percentage as a text label inside the bar</td>
-<td>optional</td>
-<td>true, false</td>
-<td>false</td>
-</tr>
-<tr>
-<td>type</td>
-<td>The type of the progress bar</td>
-<td>optional</td>
-<td>primary, secondary, success, info, warning, danger, light, dark</td>
-<td>default</td>
-</tr>
-<tr>
-<td>class</td>
-<td>Any extra classes you want to add</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-<tr>
-<td>data</td>
-<td>Data attribute and value pairs separated by a comma. Pairs separated by pipe (see example at <a href="#button-dropdowns">Button Dropdowns</a>).</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-</tbody>
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>percent</td>
+            <td>The percentage amount to show in the progress bar</td>
+            <td>required</td>
+            <td>any number between 0 and 100</td>
+            <td>false</td>
+        </tr>
+        <tr>
+            <td>label</td>
+            <td>Whether to show the percentage as a text label inside the bar</td>
+            <td>optional</td>
+            <td>🚩 (flag)</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>type</td>
+            <td>The type of the progress bar</td>
+            <td>optional</td>
+            <td>primary, secondary, success, info, warning, danger, light, dark</td>
+            <td>primary</td>
+        </tr>
+        <tr>
+            <td>striped</td>
+            <td>Whether enclosed progress bars will be striped</td>
+            <td>optional</td>
+            <td>🚩 (flag)</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>animated</td>
+            <td>Whether enclosed progress bars will be animated</td>
+            <td>optional</td>
+            <td>🚩 (flag)</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at <a href="#container-parameters">[container] parameters</a>.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+    </tbody>
 </table>
 <p><a href="https://getbootstrap.com/docs/4.5/components/progress/">Bootstrap progress bars documentation</a></p>
 <hr>
 <h3 id="media-objects">Media Objects</h3>
-<pre><code>[media]
+<pre><code class="d-block p-4">
+[media]
     [media-object media=&quot;left&quot;]
         ...
     [/media-object]
@@ -1669,110 +1842,112 @@ FF0855 (= #FF0855 as background color)</td>
         ...
     [/media-body]
 [/media]
-</code></pre><h4 id="-media-parameters">[media] parameters</h4>
+</code></pre>
+<h4 id="-media-parameters">[media] parameters</h4>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th>Required</th>
-<th>Values</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>align</td>
-<td>Where the media should align with the text.</td>
-<td>optional</td>
-<td>start, center, end</td>
-<td>start</td>
-</tr>
-<tr>
-<td>class</td>
-<td>Any extra classes you want to add</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-<tr>
-<td>data</td>
-<td>Data attribute and value pairs separated by a comma. Pairs separated by pipe (see example at <a href="#button-dropdowns">Button Dropdowns</a>).</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-</tbody>
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>listgroup</td>
+            <td>Whether the media is part of a list group</td>
+            <td>optional</td>
+            <td>🚩 (flag)</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at <a href="#container-parameters">[container] parameters</a>.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+    </tbody>
 </table>
 <h4 id="-media-object-parameters">[media-object] parameters</h4>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th>Required</th>
-<th>Values</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>class</td>
-<td>Any extra classes you want to add</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-<tr>
-<td>data</td>
-<td>Data attribute and value pairs separated by a comma. Pairs separated by pipe (see example at <a href="#button-dropdowns">Button Dropdowns</a>).</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-</tbody>
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>align</td>
+            <td>Where the media should align with the text.</td>
+            <td>optional</td>
+            <td>start, center, end</td>
+            <td>start</td>
+        </tr>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at <a href="#container-parameters">[container] parameters</a>.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+    </tbody>
 </table>
 <h4 id="-media-body-parameters">[media-body] parameters</h4>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th>Required</th>
-<th>Values</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>title</td>
-<td>The object title</td>
-<td>required</td>
-<td>Any text</td>
-<td>none</td>
-</tr>
-<tr>
-<td>class</td>
-<td>Any extra classes you want to add</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-<tr>
-<td>data</td>
-<td>Data attribute and value pairs separated by a comma. Pairs separated by pipe (see example at <a href="#button-dropdowns">Button Dropdowns</a>).</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-</tbody>
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at <a href="#container-parameters">[container] parameters</a>.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+    </tbody>
 </table>
-<p><strong>NOTE: media-object should contain an image, or linked image, inserted using the WordPress TinyMCE editor</strong></p>
+<p><strong>NOTE: media-object should contain an image, or linked image, inserted using the WordPress TinyMCE editor or the [code inline]img-gen[/code] tag.</strong></p>
 <p><a href="https://getbootstrap.com/docs/4.5/components/media-object/">Bootstrap media objects documentation</a></p>
 <hr>
 <h3 id="list-groups">List Groups</h3>
 <h4 id="basic-example-lst-grp">Basic Example</h4>
-<pre><code>[list-group]
+<pre><code class="d-block p-4">
+[list-group]
     [list-group-item]
         ...
     [/list-group-item]
@@ -1783,8 +1958,10 @@ FF0855 (= #FF0855 as background color)</td>
         ...
     [/list-group-item]
 [/list-group]
-</code></pre><h4 id="linked-items">Linked Items</h4>
-<pre><code>[list-group linked=&quot;true&quot;]
+</code></pre>
+<h4 id="linked-items">Linked Items</h4>
+<pre><code class="d-block p-4">
+[list-group linked=&quot;true&quot;]
     [list-group-item link=&quot;#&quot; active=&quot;true&quot;]
         ...
     [/list-group-item]
@@ -1795,676 +1972,1167 @@ FF0855 (= #FF0855 as background color)</td>
         ...
     [/list-group-item]
 [/list-group]
-</code></pre><h4 id="custom-content">Custom Content</h4>
-<pre><code>[list-group linked=&quot;true&quot;]
-    [list-group-item link=&quot;#&quot; active=&quot;true&quot;]
-        [list-group-item-heading]...[/list-group-item-heading]
-        [list-group-item-text]...[/list-group-item-text]
-    [/list-group-item]
-    [list-group-item link=&quot;#&quot;]
-        [list-group-item-heading]...[/list-group-item-heading]
-        [list-group-item-text]...[/list-group-item-text]
-    [/list-group-item]
-    [list-group-item link=&quot;#&quot;]
-        [list-group-item-heading]...[/list-group-item-heading]
-        [list-group-item-text]...[/list-group-item-text]
-    [/list-group-item]
-[/list-group]
-</code></pre><h4 id="-list-group-parameters">[list-group] parameters</h4>
+</code></pre>
+
+<h4 id="-list-group-parameters">[list-group] parameters</h4>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th>Required</th>
-<th>Values</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>linked</td>
-<td>Whether this is a linked list group, or a standard one</td>
-<td>optional</td>
-<td>true, false</td>
-<td>false</td>
-</tr>
-<tr>
-<td>class</td>
-<td>Any extra classes you want to add</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-<tr>
-<td>data</td>
-<td>Data attribute and value pairs separated by a comma. Pairs separated by pipe (see example at <a href="#button-dropdowns">Button Dropdowns</a>).</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-</tbody>
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>linked</td>
+            <td>Whether this is a linked list group, or a standard one</td>
+            <td>optional</td>
+            <td>🚩 (flag)</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>flush</td>
+            <td>Remove some borders and rounded corners to render list group items edge-to-edge in a parent container (e.g., cards)</td>
+            <td>optional</td>
+            <td>🚩 (flag)</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at <a href="#container-parameters">[container] parameters</a>.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+    </tbody>
 </table>
 <h4 id="-list-group-item-parameters">[list-group-item] parameters</h4>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th>Required</th>
-<th>Values</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>link</td>
-<td>The url you want the list item to link to <strong>Must correspond with the &quot;linked&quot; parameter in [list-group]</strong></td>
-<td>optional</td>
-<td>any text</td>
-<td>#</td>
-</tr>
-<tr>
-<td>type</td>
-<td>The type of the list-group-item</td>
-<td>optional</td>
-<td>primary, secondary, success, info, warning, danger, light, dark, link</td>
-<td>none</td>
-</tr>
-<tr>
-<td>active</td>
-<td>Whether the item has the &quot;active&quot; style applied</td>
-<td>optional</td>
-<td>true, false</td>
-<td>false</td>
-</tr>
-<tr>
-<td>target</td>
-<td>Target for the link</td>
-<td>optional</td>
-<td>any valid target</td>
-<td>none</td>
-</tr>
-<tr>
-<td>class</td>
-<td>Any extra classes you want to add</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-<tr>
-<td>data</td>
-<td>Data attribute and value pairs separated by a comma. Pairs separated by pipe (see example at <a href="#button-dropdowns">Button Dropdowns</a>).</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-</tbody>
-</table>
-<h4 id="-list-group-item-heading-parameters">[list-group-item-heading] parameters</h4>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th>Required</th>
-<th>Values</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>class</td>
-<td>Any extra classes you want to add</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-<tr>
-<td>data</td>
-<td>Data attribute and value pairs separated by a comma. Pairs separated by pipe (see example at <a href="#button-dropdowns">Button Dropdowns</a>).</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-</tbody>
-</table>
-<h4 id="-list-group-item-text-parameters">[list-group-item-text] parameters</h4>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th>Required</th>
-<th>Values</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>class</td>
-<td>Any extra classes you want to add</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-<tr>
-<td>data</td>
-<td>Data attribute and value pairs separated by a comma. Pairs separated by pipe (see example at <a href="#button-dropdowns">Button Dropdowns</a>).</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-</tbody>
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>link</td>
+            <td>The url you want the list item to link to <strong>Must correspond with the &quot;linked&quot; parameter in [list-group]</strong></td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>#</td>
+        </tr>
+        <tr>
+            <td>type</td>
+            <td>The type of the list-group-item</td>
+            <td>optional</td>
+            <td>primary, secondary, success, info, warning, danger, light, dark, link</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>active</td>
+            <td>Whether the item has the &quot;active&quot; style applied</td>
+            <td>optional</td>
+            <td>true, false</td>
+            <td>false</td>
+        </tr>
+        <tr>
+            <td>target</td>
+            <td>Target for the link</td>
+            <td>optional</td>
+            <td>any valid target</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at <a href="#container-parameters">[container] parameters</a>.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+    </tbody>
 </table>
 <p><a href="https://getbootstrap.com/docs/4.5/components/list-group/">Bootstrap list groups documentation</a></p>
 <hr>
-<h3 id="javascript">Javascript</h3>
-<h3 id="tabs">Tabs</h3>
-<pre><code>[tabs type=&quot;tabs&quot;]
-    [tab title=&quot;Home&quot; active=&quot;true&quot;]
-        ...
-    [/tab]
-    [tab title=&quot;Profile&quot;]
-        ...
-    [/tab]
-    [tab title=&quot;Messages&quot;]
-        ...
-    [/tab]
-[/tabs]
-</code></pre><h4 id="-tabs-parameters">[tabs] parameters</h4>
+<h3 id="content">Content</h3>
+<h3 id="code">Code</h3>
+<pre><code class="d-block p-4">
+[code] ... [/code]
+</code></pre>
+<h4 id="-code-parameters">[code] parameters</h4>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th>Required</th>
-<th>Values</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>type</td>
-<td>The type of nav</td>
-<td>required</td>
-<td>tabs, pills</td>
-<td>tabs</td>
-</tr>
-<tr>
-<td>class</td>
-<td>Any extra classes you want to add</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-<tr>
-<td>data</td>
-<td>Data attribute and value pairs separated by a comma. Pairs separated by pipe (see example at <a href="#button-dropdowns">Button Dropdowns</a>).</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-</tbody>
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>inline</td>
+            <td>Display inline code</td>
+            <td>optional</td>
+            <td>🚩 (flag)</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>scrollable</td>
+            <td>Set a max height of 350px and provide a scroll bar. Not usable with <code>inline</code>.</td>
+            <td>optional</td>
+            <td>🚩 (flag)</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at <a href="#container-parameters">[container] parameters</a>.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+    </tbody>
 </table>
-<h4 id="-tab-parameters">[tab] parameters</h4>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th>Required</th>
-<th>Values</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>title</td>
-<td>The title of the tab</td>
-<td>required</td>
-<td>any text</td>
-<td>false</td>
-</tr>
-<tr>
-<td>active</td>
-<td>Whether this tab should be &quot;active&quot; or selected</td>
-<td>optional</td>
-<td>true, false</td>
-<td>false</td>
-</tr>
-<tr>
-<td>fade</td>
-<td>Whether to use the &quot;fade&quot; effect when showing this tab</td>
-<td>optional</td>
-<td>true, false</td>
-<td>false</td>
-</tr>
-<tr>
-<td>class</td>
-<td>Any extra classes you want to add</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-<tr>
-<td>data</td>
-<td>Data attribute and value pairs separated by a comma. Pairs separated by pipe (see example at <a href="#button-dropdowns">Button Dropdowns</a>).</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-</tbody>
-</table>
-<p><a href="https://getbootstrap.com/docs/4.5/components/navs/#tabs">Bootstrap tabs documentation</a></p>
+<p><a href="https://getbootstrap.com/docs/4.5/content/code/">Bootstrap code documentation</a></p>
 <hr>
-<h3 id="tooltip">Tooltip</h3>
-<pre><code>[tooltip title=&quot;I&#39;m the title&quot; placement=&quot;right&quot;] ... [/tooltip]
-</code></pre><h4 id="-tooltip-parameters">[tooltip] parameters</h4>
+<h3 id="tables">Tables</h3>
+<pre><code class="d-block p-4">
+[table-wrap bordered striped]
+
+            Standard HTML table code goes here.
+
+[/table-wrap]
+</code></pre>
+<h4 id="-table-wrap-parameters">[table-wrap] parameters</h4>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th>Required</th>
-<th>Values</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>title</td>
-<td>The text of the tooltip</td>
-<td>required</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-<tr>
-<td>placement</td>
-<td>The placement of the tooltip</td>
-<td>optional</td>
-<td>left, top, bottom, right</td>
-<td>top</td>
-</tr>
-<tr>
-<td>animation</td>
-<td>apply a CSS fade transition to the tooltip</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-<tr>
-<td>html</td>
-<td>Insert HTML into the tooltip</td>
-<td>optional</td>
-<td>true, false</td>
-<td>false</td>
-</tr>
-</tbody>
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>bordered</td>
+            <td>Set &quot;bordered&quot; table style (see Bootstrap documentation)</td>
+            <td>optional</td>
+            <td>🚩 (flag)</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>striped</td>
+            <td>Set &quot;striped&quot; table style (see Bootstrap documentation)</td>
+            <td>optional</td>
+            <td>🚩 (flag)</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>hover</td>
+            <td>Set &quot;hover&quot; table style (see Bootstrap documentation)</td>
+            <td>optional</td>
+            <td>🚩 (flag)</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>condensed</td>
+            <td>Set &quot;condensed&quot; table style (see Bootstrap documentation)</td>
+            <td>optional</td>
+            <td>🚩 (flag)</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>responsive</td>
+            <td>Wrap the table in a div with the class &quot;table-responsive&quot; (see <a href="https://getbootstrap.com/docs/4.5/content/tables/#always-responsive">Bootstrap responsive table documentation</a>)</td>
+            <td>optional</td>
+            <td>🚩 (flag)</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at <a href="#container-parameters">[container] parameters</a>.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+    </tbody>
+</table>
+<p><a href="https://getbootstrap.com/docs/4.5/content/tables/">Bootstrap table documentation</a></p>
+<hr>
+<h3 id="images">Image</h3>
+<pre><code class="d-block p-4">
+[img type=&quot;circle&quot; responsive] ... [/img]
+</code></pre>
+<p>Wrap any number of HTML image tags or images inserted via the WordPress media manager or the [code inline]img-gen[/code] tag..</p>
+<h4 id="-img-parameters">[img] parameters</h4>
+<table>
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>responsive</td>
+            <td>Make the wrapped images responsive</td>
+            <td>optional</td>
+            <td>🚩 (flag)</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>thumbnail</td>
+            <td>Add a rounded 1px border appearance</td>
+            <td>optional</td>
+            <td>🚩 (flag)</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at <a href="#container-parameters">[container] parameters</a>.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+    </tbody>
+</table>
+<p><a href="https://getbootstrap.com/docs/4.5/content/images/">Bootstrap images documentation</a></p>
+<hr>
+<h3 id="images-gen">Dynamic Dummy Image Generator</h3>
+<pre><code class="d-block p-4">
+[img-gen type=&quot;circle&quot; responsive size=&quot;800x600&quot; text=&quot;Hello&quot;]
+</code></pre>
+<p>Generate dynamic dummy images with selectable colors and text.</p>
+<h4 id="-img-gen-parameters">[img-gen] parameters</h4>
+<table>
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>type</td>
+            <td>The effect to apply to wrapped images</td>
+            <td>optional</td>
+            <td>rounded, circle, thumbnail</td>
+            <td>false</td>
+        </tr>
+        <tr>
+            <td>responsive</td>
+            <td>Make the wrapped images responsive</td>
+            <td>optional</td>
+            <td>🚩 (flag)</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>size</td>
+            <td>The size of the image in pixels</td>
+            <td>optional</td>
+            <td>Examples: 500x250 (= 500px width, 250px height)
+                <br> 500 (= 500px square) </td>
+            <td>640x480</td>
+        </tr>
+        <tr>
+            <td>file</td>
+            <td>The image file type</td>
+            <td>optional</td>
+            <td>png, gif, jpg or jpeg</td>
+            <td>png</td>
+        </tr>
+        <tr>
+            <td>text</td>
+            <td>The text shown on top of the image</td>
+            <td>optional</td>
+            <td>Any text</td>
+            <td>{Width-Of-Image} x {Hight-Of-Image}</td>
+        </tr>
+        <tr>
+            <td>bg</td>
+            <td>The background color of the image</td>
+            <td>optional</td>
+            <td>Examples:
+                <br> f00 (= #FF0000 as background color)
+                <br> FF0855 (= #FF0855 as background color)</td>
+            <td>000080</td>
+        </tr>
+        <tr>
+            <td>color</td>
+            <td>The font color of the image</td>
+            <td>optional</td>
+            <td>see bg color</td>
+            <td>FFFFFF</td>
+        </tr>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at <a href="#container-parameters">[container] parameters</a>.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+    </tbody>
+</table>
+<p><a href="https://getbootstrap.com/docs/4.5/content/images/">Bootstrap images documentation</a></p>
+<hr>
+<h3 id="blockquote">Blockquote</h3>
+<pre><code class="d-block p-4">
+[blockquote]
+    ...
+    [blockquote-footer]
+        ...
+    [/blockquote-footer]
+[/blockquote]
+</code></pre>
+<h4 id="-blockquote-parameters">[blockquote] parameters</h4>
+<table>
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at <a href="#container-parameters">[container] parameters</a>.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+    </tbody>
+</table>
+<h4 id="-blockquote-footer-parameters">[blockquote-footer] parameters</h4>
+<table>
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at <a href="#container-parameters">[container] parameters</a>.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+    </tbody>
+</table>
+<p><a href="https://getbootstrap.com/docs/4.5/content/typography/#blockquotes">Bootstrap blockquote documentation</a></p>
+<hr>
+<h3 id="lead-body-copy">Lead body copy</h3>
+<pre><code class="d-block p-4">
+[lead] ... [/lead]
+</code></pre>
+<h4 id="-lead-parameters">[lead] parameters</h4>
+<table>
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at <a href="#container-parameters">[container] parameters</a>.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+    </tbody>
+</table>
+<p><a href="https://getbootstrap.com/docs/4.5/content/typography/#lead">Bootstrap lead documentation</a></p>
+<hr>
+<h3 id="utilities">Utilities</h3>
+<h3 id="border-classes">Border</h3>
+<p>Use border utilities to quickly style the <code>border</code>, <code>border-radius</code>, <code>border-size</code> and <code>border-color</code> of an element. Great for images, buttons, or any other element.</p>
+<pre><code class="d-block p-4">
+[border radius="pill"] ... [/border]
+</code></pre>
+<h4 id="-border-parameters">[border] parameters</h4>
+<table>
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>add</td>
+            <td>The border(s) to add</td>
+            <td>optional</td>
+            <td>all, top, right, bottom, left</td>
+            <td>all</td>
+        </tr>
+        <tr>
+            <td>del</td>
+            <td>The border(s) to subtract</td>
+            <td>optional</td>
+            <td>all, top, right, bottom, left</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>radius</td>
+            <td>The border radius to display</td>
+            <td>optional</td>
+            <td>all, top, right, bottom, left, circle, pill</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>size</td>
+            <td>The size of the border radius</td>
+            <td>optional</td>
+            <td>sm, md, lg</td>
+            <td>md</td>
+        </tr>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at <a href="#container-parameters">[container] parameters</a>.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+    </tbody>
+</table>
+<p><a href="https://getbootstrap.com/docs/4.5/utilities/borders/">Bootstrap border classes documentation</a></p>
+<hr>
+<h3 id="color-classes">Color</h3>
+<p>Use color utilities to quickly style the <code>text color</code> and <code>background color</code> of an element.</p>
+<pre><code class="d-block p-4">
+[color text=&quot;success&quot;] ... [/color]
+</code></pre>
+<h4 id="-color-parameters">[color] parameters</h4>
+<table>
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>text</td>
+            <td>The text color to display</td>
+            <td>optional</td>
+            <td>primary, secondary, success, danger, warning, info, light, dark, body, muted, white, black-50, white-50</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>bg</td>
+            <td>The background color to display</td>
+            <td>optional</td>
+            <td>primary, secondary, success, danger, warning, info, light, dark, white, transparent</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at <a href="#container-parameters">[container] parameters</a>.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+    </tbody>
+</table>
+<p><a href="https://getbootstrap.com/docs/4.5/utilities/colors/">Bootstrap color classes documentation</a></p>
+<hr>
+<h3 id="flex">Flex</h3>
+<pre><code class="d-block p-4">
+[flex size="lg" inline row-reverse="xs sm md" class="p-3 bg-secondary text-white"]
+    [flex-item class="p-2 bg-info"]Flex item 1[/flex-item]
+    [flex-item class="p-2 bg-warning"]Flex item 2[/flex-item]
+    [flex-item class="p-2 bg-primary"]Flex item 3[/flex-item]
+[/flex]
+</code></pre>
+<h4 id="-flex-parameters">[flex] parameters</h4>
+<table>
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>inline</td>
+            <td>Set the inline style for the flex container (only takes up as much width as necessary)</td>
+            <td>optional</td>
+            <td>🚩 (flag)</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>direction</td>
+            <td>Set the direction for the flex items</td>
+            <td>optional</td>
+            <td>row, row-reverse, column, column-reverse</td>
+            <td>row</td>
+        </tr>
+        <tr>
+            <td>justify</td>
+            <td>Change the alignment of flex items on the main axis</td>
+            <td>optional</td>
+            <td>start, end, center, between, around</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>align</td>
+            <td>Set flexbox container to align flex items together on the cross axis. This property has no effect on single rows of flex items.</td>
+            <td>optional</td>
+            <td>start, end, center, around, stretch</td>
+            <td>start</td>
+        </tr>
+        <tr>
+            <td>wrap</td>
+            <td>Set how flex items wrap in a flex container.</td>
+            <td>optional</td>
+            <td>true, false, reverse</td>
+            <td>false</td>
+        </tr>
+
+
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at <a href="#container-parameters">[container] parameters</a>.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+    </tbody>
+</table>
+<p><a href="https://getbootstrap.com/docs/4.5/utilities/colors/">Bootstrap color classes documentation</a></p>
+<hr>
+<h3 id="html">HTML snippets</h3>
+<p>Allow any html code. This shortcode has no parameters.</p>
+<pre><code class="d-block p-4">
+[html]&lt;br&gt;&lt;hr&gt;&lt;br&gt;[/html]
+</code></pre>
+<hr>
+<h3 id="lorem-ipsum">Lorem Ipsum generator</h3>
+<p>Generate any amount of <code>lorem ipsum</code> data. Great for layout tests. Without any parameters, the tag will produce one sentence with the <code>p</code> tag.</p>
+<pre><code class="d-block p-4">
+[lorem-ipsum sentences="3" tag="div"]
+</code></pre>
+<h4 id="-lorem-ipsum-parameters">[lorem-ipsum] parameters</h4>
+<table>
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>tag</td>
+            <td>The element tag for the text snippets.</td>
+            <td>optional</td>
+            <td>any element tag; use <code>span</code> to keep the elements together</td>
+            <td>p</td>
+        </tr>
+        <tr>
+            <td>words</td>
+            <td>The number of words to generate</td>
+            <td>optional</td>
+            <td>any number</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>sentences</td>
+            <td>The number of sentences to generate</td>
+            <td>optional</td>
+            <td>any number</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>paragraphs</td>
+            <td>The number of paragraphs to generate</td>
+            <td>optional</td>
+            <td>any number</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at <a href="#container-parameters">[container] parameters</a>.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+    </tbody>
+</table>
+<hr>
+<h3 id="javascript">Javascript</h3>
+<h3 id="tooltip">Tooltip</h3>
+<pre><code class="d-block p-4">
+[tooltip title=&quot;I&#39;m the title&quot; placement=&quot;right&quot;] ... [/tooltip]
+</code></pre>
+<h4 id="-tooltip-parameters">[tooltip] parameters</h4>
+<table>
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>title</td>
+            <td>The text of the tooltip</td>
+            <td>required</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>placement</td>
+            <td>The placement of the tooltip</td>
+            <td>optional</td>
+            <td>left, top, bottom, right</td>
+            <td>top</td>
+        </tr>
+        <tr>
+            <td>animation</td>
+            <td>apply a CSS fade transition to the tooltip</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>html</td>
+            <td>Insert HTML into the tooltip</td>
+            <td>optional</td>
+            <td>true, false</td>
+            <td>false</td>
+        </tr>
+    </tbody>
 </table>
 <p><a href="https://getbootstrap.com/docs/4.5/components/tooltips/">Bootstrap tooltip documentation</a></p>
 <hr>
 <h3 id="popover">Popover</h3>
-<pre><code>[popover title=&quot;I&#39;m the title&quot; text=&quot;And here&#39;s some amazing content. It&#39;s very engaging. right?&quot; placement=&quot;right&quot;] ... [/popover]
-</code></pre><h4 id="-popover-parameters">[popover] parameters</h4>
+<pre><code class="d-block p-4">
+[popover title=&quot;I&#39;m the title&quot; text=&quot;And here&#39;s some amazing content. It&#39;s very engaging. right?&quot; placement=&quot;right&quot;] ... [/popover]
+</code></pre>
+<h4 id="-popover-parameters">[popover] parameters</h4>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th>Required</th>
-<th>Values</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>title</td>
-<td>The title of the popover</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-<tr>
-<td>text</td>
-<td>The text of the popover</td>
-<td>required</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-<tr>
-<td>placement</td>
-<td>The placement of the popover</td>
-<td>optional</td>
-<td>left, top, bottom, right</td>
-<td>top</td>
-</tr>
-<tr>
-<td>animation</td>
-<td>apply a CSS fade transition to the tooltip</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-<tr>
-<td>html</td>
-<td>Insert HTML into the tooltip</td>
-<td>optional</td>
-<td>true, false</td>
-<td>false</td>
-</tr>
-</tbody>
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>title</td>
+            <td>The title of the popover</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>text</td>
+            <td>The text of the popover</td>
+            <td>required</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>placement</td>
+            <td>The placement of the popover</td>
+            <td>optional</td>
+            <td>left, top, bottom, right</td>
+            <td>top</td>
+        </tr>
+        <tr>
+            <td>animation</td>
+            <td>apply a CSS fade transition to the tooltip</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>html</td>
+            <td>Insert HTML into the tooltip</td>
+            <td>optional</td>
+            <td>true, false</td>
+            <td>false</td>
+        </tr>
+    </tbody>
 </table>
 <p><a href="https://getbootstrap.com/docs/4.5/components/popovers/">Bootstrap popovers documentation</a></p>
 <hr>
 <h3 id="collapse">Collapse</h3>
-<h4 id="single-collapse">Single Collapse</h4>
-<pre><code>[collapse title=&quot;Collapse 1&quot; active=&quot;true&quot;]
-    ...
-[/collapse]
-</code></pre><h4 id="set-of-collapsibles">Set of Collapsibles</h4>
-<pre><code>[collapsibles]
-    [collapse title=&quot;Collapse 1&quot; active=&quot;true&quot;]
-        ...
-    [/collapse]
-    [collapse title=&quot;Collapse 2&quot;]
-        ...
-    [/collapse]
-    [collapse title=&quot;Collapse 3&quot;]
-        ...
-    [/collapse]
-[/collapsibles]
-</code></pre><h4 id="-collapsibles-parameters">[collapsibles] parameters</h4>
+<h5>Accordion example</h5>
+<p>Create an accordion by wrapping <code>[card]</code>s in <code>[accordion]</code>.</p>
+<pre><code class="d-block p-4">
+[accordion]
+  [card active]
+    [card-header] ... [/card-header]
+    [card-body]
+      ...
+    [/card-body]
+  [/card]
+  [card]
+    [card-header] ... [/card-header]
+    [card-body]
+      ...
+    [/card-body]
+  [/card]
+[/accordion]</code></pre>
+<h4 id="-accordion-parameters">[accordion] parameters</h4>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th>Required</th>
-<th>Values</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>class</td>
-<td>Any extra classes you want to add</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-<tr>
-<td>data</td>
-<td>Data attribute and value pairs separated by a comma. Pairs separated by pipe (see example at <a href="#button-dropdowns">Button Dropdowns</a>).</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-</tbody>
-</table>
-<h4 id="-collapse-parameters">[collapse] parameters</h4>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th>Required</th>
-<th>Values</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>title</td>
-<td>The title of the collapsible, visible when collapsed</td>
-<td>required</td>
-<td>any text</td>
-<td>false</td>
-</tr>
-<tr>
-<td>type</td>
-<td>The type of the panel</td>
-<td>optional</td>
-<td>primary, secondary, success, info, warning, danger, light, dark, link</td>
-<td>default</td>
-</tr>
-<tr>
-<td>active</td>
-<td>Whether the tab is expanded at load time</td>
-<td>optional</td>
-<td>true, false</td>
-<td>false</td>
-</tr>
-<tr>
-<td>class</td>
-<td>Any extra classes you want to add to the card</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-<tr>
-<tr>
-<td>lclass</td>
-<td>Any extra classes you want to add to the header link</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-<tr>
-<td>bclass</td>
-<td>Any extra classes you want to add to the card body</td>
-<td>optional</td>
-<td>any text</td>
-<td>none, inherited from class</td>
-</tr>
-<tr>
-<td>data</td>
-<td>Data attribute and value pairs separated by a comma. Pairs separated by pipe (see example at <a href="#button-dropdowns">Button Dropdowns</a>).</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-</tbody>
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td></td>
+        </tr>
+    </tbody>
 </table>
 <p><a href="https://getbootstrap.com/docs/4.5/components/collapse/">Bootstrap collapse documentation</a></p>
 <hr>
 <h3 id="carousel">Carousel</h3>
-<pre><code>[carousel]
-    [carousel-item active=&quot;true&quot;] ... [/carousel-item]
-    [carousel-item] ... [/carousel-item]
-    [carousel-item] ... [/carousel-item]
+<pre><code class="d-block p-4">
+[carousel]
+    [carousel-item active]
+        [img-gen responsive size="1200x200" text="Slide 1"]
+    [/carousel-item]
+    [carousel-item]
+        [img-gen responsive size="1200x200" text="Slide 2" bg="C0C0C0"]
+    [/carousel-item]
+    [carousel-item]
+        [img-gen responsive size="1200x200" text="Slide 3" bg="F00000"]
+    [/carousel-item]
+    [carousel-item][
+        img-gen responsive size="1200x200" text="Slide 4" bg="00F000"]
+    [/carousel-item]
 [/carousel]
-</code></pre><p>[carousel-item] wraps an HTML image tag or image inserted via the WordPress editor.</p>
+</code></pre>
+<p>[carousel-item] wraps an HTML image tag, image inserted via the WordPress editor or the [code inline]img-gen[/code] tag. It can also be used for text slides but you may need to use additional utilities or custom styles to appropriately size content.</p>
 <h4 id="-carousel-parameters">[carousel] parameters</h4>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th>Required</th>
-<th>Values</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>interval</td>
-<td>The amount of time to delay between automatically cycling an item. If false, carousel will not automatically cycle.</td>
-<td>optional</td>
-<td>any number (in ms) or &quot;false&quot;</td>
-<td>5000</td>
-</tr>
-<tr>
-<td>pause</td>
-<td>Pauses the carousel from going through the next slide when the mouse pointer enters the carousel, and resumes the sliding when the mouse pointer leaves the carousel.</td>
-<td>optional</td>
-<td>hover, false</td>
-<td>hover</td>
-</tr>
-<tr>
-<td>wrap</td>
-<td>Whether the carousel should cycle continuously or have hard stops.</td>
-<td>optional</td>
-<td>true, false</td>
-<td>true</td>
-</tr>
-<tr>
-<td>indicator</td>
-<td>Whether the carousel should show the slide indicator.</td>
-<td>optional</td>
-<td>true, false</td>
-<td>true</td>
-</tr>
-<tr>
-<td>arrows</td>
-<td>Whether the carousel should show the previous and next slide controls.</td>
-<td>optional</td>
-<td>true, false</td>
-<td>true</td>
-</tr>
-<tr>
-<td>class</td>
-<td>Any extra classes you want to add</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-<tr>
-<td>data</td>
-<td>Data attribute and value pairs separated by a comma. Pairs separated by pipe (see example at <a href="#button-dropdowns">Button Dropdowns</a>).</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-</tbody>
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>interval</td>
+            <td>The amount of time to delay between automatically cycling an item. If false, carousel will not automatically cycle.</td>
+            <td>optional</td>
+            <td>any number (in ms) or &quot;false&quot;</td>
+            <td>5000</td>
+        </tr>
+        <tr>
+            <td>pause</td>
+            <td>Pauses the carousel from going through the next slide when the mouse pointer enters the carousel, and resumes the sliding when the mouse pointer leaves the carousel.</td>
+            <td>optional</td>
+            <td>hover, false</td>
+            <td>hover</td>
+        </tr>
+        <tr>
+            <td>wrap</td>
+            <td>Whether the carousel should cycle continuously or have hard stops.</td>
+            <td>optional</td>
+            <td>true, false</td>
+            <td>true</td>
+        </tr>
+        <tr>
+            <td>indicators</td>
+            <td>Whether the carousel should show the slide indicator.</td>
+            <td>optional</td>
+            <td>🚩 (flag)</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>controls</td>
+            <td>Whether the carousel should show the previous and next slide controls.</td>
+            <td>optional</td>
+            <td>🚩 (flag)</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at <a href="#container-parameters">[container] parameters</a>.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+    </tbody>
 </table>
 <h4 id="-carousel-item-parameters">[carousel-item] parameters</h4>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th>Required</th>
-<th>Values</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>active</td>
-<td>Whether the item has the &quot;active&quot; style applied. One item MUST be set as active.</td>
-<td>optional</td>
-<td>true, false</td>
-<td>false</td>
-</tr>
-<tr>
-<td>caption</td>
-<td>This carousel slide&#39;s caption</td>
-<td>optional</td>
-<td>Any text</td>
-<td>none</td>
-</tr>
-<tr>
-<td>class</td>
-<td>Any extra classes you want to add</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-<tr>
-<td>data</td>
-<td>Data attribute and value pairs separated by a comma. Pairs separated by pipe (see example at <a href="#button-dropdowns">Button Dropdowns</a>).</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-</tbody>
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>active</td>
+            <td>Whether the item has the &quot;active&quot; style applied. One item MUST be set as active.</td>
+            <td>optional</td>
+            <td>🚩 (flag)</td>
+            <td></td>
+        </tr>
+        <!--tr>
+            <td>caption</td>
+            <td>This carousel slide&#39;s caption</td>
+            <td>optional</td>
+            <td>Any text</td>
+            <td>none</td>
+        </tr-->
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at <a href="#container-parameters">[container] parameters</a>.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+    </tbody>
 </table>
 <p><a href="https://getbootstrap.com/docs/4.5/components/carousel/">Bootstrap carousel documentation</a></p>
 <hr>
 <h3 id="modal">Modal</h3>
-<pre><code>[modal text=&quot;This is my modal&quot; title=&quot;Modal Title Goes Here&quot; class=&quot;btn btn-primary btn-lg&quot;]
-    ...
+<pre><code class="d-block p-4">
+[button type="info" modal="example-modal-sm"] Modal Action [/button]
+[modal size="sm" fade id="example-modal-sm"]
+    [modal-header]Example Header[/modal-header]
+    [modal-body]
+        [lorem-ipsum]
+    [/modal-body]
     [modal-footer]
-        [button type=&quot;primary&quot; link=&quot;#&quot; data=&quot;dismiss,modal&quot;]Dismiss[/button]
+        [button type="secondary"] Lorem [/button]
+        [button type="primary"] Ipsum [/button]
     [/modal-footer]
 [/modal]
-</code></pre><h4 id="-modal-parameters">[modal] parameters</h4>
+</code></pre>
+<h4 id="-modal-parameters">[modal] parameters</h4>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th>Required</th>
-<th>Values</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>text</td>
-<td>Text of the modal trigger link</td>
-<td>required</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-<tr>
-<td>title</td>
-<td>Title of the modal popup</td>
-<td>required</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-<tr>
-<td>size</td>
-<td>Optional modal size</td>
-<td>optional</td>
-<td>lg, sm</td>
-<td>none</td>
-</tr>
-<tr>
-<td>class</td>
-<td>Any extra classes you want to add to the trigger link</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-<tr>
-<td>data</td>
-<td>Data attribute and value pairs separated by a comma. Pairs separated by pipe (see example at <a href="#button-dropdowns">Button Dropdowns</a>).</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-</tbody>
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>fade</td>
+            <td>Slide modal down and fade in from the top of the page</td>
+            <td>optional</td>
+            <td>🚩 (flag)</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>centered</td>
+            <td>Vertically center the modal</td>
+            <td>optional</td>
+            <td>🚩 (flag)</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>scrollable</td>
+            <td>Allows scrolling the modal body</td>
+            <td>optional</td>
+            <td>🚩 (flag)</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>size</td>
+            <td>Optional modal size</td>
+            <td>optional</td>
+            <td>sm, lg, xl</td>
+            <td>Default</td>
+        </tr>
+        <tr>
+            <td>id</td>
+            <td>Unique id for the modal (see <code>modal</code> at <a href="#buttons">Buttons</a></td>
+            <td>required</td>
+            <td>any text without space</td>
+            <td>modal-{counter}; {counter} starting at 0</td>
+        </tr>
+        <tr>
+            <td>backdrop</td>
+            <td>Apply the modal &quot;backdrop&quot; style; <code>static</code> will not close the modal when cklicking outside of it</td>
+            <td>optional</td>
+            <td>false, true, static</td>
+            <td>true</td>
+        </tr>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add to the trigger link</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at <a href="#container-parameters">[container] parameters</a>.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+    </tbody>
+</table>
+<h4 id="-modal-header-parameters">[modal-header] parameters</h4>
+<table>
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at <a href="#container-parameters">[container] parameters</a>.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+    </tbody>
+</table>
+<h4 id="-modal-body-parameters">[modal-body] parameters</h4>
+<table>
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at <a href="#container-parameters">[container] parameters</a>.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+    </tbody>
 </table>
 <h4 id="-modal-footer-parameters">[modal-footer] parameters</h4>
 <table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th>Required</th>
-<th>Values</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>class</td>
-<td>Any extra classes you want to add</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-<tr>
-<td>data</td>
-<td>Data attribute and value pairs separated by a comma. Pairs separated by pipe (see example at <a href="#button-dropdowns">Button Dropdowns</a>).</td>
-<td>optional</td>
-<td>any text</td>
-<td>none</td>
-</tr>
-</tbody>
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at <a href="#container-parameters">[container] parameters</a>.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+    </tbody>
 </table>
 <p><a href="https://getbootstrap.com/docs/4.5/components/modal/">Bootstrap modal documentation</a></p>
 <hr>

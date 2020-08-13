@@ -1,6 +1,7 @@
 The MIT License (MIT)
 
 Copyright (c) 2016 Filip Stefansson
+Copyright (c) 2018 MWDelaney
 Copyright (c) 2020 Uwe Jacobs
 
 Permission is hereby granted, free of charge, to any person obtaining a copy

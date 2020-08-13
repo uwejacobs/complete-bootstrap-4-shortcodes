@@ -14,18 +14,6 @@
       "name": "Uwe Jacobs",
       "homepage": "https://www.uwejacobs.com",
       "role": "Developer"
-    },
-    {
-      "name": "Filip Stefansson",
-      "email": "filip.stefansson@gmail.com",
-      "homepage": "http://filipstefansson.com",
-      "role": "Developer"
-    },
-    {
-      "name": "Simon Yeldon"
-    },
-    {
-      "name": "Michael W. Delaney"
     }
   ],  
   "type": "wordpress-plugin",

@@ -4,7 +4,7 @@ Plugin Name: Bootstrap 4 Shortcodes
 Plugin URI: (https://github.com/MWDelaney/bootstrap-shortcodes)
 Description: The plugin adds shortcodes for all Bootstrap 4 elements.
 Version: 4.5.0
-Author: Uwe Jacobs; Michael W. Delaney, Filip Stefansson, and Simon Yeldon until 3.3.12
+Author: Uwe Jacobs; Michael W. Delaney, Filip Stefansson, and Simon Yeldon (bs3 3.3.12); Michael W. Delaney (bs4 1.0.0)
 Author URI:
 License: MIT
 */
@@ -16,7 +16,6 @@ License: MIT
 // ======================================================================== //
 
 		require_once( dirname( __FILE__ ) . '/includes/defaults.php' );
-		require_once( dirname( __FILE__ ) . '/includes/functions.php' );
 		require_once( dirname( __FILE__ ) . '/includes/actions-filters.php' );
 
 // ======================================================================== //
@@ -38,7 +37,13 @@ License: MIT
 
 			//Conditionally include poppver functionality (see function for conditionals)
 			add_action( 'the_post', array( $this, 'bootstrap_shortcodes_popover_script' ), 9999 );
-		}
+
+		    if ( !defined('LIBXML_HTML_NOIMPLIED') || !defined('LIBXML_HTML_NODEFDTD') ) {
+    	        define('LIBXML_HTML_NOIMPLIED', 0);
+	            define('LIBXML_HTML_NODEFDTD', 0);
+	            $GLOBALS['libxml_hack'] = true;
+    	    }
+	}
 
 	// ======================================================================== //
 
@@ -91,11 +96,12 @@ License: MIT
 	function add_shortcodes() {
 
 		$shortcodes = array(
+            'accordion',
 			'alert',
 			'badge',
-			'br',
 			'blockquote',
 			'blockquote-footer',
+			'border',
 			'breadcrumb',
 			'breadcrumb-item',
 			'button',
@@ -103,41 +109,48 @@ License: MIT
 			'button-toolbar',
 			'card',
 			'card-body',
+			'card-body-outer',
 			'card-columns',
 			'card-deck',
 			'card-footer',
 			'card-group',
 			'card-header',
+			'card-img',
 			'card-img-overlay',
+			'card-outer',
+			'card-subtitle',
+			'card-title',
 			'carousel',
 			'carousel-item',
 			'code',
-			'collapse',
-			'collapsibles',
+			'color',
 			'column',
+			'column-outer',
 			'container',
 			'container-fluid',
-			'divider',
 			'dropdown',
+			'dropdown-divider',
 			'dropdown-header',
 			'dropdown-item',
-			'emphasis',
+			'dropdown-menu',
             'flex',
             'flex-item',
+            'html',
 			'icon',
 			'icon-stack',
 			'img',
 			'img-gen',
 			'embed-responsive',
 			'jumbotron',
+			'lorem-ipsum',
 			'lead',
 			'list-group',
 			'list-group-item',
-			'list-group-item-heading',
-			'list-group-item-text',
 			'media',
 			'media-body',
+			'media-body-outer',
 			'media-object',
+			'media-outer',
 			'modal',
 			'modal-header',
 			'modal-body',
@@ -149,9 +162,8 @@ License: MIT
 			'progress-bar',
 			'responsive',
 			'row',
-			'tab',
+			'row-outer',
 			'table-wrap',
-			'tabs',
 			'tooltip',
 		);
 
@@ -163,51 +175,73 @@ License: MIT
 		}
 	}
 
+
 	/*--------------------------------------------------------------------------------------
 		*
 		* bs_button
 		*
-		* @author Filip Stefansson, Nicolas Jonas
-		* @since 1.0
-		* 
 		*-------------------------------------------------------------------------------------*/
-	function bs_button( $atts, $content = null ) {
-
+	function bs_button( $save_atts, $content = null ) {
+        $save_atts = array_change_key_case( (array) $save_atts, CASE_LOWER );
 		$atts = shortcode_atts( array(
-			"type"     => false,
-			"size"     => false,
-			"block"    => false,
-			"dropdown" => false,
-			"link"     => '#',
-			"target"   => false,
-			"disabled" => false,
-			"active"   => false,
-			"class"    => false,
-			"title"    => false,
-			"data"     => false
-		), $atts );
+            // 'block'
+            // 'active'
+            // 'disabled'
+            // 'dropdown'
+            // 'split'
+            // 'outline'
+			"type"			=> 'primary',
+			"size"			=> false,
+			"modal"         => false,
+			"class"			=> false,
+			"data"			=> false
+		), $save_atts );
 
-        $class = array();
+		$class	= array();
 		$class[] = 'btn';
-		$class[] = ( $atts['type'] )     ? 'btn-' . $atts['type'] : '';
-		$class[] = ( $atts['size'] && $atts['size'] != "xs" )     ? 'btn-' . $atts['size'] : '';
-		$class[] = ( $atts['block'] == 'true' )    ? 'btn-block' : '';
-		$class[] = ( $atts['dropdown']   == 'true' ) ? 'dropdown-toggle' : '';
-		$class[] = ( $atts['disabled']   == 'true' ) ? 'disabled' : '';
-		$class[] = ( $atts['active']     == 'true' )   ? 'active' : '';
+		$class[] = 'btn-' . ($this->is_flag('outline', $save_atts) ? 'outline-' : '') . $atts['type'];
+		$class[] = ($atts['size'] && $atts['size'] != "md" )       ? 'btn-' . $atts['size'] : '';
+		$class[] = ($this->is_flag('block', $save_atts))           ? 'btn-block' : '';
+		$class[] = ($this->is_flag('active', $save_atts))          ? 'active' : '';
+		$class[] = ($this->is_flag('disabled', $save_atts))        ? 'disabled' : '';
+		$class[] = ($this->is_flag('dropdown', $save_atts))        ? 'dropdown-toggle' : '';
+		$class[] = ($this->is_flag('split', $save_atts))           ? 'dropdown-toggle-split' : '';
+		$class[] = ($atts['class'])                                ? $atts['class'] : '';
 
-		$data_props = $this->parse_data_attributes( $atts['data'] );
+		$button_data   = array();
+		$button_data[] = ($this->is_flag('dropdown', $save_atts)) ? 'toggle,dropdown' : '';
+		if ($atts['modal']) {
+    		$button_data[] = 'toggle,modal';
+	    	$button_data[] = 'target,#' . $atts['modal'];
+    	}
+		$button_data   = implode( '|', array_filter($button_data) );
 
-		return sprintf(
-			'<a href="%s"%s%s%s%s>%s</a>',
-			esc_url( $atts['link'] ),
-			$this->class_output ( $class, $atts["class"] ),
-			( $atts['target'] )     ? sprintf( ' target="%s"', esc_attr( $atts['target'] ) ) : '',
-			( $atts['title'] )      ? sprintf( ' title="%s"',  esc_attr( $atts['title'] ) )  : '',
-			$data_props,
-			do_shortcode( $content )
+        $search_tags = array('a', 'button', 'input');
+
+		$wrap_before = ($content && $this->testdom($content, $search_tags)) ? '' : '<button>';
+		$wrap_after  = ($content && $this->testdom($content, $search_tags)) ? '' : '</button>';
+
+		$content = do_shortcode( $wrap_before . $content . $wrap_after );
+		$return = sprintf(
+				'%s',
+				$content
 		);
 
+		$return = $this->addclass( $search_tags, $return, $class );
+		$return = $this->adddata( $search_tags, $return, $atts['data'] );
+		$return = $this->adddata( $search_tags, $return, $button_data );
+		if ($this->is_flag('dropdown', $save_atts)) {
+			$return = $this->addattribute( $search_tags, $return, 'haspopup', 'true', 'aria-' );
+			$return = $this->addattribute( $search_tags, $return, 'expanded', 'false', 'aria-' );
+		}
+		if ($this->is_flag('active', $save_atts)) {
+			$return = $this->addattribute( $search_tags, $return, 'pressed', 'true', 'aria-' );
+		}
+		if ($this->is_flag('disabled', $save_atts)) {
+			$return = $this->addattribute( $search_tags, $return, 'disabled', 'true', 'aria-' );
+		}
+
+		return $return;
 	}
 
 	/*--------------------------------------------------------------------------------------
@@ -217,28 +251,28 @@ License: MIT
 		* @author M. W. Delaney
 		*
 		*-------------------------------------------------------------------------------------*/
-	function bs_button_group( $atts, $content = null ) {
-
+	function bs_button_group( $save_atts, $content = null ) {
+        $save_atts = array_change_key_case( (array) $save_atts, CASE_LOWER );
 		$atts = shortcode_atts( array(
+				// "vertical"  => false,
+				// "justified" => false,
+				"drop"      => false,
 				"size"      => false,
-				"vertical"  => false,
-				"justified" => false,
-				"dropup"    => false,
 				"class"     => false,
 				"data"      => false
-		), $atts );
+		), $save_atts );
 
         $class = array();
 		$class[] = 'btn-group';
-		$class[] = ( $atts['size'] && $atts['size'] != "xs" ) ? 'btn-group-' . $atts['size'] : '';
-		$class[] = ( $atts['vertical']   == 'true' )          ? 'btn-group-vertical' : '';
-		$class[] = ( $atts['justified']  == 'true' )          ? 'btn-group-justified' : '';
-		$class[] = ( $atts['dropup']     == 'true' )          ? 'dropup' : '';
+		$class[] = ( $atts['size'] && $atts['size'] != "md" )  ? 'btn-group-' . $atts['size'] : '';
+		$class[] = ( $this->is_flag('vertical', $save_atts) )  ? 'btn-group-vertical' : '';
+		$class[] = ( $this->is_flag('justified', $save_atts) ) ? 'btn-group-justified' : '';
+		$class[] = ( $atts['drop']  )                          ? 'drop' . $atts['drop'] : '';
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
 		return sprintf(
-			'<div%s%s>%s</div>',
+			'<div role="group"%s%s>%s</div>',
 			$this->class_output ( $class, $atts["class"] ),
 			$data_props,
 			do_shortcode( $content )
@@ -252,7 +286,7 @@ License: MIT
 		*
 		*-------------------------------------------------------------------------------------*/
 	function bs_button_toolbar( $atts, $content = null ) {
-
+        $atts = array_change_key_case( (array) $atts, CASE_LOWER );
 		$atts = shortcode_atts( array(
 				"class"  => false,
 				"data"   => false
@@ -264,7 +298,7 @@ License: MIT
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
 		return sprintf(
-			'<div%s%s>%s</div>',
+			'<div role="toolbar"%s%s>%s</div>',
 			$this->class_output ( $class, $atts["class"] ),
 			$data_props,
 			do_shortcode( $content )
@@ -279,16 +313,16 @@ License: MIT
 		* @since 3.0.3.3
 		*
 		*-------------------------------------------------------------------------------------*/
-	function bs_container( $atts, $content = null ) {
-
+	function bs_container( $save_atts, $content = null ) {
+        $save_atts = array_change_key_case( (array) $save_atts, CASE_LOWER );
 		$atts = shortcode_atts( array(
-				"fluid"  => false,
+				// "fluid"
 				"class"  => false,
 				"data"   => false
-		), $atts );
+		), $save_atts );
 
         $class = array();
-		$class[] = ( $atts['fluid']   == 'true' )  ? 'container-fluid' : 'container';
+		$class[] = 'container' . ($this->is_flag('fluid', $save_atts) ? '-fluid' : '');
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
@@ -310,7 +344,7 @@ License: MIT
 		 *
 		 *-------------------------------------------------------------------------------------*/
 	function bs_container_fluid( $atts, $content = null ) {
-
+        $atts = array_change_key_case( (array) $atts, CASE_LOWER );
 		$atts = shortcode_atts( array(
 				 "class"  => false,
 				 "data"   => false
@@ -337,14 +371,14 @@ License: MIT
 		*
 		*-------------------------------------------------------------------------------------*/
 	function bs_dropdown( $atts, $content = null ) {
-
+        $atts = array_change_key_case( (array) $atts, CASE_LOWER );
 		$atts = shortcode_atts( array(
 				"class"  => false,
 				"data"   => false
 		), $atts );
 
         $class = array();
-		$class[] = 'dropdown-menu';
+		$class[] = 'dropdown';
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
@@ -363,18 +397,18 @@ License: MIT
 		* @author M. W. Delaney
 		*
 		*-------------------------------------------------------------------------------------*/
-	function bs_dropdown_item( $atts, $content = null ) {
-
+	function bs_dropdown_item( $save_atts, $content = null ) {
+        $save_atts = array_change_key_case( (array) $save_atts, CASE_LOWER );
 		$atts = shortcode_atts( array(
+				// "disabled"
 				"link"        => '#',
-				"disabled"    => false,
 				"class"       => false,
 				"data"        => false
-		), $atts );
+		), $save_atts );
 
         $class = array();
 		$class[] = 'dropdown-item';
-		$class[] = ( $atts['disabled']  == 'true' ) ? 'disabled' : '';
+		$class[] = ($this->is_flag('disabled', $save_atts)) ? 'disabled' : '';
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
@@ -394,8 +428,8 @@ License: MIT
 		* @author M. W. Delaney
 		*
 		*-------------------------------------------------------------------------------------*/
-	function bs_divider( $atts, $content = null ) {
-
+	function bs_dropdown_divider( $atts, $content = null ) {
+        $atts = array_change_key_case( (array) $atts, CASE_LOWER );
 		$atts = shortcode_atts( array(
 				"class" => false,
 				"data"  => false
@@ -422,7 +456,7 @@ License: MIT
 		*
 		*-------------------------------------------------------------------------------------*/
 	function bs_dropdown_header( $atts, $content = null ) {
-
+        $atts = array_change_key_case( (array) $atts, CASE_LOWER );
 		$atts = shortcode_atts( array(
 				"class"  => false,
 				"data"   => false
@@ -441,37 +475,106 @@ License: MIT
 		);
 	}
 
+	/**
+	 * Dropdown Menu shortcode
+	 * @param  [type] $atts    shortcode attributes
+	 * @param  string $content shortcode contents
+	 * @return string
+	 */
+	function bs_dropdown_menu( $save_atts, $content = null ) {
+        $save_atts = array_change_key_case( (array) $save_atts, CASE_LOWER );
+		$atts = shortcode_atts( array(
+			// "right"
+			"class"			=> false,
+			"data"			=> false,
+		), $save_atts );
+
+		$search_tags	= array('div');
+
+		$class   = array();
+		$class[] = 'dropdown-menu';
+		$class[] = ($this->is_flag('right', $save_atts)) ? 'dropdown-menu-right' : '';
+
+		$wrap_before = ($this->testdom($content, $search_tags)) ? '' : '<div' . $this->class_output ( $class, $atts["class"] ) . '>';
+		$wrap_after  = ($this->testdom($content, $search_tags)) ? '' : '</div>';
+
+		$a_class   = array();
+		$a_class[] = 'dropdown-item';
+		$a_search_tags = array('a');
+
+		$h_class   = array();
+		$h_class[] = 'dropdown-header';
+		$h_search_tags = array('h1', 'h2', 'h3', 'h4', 'h5', 'h6');
+
+		$content = strip_tags($content, '<a><button><h1><h2><h3><h4><h5><h6><div>');
+		$content = $wrap_before . $content . $wrap_after;
+		//$content = $this->addclass( $search_tags, $content, $class );
+
+		$return = sprintf(
+				'%s',
+				do_shortcode($content)
+		);
+
+		$return = $this->addclass( $h_search_tags, $return, $h_class );
+		$return = $this->addclass( $a_search_tags, $return, $a_class );
+		$return = $this->adddata( $search_tags, $return, $atts['data'] );
+
+		return $return;
+	}
+
 	/*--------------------------------------------------------------------------------------
 		*
 		* bs_nav
 		*
 		*
 		*-------------------------------------------------------------------------------------*/
-	function bs_nav( $atts, $content = null ) {
+	function bs_nav( $save_atts, $content = null ) {
+        $save_atts = array_change_key_case( (array) $save_atts, CASE_LOWER );
+			$atts = shortcode_atts( array(
+                // 'vertical'
+                // 'tabs'
+                // 'pills'
+                // 'fill'
+                // 'justified'
+				"class"			=> false,
+				"data"			=> false
+			), $save_atts );
 
-		$atts = shortcode_atts( array(
-					"type"      => false,
-					"stacked"   => false,
-					"justified" => false,
-					"class"     => false,
-					"data"      => false
-		), $atts );
+			$search_tags	= array('ul', 'nav');
 
-        $class = array();
-		$class[] = 'nav';
-		$class[] = ( $atts['type'] )                ? 'nav-' . $atts['type'] : 'nav-tabs';
-		$class[] = ( $atts['stacked']   == 'true' ) ? 'nav-stacked' : '';
-		$class[] = ( $atts['justified'] == 'true' ) ? 'nav-justified' : '';
+			$wrap_before = ($this->testdom($content, $search_tags)) ? '' : '<nav>';
+			$wrap_after  = ($this->testdom($content, $search_tags)) ? '' : '</nav>';
 
-		$data_props = $this->parse_data_attributes( $atts['data'] );
+			$class   = array();
+			$class[] = 'nav';
+			$class[] = ($this->is_flag('vertical', $save_atts))  ? 'flex-column' : '';
+			$class[] = ($this->is_flag('tabs', $save_atts))      ? 'nav-tabs' : '';
+			$class[] = ($this->is_flag('pills', $save_atts))     ? 'nav-pills' : '';
+			$class[] = ($this->is_flag('fill', $save_atts))      ? 'nav-fill' : '';
+			$class[] = ($this->is_flag('justified', $save_atts)) ? 'nav-justified' : '';
 
-		return sprintf(
-			'<ul%s%s>%s</ul>',
-			$this->class_output ( $class, $atts["class"] ),
-			$data_props,
-			do_shortcode( $content )
-		);
-	}
+			$li_class	= array();
+			$li_class[]	= 'nav-item';
+			$li_search_tags	= array('li');
+
+			$a_class	= array();
+			$a_class[]	= 'nav-link';
+			$a_search_tags	= array('a');
+
+			$content = do_shortcode( $wrap_before . $content . $wrap_after );
+
+			$return = sprintf(
+					'%s',
+					$content
+			);
+
+			$return = $this->addclass( $search_tags, $return, $class );
+			//$return = $this->addclass( $li_search_tags, $return, $li_class );
+			//$return = $this->addclass( $a_search_tags, $return, $a_class );
+			$return = $this->adddata( $search_tags, $return, $atts['data'] );
+
+			return $return;
+		}
 
 	/*--------------------------------------------------------------------------------------
 		*
@@ -479,265 +582,446 @@ License: MIT
 		*
 		*
 		*-------------------------------------------------------------------------------------*/
-	function bs_nav_item( $atts, $content = null ) {
-
+	function bs_nav_item( $save_atts, $content = null ) {
+        $save_atts = array_change_key_case( (array) $save_atts, CASE_LOWER );
 		$atts = shortcode_atts( array(
 				"link"     => '#',
-				"active"   => false,
-				"disabled" => false,
-				"dropdown" => false,
+				// "active"
+				// "disabled"
+				// "dropdown"
 				"class"    => false,
 				"data"     => false,
-		), $atts );
+		), $save_atts );
 
         $li_class = array();
-		$li_class[] = ( $atts['dropdown'] )           ? 'dropdown' : '';
-		$li_class[] = ( $atts['active']   == 'true' ) ? 'active' : '';
-		$li_class[] = ( $atts['disabled'] == 'true' ) ? 'disabled' : '';
+		$li_class[]	= 'nav-item';
+		$li_class[] = ( $this->is_flag('dropdown', $save_atts) ) ? 'dropdown' : '';
+		$li_class[] = ( $this->is_flag('active', $save_atts) )   ? 'active' : '';
+		$li_class[] = ( $this->is_flag('disabled', $save_atts) ) ? 'disabled' : '';
 
 		$a_class = array();
-		$a_class[] = ( $atts['dropdown']   == 'true' ) ? 'dropdown-toggle' : '';
+		$a_class[] = 'nav-link';
+		$a_class[] = ( $this->is_flag('dropdown', $save_atts) ) ? 'dropdown-toggle' : '';
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
-		//* If we have a dropdown shortcode inside the content we end the link before the dropdown shortcode, else all content goes inside the link
-		$content = ( $atts['dropdown'] ) ? str_replace( '[dropdown]', '</nav-link>[dropdown]', $content ) : $content . '</nav-link>';
+        //* If we have a dropdown shortcode inside the content we end the link before the dropdown shortcode, else all content goes inside the link
+        $content = ( $this->is_flag('dropdown', $save_atts) ) ? str_replace( '[/dropdown-menu]', '</li>[/dropdown-menu]', $content ) : $content;
 
 		return sprintf(
-			'<nav-item%1$s><nav-link href="%2$s"%3$s%4$s%5$s>%6$s</nav-item>',
+			'<li%1$s><a href="%2$s"%3$s%4$s%5$s>%6$s</nav-link></a></li>',
 			$this->class_output ( $li_class ),
 			esc_url( $atts['link'] ),
 			$this->class_output ( $a_class, $atts["class"] ),
-			( $atts['dropdown'] )   ? ' data-toggle="dropdown"' : '',
+			( $this->is_flag('dropdown', $save_atts) )   ? ' data-toggle="dropdown"' : '',
 			$data_props,
 			do_shortcode( $content )
 		);
 
 	}
 
-	/*--------------------------------------------------------------------------------------
-		*
-		* bs_card_deck
-		*
-		* @author Uwe Jacobs
-		* @since 4.5.0
-		*
-		*-------------------------------------------------------------------------------------*/
-	function bs_card_deck( $atts, $content = null ) {
+    	/*--------------------------------------------------------------------------------------
+		 *
+		 * bs_accordion
+		 *
+		 *-------------------------------------------------------------------------------------*/
+		function bs_accordion( $save_atts, $content = null ) {
+            $save_atts = array_change_key_case( (array) $save_atts, CASE_LOWER );
+			$atts = shortcode_atts( array(
+					"class" => false,
+					"data"   => false,
+			), $save_atts );
 
-		$atts = shortcode_atts( array(
-				"class"   => null,
-				"data"    => false
-		), $atts );
+			( isset($GLOBALS['accordion_count']) ) ? $GLOBALS['accordion_count']++ : $GLOBALS['accordion_count'] = 0;
 
-        $class = array();
-		$class[] = 'card-deck';
+			$GLOBALS['accordion'] = true;
 
-		$data_props = $this->parse_data_attributes( $atts['data'] );
+			$class	= array();
+			$class[] = "accordion";
 
-		return sprintf(
-			'<div%s%s>%s</div>',
-			$this->class_output ( $class, $atts["class"] ),
-			$data_props,
-			do_shortcode( $content )
-		);
+    		$data_props = $this->parse_data_attributes( $atts['data'] );
+
+			$id = 'accordion' . $GLOBALS['accordion_count'];
+
+			$return = sprintf(
+					'<div id="%s"%s role="tablist"%s>%s</div>',
+					$id,
+        			$this->class_output ( $class, $atts["class"] ),
+					$data_props,
+					do_shortcode( $content )
+			);
+
+			unset($GLOBALS['accordion']);
+			return $return;
+		}
+
+    	/*--------------------------------------------------------------------------------------
+		 *
+		 * card
+		 *
+		 *-------------------------------------------------------------------------------------*/
+	function bs_card_outer( $save_atts, $content = null ) {
+	    return($this->bs_card( $save_atts, $content ));
 	}
-
-	/*--------------------------------------------------------------------------------------
-		*
-		* bs_card_columns
-		*
-		* @author Uwe Jacobs
-		* @since 4.5.0
-		*
-		*-------------------------------------------------------------------------------------*/
-	function bs_card_columns( $atts, $content = null ) {
-
+	function bs_card( $save_atts, $content = null ) {
+        $save_atts = array_change_key_case( (array) $save_atts, CASE_LOWER );
 		$atts = shortcode_atts( array(
-				"class"   => false,
-				"data"    => false
-		), $atts );
+                // show
+				"class"	=> false,
+				"data"	=> false
+		), $save_atts );
 
-        $class = array();
-		$class[] = 'card-columns';
+		if (isset($GLOBALS['accordion'])) {
+			if(!isset($GLOBALS['accordion_card'])) {
+				$GLOBALS['accordion_card'] = 0;
+			} else {
+				$GLOBALS['accordion_card']++;
+			}
 
-		$data_props = $this->parse_data_attributes( $atts['data'] );
-
-		return sprintf(
-			'<div%s%s>%s</div>',
-			$this->class_output ( $class, $atts["class"] ),
-			$data_props,
-			do_shortcode( $content )
-		);
-	}
-
-	/*--------------------------------------------------------------------------------------
-		*
-		* bs_card_group
-		*
-		* @author Uwe Jacobs
-		* @since 4.5.0
-		*
-		*-------------------------------------------------------------------------------------*/
-	function bs_card_group( $atts, $content = null ) {
-
-		$atts = shortcode_atts( array(
-				"class"   => false,
-				"data"    => false
-		), $atts );
+			$GLOBALS['accordion_card_show'] = $this->is_flag('show', $save_atts);
+        }
 
 		$class = array();
-		$class[] = 'card-group';
-
-		$data_props = $this->parse_data_attributes( $atts['data'] );
-
-		return sprintf(
-			'<div%s%s>%s</div>',
-			$this->class_output ( $class, $atts["class"] ),
-			$data_props,
-			do_shortcode( $content )
-		);
-	}
-
-	/*--------------------------------------------------------------------------------------
-		*
-		* bs_card
-		*
-		* @author Uwe Jacobs
-		* @since 4.5.0
-		*
-		*-------------------------------------------------------------------------------------*/
-	function bs_card( $atts, $content = null ) {
-
-		$atts = shortcode_atts( array(
-				"class"   => false,
-				"data"    => false
-		), $atts );
-
-        $class = array();
 		$class[] = 'card';
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
 		return sprintf(
-			'<div%s%s>%s</div>',
-			$this->class_output ( $class, $atts["class"] ),
-			$data_props,
-			do_shortcode( $content )
-		);
+				'<div%s%s>%s</div>',
+    			$this->class_output ( $class, $atts["class"] ),
+                $data_props,
+				do_shortcode( $content )
+        );
 	}
 
-	/*--------------------------------------------------------------------------------------
-		*
-		* bs_card_header
-		*
-		* @author Uwe Jacobs
-		* @since 4.5.0
-		*
-		*-------------------------------------------------------------------------------------*/
-	function bs_card_header( $atts, $content = null ) {
-
-		$atts = shortcode_atts( array(
-				"class"   => false,
-				"data"    => false
-		), $atts );
-
-        $class = array();
-		$class[] = 'card-header';
-
-		$data_props = $this->parse_data_attributes( $atts['data'] );
-
-		return sprintf(
-			'<div%s%s>%s</div>',
-			$this->class_output ( $class, $atts["class"] ),
-			$data_props,
-			do_shortcode( $content )
-		);
+    	/*--------------------------------------------------------------------------------------
+		 *
+		 * bs_card_body
+		 *
+		 *-------------------------------------------------------------------------------------*/
+	function bs_card_body_outer( $save_atts, $content = null ) {
+	    return( $this->bs_card_body( $save_atts, $content ) );
 	}
-
-	/*--------------------------------------------------------------------------------------
-		*
-		* bs_card_body
-		*
-		* @author Uwe Jacobs
-		* @since 4.5.0
-		*
-		*-------------------------------------------------------------------------------------*/
-	function bs_card_body( $atts, $content = null ) {
-
+	function bs_card_body( $save_atts, $content = null ) {
+        $save_atts = array_change_key_case( (array) $save_atts, CASE_LOWER );
 		$atts = shortcode_atts( array(
-				"class"   => false,
-				"data"    => false
-		), $atts );
+				"class"	=> false,
+				"data"	=> false
+		), $save_atts );
 
-        $class = array();
-		$class[] = 'card-body';
+		if (isset($GLOBALS['accordion'])) {
+    		$show = ($GLOBALS['accordion_card_show']) ? ' show' : '';
+	    }
 
-		$data_props = $this->parse_data_attributes( $atts['data'] );
-
-		return sprintf(
-			'<div%s%s>%s</div>',
-			$this->class_output ( $class, $atts["class"] ),
-			$data_props,
-			do_shortcode( $content )
-		);
-	}
-
-	/*--------------------------------------------------------------------------------------
-		*
-		* bs_card_footer
-		*
-		* @author Uwe Jacobs
-		* @since 4.5.0
-		*
-		*-------------------------------------------------------------------------------------*/
-	function bs_card_footer( $atts, $content = null ) {
-
-		$atts = shortcode_atts( array(
-				"class"   => false,
-				"data"    => false
-		), $atts );
-
-        $class = array();
-		$class[] = 'card-footer';
-
-		$data_props = $this->parse_data_attributes( $atts['data'] );
-
-		return sprintf(
-			'<div%s%s>%s</div>',
-			$this->class_output ( $class, $atts["class"] ),
-			$data_props,
-			do_shortcode( $content )
-		);
-	}
-
-	/*--------------------------------------------------------------------------------------
-		*
-		* bs_img_overlay
-		*
-		* @author Uwe Jacobs
-		* @since 4.5.0
-		*
-		*-------------------------------------------------------------------------------------*/
-	function bs_img_overlay( $atts, $content = null ) {
-
-		$atts = shortcode_atts( array(
-				"class"   => false,
-				"data"    => false
-		), $atts );
+		$wrap_before = (isset($GLOBALS['accordion'])) ? sprintf('<div id="collapse%s" class="collapse%s" data-parent="#accordion%s" aria-labelledby="bs-heading%s">', $GLOBALS['accordion_card'], $show, $GLOBALS['accordion_count'], $GLOBALS['accordion_card']) : '';
+		$wrap_after = (isset($GLOBALS['accordion'])) ? '</div>' : '';
 
 		$class = array();
-		$class[] = 'card-img-overlay';
+		$class[] = 'card-body';
+
+		$p_class = array();
+		$p_class[] = 'card-text';
+        $p_tags	   = array('p');
+
+		$blockquote_class = array();
+		$blockquote_class[] = 'card-blockquote';
+		$blockquote_tags	= array('blockquote');
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
-
-		return sprintf(
-			'<div%s%s>%s</div>',
-			$this->class_output ( $class, $atts["class"] ),
-			$data_props,
-			do_shortcode( $content )
+		
+		$return = sprintf(
+				'<div%s%s>%s</div>',
+       			$this->class_output ( $class, $atts["class"] ),
+				$data_props,
+				do_shortcode($content)
 		);
+
+        $return = $wrap_before . $return . $wrap_after;
+		$return = $this->addclass( $p_tags, $return, $p_class );
+		$return = $this->addclass( $blockquote_tags, $return, $blockquote_class );
+
+		return $return;
 	}
+
+    	/*--------------------------------------------------------------------------------------
+		 *
+		 * bs_card_title
+		 *
+		 *-------------------------------------------------------------------------------------*/
+
+	function bs_card_title( $atts, $content = null ) {
+        $atts = array_change_key_case( (array) $atts, CASE_LOWER );
+		$atts = shortcode_atts( array(
+				"class" => false,
+				"data"   => false
+		), $atts );
+
+		$search_tags = array('h1', 'h2', 'h3', 'h4', 'h5', 'h6');
+
+		$wrap_before = ( $this->testdom($content, $search_tags) ) ? '' : '<h4>';
+		$wrap_after  = ( $this->testdom($content, $search_tags) ) ? '' : '</h4>';
+
+		$class	= array();
+		$class[]  = 'card-title';
+
+		$return = sprintf(
+				'%s',
+				do_shortcode( $wrap_before . $content . $wrap_after )
+		);
+
+		$return = $this->addclass( $search_tags, $return, $class );
+		$return = $this->adddata( $search_tags, $return, $atts['data'] );
+
+		return $return;
+	}
+
+    	/*--------------------------------------------------------------------------------------
+		 *
+		 * bs_card_subtitle
+		 *
+		 *-------------------------------------------------------------------------------------*/
+	function bs_card_subtitle( $atts, $content = null ) {
+        $atts = array_change_key_case( (array) $atts, CASE_LOWER );
+		$atts = shortcode_atts( array(
+				"class" => false,
+				"data"   => false
+		), $atts );
+
+		$search_tags = array('h1', 'h2', 'h3', 'h4', 'h5', 'h6');
+
+		$wrap_before = ($this->testdom($content, $search_tags)) ? '' : '<h6>';
+		$wrap_after = ($this->testdom($content, $search_tags)) ? '' : '</h6>';
+
+		$class	= array();
+		$class[]  = 'card-subtitle';
+
+		$return = sprintf(
+				'%s',
+				do_shortcode( $wrap_before . $content . $wrap_after )
+		);
+
+		$return = $this->addclass( $search_tags, $return, $class );
+		$return = $this->adddata( $search_tags, $return, $atts['data'] );
+
+		return $return;
+	}
+
+    	/*--------------------------------------------------------------------------------------
+		 *
+		 * bs_card_img
+		 *
+		 *-------------------------------------------------------------------------------------*/
+		function bs_card_img( $save_atts, $content = null ) {
+            $save_atts = array_change_key_case( (array) $save_atts, CASE_LOWER );
+			$atts = shortcode_atts( array(
+                    // "top"
+                    // "bottom"
+					"class" => false,
+					"data"   => false
+			), $save_atts );
+
+			$class	= array();
+			if ($this->is_flag('top', $save_atts)) {
+			    $class[] = 'card-img-top';
+			} else if ($this->is_flag('bottom', $save_atts)) {
+			    $class[] = 'card-img-bottom';
+			} else {
+    			$class[] = 'card-img';
+			}
+
+            $search_tags = array('img');
+
+			$content = do_shortcode( $content );
+			$content = strip_tags($content, '<img><a>');
+
+			$return = sprintf(
+					'%s',
+					$content
+			);
+
+			$return = $this->addclass( $search_tags, $return, $class );
+			$return = $this->adddata( $search_tags, $return, $atts['data'] );
+
+			return $return;
+		}
+
+    	/*--------------------------------------------------------------------------------------
+		 *
+		 * bs_card_img_overlay
+		 *
+		 *-------------------------------------------------------------------------------------*/
+		function bs_card_img_overlay( $atts, $content = null ) {
+            $atts = array_change_key_case( (array) $atts, CASE_LOWER );
+			$atts = shortcode_atts( array(
+					"class"	=> false,
+					"data"	=> false
+			), $atts );
+
+			$class = array();
+			$class[] = 'card-img-overlay';
+
+    		$data_props = $this->parse_data_attributes( $atts['data'] );
+
+			return sprintf(
+					'<div%s%s>%s</div>',
+           			$this->class_output ( $class, $atts["class"] ),
+					$data_props,
+					do_shortcode( $content )
+			);
+		}
+
+    	/*--------------------------------------------------------------------------------------
+		 *
+		 * bs_card_header
+		 *
+		 *-------------------------------------------------------------------------------------*/
+		function bs_card_header( $atts, $content = null ) {
+            $atts = array_change_key_case( (array) $atts, CASE_LOWER );
+			$atts = shortcode_atts( array(
+					"class" => false,
+					"data"   => false
+			), $atts );
+
+			$search_tags = array('h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'div');
+
+			$wrap_before = '';
+			$wrap_after = '';
+
+            $id = (isset($GLOBALS['accordion'])) ? ' id="bs-heading' . $GLOBALS['accordion_card'] . '"' : '';
+  			$wrap_before .= ($this->testdom($content, $search_tags)) ? '' : '<div' . $id . '>';
+    		$wrap_after .= ($this->testdom($content, $search_tags)) ? '' : '</div>';
+
+   			$wrap_before .= (isset($GLOBALS['accordion'])) ? sprintf('<button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapse%1$s" aria-controls="collapse%1$s" aria-expanded="%2$s">', $GLOBALS['accordion_card'], $GLOBALS['accordion_card_show'] ? 'true' : 'false') : '';
+    		$wrap_after .= (isset($GLOBALS['accordion'])) ? '</button>' : '';
+
+			$class = array();
+			$class[] = 'card-header';
+            $class = array_merge($class, explode(' ', $atts['class']));
+
+			$return = sprintf(
+					'%s',
+					do_shortcode( $content )
+			);
+
+            $return = $wrap_before . $return . $wrap_after;
+			$return = $this->addclass( $search_tags, $return, $class );
+			$return = $this->adddata( $search_tags, $return, $atts['data'] );
+
+			return $return;
+		}
+
+    	/*--------------------------------------------------------------------------------------
+		 *
+		 * bs_card_footer
+		 *
+		 *-------------------------------------------------------------------------------------*/
+		function bs_card_footer( $atts, $content = null ) {
+            $atts = array_change_key_case( (array) $atts, CASE_LOWER );
+			$atts = shortcode_atts( array(
+					"class" => false,
+					"data"   => false
+			), $atts );
+
+			$search_tags = array('div');
+
+			$wrap_before = ($this->testdom($content, $search_tags)) ? '' : '<div>';
+			$wrap_after = ($this->testdom($content, $search_tags)) ? '' : '</div>';
+
+			$class = array();
+			$class[] = 'card-footer';
+
+			$return = sprintf(
+					'%s',
+					do_shortcode( $wrap_before . $content . $wrap_after )
+			);
+
+			$return = $this->addclass( $search_tags, $return, $class );
+			$return = $this->adddata( $search_tags, $return, $atts['data'] );
+
+			return $return;
+		}
+
+    	/*--------------------------------------------------------------------------------------
+		 *
+		 * bs_card_group
+		 *
+		 *-------------------------------------------------------------------------------------*/
+		function bs_card_group( $atts, $content = null ) {
+            $atts = array_change_key_case( (array) $atts, CASE_LOWER );
+			$atts = shortcode_atts( array(
+					"class" => false,
+					"data"   => false
+			), $atts );
+
+			$class = array();
+			$class[] = 'card-group';
+
+    		$data_props = $this->parse_data_attributes( $atts['data'] );
+
+			$return = sprintf(
+					'<div%s%s>%s</div>',
+           			$this->class_output ( $class, $atts["class"] ),
+					$data_props,
+					do_shortcode($content)
+			);
+
+			return $return;
+		}
+
+    	/*--------------------------------------------------------------------------------------
+		 *
+		 * bs_card_deck
+		 *
+		 *-------------------------------------------------------------------------------------*/
+		function bs_card_deck( $atts, $content = null ) {
+            $atts = array_change_key_case( (array) $atts, CASE_LOWER );
+			$atts = shortcode_atts( array(
+					"class" => false,
+					"data"   => false
+			), $atts );
+
+			$class = array();
+			$class[] = 'card-deck';
+
+    		$data_props = $this->parse_data_attributes( $atts['data'] );
+
+			$return = sprintf(
+					'<div%s%s>%s</div>',
+           			$this->class_output ( $class, $atts["class"] ),
+					$data_props,
+					do_shortcode($content)
+			);
+
+			return $return;
+		}
+
+    	/*--------------------------------------------------------------------------------------
+		 *
+		 * bs_card_columns
+		 *
+		 *-------------------------------------------------------------------------------------*/
+		function bs_card_columns( $atts, $content = null ) {
+            $atts = array_change_key_case( (array) $atts, CASE_LOWER );
+			$atts = shortcode_atts( array(
+					"class" => false,
+					"data"   => false
+			), $atts );
+
+			$class = array();
+			$class[] = 'card-columns';
+
+    		$data_props = $this->parse_data_attributes( $atts['data'] );
+
+			$return =sprintf(
+					'<div%s%s>%s</div>',
+           			$this->class_output ( $class, $atts["class"] ),
+					$data_props,
+					do_shortcode($content)
+			);
+
+			return $return;
+		}
+
 
 	/*--------------------------------------------------------------------------------------
 		*
@@ -747,26 +1031,29 @@ License: MIT
 		* @since 1.0
 		*
 		*-------------------------------------------------------------------------------------*/
-	function bs_alert( $atts, $content = null ) {
-
+	function bs_alert( $save_atts, $content = null ) {
+        $save_atts = array_change_key_case( (array) $save_atts, CASE_LOWER );
 		$atts = shortcode_atts( array(
+				// "dismissable"
+				// "fade"
 				"type"          => false,
-				"dismissable"   => false,
 				"class"         => false,
 				"data"          => false
-		), $atts );
+		), $save_atts );
 
 		$class = array();
 		$class[] = 'alert';
-		$class[] = ( $atts['type'] )                   ? 'alert-' . $atts['type'] : 'alert-success';
-		$class[] = ( $atts['dismissable'] == 'true' )  ? 'alert-dismissable' : '';
+		$class[] = ( $atts['type'] )                             ? 'alert-' . $atts['type'] : 'alert-primary';
+		$class[] = ( $this->is_flag('dismissable', $save_atts) ) ? 'alert-dismissable' : '';
+		$class[] = ( $this->is_flag('fade', $save_atts) )        ? 'fade' : '';
+		$class[] = ( $this->is_flag('fade', $save_atts) )        ? 'show' : '';
 
-		$dismissable = ( $atts['dismissable'] ) ? '<button type="button" class="close" data-dismiss="alert" aria-label="Close">&times;</button>' : '';
+		$dismissable = ( $this->is_flag('dismissable', $save_atts) ) ? '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' : '';
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
 		return sprintf(
-			'<div%s%s>%s%s</div>',
+			'<div role="alert"%s%s>%s%s</div>',
 			$this->class_output ( $class, $atts["class"] ),
 			$data_props,
 			$dismissable,
@@ -780,19 +1067,16 @@ License: MIT
 		*
 		*
 		*-------------------------------------------------------------------------------------*/
-	function bs_progress( $atts, $content = null ) {
-
+	function bs_progress( $save_atts, $content = null ) {
+        $save_atts = array_change_key_case( (array) $save_atts, CASE_LOWER );
 		$atts = shortcode_atts( array(
-				"striped"   => false,
-				"animated"  => false,
 				"class"     => false,
 				"data"      => false
-		), $atts );
+		), $save_atts );
 
 		$class = array();
 		$class[] = 'progress';
-		$class[] = ( $atts['striped']  == 'true' )  ? 'progress-striped' : '';
-		$class[] = ( $atts['animated']  == 'true' ) ? 'progress-bar-animated' : '';
+
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
@@ -810,28 +1094,32 @@ License: MIT
 		*
 		*
 		*-------------------------------------------------------------------------------------*/
-	function bs_progress_bar( $atts, $content = null ) {
-
+	function bs_progress_bar( $save_atts, $content = null ) {
+        $save_atts = array_change_key_case( (array) $save_atts, CASE_LOWER );
 		$atts = shortcode_atts( array(
-					"type"      => false,
-					"percent"   => false,
-					"label"     => false,
-					"class"     => false,
-					"data"      => false
-		), $atts );
+				// "striped"
+				// "animated"
+				// "label"
+				"type"      => false,
+				"percent"   => false,
+				"class"     => false,
+				"data"      => false
+		), $save_atts );
 
 		$class = array();
 		$class[] = 'progress-bar';
 		$class[] = ( $atts['type'] ) ? 'bg-' . $atts['type'] : '';
+		$class[] = ( $this->is_flag('striped', $save_atts) )  ? 'progress-bar-striped' : '';
+		$class[] = ( $this->is_flag('animated', $save_atts) ) ? 'progress-bar-animated' : '';
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
 		return sprintf(
 			'<div%s role="progressbar" %s%s>%s</div>',
 			$this->class_output ( $class, $atts["class"] ),
-			( $atts['percent'] )      ? ' aria-value="' . (int) $atts['percent'] . '" aria-valuemin="0" aria-valuemax="100" style="width: ' . (int) $atts['percent'] . '%;"' : '',
+			( $atts['percent'] ) ? ' aria-value="' . (int) $atts['percent'] . '" aria-valuemin="0" aria-valuemax="100" style="width: ' . (int) $atts['percent'] . '%;"' : '',
 			$data_props,
-			( $atts['percent'] )      ? sprintf('<span%s>%s</span>', ( !$atts['label'] ) ? ' class="sr-only"' : '', (int) $atts['percent'] . '% Complete') : ''
+			( $atts['percent'] ) ? sprintf('<span%s>%s</span>', ( !$this->is_flag('label', $save_atts) ) ? ' class="sr-only"' : '', (int) $atts['percent'] . '%') : ''
 		);
 	}
 
@@ -843,27 +1131,27 @@ License: MIT
 		* @since 1.0
 		*
 		*-------------------------------------------------------------------------------------*/
-	function bs_code( $atts, $content = null ) {
-
+	function bs_code( $save_atts, $content = null ) {
+        $save_atts = array_change_key_case( (array) $save_atts, CASE_LOWER );
 		$atts = shortcode_atts( array(
-					"inline"      => false,
-					"scrollable"  => false,
+					// "inline"
+					// "scrollable"
 					"class"       => false,
 					"data"        => false
-		), $atts );
+		), $save_atts );
 
 		$class = array();
 		$class[] = '';
-		$class[] = ( $atts['scrollable']   == 'true' )  ? 'pre-scrollable' : '';
+		$class[] = ( $this->is_flag('scrollable', $save_atts) ) ? 'pre-scrollable' : '';
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
 		return sprintf(
 			'<%1$s%2$s%3$s>%4$s</%1$s>',
-			( $atts['inline'] ) ? 'code' : 'pre',
+			( $this->is_flag('inline', $save_atts) ) ? 'code' : 'pre',
 			$this->class_output ( $class, $atts["class"] ),
 			$data_props,
-			do_shortcode( $content )
+			$content
 		);
 	}
 
@@ -875,8 +1163,11 @@ License: MIT
 		* @since 1.0
 		*
 		*-------------------------------------------------------------------------------------*/
+	function bs_row_outer( $atts, $content = null ) {
+	    return($this->bs_row( $atts, $content ));
+	}
 	function bs_row( $atts, $content = null ) {
-
+        $atts = array_change_key_case( (array) $atts, CASE_LOWER );
 		$atts = shortcode_atts( array(
 				"class"  => false,
 				"data"   => false
@@ -902,24 +1193,22 @@ License: MIT
 		* @author Simon Yeldon
 		* @since 1.0
 		*-------------------------------------------------------------------------------------*/
+	function bs_column_outer( $atts, $content = null ) {
+	    return($this->bs_column( $atts, $content ));
+	}
 	function bs_column( $atts, $content = null ) {
-
+        $atts = array_change_key_case( (array) $atts, CASE_LOWER );
 		$atts = shortcode_atts( array(
 				"xl"          => false,
 				"lg"          => false,
 				"md"          => false,
 				"sm"          => false,
 				"xs"          => false,
-				"offset_xl"   => false,
-				"offset_lg"   => false,
-				"offset_md"   => false,
-				"offset_sm"   => false,
-				"offset_xs"   => false,
-				"order_xl"    => false,
-				"order_lg"    => false,
-				"order_md"    => false,
-				"order_sm"    => false,
-				"order_xs"    => false,
+				"offset-xl"   => false,
+				"offset-lg"   => false,
+				"offset-md"   => false,
+				"offset-sm"   => false,
+				"offset-xs"   => false,
 				"class"       => false,
 				"data"        => false
 		), $atts );
@@ -931,16 +1220,11 @@ License: MIT
 		$class[] = ( $atts['md'] )                                      ? 'col-md-' . $atts['md'] : '';
 		$class[] = ( $atts['sm'] )                                      ? 'col-sm-' . $atts['sm'] : '';
 		$class[] = ( $atts['xs'] )                                      ? 'col-' . $atts['xs'] : '';
-		$class[] = ( $atts['offset_xl'] || $atts['offset_xl'] === "0" ) ? 'offset-xl-' . $atts['offset_xl'] : '';
-		$class[] = ( $atts['offset_lg'] || $atts['offset_lg'] === "0" ) ? 'offset-lg-' . $atts['offset_lg'] : '';
-		$class[] = ( $atts['offset_md'] || $atts['offset_md'] === "0" ) ? 'offset-md-' . $atts['offset_md'] : '';
-		$class[] = ( $atts['offset_sm'] || $atts['offset_sm'] === "0" ) ? 'offset-sm-' . $atts['offset_sm'] : '';
-		$class[] = ( $atts['offset_xs'] || $atts['offset_xs'] === "0" ) ? 'offset-' . $atts['offset_xs'] : '';
-		$class[] = ( $atts['order_xl']  || $atts['order_xl']  === "0" ) ? 'order-xl-' . $atts['pull_xl'] : '';
-		$class[] = ( $atts['order_lg']  || $atts['order_lg']  === "0" ) ? 'order-lg-' . $atts['pull_lg'] : '';
-		$class[] = ( $atts['order_md']  || $atts['order_md']  === "0" ) ? 'order-md-' . $atts['pull_md'] : '';
-		$class[] = ( $atts['order_sm']  || $atts['order_sm']  === "0" ) ? 'order-sm-' . $atts['pull_sm'] : '';
-		$class[] = ( $atts['order_xs']  || $atts['order_xs']  === "0" ) ? 'order-' . $atts['pull_xs'] : '';
+		$class[] = ( $atts['offset-xl'] || $atts['offset-xl'] === "0" ) ? 'offset-xl-' . $atts['offset-xl'] : '';
+		$class[] = ( $atts['offset-lg'] || $atts['offset-lg'] === "0" ) ? 'offset-lg-' . $atts['offset-lg'] : '';
+		$class[] = ( $atts['offset-md'] || $atts['offset-md'] === "0" ) ? 'offset-md-' . $atts['offset-md'] : '';
+		$class[] = ( $atts['offset-sm'] || $atts['offset-sm'] === "0" ) ? 'offset-sm-' . $atts['offset-sm'] : '';
+		$class[] = ( $atts['offset-xs'] || $atts['offset-xs'] === "0" ) ? 'offset-' . $atts['offset-xs'] : '';
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
@@ -959,70 +1243,24 @@ License: MIT
 		* @author Uwe Jacobs
 		* @since 4.5.0
 		*-------------------------------------------------------------------------------------*/
-	function bs_flex( $atts, $content = null ) {
-
+	function bs_flex( $save_atts, $content = null ) {
+        $save_atts = array_change_key_case( (array) $save_atts, CASE_LOWER );
 		$atts = shortcode_atts( array(
-				"size"                  => false,
-				"inline"                => false,
-				"row"                   => false,
-				"row-reverse"           => false,
-				"column"                => false,
-				"column-reverse"        => false,
+				// "inline"
+				"direction"             => false,
+				"justify"               => false,
+				"align"                 => false,
 				"wrap"                  => false,
-				"no-wrap"               => false,
-				"wrap-reverse"          => false,
 				"class"                 => false,
 				"data"                  => false
-		), $atts );
+		), $save_atts );
 
 		$class = array();
-		$class_str  = 'd';
-		$class_str .= ( $atts['size']   && $atts['size']   !=  "xs" )  ? '-' . $atts['size'] : '';
-		$class_str .= ( $atts['inline'] || $atts['inline'] === "1"  )  ? '-inline' : '';
-		$class_str .= '-flex';
-        $class[] = $class_str;
-		if ($atts['row']) {
-            $opts = explode(' ', $atts['row']);
-            foreach($opts as $opt) {
-		        $class[] = 'flex' . ( $opt == "xs" ? '' : $opt ) . '-row';
-            }
-		}
-		if ($atts['row-reverse']) {
-            $opts = explode(' ', $atts['row-reverse']);
-            foreach($opts as $opt) {
-		        $class[] = 'flex' . ( $opt == "xs" ? '' : '-' . $opt ) . '-row-reverse';
-            }
-		}
-		if ($atts['column']) {
-            $opts = explode(' ', $atts['column']);
-            foreach($opts as $opt) {
-		        $class[] = 'flex' . ( $opt == "xs" ? '' : '-' . $opt ) . '-column';
-            }
-		}
-		if ($atts['column-reverse']) {
-            $opts = explode(' ', $atts['column-reverse']);
-            foreach($opts as $opt) {
-		        $class[] = 'flex' . ( $opt == "xs" ? '' : '-' . $opt ) . '-column-reverse';
-            }
-		}
-		if ($atts['wrap']) {
-            $opts = explode(' ', $atts['wrap']);
-            foreach($opts as $opt) {
-		        $class[] = 'flex' . ( $opt == "xs" ? '' : '-' . $opt ) . '-wrap';
-            }
-		}
-		if ($atts['no-wrap']) {
-            $opts = explode(' ', $atts['no-wrap']);
-            foreach($opts as $opt) {
-		        $class[] = 'flex' . ( $opt == "xs" ? '' : '-' . $opt ) . '-nowrap';
-            }
-		}
-		if ($atts['wrap-reverse']) {
-            $opts = explode(' ', $atts['wrap-reverse']);
-            foreach($opts as $opt) {
-		        $class[] = 'flex' . ( $opt == "xs" ? '' : '-' . $opt ) . '-wrap-reverse';
-            }
-		}
+		$class[] .= 'd' . ( $this->is_flag('inline', $save_atts)     ? '-inline' : '' ) . '-flex';
+        $class[] .= ( $atts['direction'] )                           ? 'flex-' . $atts['direction'] : '';
+        $class[] .= ( $atts['justify'] )                             ? 'justify-content-' . $atts['justify'] : '';
+        $class[] .= ( $atts['align'] )                               ? 'align-content-' . $atts['align'] : '';
+        $class[] .= ( $atts['wrap'] ) ? ( $atts['wrap'] == "reverse" ? 'flex-wrap-reverse' : 'flex-wrap' ) : 'flex-nowrap';
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
@@ -1042,8 +1280,9 @@ License: MIT
 		* @since 4.5.0
 		*-------------------------------------------------------------------------------------*/
 	function bs_flex_item( $atts, $content = null ) {
-
+        $atts = array_change_key_case( (array) $atts, CASE_LOWER );
 		$atts = shortcode_atts( array(
+				"align-self"          => false,
 				"fill"                => false,
 				"grow"                => false,
 				"no-grow"             => false,
@@ -1096,122 +1335,97 @@ License: MIT
 		);
 	}
 
-	/*--------------------------------------------------------------------------------------
-		*
-		* bs_list_group
-		*
-		* @author M. W. Delaney
-		*
-		*-------------------------------------------------------------------------------------*/
-	function bs_list_group( $atts, $content = null ) {
+		/**
+		 * List Group shortcode
+		 * @param  [type] $atts    shortcode attributes
+		 * @param  string $content shortcode contents
+		 * @return string
+		 */
+		function bs_list_group( $save_atts, $content = null ) {
+            $save_atts = array_change_key_case( (array) $save_atts, CASE_LOWER );
+			$atts = shortcode_atts( array(
+		        // "flush"
+		        // "media"
+                // "linked"
+				"class"			=> false,
+				"data"			=> false
+			), $save_atts );
 
-		$atts = shortcode_atts( array(
-				"linked" => false,
-				"class"  => false,
-				"data"   => false
-		), $atts );
+			$search_tags	= array('ul', 'div');
+			$wrap_before = ($this->testdom($content, $search_tags)) ? '' : ($this->is_flag('linked', $save_atts)) ? '<div>'  : '<ul>';
+			$wrap_after  = ($this->testdom($content, $search_tags)) ? '' : ($this->is_flag('linked', $save_atts)) ? '</div>' : '</ul>';
 
-		$class = array();
-		$class[] = 'list-group';
+			$class   = array();
+			$class[] = 'list-group';
+			$class[] = ($this->is_flag('flush', $save_atts)) ? 'list-group-flush' : '';
+			$class[] = ($this->is_flag('media', $save_atts)) ? 'list-unstyled' : '';
 
-		$data_props = $this->parse_data_attributes( $atts['data'] );
+			$li_class	= array();
+			$li_class[]	= ($this->is_flag('media', $save_atts)) ? 'media' : 'list-group-item';
+			$li_search_tags	= array('li');
 
-		return sprintf(
-			'<%1$s%2$s%3$s>%4$s</%1$s>',
-			( $atts['linked'] == 'true' ) ? 'div' : 'ul',
-			$this->class_output ( $class, $atts["class"] ),
-			$data_props,
-			do_shortcode( $content )
-		);
-	}
+			$a_class	= array();
+			$a_class[]	= 'list-group-item';
+			$a_class[]	= 'list-group-item-action';
+			$a_search_tags	= array('a');
 
-	/*--------------------------------------------------------------------------------------
-		*
-		* bs_list_group_item
-		*
-		* @author M. W. Delaney
-		*
-		*-------------------------------------------------------------------------------------*/
-	function bs_list_group_item( $atts, $content = null ) {
+			$content = do_shortcode( $wrap_before . $content . $wrap_after );
 
-		$atts = shortcode_atts( array(
-				"link"    => '#',
-				"type"    => false,
-				"active"  => false,
-				"target"  => false,
-				"class"   => false,
-				"data"    => false
-		), $atts );
+			$return = sprintf(
+					'%s',
+					$content
+			);
 
-		$class = array();
-		$class[] = 'list-group-item';
-		$class[] = ( $atts['type'] )                 ? 'list-group-item-' . $atts['type'] : '';
-		$class[] = ( $atts['active']   == 'true' )   ? 'active' : '';
+			$return = $this->addclass( $search_tags, $return, $class );
+			$return = $this->addclass( $li_search_tags, $return, $li_class );
+			$return = $this->addclass( $a_search_tags, $return, $a_class );
+			$return = $this->adddata( $search_tags, $return, $atts['data'] );
+			$return = $this->striptagfromdom( 'br', $return );
 
-		$data_props = $this->parse_data_attributes( $atts['data'] );
+			return $return;
+		}
 
-		return sprintf(
-			'<%1$s %2$s %3$s%4$s%5$s>%6$s</%1$s>',
-			( $atts['link'] )     ? 'a' : 'li',
-			( $atts['link'] )     ? 'href="' . esc_url( $atts['link'] ) . '"' : '',
-			( $atts['target'] )   ? sprintf( ' target="%s"', esc_attr( $atts['target'] ) ) : '',
-			$this->class_output ( $class, $atts["class"] ),
-			$data_props,
-			do_shortcode( $content )
-		);
-	}
 
-	/*--------------------------------------------------------------------------------------
-		*
-		* bs_list_group_item_heading
-		*
-		*
-		*-------------------------------------------------------------------------------------*/
-	function bs_list_group_item_heading( $atts, $content = null ) {
+		/**
+		 * List Group type shortcode
+		 * @param  [type] $atts    shortcode attributes
+		 * @param  string $content shortcode contents
+		 * @return string
+		 */
+		function bs_list_group_item( $save_atts, $content = null ) {
+            $save_atts = array_change_key_case( (array) $save_atts, CASE_LOWER );
+			$atts = shortcode_atts( array(
+                // "active"
+                // "disabled"
+				"type"			=> false,
+				"class"			=> false,
+				"data"			=> false
+			), $save_atts );
 
-		$atts = shortcode_atts( array(
-				"class"  => false,
-				"data"   => false
-		), $atts );
+			$search_tags = array('a', 'button', 'li');
 
-		$class = array();
-		$class[] = 'list-group-item-heading';
+			$class   = array();
+			$class[] = 'list-group-item';
+			$class[] = ( $atts['type'] ) ? 'list-group-item-' . $atts['type'] : '';
+    		$class[] = ($this->is_flag('active', $save_atts))   ? 'active' : '';
+    		$class[] = ($this->is_flag('disabled', $save_atts)) ? 'disabled ' : '';
 
-		$data_props = $this->parse_data_attributes( $atts['data'] );
+			$content = do_shortcode( $content );
 
-		return sprintf(
-			'<h4%s%s>%s</h4>',
-			$this->class_output ( $class, $atts["class"] ),
-			$data_props,
-			do_shortcode( $content )
-		);
-	}
+			$return = sprintf(
+					'%s%s%s',
+                    ($this->testdom($content, $search_tags)) ? '' : '<li>',
+					$content,
+                    ($this->testdom($content, $search_tags)) ? '' : '</li>'
+			);
 
-	/*--------------------------------------------------------------------------------------
-		*
-		* bs_list_group_item_text
-		*
-		*
-		*-------------------------------------------------------------------------------------*/
-	function bs_list_group_item_text( $atts, $content = null ) {
+			$return = $this->addclass( $search_tags, $return, $class );
+			$return = $this->adddata( $search_tags, $return, $atts['data'] );
+			$return = $this->striptagfromdom( 'br', $return );
 
-		$atts = shortcode_atts( array(
-				"class"  => false,
-				"data"   => false
-		), $atts );
+			return $return;
+    }
 
-		$class = array();
-		$class[] = 'list-group-item-text';
-
-		$data_props = $this->parse_data_attributes( $atts['data'] );
-
-		return sprintf(
-			'<p%s%s>%s</p>',
-			$this->class_output ( $class, $atts["class"] ),
-			$data_props,
-			do_shortcode( $content )
-		);
-	}
 
 	/*--------------------------------------------------------------------------------------
 		*
@@ -1220,7 +1434,7 @@ License: MIT
 		*
 		*-------------------------------------------------------------------------------------*/
 	function bs_breadcrumb( $atts, $content = null ) {
-
+        $atts = array_change_key_case( (array) $atts, CASE_LOWER );
 		$atts = shortcode_atts( array(
 				"class"  => false,
 				"data"   => false
@@ -1246,24 +1460,25 @@ License: MIT
 		* @author M. W. Delaney
 		*
 		*-------------------------------------------------------------------------------------*/
-	function bs_breadcrumb_item( $atts, $content = null ) {
-
+	function bs_breadcrumb_item( $save_atts, $content = null ) {
+        $save_atts = array_change_key_case( (array) $save_atts, CASE_LOWER );
 		$atts = shortcode_atts( array(
+				// "active"
 				"link" => '#',
 				"class"  => false,
-				"active" => false,
 				"data" => false
-		), $atts );
+		), $save_atts );
 
 		$class = array();
 
         $li_class = array();
 		$li_class[] = 'breadcrumb-item';
-		$li_class[] = ( $atts['active'] == 'true' )  ? 'active' : '';
+		$li_class[] = ($this->is_flag('active', $save_atts)) ? 'active' : '';
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
-		
+
         $content = do_shortcode( $content );
+
 		$link = sprintf(
 			'<a href="%s"%s%s>%s</a>',
 			esc_url( $atts['link'] ),
@@ -1275,7 +1490,7 @@ License: MIT
 		return sprintf(
 			'<li%s>%s</li>',
 			$this->class_output ( $li_class ),
-		    ( $atts['active'] == 'true' ) ? $content : $link
+		    ( $this->is_flag('active', $save_atts) ) ? $content : $link
 		);
 	}
 
@@ -1287,17 +1502,17 @@ License: MIT
 		* @since 1.0
 		*
 		*-------------------------------------------------------------------------------------*/
-	function bs_badge( $atts, $content = null ) {
-
+	function bs_badge( $save_atts, $content = null ) {
+        $save_atts = array_change_key_case( (array) $save_atts, CASE_LOWER );
 		$atts = shortcode_atts( array(
-				"right"   => false,
+				// "right"
 				"class"   => false,
 				"data"    => false
-		), $atts );
+		), $save_atts );
 
 		$class = array();
 		$class[] = 'badge';
-		$class[] = ( $atts['right']   == 'true' ) ? 'pull-right' : '';
+		$class[] = ( $this->is_flag('right', $save_atts) ) ? 'float-right' : '';
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
@@ -1318,7 +1533,7 @@ License: MIT
 		*
 		*-------------------------------------------------------------------------------------*/
 	function bs_icon( $atts, $content = null ) {
-
+        $atts = array_change_key_case( (array) $atts, CASE_LOWER );
 		$atts = shortcode_atts( array(
 				"prefix" => false,
 				"type"   => false,
@@ -1349,7 +1564,7 @@ License: MIT
 		*
 		*-------------------------------------------------------------------------------------*/
 	function bs_icon_stack( $atts, $content = null ) {
-
+        $atts = array_change_key_case( (array) $atts, CASE_LOWER );
 		$atts = shortcode_atts( array(
 				"class"  => false,
 				"data"   => false
@@ -1377,488 +1592,152 @@ License: MIT
 		* @since 1.0
 		*
 		*-------------------------------------------------------------------------------------*/
-	function bs_table_wrap( $atts, $content = null ) {
-
+	function bs_table_wrap( $save_atts, $content = null ) {
+        $save_atts = array_change_key_case( (array) $save_atts, CASE_LOWER );
 		$atts = shortcode_atts( array(
-				"bordered"   => false,
-				"striped"    => false,
-				"hover"      => false,
-				"condensed"  => false,
-				"responsive" => false,
+				// "bordered"
+				// "striped"
+				// "hover"
+				// "condensed"
+				// "responsive"
 				"class"      => false,
 				"data"       => false
-		), $atts );
+		), $save_atts );
 
-		$class  = 'table';
-		$class .= ( $atts['bordered']  == 'true' ) ? ' table-bordered' : '';
-		$class .= ( $atts['striped']   == 'true' ) ? ' table-striped' : '';
-		$class .= ( $atts['hover']     == 'true' ) ? ' table-hover' : '';
-		$class .= ( $atts['condensed'] == 'true' ) ? ' table-sm' : '';
-		$class .= ( $atts['class'] )               ? ' ' . $atts['class'] : '';
+		$class   = array();
+		$class[] = 'table';
+        $class[] = $this->is_flag('bordered', $save_atts)  ?  'table-bordered' : '';
+        $class[] = $this->is_flag('striped', $save_atts)   ?  'table-striped' : '';
+        $class[] = $this->is_flag('hover', $save_atts)     ?  'table-hover' : '';
+        $class[] = $this->is_flag('condensed', $save_atts) ?  'table-sm' : '';
+		$class[] = ( $atts['class'] )                      ?   $atts['class'] : '';
 
 		$tag = array('table');
-		$content = do_shortcode($content);
-		$return .= $this->scrape_dom_element($tag, $content, $class, '', $atts['data']);
-		
-		$return = ( $atts['responsive'] ) ? '<div class="table-responsive">' . $return . '</div>' : $return;
+
+		$return = do_shortcode($content);
+
+		$return = ( $this->is_flag('responsive', $save_atts) ) ? '<div class="table-responsive">' . $return . '</div>' : $return;
+
+		$return = $this->addclass( $tag, $return, $class );
+		$return = $this->adddata( $tag, $return, $atts['data'] );
+
 		return $return;
 	}
 
 
-	/*--------------------------------------------------------------------------------------
-		*
-		* bs_tabs
-		*
-		* @author Filip Stefansson
-		* @since 1.0
-		* Modified by TwItCh twitch@designweapon.com
-		* Now acts a whole nav/tab/pill shortcode solution!
-		*-------------------------------------------------------------------------------------*/
-	function bs_tabs( $atts, $content = null ) {
 
-		if( isset( $GLOBALS['tabs_count'] ) )
-			$GLOBALS['tabs_count']++;
-		else
-			$GLOBALS['tabs_count'] = 0;
+		/**
+		 * Carousel shortcode
+		 * @param  [type] $atts    shortcode attributes
+		 * @param  string $content shortcode contents
+		 * @return string
+		 */
+		function bs_carousel( $save_atts, $content = null ) {
+            $save_atts = array_change_key_case( (array) $save_atts, CASE_LOWER );
+			$atts = shortcode_atts( array(
+			    // "caption" ???
+			    // "controls"
+			    // "indicators"
+				"interval" => false,
+				"pause"    => 'hover',
+				"wrap"     => 'true',
+				"class"    => false,
+				"data"     => false
+			), $save_atts );
 
-		$GLOBALS['tabs_default_count'] = 0;
+			if( isset($GLOBALS['carousel_count']) )
+				$GLOBALS['carousel_count']++;
+			else
+				$GLOBALS['carousel_count'] = 0;
 
-		$atts = apply_filters('bs_tabs_atts',$atts);
+			$id = 'bs4-carousel-'. $GLOBALS['carousel_count'];
 
-		$atts = shortcode_atts( array(
-				"type"    => false,
-				"class"   => false,
-				"data"    => false,
-				"name"    => false,
-		), $atts );
+			$class	= array();
+			$class[]  = 'carousel';
+			$class[]  = 'slide';
 
-        $ul_class = array();
-		$ul_class[] = 'nav';
-		$ul_class[] = ( $atts['type'] )     ? 'nav-' . $atts['type'] : 'nav-tabs';
+			$item_class	= array();
+			//$item_class[]  = 'carousel-item';
+			//$item_class[]  = 'img-fluid';
 
-        $div_class = array();
-        $div_class[] = 'tab-content';
+			$active_class	= array();
+			$active_class[]  = 'active';
 
-		// If user defines name of group, use that for ID for tab history purposes
-		if(isset($atts['name'])) {
-			$id = $atts['name'];
-		} else {
-			$id = 'custom-tabs-' . $GLOBALS['tabs_count'];
-		}
+			$caption_class = array();
+			$caption_class[] = 'carousel-caption';
 
-		$data_props = $this->parse_data_attributes( $atts['data'] );
+			$item_tags = array('figure', 'img');
+			$fallback_tag = 'div';
 
-		$atts_map = bs_attribute_map( $content );
+			$indicator_tags = array('li');
 
-		// Extract the tab titles for use in the tab widget.
-		if ( $atts_map ) {
-			$tabs = array();
-			$GLOBALS['tabs_default_active'] = true;
-			foreach( $atts_map as $check ) {
-					if( !empty($check["tab"]["active"]) ) {
-							$GLOBALS['tabs_default_active'] = false;
-					}
-			}
-			$i = 0;
-			foreach( $atts_map as $tab ) {
+			$caption_tags = array('figcaption');
 
-                $li_class = array();
-				$li_class[] ='nav-item';
-				$li_class[] = ( !empty($tab["tab"]["active"]) || ($GLOBALS['tabs_default_active'] && $i == 0) ) ? 'active' : '';
-				$li_class[] = ( !empty($tab["tab"]["class"]) )                                                  ? esc_attr($tab["tab"]["class"]) : '';
+			$content = do_shortcode( $content );
 
-				if(!isset($tab["tab"]["link"])) {
-					$tab_id = 'custom-tab-' . $GLOBALS['tabs_count'] . '-' . md5( $tab["tab"]["title"] );
-				} else {
-					$tab_id = $tab["tab"]["link"];
-				}
+            $controls = '';
+            $controls .= '<a class="carousel-control-prev" href="' . esc_url( '#' . $id ) . '" role="button" data-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="sr-only">Previous</span></a>';
+            $controls .= '<a class="carousel-control-next" href="' . esc_url( '#' . $id ) . '" role="button" data-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="sr-only">Next</span></a>';
 
-				$tabs[] = sprintf(
-					'<li%s><a class="nav-link" href="#%s" data-toggle="tab" >%s</a></li>',
-        			$this->class_output ( $li_class ),
-					sanitize_html_class($tab_id),
-					$tab["tab"]["title"]
-				);
-				$i++;
-			}
-		}
-		$output = sprintf(
-			'<ul%s id="%s"%s>%s</ul><div%s>%s</div>',
-			$this->class_output ( $ul_class, $atts["class"] ),
-			sanitize_html_class( $id ),
-			$data_props,
-			( $tabs )  ? implode( $tabs ) : '',
-			$this->class_output ( $div_class ),
-			do_shortcode( $content )
-		);
-
-		return apply_filters('bs_tabs', $output);
-	}
-
-	/*--------------------------------------------------------------------------------------
-		*
-		* bs_tab
-		*
-		* @author Filip Stefansson
-		* @since 1.0
-		*
-		*-------------------------------------------------------------------------------------*/
-	function bs_tab( $atts, $content = null ) {
-
-		$atts = shortcode_atts( array(
-				"title"   => false,
-				"active"  => false,
-				"fade"    => false,
-				"class"   => false,
-				"data"    => false,
-				"link"    => false
-		), $atts );
-
-		if( $GLOBALS['tabs_default_active'] && $GLOBALS['tabs_default_count'] == 0 ) {
-				$atts['active'] = true;
-		}
-		$GLOBALS['tabs_default_count']++;
-
-        $class = array();
-		$class[] = 'tab-pane';
-		$class[] = ( $atts['fade']   == 'true' )                            ? 'fade' : '';
-		$class[] = ( $atts['active'] == 'true' )                            ? 'active' : '';
-		$class[] = ( $atts['active'] == 'true' && $atts['fade'] == 'true' ) ? 'in' : '';
-
-		if(!isset($atts['link']) || $atts['link'] == NULL) {
-			$id = 'custom-tab-' . $GLOBALS['tabs_count'] . '-' . md5( $atts['title'] );
-		} else {
-			$id = $atts['link'];
-		}
-		$data_props = $this->parse_data_attributes( $atts['data'] );
-
-		return sprintf(
-			'<div id="%s"%s%s>%s</div>',
-			sanitize_html_class($id),
-			$this->class_output ( $class, $atts["class"] ),
-			$data_props,
-			do_shortcode( $content )
-		);
-	}
-
-
-	/*--------------------------------------------------------------------------------------
-		*
-		* bs_collapsibles
-		*
-		* @author Filip Stefansson
-		* @since 1.0
-		*
-		*-------------------------------------------------------------------------------------*/
-	function bs_collapsibles( $atts, $content = null ) {
-
-		if( isset($GLOBALS['collapsibles_count']) )
-			$GLOBALS['collapsibles_count']++;
-		else
-			$GLOBALS['collapsibles_count'] = 0;
-
-		$atts = shortcode_atts( array(
-				"class"  => false,
-				"data"   => false
-		), $atts );
-
-		$class = array();
-
-		$id = 'custom-collapse-'. $GLOBALS['collapsibles_count'];
-
-		$data_props = $this->parse_data_attributes( $atts['data'] );
-
-		return sprintf(
-			'<div%s id="%s"%s>%s</div>',
-			$this->class_output ( $class, $atts["class"] ),
-			esc_attr($id),
-			$data_props,
-			do_shortcode( $content )
-		);
-
-	}
-
-
-	/*--------------------------------------------------------------------------------------
-		*
-		* bs_collapse
-		*
-		* @author Filip Stefansson
-		* @since 1.0
-		*
-		*-------------------------------------------------------------------------------------*/
-	function bs_collapse( $atts, $content = null ) {
-
-		if( isset($GLOBALS['single_collapse_count']) )
-			$GLOBALS['single_collapse_count']++;
-		else
-			$GLOBALS['single_collapse_count'] = 0;
-
-		$atts = shortcode_atts( array(
-				"title"   => false,
-				"type"    => false,
-				"active"  => false,
-				"class"   => false,
-				"lclass"  => false,
-				"bclass"  => false,
-				"hclass"  => false,
-				"data"    => false
-		), $atts );
-
-        $card_class = array();
-		$card_class[] = 'card';
-		$card_class[] = ( $atts['type'] )     ?  'bg-' . $atts['type'] : '';
-
-        $collapse_class = array();
-		$collapse_class[] = 'collapse';
-		$collapse_class[] = ( $atts['active'] == 'true' )  ? 'show' : '';
-
-        $a_class = array();
-		$a_class[] = 'card-link';
-
-		$b_class = array();
-		$b_class[] = 'card-body';
-
-		$h_class = array();
-		$h_class[] = 'card-header';
-
-		$parent = isset( $GLOBALS['collapsibles_count'] ) ? 'custom-collapse-' . $GLOBALS['collapsibles_count'] : 'single-collapse';
-		$current_collapse = $parent . '-' . $GLOBALS['single_collapse_count'];
-
-		$data_props = $this->parse_data_attributes( $atts['data'] );
-
-		return sprintf(
-			'<div%1$s%2$s>
-				<div%10$s>
-					<h4 class="card-title">
-						<a%3$s data-toggle="collapse" href="#%5$s">%6$s</a>
-					</h4>
-				</div>
-				<div id="%5$s"%7$s%4$s>
-					<div%9$s>%8$s</div>
-				</div>
-			</div>',
-			$this->class_output ( $card_class, $atts["class"] ),
-			$data_props,
-			$this->class_output ( $a_class, $atts["lclass"] ),
-			( $parent && $parent != 'single-collapse' )       ? ' data-parent="#' . $parent . '"' : '',
-			$current_collapse,
-			$atts['title'],
-			$this->class_output ( $collapse_class ),
-			do_shortcode( $content ),
-			$this->class_output ( $b_class, $atts["bclass"] ),
-			$this->class_output ( $h_class, $atts["hclass"] )
-		);
-	}
-
-
-	/*--------------------------------------------------------------------------------------
-		*
-		* bs_carousel
-		*
-		* @since 1.0
-		*
-		*-------------------------------------------------------------------------------------*/
-	function bs_carousel( $atts, $content = null ) {
-
-		if( isset($GLOBALS['carousel_count']) )
-			$GLOBALS['carousel_count']++;
-		else
-			$GLOBALS['carousel_count'] = 0;
-
-		$GLOBALS['carousel_default_count'] = 0;
-
-		$atts = shortcode_atts( array(
-				"interval"  => false,
-				"pause"     => 'hover',
-				"wrap"      => false,
-				"indicator" => 'true',
-				"arrows"    => 'true',
-				"class"     => false,
-				"data"      => false,
-		), $atts );
-
-        $div_class = array();
-		$div_class[] = 'carousel slide';
-
-        $inner_class = array();
-		$inner_class[] = 'carousel-inner';
-
-		$id = 'custom-carousel-'. $GLOBALS['carousel_count'];
-
-		$data_props = $this->parse_data_attributes( $atts['data'] );
-
-		$atts_map = bs_attribute_map( $content );
-
-		// Extract the slide titles for use in the carousel widget.
-		if ( ( $atts['indicator'] && $atts['indicator'] == "true" ) && $atts_map ) {
 			$indicators = array();
-			$GLOBALS['carousel_default_active'] = true;
-			foreach( $atts_map as $check ) {
-				if( !empty($check["carousel-item"]["active"]) ) {
-					$GLOBALS['carousel_default_active'] = false;
-				}
-			}
 			$i = 0;
-			foreach( $atts_map as $slide ) {
+            $cnt = $this->counttags('carousel-item', $content);
+			while( $i < $cnt ) {
 				$indicators[] = sprintf(
-					'<li%s data-target="%s" data-slide-to="%s"></li>',
-					( !empty($slide["carousel-item"]["active"]) || ($GLOBALS['carousel_default_active'] && $i == 0) ) ? 'active' : '',
+					'<li data-target="%s" data-slide-to="%s"></li>',
 					esc_attr( '#' . $id ),
 					esc_attr( $i )
 				);
 				$i++;
 			}
-		}
-		return sprintf(
-			'<div%s id="%s" data-ride="carousel"%s%s%s%s>%s<div%s>%s%s',
-			$this->class_output ( $div_class, $atts["class"] ),
-			esc_attr( $id ),
-			( $atts['interval'] )   ? sprintf( ' data-interval="%d"', $atts['interval'] ) : '',
-			( $atts['pause'] )      ? sprintf( ' data-pause="%s"', esc_attr( $atts['pause'] ) ) : '',
-			( $atts['wrap'] == 'true' )       ? sprintf( ' data-wrap="%s"', esc_attr( $atts['wrap'] ) ) : '',
-			$data_props,
-			( $indicators ) ? '<ol class="carousel-indicators">' . implode( $indicators ) . '</ol>' : '',
-			$this->class_output ( $inner_class ),
-			do_shortcode( $content ),
-			( $atts['arrows'] && $atts['arrows'] == "false" ) ? '' :
-			'<div><a class="carousel-control-prev"  href="' . esc_url( '#' . $id ) . '" data-slide="prev"><span class="carousel-control-prev-icon"></span></a>' .
-			'<a class="carousel-control-next" href="' . esc_url( '#' . $id ) . '" data-slide="next"><span class="carousel-control-next-icon"></span></a></div>'
-		);
-	}
 
+			// Remove wrapped image alignment and caption classes
+			$content = preg_replace('/alignnone/', '', $content);
+			$content = preg_replace('/alignright/', '', $content);
+			$content = preg_replace('/alignleft/', '', $content);
+			$content = preg_replace('/aligncenter/', '', $content);
+			$content = preg_replace('/wp-caption/', '', $content);
+
+    		$data_props = $this->parse_data_attributes( $atts['data'] );
+
+			$return = sprintf(
+							'<div%s id="%s" data-ride="carousel"%s%s%s%s>%s<div class="carousel-inner" role="listbox">%s</div>%s</div>',
+							$this->class_output($class, $atts['class']),
+							esc_attr( $id ),
+							( $atts['interval'] )   ? sprintf( ' data-interval="%d"', $atts['interval'] ) : '',
+							( $atts['pause'] )      ? sprintf( ' data-pause="%s"', esc_attr( $atts['pause'] ) ) : '',
+							( $atts['wrap'] ) ? sprintf( ' data-wrap="%s"', esc_attr( $atts['wrap'] ) ) : '',
+							$data_props,
+							( $this->is_flag( 'indicators', $save_atts ) ) ? '<ol class="carousel-indicators">' . implode( $indicators ) . '</ol>' : '',
+                            $content,
+                            ( $this->is_flag( 'controls', $save_atts ) ) ? $controls : ''
+			);
+
+			$return = $this->addclass( $item_tags, $return, $item_class );
+			$return = $this->addclass( $item_tags, $return, $active_class, '1' );
+			$return = $this->addclass( $indicator_tags, $return, $active_class, '1' );
+			$return = $this->addclass( $caption_tags, $return, $caption_class);
+
+			return $return;
+		}
 
 	/*--------------------------------------------------------------------------------------
 		*
 		* bs_carousel_item
 		*
-		* @author Filip Stefansson
-		* @since 1.0
-		*
 		*-------------------------------------------------------------------------------------*/
-	function bs_carousel_item( $atts, $content = null ) {
-
+	function bs_carousel_item( $save_atts, $content = null ) {
+        $save_atts = array_change_key_case( (array) $save_atts, CASE_LOWER );
 		$atts = shortcode_atts( array(
-				"active"  => false,
-				"caption" => false,
+		        // "active"
 				"class"   => false,
 				"data"    => false
-		), $atts );
+		), $save_atts );
 
-		if( $GLOBALS['carousel_default_active'] && $GLOBALS['carousel_default_count'] == 0 ) {
-				$atts['active'] = true;
-		}
-		$GLOBALS['carousel_default_count']++;
-
-		$class = array();
+		$class   = array();
 		$class[] = 'carousel-item';
-		$class[] = ( $atts['active']   == 'true' ) ? 'active' : '';
+		$class[] = ( $this->is_flag( 'active', $save_atts ) ) ? 'active' : '';
 
-		$data_props = $this->parse_data_attributes( $atts['data'] );
-
-		//$content = preg_replace('/class=".*?"/', '', $content);
-		$content = preg_replace('/alignnone/', '', $content);
-		$content = preg_replace('/alignright/', '', $content);
-		$content = preg_replace('/alignleft/', '', $content);
-		$content = preg_replace('/aligncenter/', '', $content);
-
-		return sprintf(
-			'<div%s%s>%s%s</div>',
-			$this->class_output ( $class, $atts["class"] ),
-			$data_props,
-			do_shortcode( $content ),
-			( $atts['caption'] ) ? '<div class="carousel-caption">' . esc_html( $atts['caption'] ) . '</div>' : ''
-		);
-	}
-
-	/*--------------------------------------------------------------------------------------
-		*
-		* bs_tooltip
-		*
-		* @author
-		* @since 1.0
-		*
-		*-------------------------------------------------------------------------------------*/
-
-
-	function bs_tooltip( $atts, $content = null ) {
-
-		$atts = shortcode_atts( array(
-			 'title'     => '',
-			 'placement' => 'top',
-			 'animation' => 'true',
-			 'html'      => 'false',
-			 'data'      => ''
-		), $atts );
-
-		$class = 'bs-tooltip';
-
-		$atts['data']   .= $this->check_for_data($atts['data']) . 'toggle,tooltip';
-		$atts['data']   .= ( $atts['animation'] ) ? $this->check_for_data($atts['data']) . 'animation,' . $atts['animation'] : '';
-		$atts['data']   .= ( $atts['placement'] ) ? $this->check_for_data($atts['data']) . 'placement,' . $atts['placement'] : '';
-		$atts['data']   .= ( $atts['html'] )      ? $this->check_for_data($atts['data']) . 'html,'      .$atts['html']      : '';
-
-		$return = '';
-		$tag = 'span';
-		$content = do_shortcode($content);
-		$return .= $this->get_dom_element($tag, $content, $class, $atts['title'], $atts['data']);
-		return $return;
-
-	}
-
-	/*--------------------------------------------------------------------------------------
-		*
-		* bs_popover
-		*
-		*
-		*-------------------------------------------------------------------------------------*/
-
-	function bs_popover( $atts, $content = null ) {
-
-		$atts = shortcode_atts( array(
-				'title'     => false,
-				'text'      => '',
-				'placement' => 'top',
-				'animation' => 'true',
-				'html'      => 'false',
-				'data'      => ''
-		), $atts );
-
-		$class = 'bs-popover';
-
-		$atts['data'] .= $this->check_for_data($atts['data']) . 'toggle,popover';
-		$atts['data'] .= $this->check_for_data($atts['data']) . 'content,' . str_replace(',', '&#44;', $atts['text']);
-		$atts['data'] .= ( $atts['animation'] ) ? $this->check_for_data($atts['data']) . 'animation,' . $atts['animation'] : '';
-		$atts['data'] .= ( $atts['placement'] ) ? $this->check_for_data($atts['data']) . 'placement,' . $atts['placement'] : '';
-		$atts['data'] .= ( $atts['html'] )      ? $this->check_for_data($atts['data']) . 'html,'      . $atts['html']      : '';
-
-		$return = '';
-		$tag = 'span';
-		$content = do_shortcode($content);
-		$return .= $this->get_dom_element($tag, $content, $class, $atts['title'], $atts['data']);
-		return html_entity_decode($return);
-
-	}
-
-
-	/*--------------------------------------------------------------------------------------
-		*
-		* bs_media
-		*
-		* @author
-		* @since 1.0
-		*
-		*-------------------------------------------------------------------------------------*/
-
-	function bs_media( $atts, $content = null ) {
-
-		$atts = shortcode_atts( array(
-				"class"  => false,
-				"data"   => false
-		), $atts );
-
-		$class = array();
-		$class[] = 'media';
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
@@ -1870,29 +1749,139 @@ License: MIT
 		);
 	}
 
-    function bs_media_object( $atts, $content = null ) {
+		/**
+		 * Tooltip shortcode
+		 */
+		function bs_tooltip( $save_atts, $content = null ) {
+            $save_atts = array_change_key_case( (array) $save_atts, CASE_LOWER );
+			$atts = shortcode_atts( array(
+			        // "html"
+					"placement" => "top",
+					"title"     => false,
+					"data"      => false,
+			), $save_atts );
 
+			$tooltip_data = array();
+			$tooltip_data[] = "toggle,tooltip";
+			$tooltip_data[] = "placement," . $atts['placement'];
+			$tooltip_data[]	= ($this->is_flag('html', $save_atts)) ? 'html,true' : '';
+			$tooltip_data = implode( '|', array_filter($tooltip_data) );
+
+			$return = sprintf(
+					'%s',
+					do_shortcode($content)
+			);
+
+			$return = $this->addattribute( false, $return, 'title', $atts['title'] );
+			$return = $this->adddata( false, $return, $atts['data'] );
+			$return = $this->adddata( false, $return, $tooltip_data );
+
+			return $return;
+		}
+
+		/**
+		 * Popover shortcode
+		 */
+		function bs_popover( $save_atts, $content = null ) {
+            $save_atts = array_change_key_case( (array) $save_atts, CASE_LOWER );
+			$atts = shortcode_atts( array(
+                    // "html"
+					"container" => "body",
+					"placement" => "top",
+					"trigger" => "",
+					"title" => false,
+					"content" => false,
+					"data"   => false,
+			), $save_atts );
+
+			$popover_data = array();
+			$popover_data[] = "toggle,popover";
+			$popover_data[] = "placement," . $atts['placement'];
+			$popover_data[] = "container," . $atts['container'];
+			$popover_data[] = "content," . $atts['content'];
+			$popover_data[] = "trigger," . $atts['trigger'];
+			$popover_data[]	= ($this->is_flag('html', $save_atts)) ? 'html,true' : '';
+			$popover_data = implode( '|', array_filter($popover_data) );
+
+			$return = sprintf(
+					'%s',
+					do_shortcode($content)
+			);
+
+			$return = $this->addattribute( false, $return, 'title', $atts['title'] );
+			$return = $this->adddata( false, $return, $atts['data'] );
+			$return = $this->adddata( false, $return, $popover_data );
+
+			return $return;
+		}
+
+
+	/*--------------------------------------------------------------------------------------
+		*
+		* bs_media
+		*
+		* @author
+		* @since 1.0
+		*
+		*-------------------------------------------------------------------------------------*/
+	function bs_media_outer( $save_atts, $content = null ) {
+	    return($this->bs_media( $save_atts, $content ));
+	}
+	function bs_media( $save_atts, $content = null ) {
+        $save_atts = array_change_key_case( (array) $save_atts, CASE_LOWER );
 		$atts = shortcode_atts( array(
-				"align " => false,
-				"class"  => false,
+                // "listgroup"
+   				"class"  => false,
 				"data"   => false
+		), $save_atts );
+
+        $div = ($this->is_flag('listgroup', $save_atts)) ? 'li' : 'div';
+
+		$class = array();
+		$class[] = 'media';
+
+		$data_props = $this->parse_data_attributes( $atts['data'] );
+
+		return sprintf(
+			'<%s%s%s>%s</%s>',
+			$div,
+			$this->class_output ( $class, $atts["class"] ),
+			$data_props,
+			do_shortcode( $content ),
+			$div
+		);
+	}
+
+    function bs_media_object( $atts, $content = null ) {
+        $atts = array_change_key_case( (array) $atts, CASE_LOWER );
+		$atts = shortcode_atts( array(
+				"align" => false,
+				"class" => false,
+				"data"  => false
 		), $atts );
 
-		$class  = '';
-		$class .= ( $atts['align'] )   ? 'align-self-' . $atts['align']: '';
+		$class   = array();
+		$class[] = $atts['class'];
+		$class[] = ( $atts['align'] ) ? 'align-self-' . $atts['align'] : '';
+		$class[] = ( $atts['class'] ) ? $atts['class'] : '';
 
 		$return = '';
 
 		$tag = array('figure', 'div', 'img', 'i', 'span');
-		$content = do_shortcode(preg_replace('/(<br>)+$/', '', $content));
-		$return .= $this->scrape_dom_element($tag, $content, $class, '', $atts['data']);
+		$return = do_shortcode($content);
+		$return = $this->striptagfromdom( 'br', $return );
+		$return = $this->addclass( $tag, $return, $class );
+		$return = $this->adddata( $tag, $return, $atts['data'] );
+
 		return $return;
 	}
 
+	function bs_media_body_outer( $save_atts, $content = null ) {
+	    return($this->bs_media_body( $save_atts, $content ));
+	}
 	function bs_media_body( $atts, $content = null ) {
-
+        $atts = array_change_key_case( (array) $atts, CASE_LOWER );
 		$atts = shortcode_atts( array(
-				"title"  => false,
 				"class"  => false,
 				"data"   => false
 		), $atts );
@@ -1900,19 +1889,22 @@ License: MIT
         $div_class = array();
 		$div_class[] = 'media-body';
 
-        $h4_heading = array();
-		$h4_class[] = 'media-heading';
+		$h_class   = array();
+        $h_class[] = 'mt-0';
+		$h_search_tags = array('h1', 'h2', 'h3', 'h4', 'h5', 'h6');
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
-		return sprintf(
-			'<div%s%s><h4%s>%s</h4>%s</div>',
+		$return = sprintf(
+			'<div%s%s>%s</div>',
 			$this->class_output ( $div_class, $atts["class"] ),
 			$data_props,
-			$this->class_output ( $h4_class ),
-			esc_html(  $atts['title']),
 			do_shortcode( $content )
 		);
+
+		$return = $this->addclass( $h_search_tags, $return, $h_class );
+
+		return $return;
 	}
 
 	/*--------------------------------------------------------------------------------------
@@ -1921,25 +1913,27 @@ License: MIT
 		*
 		*
 		*-------------------------------------------------------------------------------------*/
-	function bs_jumbotron( $atts, $content = null ) {
-
+	function bs_jumbotron( $save_atts, $content = null ) {
+        $save_atts = array_change_key_case( (array) $save_atts, CASE_LOWER );
 		$atts = shortcode_atts( array(
-					"title"  => false,
+					// "fluid"
 					"class"  => false,
 					"data"   => false
-		), $atts );
+		), $save_atts );
 
 		$class = array();
 		$class[] = 'jumbotron';
+		$class[] = ($this->is_flag('fluid', $save_atts)) ? 'jumbotron-fluid' : '';
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
 		return sprintf(
-			'<div%s%s>%s%s</div>',
+			'<div%s%s>%s%s%s</div>',
 			$this->class_output ( $class, $atts["class"] ),
 			$data_props,
-			( $atts['title'] ) ? '<h1>' . esc_html( $atts['title'] ) . '</h1>' : '',
-			do_shortcode( $content )
+			($this->is_flag('fluid', $save_atts)) ? '<div class="container">' : '',
+			do_shortcode( $content ),
+			($this->is_flag('fluid', $save_atts)) ? '</div>' : ''
 		);
 	}
 
@@ -1950,7 +1944,7 @@ License: MIT
 		*
 		*-------------------------------------------------------------------------------------*/
 	function bs_lead( $atts, $content = null ) {
-
+        $atts = array_change_key_case( (array) $atts, CASE_LOWER );
 		$atts = shortcode_atts( array(
 				"class"  => false,
 				"data"   => false
@@ -1961,54 +1955,69 @@ License: MIT
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
-		return sprintf(
-			'<p%s%s>%s</p>',
-			$this->class_output ( $class, $atts["class"] ),
-			$data_props,
-			do_shortcode( $content )
+		$return = sprintf(
+				'%s',
+   				do_shortcode( $content )
 		);
+
+		$return = $this->addclass( null, $return, $class );
+
+		return $return;
 	}
 
 	/*--------------------------------------------------------------------------------------
 		*
-		* bs_br
+		* bs_html
 		*
 		* @author Uwe Jacobs
 		* @since 4.5.0
 		*
 		*-------------------------------------------------------------------------------------*/
-	function bs_br( $atts, $content = null ) {
+	function bs_html( $atts, $content = null ) {
 
-		return '<br>';
+        $content = str_replace("&#8221;", '"', $content);
+        $content = str_replace("&#8217;", '"', $content);
+        $content = str_replace("&#8243;", '"', $content);
+		$content =  wp_specialchars_decode($content, ENT_QUOTES);
+		return ($content);
 	}
 
 	/*--------------------------------------------------------------------------------------
 		*
-		* bs_emphasis
+		* bs_lorem_ipsum
 		*
+		* @author Uwe Jacobs
+		* @since 4.5.0
 		*
 		*-------------------------------------------------------------------------------------*/
-	function bs_emphasis( $atts, $content = null ) {
+	function bs_lorem_ipsum( $atts, $content = null ) {
+	    require_once( dirname( __FILE__ ) . '/includes/LoremIpsum.php' );
 
+        $atts = array_change_key_case( (array) $atts, CASE_LOWER );
 		$atts = shortcode_atts( array(
-				"type"    => false,
-				"bgtype"  => false,
-				"class"   => false,
-				"data"    => false
+				"tag"         => 'p',
+				"words"       => false,
+				"sentences"   => false,
+				"paragraphs"  => false,
+				"class"       => false,
+				"data"        => false
 		), $atts );
 
-		$class = array();
-		$class[] = ( $atts['type'] )     ? 'text-' . $atts['type'] : 'text-muted';
-		$class[] = ( $atts['bgtype'] )   ? 'bg-' . $atts['bgtype'] : '';
+	    $lipsum = new joshtronic\LoremIpsum();
 
-		$data_props = $this->parse_data_attributes( $atts['data'] );
+        if ($atts['words'] && intval($atts['words']) > 0) {
+            $return = $lipsum->words(intval($atts['words']), $atts['tag']);
+        } else if ($atts['sentences'] && intval($atts['sentences'], ) > 0) {
+            $return = $lipsum->sentences(intval($atts['sentences']), $atts['tag']);
+        } else if ($atts['paragraphs'] && intval($atts['paragraphs']) > 0) {
+            $return = $lipsum->paragraph(intval($atts['paragraphs']), $atts['tag']);
+        } else {
+            $return = $lipsum->sentences(1, $atts['tag']);
+        }
 
-		return sprintf(
-			'<span%s%s>%s</span>',
-			$this->class_output ( $class, $atts["class"] ),
-			$data_props,
-			do_shortcode( $content )
-		);
+		$return = $this->addclass( array($atts['tag']), $return, explode(' ', $atts['class']));
+
+		return $return;
 	}
 
 	/*--------------------------------------------------------------------------------------
@@ -2017,34 +2026,27 @@ License: MIT
 		*
 		*
 		*-------------------------------------------------------------------------------------*/
-	function bs_img( $atts, $content = null ) {
-
+	function bs_img( $save_atts, $content = null ) {
+        $save_atts = array_change_key_case( (array) $save_atts, CASE_LOWER );
 		$atts = shortcode_atts( array(
-				"type"       => false,
-				"responsive" => false,
+				// "responsive"
+				// "thumbnail"
 				"class"      => false,
 				"data"       => false
-		), $atts );
+		), $save_atts );
 
-        if ($atts['type']) {
-            if ($atts['type'] == 'circle') {
-            	$atts['type'] = 'rounded-circle';
-            } else if ($atts['type'] == 'thumbnail') {
-            	$atts['type'] = 'img-thumbnail';
-            }
-		}
-
-		$class  = '';
-		$class .= ( $atts['type'] )                   ? ' ' . $atts['type'] : '';
-		$class .= ( $atts['responsive']   == 'true' ) ? ' img-fluid' : '';
-		$class .= ( $atts['class'] )                  ? ' ' . $atts['class'] : '';
+		$class   = array();
+   		$class[] = ( $this->is_flag('responsive', $save_atts) ) ? 'img-fluid' : '';
+   		$class[] = ( $this->is_flag('thumbnail', $save_atts) )  ? 'img-thumbnail' : '';
+		$class[] = ( $atts['class'] )                           ? $atts['class'] : '';
 
 		$return = '';
 		$tag = array('img');
-		$content = do_shortcode($content);
-		$return .= $this->scrape_dom_element($tag, $content, $class, '', $atts['data']);
-		return $return;
+		$return = do_shortcode($content);
+		$return = $this->addclass( $tag, $return, $class );
+		$return = $this->adddata( $tag, $return, $atts['data'] );
 
+		return $return;
 	}
 
 	/*--------------------------------------------------------------------------------------
@@ -2059,30 +2061,15 @@ License: MIT
      *
 	 *-------------------------------------------------------------------------------------*/
 	function bs_img_gen( $atts, $content = null ) {
+        $atts = array_change_key_case( (array) $atts, CASE_LOWER );
 		$atts = shortcode_atts( array(
-				"type"          => false,
-				"responsive"    => false,
 				"size"          => false,
 				"file"          => false,
 				"text"          => false,
 				"bg"            => false,
 				"color"         => false,
-				"data"          => false
+				"alt"           => false
 		), $atts );
-
-        if ($atts['type']) {
-            if ($atts['type'] == 'circle') {
-            	$atts['type'] = 'rounded-circle';
-            } else if ($atts['type'] == 'thumbnail') {
-            	$atts['type'] = 'img-thumbnail';
-            }
-		}
-
-		$class = array();
-		$class[] = ( $atts['type'] )                   ? $atts['type'] : '';
-		$class[] = ( $atts['responsive']   == 'true' ) ? 'img-fluid' : '';
-
-		$data_props = $this->parse_data_attributes( $atts['data'] );
 
         /**
          * Handle the “size” parameter.
@@ -2168,13 +2155,20 @@ License: MIT
         list($colorRed, $colorGreen, $colorBlue) = sscanf($color, "%02x%02x%02x");
 
         /**
+         * Handle the "alt" parameter.
+         */
+		if (! isset($GLOBALS['img_gen_count']) ) $GLOBALS['img_gen_count'] = 0;
+        $alt_text = ($atts['alt']) ? ($atts['alt']) : "Generated Dummy Image " . ++$GLOBALS['img_gen_count'];
+
+
+        /**
          * Define the typeface settings.
          */
         $fontFile = plugin_dir_path( __FILE__ ) . '/includes/fonts/RobotoMono-Regular.ttf';
         if ( ! is_readable($fontFile)) {
             $fontFile = 'arial';
         }
-        
+
         $fontSize = round(($imgWidth - 50) / 8);
         if ($fontSize <= 9) {
             $fontSize = 9;
@@ -2206,7 +2200,7 @@ License: MIT
         /**
          * Return the image and destroy it afterwards.
          */
-        ob_start(); 
+        ob_start();
         switch ($filetype) {
             case 'png':
                 $img_type = 'image/png';
@@ -2226,11 +2220,11 @@ License: MIT
         $img_data = ob_get_clean();
 
 		return sprintf(
-			'<img src="data:%s;base64,%s"%s%s alt="Generated Dummy Image" />',
+			'<img src="data:%s;base64,%s" alt="%s" />',
 			$img_type,
 			base64_encode( $img_data ),
-			$this->class_output ( $class, $atts["class"] ),
-			$data_props
+			$alt_text
+
 		);
     }
 
@@ -2241,7 +2235,7 @@ License: MIT
 		*
 		*-------------------------------------------------------------------------------------*/
 	function bs_blockquote( $atts, $content = null ) {
-
+        $atts = array_change_key_case( (array) $atts, CASE_LOWER );
 		$atts = shortcode_atts( array(
 					"class"  => false,
 					"data"   => false
@@ -2267,7 +2261,7 @@ License: MIT
 		*
 		*-------------------------------------------------------------------------------------*/
 	function bs_blockquote_footer( $atts, $content = null ) {
-
+        $atts = array_change_key_case( (array) $atts, CASE_LOWER );
 		$atts = shortcode_atts( array(
 					"class"  => false,
 					"data"   => false
@@ -2293,7 +2287,7 @@ License: MIT
 		*
 		*-------------------------------------------------------------------------------------*/
 	function bs_embed_responsive( $atts, $content = null ) {
-
+        $atts = array_change_key_case( (array) $atts, CASE_LOWER );
 		$atts = shortcode_atts( array(
 				"ratio"      => false,
 				"class"      => false,
@@ -2301,22 +2295,24 @@ License: MIT
 		), $atts );
 
 		$class = array();
-		$class[] = 'embed-responsive ';
-		$class[] = ( $atts['ratio'] )       ? 'embed-responsive-' . $atts['ratio'] . ' ' : '';
+		$class[] = 'embed-responsive';
+		$class[] = ( $atts['ratio'] ) ? 'embed-responsive-' . $atts['ratio'] : '';
 
-		$embed_class = 'embed-responsive-item';
+		$embed_class = array();
+		$embed_class[] = 'embed-responsive-item';
 
 		$tag = array('iframe', 'embed', 'video', 'object');
 		$content = do_shortcode($content);
+		$content = $this->addclass( $tag, $content, $embed_class );
+
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
 		return sprintf(
 			'<div%s%s>%s</div>',
 			$this->class_output ( $class, $atts["class"] ),
 			$data_props,
-			$this->scrape_dom_element($tag, $content, $embed_class, '', '')
+			$content
 		);
-
 	}
 
 
@@ -2327,7 +2323,7 @@ License: MIT
 		*
 		*-------------------------------------------------------------------------------------*/
 	function bs_responsive( $atts, $content = null ) {
-
+        $atts = array_change_key_case( (array) $atts, CASE_LOWER );
 		$atts = shortcode_atts( array(
 				"hidden"  => false,
 				"block"  => false,
@@ -2366,167 +2362,251 @@ License: MIT
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
 		return sprintf(
-			'<span%s%s>%s</span>',
+			'<div%s%s>%s</div>',
 			$this->class_output ( $class, $atts["class"] ),
 			$data_props,
 			do_shortcode( $content )
 		);
 	}
 
+		/**
+		 * Modal shortcode
+		 * @param  [type] $atts    shortcode attributes
+		 * @param  string $content shortcode contents
+		 * @return string
+		 */
+		function bs_modal( $save_atts, $content = null ) {
+            $save_atts = array_change_key_case( (array) $save_atts, CASE_LOWER );
+			$atts = shortcode_atts( array(
+                // "fade"
+                // "centered"
+                // "scrollable"
+				"size"			=> false,
+				"backdrop"      => 'true',
+                "id"			=> false,
+                "class"			=> false,
+				"data"			=> false
+			), $save_atts );
+
+      ( isset($GLOBALS['modal_count']) ) ? $GLOBALS['modal_count']++ : $GLOBALS['modal_count'] = 0;
+
+      $id = ($atts['id'] != false) ? $atts['id'] : 'modal-' . $GLOBALS['modal_count'];
+
+      $class   = array();
+      $class[] = 'modal';
+      $class[] = ($this->is_flag('fade', $save_atts)) ? 'fade' : '';
+
+      $dialog_class   = array();
+      $dialog_class[] = 'modal-dialog';
+	  $dialog_class[] = ($atts['size']) ? 'modal-' . $atts['size'] : '';
+      $dialog_class[] = ($this->is_flag('centered', $save_atts)) ? 'modal-dialog-centered' : '';
+      $dialog_class[] = ($this->is_flag('scrollable', $save_atts)) ? 'modal-dialog-scrollable' : '';
+
+		$data_props = $this->parse_data_attributes( $atts['data'] );
+
+			$content = do_shortcode( $content );
+
+			$return = sprintf(
+          '<div id="%s"%s data-backdrop="%s" aria-labelledby="%s" aria-hidden="true" tabindex="-1" role="dialog" %s>
+            <div%s role="document">
+              <div class="modal-content">
+                %s
+              </div>
+            </div>
+          </div>',
+          $id,
+          $this->class_output($class, $atts['class']),
+          $atts['backdrop'],
+          $id,
+          $data_props,
+					$this->class_output($dialog_class),
+					do_shortcode($content)
+			);
+
+			return $return;
+    }
+
+
+	/**
+	 * Modal header shortcode
+	 * @param  [type] $atts    shortcode attributes
+	 * @param  string $content shortcode contents
+	 * @return string
+	 */
+	function bs_modal_header( $atts, $content = null ) {
+        $atts = array_change_key_case( (array) $atts, CASE_LOWER );
+		$atts = shortcode_atts( array(
+				"class" => false,
+				"data"   => false
+		), $atts );
+
+		$search_tags = array('h1', 'h2', 'h3', 'h4', 'h5', 'h6');
+
+		$wrap_before = ($this->testdom($content, $search_tags)) ? '' : '<h5>';
+		$wrap_after = ($this->testdom($content, $search_tags)) ? '' : '</h5>';
+
+		$class	 = array();
+        $class[] = 'modal-header';
+
+        $h_class   = array();
+        $h_class[] = "modal-title";
+
+		$data_props = $this->parse_data_attributes( $atts['data'] );
+
+		$content = do_shortcode( $wrap_before . $content . $wrap_after );
+
+		$return = sprintf(
+        '<div%s%s>
+          %s
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>',
+        $this->class_output($class, $atts['class']),
+        $data_props,
+				$content
+		);
+
+    $return = $this->addclass( $search_tags, $return, $h_class );
+
+		return $return;
+  }
+
+
+
+	/**
+	 * Modal body shortcode
+	 * @param  [type] $atts    shortcode attributes
+	 * @param  string $content shortcode contents
+	 * @return string
+	 */
+	function bs_modal_body( $atts, $content = null ) {
+        $atts = array_change_key_case( (array) $atts, CASE_LOWER );
+		$atts = shortcode_atts( array(
+				"class" => false,
+				"data"   => false
+    ), $atts );
+
+		$class	 = array();
+        $class[] = 'modal-body';
+
+		$data_props = $this->parse_data_attributes( $atts['data'] );
+
+		$return =sprintf(
+        '<div%s%s>
+          %s
+        </div>',
+        $this->class_output($class, $atts['class']),
+        $data_props,
+				do_shortcode($content)
+    );
+
+		return $return;
+  }
+
+
+	/**
+	 * Modal footer shortcode
+	 * @param  [type] $atts    shortcode attributes
+	 * @param  string $content shortcode contents
+	 * @return string
+	 */
+	function bs_modal_footer( $atts, $content = null ) {
+        $atts = array_change_key_case( (array) $atts, CASE_LOWER );
+		$atts = shortcode_atts( array(
+				"class" => false,
+				"data"   => false
+    ), $atts );
+
+		$class	 = array();
+        $class[] = 'modal-footer';
+
+		$data_props = $this->parse_data_attributes( $atts['data'] );
+
+		$return = sprintf(
+        '<div%s%s>
+          %s
+        </div>',
+        $this->class_output($class, $atts['class']),
+        $data_props,
+				do_shortcode($content)
+    );
+
+		return $return;
+  }
+
 	/*--------------------------------------------------------------------------------------
 		*
-		* bs_modal
+		* bs_color
 		*
-		* @author M. W. Delaney
-		* @since 1.0
 		*
 		*-------------------------------------------------------------------------------------*/
-	function bs_modal( $atts, $content = null ) {
-
-		if( isset($GLOBALS['modal_count']) )
-			$GLOBALS['modal_count']++;
-		else
-			$GLOBALS['modal_count'] = 0;
-
+	function bs_color( $atts, $content = null ) {
+        $atts = array_change_key_case( (array) $atts, CASE_LOWER );
 		$atts = shortcode_atts( array(
 				"text"    => false,
-				"title"   => false,
-				"size"    => false,
+				"bg"      => false,
 				"class"   => false,
 				"data"    => false
 		), $atts );
 
-		$a_class = array();
+		$class = array();
+		$class[] = ( $atts['text'] ) ? 'text-' . $atts['text'] : '';
+		$class[] = ( $atts['bg'] )   ? 'bg-'   . $atts['bg'] : '';
 
-        $div_class = array();
-		$div_class[] = 'modal fade';
-		$div_class[] = ( $atts['size'] ) ? 'bs-modal-' . $atts['size'] : '';
-
-        $md_class = array();
-        $md_class[] = 'modal-dialog';
-		$md_class[] = ( $atts['size'] ) ? ' modal-' . $atts['size'] : '';
-
-		$id = 'custom-modal-' . $GLOBALS['modal_count'];
-
-		$data_props = $this->parse_data_attributes( $atts['data'] );
-
-		$modal_output = sprintf(
-				'<div%1$s id="%2$s" tabindex="-1" role="dialog" aria-hidden="true">
-						<div%3$s">
-								<div class="modal-content">
-										<div class="modal-header">
-												%4$s
-												<button type="button" class="close" data-dismiss="modal" aria-label="Close">&times;</button>
-										</div>
-										<div class="modal-body">
-												%5$s
-										</div>
-								</div>
-						</div>
-				</div>
-				',
-			$this->class_output ( $div_class ),
-			esc_attr( $id ),
-			$this->class_output ( $md_class ),
-			( $atts['title'] ) ? '<h4 class="modal-title">' . $atts['title'] . '</h4>' : '',
-			do_shortcode( $content )
+		$return = sprintf(
+				'%s',
+				do_shortcode( $content )
 		);
 
-		add_action('wp_footer', function() use ($modal_output) {
-				echo $modal_output;
-		}, 100,0);
+		$return = $this->addclass( null, $return, $class );
+		$return = $this->adddata( null, $return, $atts['data'] );
 
-		return sprintf(
-			'<a data-toggle="modal" href="#%1$s"%2$s%3$s>%4$s</a>',
-			esc_attr( $id ),
-			$this->class_output ( $a_class, $atts["class"] ),
-			$data_props,
-			esc_html( $atts['text'] )
-		);
+		return $return;
 	}
 
-	/*--------------------------------------------------------------------------------------
-		*
-		* bs_modal_header
-		*
-		* @author M. W. Delaney
-		* @since 1.0
-		*
-		*-------------------------------------------------------------------------------------*/
-	function bs_modal_header( $atts, $content = null ) {
-
+	/**
+	 * Tag border
+	 * @param  [type] $atts    shortcode attributes
+	 * @param  string $content shortcode contents
+	 * @return string
+	 */
+	function bs_border( $save_atts, $content = null ) {
 		$atts = shortcode_atts( array(
-				"class"  => false,
-				"data"   => false,
-		), $atts );
+			"add"			=> "all",
+			"del"			=> false,
+			"radius"		=> false,
+			"size"			=> false,
+			"class"			=> false,
+			"data"			=> false
+		), $save_atts );
 
-		$class = array();
-		$class[] = 'modal-header';
+    	$class	= array();
+    	if( $atts['add'] ) {
+	    	$add = explode( ' ', $atts['add'] );
+		    foreach( $add as $a ):
+			    $class[] = ( $a == "all" ? "border" : "border-$a" );
+    		endforeach;
+	    } else {
+	        $class[] = "border";
+	    }
+    	if( $atts['del'] ) {
+	    	$add = explode( ' ', $atts['del'] );
+		    foreach( $del as $d ):
+			    $class[] = ( $d == "all" ? "border-0" : "border-$d-0" );
+    		endforeach;
+        }
+		$class[] = ( $atts['size'] ) ? 'rounded-' . $atts['size'] : '';
+		$class[] = ( $atts['radius'] ) ? ( $atts['radius'] == "all" ) ? 'rounded' : 'rounded-' . $atts['radius'] : '';
 
-		$data_props = $this->parse_data_attributes( $atts['data'] );
-
-		return sprintf(
-			'</div><div%s%s>%s',
-			$this->class_output ( $class, $atts["class"] ),
-			$data_props,
-			do_shortcode( $content )
+		$return = sprintf(
+				'%s',
+   				do_shortcode( $content )
 		);
-	}
 
-	/*--------------------------------------------------------------------------------------
-		*
-		* bs_modal_body
-		*
-		* @author M. W. Delaney
-		* @since 1.0
-		*
-		*-------------------------------------------------------------------------------------*/
-	function bs_modal_body( $atts, $content = null ) {
+		$return = $this->addclass( null, $return, $class );
 
-		$atts = shortcode_atts( array(
-				"class"  => false,
-				"data"   => false,
-		), $atts );
-
-		$class = array();
-		$class[] = 'modal-body';
-
-		$data_props = $this->parse_data_attributes( $atts['data'] );
-
-		return sprintf(
-			'</div><div%s%s>%s',
-			$this->class_output ( $class, $atts["class"] ),
-			$data_props,
-			do_shortcode( $content )
-		);
-	}
-
-	/*--------------------------------------------------------------------------------------
-		*
-		* bs_modal_footer
-		*
-		* @author M. W. Delaney
-		* @since 1.0
-		*
-		*-------------------------------------------------------------------------------------*/
-	function bs_modal_footer( $atts, $content = null ) {
-
-		$atts = shortcode_atts( array(
-				"class"  => false,
-				"data"   => false,
-		), $atts );
-
-		$class = array();
-		$class[] = 'modal-footer';
-
-		$data_props = $this->parse_data_attributes( $atts['data'] );
-
-		return sprintf(
-			'</div><div%s%s>%s',
-			$this->class_output ( $class, $atts["class"] ),
-			$data_props,
-			do_shortcode( $content )
-		);
+		return $return;
 	}
 
 	/*--------------------------------------------------------------------------------------
@@ -2549,97 +2629,276 @@ License: MIT
 
 		return $data_props;
 	}
-	
+
 	/*--------------------------------------------------------------------------------------
-	    * Convert class  string array into complete class="..." string and return the string
-	    * @param  array $class Array with classes
-	    * @param  string $xclass Optional string with extra classes
-	    * @return class="..." string or empty string
+	    * Convert class string array into complete class="..." string and return the string
+	    * @param  array   $class  Array with classes
+	    * @param  string  $xclass Optional string with extra classes, default null
+	    * @param  boolean $flag   Add class="" to string, default true
+	    * @return string          class="..." or "..." string (depending on $flag) or empty string
 		*-------------------------------------------------------------------------------------*/
-	function class_output($class, $xclass = null) {
-        if ($xclass) {
-    		$class = array_merge($class, explode(' ', $xclass));
+	function class_output($class, $xclass = null, $flag = true) {
+    	if (empty($class) && empty($xclass)) {
+    	    return '';
     	}
-		return (empty($class) ? '' : ' class="' .  esc_attr( trim( implode( ' ', $class ) ) ) . '"');
+
+        if ($xclass) {
+    		$class = array_unique(array_merge($class, explode(' ', $xclass)));
+    	}
+
+    	if (empty($class)) {
+    	    return '';
+    	}
+    	
+    	$class_string = '';
+    	if ($flag) { $class_string .= ' class="';}
+    	$class_string .= esc_attr( trim( implode( ' ', array_filter($class) ) ) );
+    	if ($flag) { $class_string .= '"';}
+
+		return $class_string;
 	}
-		
-	/*--------------------------------------------------------------------------------------
-		*
-		* get DOMDocument element and apply shortcode parameters to it. Create the element if it doesn't exist
-		*
-		*-------------------------------------------------------------------------------------*/
-		function get_dom_element( $tag, $content, $class, $title = '', $data = null ) {
 
-			//clean up content
-			$content = trim(trim($content), chr(0xC2).chr(0xA0));
-			$previous_value = libxml_use_internal_errors(TRUE);
+	/**
+	 * Parse a shortcode's contents for a tag and apply classes to each instance
+	 * @param  array $finds    Tags to find
+	 * @param  string $content DOM content to modify
+	 * @param  array $class    Classes to add
+	 * @param  string $nth     Number to skip
+	 * @return string          Modified DOM content
+	 */
+	function addclass( $finds, $content, $class, $nth = null ) {
+    	// Hide warnings while we run this function
+	    $previous_value = libxml_use_internal_errors(TRUE);
 
-			$dom = new DOMDocument;
-			$dom->loadXML(utf8_encode($content));
+    	$dom = new DOMDocument();
+		$dom->loadHTML(mb_convert_encoding($content, 'HTML-ENTITIES', 'UTF-8'), LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+    	libxml_clear_errors();
+    	libxml_use_internal_errors($previous_value);
 
-			libxml_clear_errors();
-			libxml_use_internal_errors($previous_value);
+		if(!$finds) {
+			$root = $dom->documentElement;
+    		if (isset($GLOBALS['libxml_hack'])) {
+    			$root = $root->childNodes->item(0)->childNodes->item(0);
+    		}
+			$finds = array($root->tagName);
+		}
 
-			if(!$dom->documentElement) {
-					$element = $dom->createElement($tag, utf8_encode($content));
-					$dom->appendChild($element);
+		$count = 0;
+		foreach( $finds as $found ) {
+			$tags = $dom->getElementsByTagName($found);
+			foreach ($tags as $tag) {
+				if($nth && $count == $nth) { continue; }
+			    if (empty($tag)) { continue; }
+				// Append the classes in $class to the tag's existing classes
+				$tag->setAttribute(
+					'class',
+					$this->class_output(
+						$class,
+						$tag->getAttribute('class'),
+						false
+					)
+				);
+				$count++;
 			}
+		}
 
-			$dom->documentElement->setAttribute('class', $dom->documentElement->getAttribute('class') . ' ' . esc_attr( utf8_encode($class) ));
-			if( $title ) {
-					$dom->documentElement->setAttribute('title', $title );
-			}
-			if( $data ) {
+		$return = $dom->saveHTML($dom->documentElement);
+
+		if (isset($GLOBALS['libxml_hack'])) {
+    		$return = str_replace(array("<html>", "</html>", "<body>", "</body>"), '', $return);
+    	}
+
+		return $return;
+	}
+
+	/**
+	 * Parse a shortcode's contents for a tag and apply data attribute pairs to each instances
+	 * @param  array $finds    Tags to find
+	 * @param  string $content DOM content to modify
+	 * @param  array $data     Data tags to add
+	 * @return string          Modified DOM content
+	 */
+	public static function adddata( $finds, $content, $data ) {
+    	// Hide warnings while we run this function
+	    $previous_value = libxml_use_internal_errors(TRUE);
+
+    	$dom = new DOMDocument();
+		$dom->loadHTML(mb_convert_encoding($content, 'HTML-ENTITIES', 'UTF-8'), LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+    	libxml_clear_errors();
+    	libxml_use_internal_errors($previous_value);
+
+		if(!$finds) {
+			$root = $dom->documentElement;
+    		if (isset($GLOBALS['libxml_hack'])) {
+    			$root = $root->childNodes->item(0)->childNodes->item(0);
+    		}
+			$finds = array($root->tagName);
+		}
+
+		foreach( $finds as $found ){
+			$tags = $dom->getElementsByTagName($found);
+			foreach ($tags as $tag) {
+				// Set data attributes
+				if( $data ) {
 					$data = explode( '|', $data );
-					foreach( $data as $d ):
-					$d = explode(',',$d);
-					$dom->documentElement->setAttribute('data-'.$d[0],trim($d[1]));
-					endforeach;
-			}
-			return utf8_decode( $dom->saveXML($dom->documentElement) );
-	}
-
-	/*--------------------------------------------------------------------------------------
-		*
-		* Scrape the shortcode's contents for a particular DOMDocument tag or tags, pull them out, apply attributes, and return just the tags.
-		*
-		*-------------------------------------------------------------------------------------*/
-	function scrape_dom_element( $tag, $content, $class, $title = '', $data = null ) {
-
-			$previous_value = libxml_use_internal_errors(TRUE);
-
-			$dom = new DOMDocument;
-			$dom->loadHTML(mb_convert_encoding($content, 'HTML-ENTITIES', 'UTF-8'));
-
-			libxml_clear_errors();
-			libxml_use_internal_errors($previous_value);
-			foreach ($tag as $find) {
-					$tags = $dom->getElementsByTagName($find);
-					foreach ($tags as $find_tag) {
-							$outputdom = new DOMDocument;
-							$new_root = $outputdom->importNode($find_tag, true);
-							$outputdom->appendChild($new_root);
-
-							if(is_object($outputdom->documentElement)) {
-									$outputdom->documentElement->setAttribute('class', $outputdom->documentElement->getAttribute('class') . ' ' . esc_attr( $class ));
-									if( $title ) {
-											$outputdom->documentElement->setAttribute('title', $title );
-									}
-									if( $data ) {
-											$data = explode( '|', $data );
-											foreach( $data as $d ):
-												$d = explode(',',$d);
-												$outputdom->documentElement->setAttribute('data-'.$d[0],trim($d[1]));
-											endforeach;
-									}
-							}
-						return $outputdom->saveHTML($outputdom->documentElement);
-
+					foreach( $data as $d ) {
+					    if (!empty($d)) {
+    						$d = explode(',',$d);
+	    					$tag->setAttribute('data-'.$d[0],trim($d[1]));
+	    				}
 					}
 				}
+			}
+		}
+
+		$return = $dom->saveHTML($dom->documentElement);
+		if (isset($GLOBALS['libxml_hack'])) {
+    		$return = str_replace(array("<html>", "</html>", "<body>", "</body>"), '', $return);
+    	}
+
+		return $return;
 	}
 
- /*--------------------------------------------------------------------------------------
+	/**
+	 * Test DOM for root tags
+	 * @param  string   $content DOM content to check
+	 * @param  array    $tags    Data tags to find
+	 * @return boolean           true = tag found; false = tag not found
+	 */
+	public static function testdom( $content, $tags ) {
+	    if (empty($content) || empty($tags)) {
+	        return false;
+	    }
+
+    	// Hide warnings while we run this function
+	    $previous_value = libxml_use_internal_errors(TRUE);
+
+    	$dom = new DOMDocument();
+		$dom->loadHTML(mb_convert_encoding($content, 'HTML-ENTITIES', 'UTF-8'));
+    	libxml_clear_errors();
+    	libxml_use_internal_errors($previous_value);
+
+   		if (isset($GLOBALS['libxml_hack'])) {
+            if (isset($dom->documentElement->childNodes)) {
+       			$tagname = $dom->documentElement->childNodes->item(0)->childNodes->item(0)->tagName;
+       		} else {
+       		    return false;
+       		}
+   		} else {
+            $tagname = $dom->documentElement->tagName;
+   		}
+
+		if(in_array($tagname, $tags)) {
+		    return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Strip tags by name from DOM
+	 */
+	public static function striptagfromdom( $tag, $content ) {
+    	// Hide warnings while we run this function
+	    $previous_value = libxml_use_internal_errors(TRUE);
+
+    	$dom = new DOMDocument();
+		$dom->loadHTML(mb_convert_encoding($content, 'HTML-ENTITIES', 'UTF-8'), LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+    	libxml_clear_errors();
+    	libxml_use_internal_errors($previous_value);
+    	$list = $dom->getElementsByTagName($tag);
+
+		while ($list->length > 0) {
+		    $p = $list->item(0);
+		    $p->parentNode->removeChild($p);
+		}
+
+		$return = $dom->saveHTML($dom->documentElement);
+		if (isset($GLOBALS['libxml_hack'])) {
+    		$return = str_replace(array("<html>", "</html>", "<body>", "</body>"), '', $return);
+    	}
+
+		return $return;
+    }
+
+	/**
+	 * Parse a shortcode's contents for a tag and add a specified area attributes to each instance
+	 * @param  [type] $finds   The tags to find
+	 * @param  [type] $content The content to search
+	 * @param  [type] $key     The key to set
+	 * @param  string $value   The value for $key
+	 * @param  string $prefix  The optional prefix for $key
+	 * @return [type]          The modified $content
+	 */
+	public static function addattribute( $finds, $content, $key, $value, $prefix = '' ) {
+    	// Hide warnings while we run this function
+	    $previous_value = libxml_use_internal_errors(TRUE);
+
+    	$dom = new DOMDocument();
+		$dom->loadHTML(mb_convert_encoding($content, 'HTML-ENTITIES', 'UTF-8'), LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+    	libxml_clear_errors();
+    	libxml_use_internal_errors($previous_value);
+
+		if(!$finds) {
+			$root = $dom->documentElement;
+    		if (isset($GLOBALS['libxml_hack'])) {
+    			$root = $root->childNodes->item(0)->childNodes->item(0);
+    		}
+			$finds = array($root->tagName);
+		}
+
+		foreach( $finds as $found ){
+			$tags = $dom->getElementsByTagName($found);
+			foreach ($tags as $tag) {
+				// Set the title attribute
+				$tag->setAttribute($prefix . $key, $value);
+			}
+		}
+
+		$return = $dom->saveHTML($dom->documentElement);
+		if (isset($GLOBALS['libxml_hack'])) {
+    		$return = str_replace(array("<html>", "</html>", "<body>", "</body>"), '', $return);
+    	}
+
+		return $return;
+	}
+
+	/**
+	 * Count instances of specified class in content
+	 * @param  string $classname   Class to count
+	 * @param  string $content     The content to search
+	 * @return int                 Number of found tags
+	 */
+	public static function counttags( $classname, $content ) {
+    	// Hide warnings while we run this function
+	    $previous_value = libxml_use_internal_errors(TRUE);
+
+    	$dom = new DOMDocument();
+		$dom->loadHTML(mb_convert_encoding($content, 'HTML-ENTITIES', 'UTF-8'), LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+    	libxml_clear_errors();
+    	libxml_use_internal_errors($previous_value);
+
+        $finder = new DomXPath($dom);
+        $nodes = $finder->query("//*[contains(concat(' ', normalize-space(@class), ' '), ' $classname ')]");
+
+		return $nodes->length;
+	}
+
+	/**
+	 * Get the name of the function that called the current function
+	 * @return string                 The calling function's name
+	 */
+	function getCallingFunctionName() {
+			$trace=debug_backtrace();
+			$caller=$trace[2];
+			$str = $caller['function'];
+			if (isset($caller['class']))
+				$str .= '-' . $caller['class'];
+
+			return $str;
+	}
+
+    /*--------------------------------------------------------------------------------------
 		*
 		* Add dividers to data attributes content if needed
 		*
@@ -2650,17 +2909,20 @@ License: MIT
 		}
 	}
 
- /*--------------------------------------------------------------------------------------
-		*
-		* If the user puts a return between the shortcode and its contents, sometimes we want to strip the resulting P tags out
-		*
-		*-------------------------------------------------------------------------------------*/
-	function strip_paragraph( $content ) {
-			$content = str_ireplace( '<p>','',$content );
-			$content = str_ireplace( '</p>','',$content );
-			return $content;
+    /*--------------------------------------------------------------------------------------
+	 * Check if a particular parameter is set as a flag (a parameter without a value) in a shortcode
+	 * @param  string  $flag the flag we're looking for
+	 * @param  array   $atts an array of the shortcode's attributes
+	 * @return boolean true = param is set; false = param is not set
+	 */
+	public static function is_flag( $flag, $atts ) {
+		if(is_array($atts)) {
+			foreach ( $atts as $key => $value ) {
+				if ( $value === $flag && is_int( $key ) ) return true;
+			}
+			return false;
+		}
 	}
-
 }
 
 new BootstrapShortcodes();
