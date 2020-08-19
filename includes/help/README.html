@@ -1,12 +1,10 @@
 <!-- TODO
 - New Tags
-flex
-figure*
-*-outer
-- aria
+  *-outer
+  navbar
+- ... examples
 Bugs:
-- dropdown-menu can't be nested
-- nav with dropdown menu
+- button dropdown id and aria
 -->
 <h1 id="bootstrap-4-shortcodes-for-wordpress">Bootstrap 4 Shortcodes for WordPress</h1>
 <p><img src="https://img.shields.io/wordpress/plugin/r/bootstrap-4-shortcodes.svg" alt="WordPress Rating"> <img src="https://img.shields.io/wordpress/plugin/dt/bootstrap-4-shortcodes.svg" alt="WordPress Downloads"></p>
@@ -44,6 +42,7 @@ Bugs:
 <ul>
     <li><a href="#code">Code</a></li>
     <li><a href="#tables">Tables</a></li>
+    <li><a href="#figures">Figures</a></li>
     <li><a href="#images">Images</a></li>
     <li><a href="#blockquote">Blockquote</a></li>
     <li><a href="#lead-body-copy">Lead body copy</a></li>
@@ -70,10 +69,10 @@ Bugs:
 <pre><code class="d-block p-4">
 [row]
     [column md=&quot;6&quot;]
-        ...
+        [lorem-ipsum]
     [/column]
     [column md=&quot;6&quot;]
-        ...
+        [lorem-ipsum]
     [/column]
 [/row]
 </code></pre>
@@ -82,10 +81,10 @@ Bugs:
 [container]
     [row]
         [column md=&quot;6&quot;]
-            ...
+            [lorem-ipsum]
         [/column]
         [column md=&quot;6&quot;]
-            ...
+            [lorem-ipsum]
         [/column]
     [/row]
 [/container]
@@ -96,10 +95,10 @@ Bugs:
     [container]
         [row]
             [column md=&quot;6&quot;]
-                ...
+                [lorem-ipsum]
             [/column]
             [column md=&quot;6&quot;]
-                ...
+                [lorem-ipsum]
             [/column]
         [/row]
     [/container]
@@ -291,7 +290,7 @@ Bugs:
 <hr>
 <h3 id="responsive-embeds">Responsive Embeds</h3>
 <pre><code class="d-block p-4">
-[embed-responsive ratio=&quot;16by9&quot;] ... [/embed-responsive]
+[embed-responsive ratio=&quot;16by9&quot;] <iframe src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0"></iframe> [/embed-responsive]
 </code></pre>
 <p>Wrap <code class="d-block p-4">&lt;iframe&gt;</code>, <code class="d-block p-4">&lt;embed&gt;</code>, <code class="d-block p-4">&lt;video&gt;</code>, and <code class="d-block p-4">&lt;object&gt;</code> elements to make them responsive.</p>
 <h4 id="-responsive-embed-parameters">[responsive-embed] parameters</h4>
@@ -333,7 +332,7 @@ Bugs:
 <hr>
 <h3 id="responsive-utilities">Responsive Utilities</h3>
 <pre><code class="d-block p-4">
-[responsive block=&quot;xl lg md&quot; hidden=&quot;sm xs&quot;] ... [/responsive]
+[responsive block=&quot;xl lg md&quot; hidden=&quot;sm xs&quot;] [lorem-ipsum] [/responsive]
 </code></pre>
 <h4 id="-reponsive-parameters">[reponsive] parameters</h4>
 <table>
@@ -678,7 +677,7 @@ Bugs:
     </tbody>
 </table>
 <h4 id="-card-img-parameters">[card-img] parameters</h4>
-<div class="alert alert-warning"><strong>Note:</strong> <code>[card-img]</code> should contain an image inserted using the WordPress editor or the [code inline]img-gen[/code] tag.</div>
+<div class="alert alert-warning"><strong>Note:</strong> <code>[card-img]</code> should contain an image inserted using the WordPress editor or the <code>img-gen</code> tag.</div>
 <table class="table table-striped table-bordered">
     <thead>
         <tr>
@@ -1192,7 +1191,7 @@ Bugs:
 <p>Button Dropdowns can be accomplished by combining the [button-group] shortcode, the &quot;data&quot; parameters of the [button] shortcode, and [dropdown] or [dropdown-menu] shortcode as follows.</p>
 <h4 id="single-button-dropdowns">Single button dropdowns</h4>
 <pre><code class="d-block p-4">
-[button-group]
+[dropdown]
     [button type="warning" dropdown] Action[/button]
     [dropdown-menu]
         [dropdown-header] Header[/dropdown-header]
@@ -1202,7 +1201,7 @@ Bugs:
         [dropdown-divider]
         [dropdown-item link="#"]Separated link[/dropdown-item]
     [/dropdown-menu]
-[/button-group]
+[/dropdown]
 </code></pre>
 <h4 id="split-button-dropdowns">Split button dropdowns</h4>
 <pre><code class="d-block p-4">
@@ -1941,7 +1940,7 @@ Bugs:
         </tr>
     </tbody>
 </table>
-<p><strong>NOTE: media-object should contain an image, or linked image, inserted using the WordPress TinyMCE editor or the [code inline]img-gen[/code] tag.</strong></p>
+<p><strong>NOTE: <code>media-object</code> should contain an image, or linked image, inserted using the WordPress TinyMCE editor or the <code>img-gen</code> tag.</strong></p>
 <p><a href="https://getbootstrap.com/docs/4.5/components/media-object/">Bootstrap media objects documentation</a></p>
 <hr>
 <h3 id="list-groups">List Groups</h3>
@@ -2200,7 +2199,7 @@ Bugs:
 <pre><code class="d-block p-4">
 [img type=&quot;circle&quot; responsive] ... [/img]
 </code></pre>
-<p>Wrap any number of HTML image tags or images inserted via the WordPress media manager or the [code inline]img-gen[/code] tag..</p>
+<p>Wrap any number of HTML image tags or images inserted via the WordPress media manager or the <code>img-gen</code> tag.</p>
 <h4 id="-img-parameters">[img] parameters</h4>
 <table>
     <thead>
@@ -2331,6 +2330,71 @@ Bugs:
     </tbody>
 </table>
 <p><a href="https://getbootstrap.com/docs/4.5/content/images/">Bootstrap images documentation</a></p>
+<hr>
+<h3 id="figures">Figurs</h3>
+<pre><code class="d-block p-4">
+[figure]
+  [img-gen size="300" class="figure-img img-fluid rounded"]
+  [figure-caption]A caption for the above image.[/figure-caption]
+[/figure]
+</code></pre>
+<h4 id="-figure-parameters">[figure] parameters</h4>
+<table>
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at <a href="#container-parameters">[container] parameters</a>.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+    </tbody>
+</table>
+<h4 id="-figure-caption-parameters">[figure-caption] parameters</h4>
+<table>
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at <a href="#container-parameters">[container] parameters</a>.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+    </tbody>
+</table>
+<p><a href="https://getbootstrap.com/docs/4.5/content/figures/">Bootstrap figures documentation</a></p>
 <hr>
 <h3 id="blockquote">Blockquote</h3>
 <pre><code class="d-block p-4">
@@ -2480,6 +2544,13 @@ Bugs:
             <td>md</td>
         </tr>
         <tr>
+            <td>color</td>
+            <td>The color of the border</td>
+            <td>optional</td>
+            <td>primary, secondary, success, danger, warning, info, light, dark, body, muted, white</td>
+            <td></td>
+        </tr>
+        <tr>
             <td>class</td>
             <td>Any extra classes you want to add</td>
             <td>optional</td>
@@ -2500,7 +2571,7 @@ Bugs:
 <h3 id="color-classes">Color</h3>
 <p>Use color utilities to quickly style the <code>text color</code> and <code>background color</code> of an element.</p>
 <pre><code class="d-block p-4">
-[color text=&quot;success&quot;] ... [/color]
+[color text=&quot;success&quot;] [lorem-ipsum] [/color]
 </code></pre>
 <h4 id="-color-parameters">[color] parameters</h4>
 <table>
@@ -2588,21 +2659,26 @@ Bugs:
             <td></td>
         </tr>
         <tr>
-            <td>align</td>
+            <td>align-content</td>
             <td>Set flexbox container to align flex items together on the cross axis. This property has no effect on single rows of flex items.</td>
             <td>optional</td>
-            <td>start, end, center, around, stretch</td>
+            <td>start, end, center, between, around, stretch</td>
+            <td>start</td>
+        </tr>
+        <tr>
+            <td>align-items</td>
+            <td>Change the alignment of flex items on the cross axis (the y-axis to start, x-axis if flex-direction column).</td>
+            <td>optional</td>
+            <td>start, end, center, baseline, stretch</td>
             <td>start</td>
         </tr>
         <tr>
             <td>wrap</td>
             <td>Set how flex items wrap in a flex container.</td>
             <td>optional</td>
-            <td>true, false, reverse</td>
+            <td>true, reverse</td>
             <td>false</td>
         </tr>
-
-
         <tr>
             <td>class</td>
             <td>Any extra classes you want to add</td>
@@ -2619,7 +2695,77 @@ Bugs:
         </tr>
     </tbody>
 </table>
-<p><a href="https://getbootstrap.com/docs/4.5/utilities/colors/">Bootstrap color classes documentation</a></p>
+<h4 id="-flex-item-parameters">[flex-item] parameters</h4>
+<table>
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>align</td>
+            <td>Align individual flex items on the cross axis.</td>
+            <td>optional</td>
+            <td>start, end, center, baseline, stretch</td>
+            <td>start</td>
+        </tr>
+        <tr>
+            <td>fill</td>
+            <td>Force elements into widths equal to their content (or equal widths if their content does not surpass their border-boxes) while taking up all available horizontal space.</td>
+            <td>optional</td>
+            <td>🚩 (flag)</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>grow</td>
+            <td>Allow flex item ability to grow to fill available space.</td>
+            <td>optional</td>
+            <td>🚩 (flag)</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>no-grow</td>
+            <td>Disallow flex item ability to grow to fill available space.</td>
+            <td>optional</td>
+            <td>🚩 (flag)</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>shrink</td>
+            <td>Allow flex item ability to shrink if forced by other elements.</td>
+            <td>optional</td>
+            <td>🚩 (flag)</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>no-shrink</td>
+            <td>Disallow flex item ability to shrink if forced by other elements.</td>
+            <td>optional</td>
+            <td>🚩 (flag)</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at <a href="#container-parameters">[container] parameters</a>.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+    </tbody>
+</table>
+<p><a href="https://getbootstrap.com/docs/4.5/utilities/flex/">Bootstrap flex documentation</a></p>
 <hr>
 <h3 id="html">HTML snippets</h3>
 <p>Allow any html code. This shortcode has no parameters.</p>
@@ -2692,7 +2838,7 @@ Bugs:
 <h3 id="javascript">Javascript</h3>
 <h3 id="tooltip">Tooltip</h3>
 <pre><code class="d-block p-4">
-[tooltip title=&quot;I&#39;m the title&quot; placement=&quot;right&quot;] ... [/tooltip]
+[tooltip title=&quot;I&#39;m the title&quot; placement=&quot;auto&quot;] ... [/tooltip]
 </code></pre>
 <h4 id="-tooltip-parameters">[tooltip] parameters</h4>
 <table>
@@ -2717,22 +2863,22 @@ Bugs:
             <td>placement</td>
             <td>The placement of the tooltip</td>
             <td>optional</td>
-            <td>left, top, bottom, right</td>
-            <td>top</td>
+            <td>auto, left, top, bottom, right</td>
+            <td>right</td>
         </tr>
         <tr>
             <td>animation</td>
-            <td>apply a CSS fade transition to the tooltip</td>
+            <td>Apply a CSS fade transition to the tooltip</td>
             <td>optional</td>
-            <td>any text</td>
-            <td>none</td>
+            <td>🚩 (flag)</td>
+            <td></td>
         </tr>
         <tr>
             <td>html</td>
-            <td>Insert HTML into the tooltip</td>
+            <td>Allow HTML in the tooltip text</td>
             <td>optional</td>
-            <td>true, false</td>
-            <td>false</td>
+            <td>🚩 (flag)</td>
+            <td></td>
         </tr>
     </tbody>
 </table>
@@ -2740,7 +2886,7 @@ Bugs:
 <hr>
 <h3 id="popover">Popover</h3>
 <pre><code class="d-block p-4">
-[popover title=&quot;I&#39;m the title&quot; text=&quot;And here&#39;s some amazing content. It&#39;s very engaging. right?&quot; placement=&quot;right&quot;] ... [/popover]
+[popover title=&quot;I&#39;m the title&quot; content=&quot;And here&#39;s some amazing content. It&#39;s very engaging. right?&quot; placement=&quot;auto&quot;] ... [/popover]
 </code></pre>
 <h4 id="-popover-parameters">[popover] parameters</h4>
 <table>
@@ -2762,7 +2908,7 @@ Bugs:
             <td>none</td>
         </tr>
         <tr>
-            <td>text</td>
+            <td>content</td>
             <td>The text of the popover</td>
             <td>required</td>
             <td>any text</td>
@@ -2772,22 +2918,29 @@ Bugs:
             <td>placement</td>
             <td>The placement of the popover</td>
             <td>optional</td>
-            <td>left, top, bottom, right</td>
-            <td>top</td>
+            <td>auto, left, top, bottom, right</td>
+            <td>right</td>
         </tr>
         <tr>
             <td>animation</td>
-            <td>apply a CSS fade transition to the tooltip</td>
+            <td>Apply a CSS fade transition to the tooltip</td>
             <td>optional</td>
-            <td>any text</td>
-            <td>none</td>
+            <td>🚩 (flag)</td>
+            <td></td>
         </tr>
         <tr>
             <td>html</td>
-            <td>Insert HTML into the tooltip</td>
+            <td>Allow HTML in the popover text</td>
             <td>optional</td>
-            <td>true, false</td>
-            <td>false</td>
+            <td>🚩 (flag)</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>trigger</td>
+            <td>Allow HTML in the popover text</td>
+            <td>optional</td>
+            <td>click, hover, focus, manual</td>
+            <td>click</td>
         </tr>
     </tbody>
 </table>
@@ -2858,7 +3011,7 @@ Bugs:
     [/carousel-item]
 [/carousel]
 </code></pre>
-<p>[carousel-item] wraps an HTML image tag, image inserted via the WordPress editor or the [code inline]img-gen[/code] tag. It can also be used for text slides but you may need to use additional utilities or custom styles to appropriately size content.</p>
+<p>[carousel-item] wraps an HTML image tag, image inserted via the WordPress editor or the <code>img-gen</code> tag. It can also be used for text slides but you may need to use additional utilities or custom styles to appropriately size content.</p>
 <h4 id="-carousel-parameters">[carousel] parameters</h4>
 <table>
     <thead>
@@ -3029,7 +3182,7 @@ Bugs:
         </tr>
         <tr>
             <td>backdrop</td>
-            <td>Apply the modal &quot;backdrop&quot; style; <code>static</code> will not close the modal when cklicking outside of it</td>
+            <td>Apply the modal &quot;backdrop&quot; style; <code>static</code> will not close the modal when clicking outside of it</td>
             <td>optional</td>
             <td>false, true, static</td>
             <td>true</td>
