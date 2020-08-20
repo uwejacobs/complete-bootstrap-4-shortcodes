@@ -68,6 +68,42 @@ Column 2 (50%)[lorem-ipsum/]
 [/card]
 <!-- /wp:shortcode -->
 
+<hr>
+
+<!-- wp:shortcode -->
+[card]
+    [card-header class="lead"]Nested Rows and Columns[/card-header]
+    [card-body class="p4"]
+
+        [row-outer]
+            [column-outer xs="3" class="bg-info text-center"]
+                Col 1
+                [row]
+                    [column xs="6"]Col 1.1[/column]
+                    [column xs="6"]Col 1.2[/column]
+                [/row]
+            [/column-outer]
+            [column-outer xs="6" class="bg-success text-center"]
+                Col 2
+                [row]
+                    [column xs="6"]Col 2.1[/column]
+                    [column xs="6"]Col 2.2[/column]
+                [/row]
+            [/column-outer]
+            [column-outer xs="3" class="bg-danger text-center"]
+                Col 3
+                [row]
+                    [column xs="6"]Col 3.1[/column]
+                    [column xs="6"]Col 3.2[/column]
+                [/row]
+            [/column-outer]
+        [/row-outer]
+
+    [/card-body]
+    [card-footer]These columns will not stack when you narrow your browser window. [/card-footer]
+[/card]
+<!-- /wp:shortcode -->
+
 <h2>Responsive Embed</h2>
 
 <!-- wp:shortcode -->
@@ -358,7 +394,7 @@ Nascetur commodo imperdiet.
 [/card-outer]
 <!-- /wp:shortcode -->
 
-<hr />
+<hr>
 
 <!-- wp:shortcode -->
 [card-outer]
@@ -836,7 +872,7 @@ New Messages[badge right] 9 [/badge]​
 [card-header class="lead"]Alerts[/card-header]
 [card-body class="p4"]
 
-[alert type="primary"] <strong> Primary </strong> [lorem-ipsum words="4" tag='span'] [/alert]
+[alert] <strong> Default </strong> [lorem-ipsum words="4" tag='span'] [/alert][alert type="primary"] <strong> Primary </strong> [lorem-ipsum words="4" tag='span'] [/alert]
 [alert type="secondary"] <strong> Secondary </strong> [lorem-ipsum words="4" tag='span'] [/alert]
 [alert type="success"] <strong> Success </strong> [lorem-ipsum words="4" tag='span'] [/alert]
 [alert type="info"] <strong> Info </strong> [lorem-ipsum words="4" tag='span'] [/alert]
@@ -1040,47 +1076,84 @@ Inner Header
 [/card]
 <!-- /wp:shortcode -->
 
+<h2>List Groups</h2>
+
+<!-- wp:shortcode -->
+[card]
+[card-header class="lead"]Basic List Group[/card-header]
+[card-body class="p4"]
+
+[list-group]
+[list-group-item]
+[lorem-ipsum]
+[/list-group-item]
+[list-group-item]
+[lorem-ipsum]
+[/list-group-item]
+[list-group-item]
+[lorem-ipsum]
+[/list-group-item]
+[/list-group]
+
+[/card-body]
+[card-footer][/card-footer]
+[/card]
+<!-- /wp:shortcode -->
+
 <hr>
 
 <!-- wp:shortcode -->
 [card]
-[card-header class="lead"]Media List[/card-header]
+[card-header class="lead"]Linked Items[/card-header]
+[card-body class="p4"]
+
+[list-group linked]
+[list-group-item active]<a href="#">Active</a>[/list-group-item]
+[list-group-item disabled]<a href="#">Disabled</a>[/list-group-item]
+[list-group-item]<a href="#">Link 1</a>[/list-group-item]
+[list-group-item]<a href="#">Link 2</a>[/list-group-item]
+[/list-group]
+
+[/card-body]
+[card-footer][/card-footer]
+[/card]
+<!-- /wp:shortcode -->
+
+<hr>
+
+<!-- wp:shortcode -->
+[card]
+[card-header class="lead"]Media List Group[/card-header]
 [card-body class="p4"]
 
 [list-group media]
 
-[media listgroup]
+[media list-group]
 [media-object class="mr-3"]
-[img responsive][img-gen size="150" text="Demo" bg="f00"][/img]
+[img responsive][img-gen size="150" text="Demo 1" bg="f00"][/img]
 [/media-object]
 [media-body]
-
-Header 1
-
+<h3>Header 1</h3>
 [lorem-ipsum sentences="3"]
 [/media-body]
 [/media]
 
-[media listgroup class="mt-4"]
+[media list-group class="mt-4"]
 [media-object class="mr-3"]
-[img responsive][img-gen size="150" text="Demo" bg="0f0"][/img]
+[img responsive][img-gen size="150" text="Demo 2" bg="0f0"][/img]
 [/media-object]
 [media-body]
-
-Header 2
-
+<h3>Header 2</h3>
 [lorem-ipsum sentences="3"]
 [/media-body]
 [/media]
 
-[media listgroup class="mt-4"]
+[media list-group class="mt-4"]
 [media-object class="mr-3"]
-[img responsive][img-gen size="150" text="Demo" bg="00f"][/img]
+[img responsive][img-gen size="150" text="Demo 3" bg="00f"][/img]
 [/media-object]
 [media-body]
-
-Header 3
-
+<h3>Header 3</h3>
 [lorem-ipsum sentences="3"]
 [/media-body]
 [/media]
@@ -1088,49 +1161,8 @@ Header 3
 [/list-group]​
 
 [/card-body]
-[card-footer]Use the [code inline]media[/code] flag at the [code inline]list-group[/code] tag and the [code inline]listgroup[/code] flag at the [code inline]media[/code] tag.[/card-footer]
+[card-footer]Use the [code inline]media[/code] flag at the [code inline][list-group][/code] tag and the [code inline]list-group[/code] flag at the [code inline][media][/code] tag.[/card-footer]
 [/card]
-<!-- /wp:shortcode -->
-
-<h2>List Groups</h2>
-
-<!-- wp:shortcode -->
-[list-group]
-[list-group-item]
-...
-[/list-group-item]
-[list-group-item]
-...
-[/list-group-item]
-[list-group-item]
-...
-[/list-group-item]
-[/list-group]
-
-
-
-
-[list-group]
-[list-group-item active]
-[lorem-ipsum sentence="1"]
-[/list-group-item]
-[list-group-item link="#"]
-[lorem-ipsum sentence="1"]
-[/list-group-item]
-[list-group-item link="#"]
-[lorem-ipsum words="4" tag="span"]
-[/list-group-item]
-[/list-group]
-
-
-
-
-[list-group linked]
-[list-group-item type="success" active][html]<a href="#">Cras justo odio</a>[/html][/list-group-item]
-[list-group-item type="info" disabled][html]<a href="#">Dapibus ac facilisis in</a>[/html][/list-group-item]
-[list-group-item type="warning"][html]<a href="#">Morbi leo risus</a>[/html][/list-group-item]
-[list-group-item type="danger"][html]<a href="#">Porta ac consectetur ac</a>[/html][/list-group-item]
-[/list-group]
 <!-- /wp:shortcode -->
 
 <h2>Code</h2>
@@ -1278,7 +1310,7 @@ Header 3
 [/card]
 <!-- /wp:shortcode -->
 
-<hr />
+<hr>
 
 <!-- wp:shortcode -->
 [card]
@@ -1753,20 +1785,28 @@ Automatically created by lorem ipsum generator
 <h2>Accordion</h2>
 
 <!-- wp:shortcode -->
+[card-outer]
+[card-header class="lead"]Basic Accordion[/card-header]
+[card-body-outer class="p4"]
+
 [accordion]
-[card show]
-[card-header] Lorem [/card-header]
-[card-body]
-[lorem-ipsum]
-[/card-body]
-[/card]
-[card]
-[card-header] Ipsum [/card-header]
-[card-body]
-[lorem-ipsum]
-[/card-body]
-[/card]
+    [card show]
+        [card-header] Header 1 [/card-header]
+        [card-body] [lorem-ipsum] [/card-body]
+    [/card]
+    [card]
+        [card-header] Header 2 [/card-header]
+        [card-body][lorem-ipsum][/card-body]
+    [/card]
+    [card]
+        [card-header] Header 3 [/card-header]
+        [card-body][lorem-ipsum][/card-body]
+    [/card]
 [/accordion]
+
+[/card-body-outer]
+[card-footer] [/card-footer]
+[/card-outer]
 <!-- /wp:shortcode -->
 
 <h2>Carousel</h2>
@@ -1814,11 +1854,23 @@ Automatically created by lorem ipsum generator
 [card-header class="lead"]Customized Carousel[/card-header]
 [card-body class="p4"]
 
-[carousel pause="false" interval="1000" controls indicators]
-[carousel-item active][img-gen responsive size="1200x200" text="Slide 1"][/carousel-item]
-[carousel-item][img-gen responsive size="1200x200" text="Slide 2" bg="C0C0C0"][/carousel-item]
-[carousel-item][img-gen responsive size="1200x200" text="Slide 3" bg="F00000"][/carousel-item]
-[carousel-item][img-gen responsive size="1200x200" text="Slide 4" bg="00F000"][/carousel-item]
+[carousel pause="false" interval="1000" controls indicators fade]
+[carousel-item active]
+    [img-gen responsive size="1200x200" text=" "]
+    [carousel-caption] Caption 1 [/carousel-caption]
+[/carousel-item]
+[carousel-item]
+    [img-gen responsive size="1200x200" text=" " bg="C0C0C0"]
+    [carousel-caption] Caption 2 [/carousel-caption]
+[/carousel-item]
+[carousel-item]
+    [img-gen responsive size="1200x200" text=" " bg="F00000"]
+    [carousel-caption] Caption 3 [/carousel-caption]
+[/carousel-item]
+[carousel-item]
+    [img-gen responsive size="1200x200" text=" " bg="00F000"]
+    [carousel-caption] Caption 4 [/carousel-caption]
+[/carousel-item]
 [/carousel]
 
 [/card-body]
@@ -1923,3 +1975,7 @@ Automatically created by lorem ipsum generator
 <!-- /wp:shortcode -->
 
 <!-- wp:shortcode /-->
+
+<!-- wp:paragraph -->
+<p></p>
+<!-- /wp:paragraph -->
