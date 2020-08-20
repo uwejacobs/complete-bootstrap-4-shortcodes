@@ -1,10 +1,6 @@
 <!-- TODO
 - New Tags
-  *-outer
   navbar
-- ... examples
-Bugs:
-- button dropdown id and aria
 -->
 <h1 id="bootstrap-4-shortcodes-for-wordpress">Bootstrap 4 Shortcodes for WordPress</h1>
 <p><img src="https://img.shields.io/wordpress/plugin/r/bootstrap-4-shortcodes.svg" alt="WordPress Rating"> <img src="https://img.shields.io/wordpress/plugin/dt/bootstrap-4-shortcodes.svg" alt="WordPress Downloads"></p>
@@ -66,6 +62,7 @@ Bugs:
 <h1 id="usage">Usage</h1>
 <h3 id="layout">Layout</h3>
 <h3 id="grid">Grid</h3>
+<p>The tags <code>[row-outer]</code> and <code>[column-outer]</code> allow nesting of rows and columns.</p>
 <pre><code class="d-block p-4">
 [row]
     [column md=&quot;6&quot;]
@@ -75,6 +72,29 @@ Bugs:
         [lorem-ipsum]
     [/column]
 [/row]
+</code></pre>
+<p>Nested rows and columns.</p>
+<pre><code class="d-block p-4">
+[row-outer]
+    [column-outer xs="3" class="bg-info"]
+        [row]
+            [column xs="6"]Col 1.1[/column]
+            [column xs="6"]Col 1.2[/column]
+        [/row]
+    [/column-outer]
+    [column-outer xs="6" class="bg-success"]
+        [row]
+            [column xs="6"]Col 2.1[/column]
+            [column xs="6"]Col 2.2[/column]
+        [/row]
+    [/column-outer]
+    [column-outer xs="3" class="bg-danger"]
+        [row]
+            [column xs="6"]Col 3.1[/column]
+            [column xs="6"]Col 3.2[/column]
+        [/row]
+    [/column-outer]
+[/row-outer]
 </code></pre>
 <p>The container component is also supported in case your theme doesn&#39;t include a container.</p>
 <pre><code class="d-block p-4">
@@ -394,7 +414,8 @@ Bugs:
 <hr>
 <h3 id="components">Components</h3>
 <h3 id="cards">Cards</h3>
-<pre><code class="d-block p-4">[card]
+<pre><code class="d-block p-4">
+[card]
   [list-group]
     [list-group-item]Cras justo odio[/list-group-item]
     [list-group-item]Dapibus ac facilisis in[/list-group-item]
@@ -555,6 +576,7 @@ Bugs:
   [/card]
 [/card-columns]</code></pre>
 <h4 id="-card-parameters">[card] parameters</h4>
+<p>The tag <code>[card-outer]</code> allows to nest cards inside a card.</p>
 <table class="table table-striped table-bordered">
     <thead>
         <tr>
@@ -591,6 +613,7 @@ Bugs:
 </table>
 <h4 id="-card-body-parameters">[card-body] parameters</h4>
 <div class="alert alert-warning"><strong>Note:</strong> Any <code>p</code>, <code>a</code> or <code>blockquote</code> tags within <code>[card-body]</code> will automatically receive <code>card-text</code>, <code>card-link</code> or <code>card-bodyquote</code> classes respectively.</div>
+<p>The tag <code>[card-body-outer]</code> allows to nest cards inside a card body.</p>
 <table class="table table-striped table-bordered">
     <thead>
         <tr>
@@ -1075,6 +1098,7 @@ Bugs:
 <p><a href="https://getbootstrap.com/docs/4.5/components/buttons/">Bootstrap button documentation</a></p>
 <hr>
 <h3 id="button-groups">Button Groups</h3>
+<p>The tag <code>[button-group-outer]</code> allows nesting of button groups.</p>
 <h4 id="basic-example-btn-grp">Basic example</h4>
 <pre><code class="d-block p-4">
 [button-group size=&quot;lg&quot; justified]
@@ -1396,21 +1420,21 @@ Bugs:
 <hr>
 <h3 id="navs">Navs</h3>
 <pre><code class="d-block p-4">
-[nav type=&quot;pills&quot;]
-    [nav-item link=&quot;#&quot;] ... [/nav-item]
-    [nav-item link=&quot;#&quot;] ... [/nav-item]
-    [nav-item link=&quot;#&quot;] ... [/nav-item]
+[nav tabs]
+    [nav-item link="#"] Link1 [/nav-item]
+    [nav-item link="#"] Link2 [/nav-item]
+    [nav-item link="#"] Link3 [/nav-item]
 [/nav]
 </code></pre>
-<h4 id="nav-with-dropdowns">Nav with dropdowns</h4>
+<h4 id="nav-with-dropdowns">Nav with active, disabled and dropdowns</h4>
 <pre><code class="d-block p-4">
-[nav type=&quot;pills&quot;]
-    [nav-item link=&quot;#&quot; active=&quot;true&quot;] ... [/nav-item]
-    [nav-item dropdown=&quot;true&quot; link=&quot;#&quot;] ...
-        [dropdown]
-            [dropdown-item link=&quot;#&quot;] ... [/dropdown-item]
-            [dropdown-item link=&quot;#&quot;] ... [/dropdown-item]
-        [/dropdown]
+[nav tabs]
+    [nav-item link="#" active] Active [/nav-item]
+    [nav-item link="#" disabled] Disabled [/nav-item]
+    [nav-item dropdown link="#"] Drop [dropdown-menu]
+            [dropdown-item link="#"] Link1 [/dropdown-item]
+            [dropdown-item link="#"] Link2 [/dropdown-item]
+        [/dropdown-menu]
     [/nav-item]
 [/nav]
 </code></pre>
@@ -1427,25 +1451,39 @@ Bugs:
     </thead>
     <tbody>
         <tr>
-            <td>type</td>
-            <td>The type of nav</td>
-            <td>required</td>
-            <td>tabs, pills</td>
             <td>tabs</td>
+            <td>Generate a tabbed interface</td>
+            <td>optional</td>
+            <td>🚩 (flag)</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>pills</td>
+            <td>Generate a interface with pills</td>
+            <td>optional</td>
+            <td>🚩 (flag)</td>
+            <td></td>
         </tr>
         <tr>
             <td>stacked</td>
             <td>Whether the nav is stacked (should be used with &quot;pills&quot; type</td>
             <td>optional</td>
-            <td>true, false</td>
-            <td>false</td>
+            <td>🚩 (flag)</td>
+            <td></td>
         </tr>
         <tr>
             <td>justified</td>
             <td>Whether the nav is justified</td>
             <td>optional</td>
-            <td>true, false</td>
-            <td>false</td>
+            <td>🚩 (flag)</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>fill</td>
+            <td>Proportionately fill all available space</td>
+            <td>optional</td>
+            <td>🚩 (flag)</td>
+            <td></td>
         </tr>
         <tr>
             <td>class</td>
@@ -1479,22 +1517,29 @@ Bugs:
             <td>link</td>
             <td>The url you want the dropdown-item to link to</td>
             <td>optional</td>
-            <td>any valid link</td>
+            <td>any text</td>
             <td>#</td>
+        </tr>
+        <tr>
+            <td>dropdown</td>
+            <td>Whether the item activates a &quot;dropdown&quot; menu</td>
+            <td>optional</td>
+            <td>🚩 (flag)</td>
+            <td></td>
         </tr>
         <tr>
             <td>active</td>
             <td>Whether the item has the &quot;active&quot; style applied</td>
             <td>optional</td>
-            <td>true, false</td>
-            <td>false</td>
+            <td>🚩 (flag)</td>
+            <td></td>
         </tr>
         <tr>
             <td>disabled</td>
             <td>Whether the item is disabled</td>
             <td>optional</td>
-            <td>true, false</td>
-            <td>false</td>
+            <td>🚩 (flag)</td>
+            <td></td>
         </tr>
         <tr>
             <td>class</td>
@@ -1517,9 +1562,9 @@ Bugs:
 <h3 id="breadcrumbs">Breadcrumbs</h3>
 <pre><code class="d-block p-4">
 [breadcrumb]
-    [breadcrumb-item link=&quot;#&quot;] ... [/breadcrumb-item]
-    [breadcrumb-item link=&quot;#&quot;] ... [/breadcrumb-item]
-    [breadcrumb-item link=&quot;#&quot;] ... [/breadcrumb-item]
+    [breadcrumb-item link="#"] Pictures [/breadcrumb-item]
+    [breadcrumb-item link="#"] Vacation [/breadcrumb-item]
+    [breadcrumb-item link="#" active] 2020 [/breadcrumb-item]
 [/breadcrumb]
 </code></pre>
 <h4 id="-breadcrumb-parameters">[breadcrumb] parameters</h4>
@@ -1596,7 +1641,7 @@ Bugs:
 <hr>
 <h3 id="badges">Badges</h3>
 <pre><code class="d-block p-4">
-[badge right] ... [/badge]
+[badge right] 10 [/badge]
 </code></pre>
 <h4 id="-badge-parameters">[badge] parameters</h4>
 <table>
@@ -1637,7 +1682,7 @@ Bugs:
 <hr>
 <h3 id="jumbotron">Jumbotron</h3>
 <pre><code class="d-block p-4">
-[jumbotron] ... [/jumbotron]
+[jumbotron] [lorem-ipsum] [/jumbotron]
 </code></pre>
 <h4 id="-jumbotron-parameters">[jumbotron] parameters</h4>
 <table>
@@ -1678,7 +1723,7 @@ Bugs:
 <hr>
 <h3 id="alerts">Alerts</h3>
 <pre><code class="d-block p-4">
-[alert type=&quot;success&quot;] ... [/alert]
+[alert type="danger"] <strong> Danger </strong> [/alert]
 </code></pre>
 <h4 id="-alert-parameters">[alert] parameters</h4>
 <table>
@@ -1832,13 +1877,15 @@ Bugs:
 <p><a href="https://getbootstrap.com/docs/4.5/components/progress/">Bootstrap progress bars documentation</a></p>
 <hr>
 <h3 id="media-objects">Media Objects</h3>
+<p>The tag <code>[media-outer]</code> allows to nest media objects inside a media object.</p>
 <pre><code class="d-block p-4">
 [media]
-    [media-object media=&quot;left&quot;]
-        ...
+    [media-object class="mr-3"]
+        [img responsive][img-gen size="150" text="Demo"][/img]
     [/media-object]
-    [media-body title=&quot;Testing&quot;]
-        ...
+    [media-body]
+        Header
+        [lorem-ipsum sentences="3"]
     [/media-body]
 [/media]
 </code></pre>
@@ -1855,7 +1902,7 @@ Bugs:
     </thead>
     <tbody>
         <tr>
-            <td>listgroup</td>
+            <td>list-group</td>
             <td>Whether the media is part of a list group</td>
             <td>optional</td>
             <td>🚩 (flag)</td>
@@ -1913,6 +1960,7 @@ Bugs:
     </tbody>
 </table>
 <h4 id="-media-body-parameters">[media-body] parameters</h4>
+<p>The tag <code>[media-body-outer]</code> allows to nest media objects inside a media object body.</p>
 <table>
     <thead>
         <tr>
@@ -1948,31 +1996,57 @@ Bugs:
 <pre><code class="d-block p-4">
 [list-group]
     [list-group-item]
-        ...
+        [lorem-ipsum]
     [/list-group-item]
     [list-group-item]
-        ...
+        [lorem-ipsum]
     [/list-group-item]
     [list-group-item]
-        ...
+        [lorem-ipsum]
     [/list-group-item]
 [/list-group]
 </code></pre>
 <h4 id="linked-items">Linked Items</h4>
 <pre><code class="d-block p-4">
-[list-group linked=&quot;true&quot;]
-    [list-group-item link=&quot;#&quot; active=&quot;true&quot;]
-        ...
-    [/list-group-item]
-    [list-group-item link=&quot;#&quot;]
-        ...
-    [/list-group-item]
-    [list-group-item link=&quot;#&quot;]
-        ...
-    [/list-group-item]
+[list-group linked]
+    [list-group-item active]<a href="#">Active</a>[/list-group-item]
+    [list-group-item disabled]<a href="#">Disabled</a>[/list-group-item]
+    [list-group-item]<a href="#">Link 1</a>[/list-group-item]
+    [list-group-item]<a href="#">Link 2</a>[/list-group-item]
 [/list-group]
 </code></pre>
-
+<h4 id="media-items">Media Items</h4>
+<pre><code class="d-block p-4">
+[list-group media]
+    [media list-group]
+        [media-object class="mr-3"]
+            [img responsive][img-gen size="150" text="Demo 1" bg="f00"][/img]
+        [/media-object]
+        [media-body]
+            &lt;h3&gt;Header 1&lt;/h3&gt;
+            [lorem-ipsum sentences="3"]
+        [/media-body]
+    [/media]
+    [media list-group class="mt-4"]
+        [media-object class="mr-3"]
+            [img responsive][img-gen size="150" text="Demo 2" bg="0f0"][/img]
+        [/media-object]
+        [media-body]
+            &lt;h3&gt;Header 2&lt;/h3&gt;
+            [lorem-ipsum sentences="3"]
+        [/media-body]
+    [/media]
+    [media list-group class="mt-4"]
+        [media-object class="mr-3"]
+            [img responsive][img-gen size="150" text="Demo 3" bg="00f"][/img]
+        [/media-object]
+        [media-body]
+            &lt;h3&gt;Header 3&lt;/h3&gt;
+            [lorem-ipsum sentences="3"]
+        [/media-body]
+    [/media]
+[/list-group]​
+</code></pre>
 <h4 id="-list-group-parameters">[list-group] parameters</h4>
 <table>
     <thead>
@@ -1987,14 +2061,21 @@ Bugs:
     <tbody>
         <tr>
             <td>linked</td>
-            <td>Whether this is a linked list group, or a standard one</td>
+            <td>Weather the list group contains links</td>
             <td>optional</td>
             <td>🚩 (flag)</td>
             <td></td>
         </tr>
         <tr>
             <td>flush</td>
-            <td>Remove some borders and rounded corners to render list group items edge-to-edge in a parent container (e.g., cards)</td>
+            <td>Remove some borders and rounded corners to render list group items edge-to-edge in a parent container (e.g. cards)</td>
+            <td>optional</td>
+            <td>🚩 (flag)</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>media</td>
+            <td>Weather the list group contains media items</td>
             <td>optional</td>
             <td>🚩 (flag)</td>
             <td></td>
@@ -2028,13 +2109,6 @@ Bugs:
     </thead>
     <tbody>
         <tr>
-            <td>link</td>
-            <td>The url you want the list item to link to <strong>Must correspond with the &quot;linked&quot; parameter in [list-group]</strong></td>
-            <td>optional</td>
-            <td>any text</td>
-            <td>#</td>
-        </tr>
-        <tr>
             <td>type</td>
             <td>The type of the list-group-item</td>
             <td>optional</td>
@@ -2045,15 +2119,15 @@ Bugs:
             <td>active</td>
             <td>Whether the item has the &quot;active&quot; style applied</td>
             <td>optional</td>
-            <td>true, false</td>
-            <td>false</td>
+            <td>🚩 (flag)</td>
+            <td></td>
         </tr>
         <tr>
-            <td>target</td>
-            <td>Target for the link</td>
+            <td>disabled</td>
+            <td>Whether the item is deactivated</td>
             <td>optional</td>
-            <td>any valid target</td>
-            <td>none</td>
+            <td>🚩 (flag)</td>
+            <td></td>
         </tr>
         <tr>
             <td>class</td>
@@ -2197,7 +2271,9 @@ Bugs:
 <hr>
 <h3 id="images">Image</h3>
 <pre><code class="d-block p-4">
-[img type=&quot;circle&quot; responsive] ... [/img]
+[img type=&quot;circle&quot; responsive]
+    [img-gen size="200" file="png" bg="C00" color="ff0"]
+[/img]
 </code></pre>
 <p>Wrap any number of HTML image tags or images inserted via the WordPress media manager or the <code>img-gen</code> tag.</p>
 <h4 id="-img-parameters">[img] parameters</h4>
@@ -2399,9 +2475,9 @@ Bugs:
 <h3 id="blockquote">Blockquote</h3>
 <pre><code class="d-block p-4">
 [blockquote]
-    ...
+    The quote goes here...
     [blockquote-footer]
-        ...
+        The source goes here...
     [/blockquote-footer]
 [/blockquote]
 </code></pre>
@@ -2465,7 +2541,7 @@ Bugs:
 <hr>
 <h3 id="lead-body-copy">Lead body copy</h3>
 <pre><code class="d-block p-4">
-[lead] ... [/lead]
+[lead] [lorem-ipsum] [/lead]
 </code></pre>
 <h4 id="-lead-parameters">[lead] parameters</h4>
 <table>
@@ -2501,7 +2577,9 @@ Bugs:
 <h3 id="border-classes">Border</h3>
 <p>Use border utilities to quickly style the <code>border</code>, <code>border-radius</code>, <code>border-size</code> and <code>border-color</code> of an element. Great for images, buttons, or any other element.</p>
 <pre><code class="d-block p-4">
-[border radius="pill"] ... [/border]
+[border radius="pill" color="danger"]
+    [lorem-ipsum class="p-3"]
+[/border]
 </code></pre>
 <h4 id="-border-parameters">[border] parameters</h4>
 <table>
@@ -2838,7 +2916,7 @@ Bugs:
 <h3 id="javascript">Javascript</h3>
 <h3 id="tooltip">Tooltip</h3>
 <pre><code class="d-block p-4">
-[tooltip title=&quot;I&#39;m the title&quot; placement=&quot;auto&quot;] ... [/tooltip]
+[tooltip title=&quot;I&#39;m the tooltip title&quot; placement=&quot;auto&quot;] Hover over me [/tooltip]
 </code></pre>
 <h4 id="-tooltip-parameters">[tooltip] parameters</h4>
 <table>
@@ -2854,7 +2932,7 @@ Bugs:
     <tbody>
         <tr>
             <td>title</td>
-            <td>The text of the tooltip</td>
+            <td>The title of the tooltip</td>
             <td>required</td>
             <td>any text</td>
             <td>none</td>
@@ -2886,7 +2964,9 @@ Bugs:
 <hr>
 <h3 id="popover">Popover</h3>
 <pre><code class="d-block p-4">
-[popover title=&quot;I&#39;m the title&quot; content=&quot;And here&#39;s some amazing content. It&#39;s very engaging. right?&quot; placement=&quot;auto&quot;] ... [/popover]
+[popover title="I'm the title" content="And this is the content" placement="auto" animation]
+    [button outline class="mr-3"] Click Me [/button]
+[/popover]
 </code></pre>
 <h4 id="-popover-parameters">[popover] parameters</h4>
 <table>
@@ -2951,19 +3031,20 @@ Bugs:
 <p>Create an accordion by wrapping <code>[card]</code>s in <code>[accordion]</code>.</p>
 <pre><code class="d-block p-4">
 [accordion]
-  [card active]
-    [card-header] ... [/card-header]
-    [card-body]
-      ...
-    [/card-body]
-  [/card]
-  [card]
-    [card-header] ... [/card-header]
-    [card-body]
-      ...
-    [/card-body]
-  [/card]
-[/accordion]</code></pre>
+    [card show]
+        [card-header] Header 1 [/card-header]
+        [card-body] [lorem-ipsum] [/card-body]
+    [/card]
+    [card]
+        [card-header] Header 2 [/card-header]
+        [card-body][lorem-ipsum][/card-body]
+    [/card]
+    [card]
+        [card-header] Header 3 [/card-header]
+        [card-body][lorem-ipsum][/card-body]
+    [/card]
+[/accordion]
+</code></pre>
 <h4 id="-accordion-parameters">[accordion] parameters</h4>
 <table>
     <thead>
@@ -2998,16 +3079,20 @@ Bugs:
 <pre><code class="d-block p-4">
 [carousel]
     [carousel-item active]
-        [img-gen responsive size="1200x200" text="Slide 1"]
+        [img-gen responsive size="1200x200" text=" "]
+        [carousel-caption] Caption 1 [/carousel-caption]        
     [/carousel-item]
     [carousel-item]
-        [img-gen responsive size="1200x200" text="Slide 2" bg="C0C0C0"]
+        [img-gen responsive size="1200x200" text=" " bg="C0C0C0"]
+        [carousel-caption] Caption 2 [/carousel-caption]        
     [/carousel-item]
     [carousel-item]
-        [img-gen responsive size="1200x200" text="Slide 3" bg="F00000"]
+        [img-gen responsive size="1200x200" text=" " bg="F00000"]
+        [carousel-caption] Caption 3 [/carousel-caption]        
     [/carousel-item]
     [carousel-item][
-        img-gen responsive size="1200x200" text="Slide 4" bg="00F000"]
+        img-gen responsive size="1200x200" text=" " bg="00F000"]
+        [carousel-caption] Caption 4 [/carousel-caption]        
     [/carousel-item]
 [/carousel]
 </code></pre>
@@ -3060,6 +3145,13 @@ Bugs:
             <td></td>
         </tr>
         <tr>
+            <td>fade</td>
+            <td>To animate slides with a fade transition instead of a slide.</td>
+            <td>optional</td>
+            <td>🚩 (flag)</td>
+            <td></td>
+        </tr>
+        <tr>
             <td>class</td>
             <td>Any extra classes you want to add</td>
             <td>optional</td>
@@ -3101,6 +3193,34 @@ Bugs:
             <td>Any text</td>
             <td>none</td>
         </tr-->
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at <a href="#container-parameters">[container] parameters</a>.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+    </tbody>
+</table>
+<h4 id="-carousel-caption-parameters">[carousel-caption] parameters</h4>
+<table>
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
         <tr>
             <td>class</td>
             <td>Any extra classes you want to add</td>

@@ -106,6 +106,7 @@ License: MIT
 			'breadcrumb-item',
 			'button',
 			'button-group',
+			'button-group-outer',
 			'button-toolbar',
 			'card',
 			'card-body',
@@ -121,6 +122,7 @@ License: MIT
 			'card-subtitle',
 			'card-title',
 			'carousel',
+			'carousel-caption',
 			'carousel-item',
 			'code',
 			'color',
@@ -199,6 +201,14 @@ License: MIT
 			"data"			=> false
 		), $save_atts );
 
+		if( isset($GLOBALS['button_count']) )
+			$GLOBALS['button_count']++;
+		else
+			$GLOBALS['button_count'] = 0;
+
+		$id = 'bs4-button-'. $GLOBALS['button_count'];
+		$GLOBALS['dropdown_button'] = $id;
+
 		$class	= array();
 		$class[] = 'btn';
 		$class[] = 'btn-' . ($this->is_flag('outline', $save_atts) ? 'outline-' : '') . $atts['type'];
@@ -235,6 +245,7 @@ License: MIT
 		if ($this->is_flag('dropdown', $save_atts)) {
 			$return = $this->addattribute( $search_tags, $return, 'haspopup', 'true', 'aria-' );
 			$return = $this->addattribute( $search_tags, $return, 'expanded', 'false', 'aria-' );
+			$return = $this->addattribute( $search_tags, $return, 'id', $id, '' );
 		}
 		if ($this->is_flag('active', $save_atts)) {
 			$return = $this->addattribute( $search_tags, $return, 'pressed', 'true', 'aria-' );
@@ -253,6 +264,9 @@ License: MIT
 		* @author M. W. Delaney
 		*
 		*-------------------------------------------------------------------------------------*/
+	function bs_button_group_outer( $save_atts, $content = null ) {
+        return $this->bs_button_group( $save_atts, $content );
+	}
 	function bs_button_group( $save_atts, $content = null ) {
         $save_atts = array_change_key_case( (array) $save_atts, CASE_LOWER );
 		$atts = shortcode_atts( array(
@@ -497,7 +511,13 @@ License: MIT
 		$class[] = 'dropdown-menu';
 		$class[] = ($this->is_flag('right', $save_atts)) ? 'dropdown-menu-right' : '';
 
-		$wrap_before = ($this->testdom($content, $search_tags)) ? '' : '<div' . $this->class_output ( $class, $atts["class"] ) . '>';
+        $aria_labelledby = '';
+		if (isset($GLOBALS['dropdown_button'])) {
+            $aria_labelledby = ' aria-labelledby="' . $GLOBALS['dropdown_button'] . '"';
+		    unset($GLOBALS['dropdown_button']);
+		}
+
+		$wrap_before = ($this->testdom($content, $search_tags)) ? '' : '<div' . $this->class_output ( $class, $atts["class"] ) . $aria_labelledby . '>';
 		$wrap_after  = ($this->testdom($content, $search_tags)) ? '' : '</div>';
 
 		$a_class   = array();
@@ -533,7 +553,7 @@ License: MIT
 	function bs_nav( $save_atts, $content = null ) {
         $save_atts = array_change_key_case( (array) $save_atts, CASE_LOWER );
 			$atts = shortcode_atts( array(
-                // 'vertical'
+                // 'stacked'
                 // 'tabs'
                 // 'pills'
                 // 'fill'
@@ -549,7 +569,7 @@ License: MIT
 
 			$class   = array();
 			$class[] = 'nav';
-			$class[] = ($this->is_flag('vertical', $save_atts))  ? 'flex-column' : '';
+			$class[] = ($this->is_flag('stacked', $save_atts))  ? 'flex-column' : '';
 			$class[] = ($this->is_flag('tabs', $save_atts))      ? 'nav-tabs' : '';
 			$class[] = ($this->is_flag('pills', $save_atts))     ? 'nav-pills' : '';
 			$class[] = ($this->is_flag('fill', $save_atts))      ? 'nav-fill' : '';
@@ -577,10 +597,10 @@ License: MIT
 	function bs_nav_item( $save_atts, $content = null ) {
         $save_atts = array_change_key_case( (array) $save_atts, CASE_LOWER );
 		$atts = shortcode_atts( array(
-				"link"     => '#',
 				// "active"
 				// "disabled"
 				// "dropdown"
+				"link"     => '#',
 				"class"    => false,
 				"data"     => false,
 		), $save_atts );
@@ -1608,9 +1628,9 @@ License: MIT
 		function bs_carousel( $save_atts, $content = null ) {
             $save_atts = array_change_key_case( (array) $save_atts, CASE_LOWER );
 			$atts = shortcode_atts( array(
-			    // "caption" ???
 			    // "controls"
 			    // "indicators"
+			    // "fade"
 				"interval" => false,
 				"pause"    => 'hover',
 				"wrap"     => 'true',
@@ -1625,9 +1645,10 @@ License: MIT
 
 			$id = 'bs4-carousel-'. $GLOBALS['carousel_count'];
 
-			$class	= array();
-			$class[]  = 'carousel';
-			$class[]  = 'slide';
+			$class   = array();
+			$class[] = 'carousel';
+			$class[] = 'slide';
+			$class[] = ( $this->is_flag( 'fade', $save_atts ) ) ? 'carousel-fade' : '';
 
 			$item_class	= array();
 			//$item_class[]  = 'carousel-item';
@@ -1711,6 +1732,31 @@ License: MIT
 		$class[] = 'carousel-item';
 		$class[] = ( $this->is_flag( 'active', $save_atts ) ) ? 'active' : '';
 
+
+		$data_props = $this->parse_data_attributes( $atts['data'] );
+
+		return sprintf(
+			'<div%s%s>%s</div>',
+			$this->class_output ( $class, $atts["class"] ),
+			$data_props,
+			do_shortcode( $content )
+		);
+	}
+
+	/*--------------------------------------------------------------------------------------
+		*
+		* bs_carousel_caption
+		*
+		*-------------------------------------------------------------------------------------*/
+	function bs_carousel_caption( $save_atts, $content = null ) {
+        $save_atts = array_change_key_case( (array) $save_atts, CASE_LOWER );
+		$atts = shortcode_atts( array(
+				"class"   => false,
+				"data"    => false
+		), $save_atts );
+
+		$class   = array();
+		$class[] = 'carousel-caption';
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 
@@ -1807,12 +1853,12 @@ License: MIT
 	function bs_media( $save_atts, $content = null ) {
         $save_atts = array_change_key_case( (array) $save_atts, CASE_LOWER );
 		$atts = shortcode_atts( array(
-                // "listgroup"
+                // "list-group"
    				"class"  => false,
 				"data"   => false
 		), $save_atts );
 
-        $div = ($this->is_flag('listgroup', $save_atts)) ? 'li' : 'div';
+        $div = ($this->is_flag('list-group', $save_atts)) ? 'li' : 'div';
 
 		$class = array();
 		$class[] = 'media';
@@ -2955,7 +3001,6 @@ License: MIT
 		*
 		*-------------------------------------------------------------------------------------*/
 	function close_icon( $dismiss ) {
-
 
 		return '<button type="button" class="close" data-dismiss="' . $dismiss . '" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
 	}
