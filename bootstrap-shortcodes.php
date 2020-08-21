@@ -1,7 +1,7 @@
 <?php
 /*
-Plugin Name: Bootstrap 4 Wordpress Shortcodes
-Plugin URI: https://github.com/uwejacobs/bt4-wp-shortcodes
+Plugin Name: Complete Bootstrap 4 Shortcodes
+Plugin URI: https://github.com/uwejacobs/bt4-shortcodes
 Description: The plugin adds shortcodes for all Bootstrap 4 elements.
 Version: 4.5.0
 Author: Uwe Jacobs

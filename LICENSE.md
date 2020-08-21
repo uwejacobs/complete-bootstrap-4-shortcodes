@@ -1,8 +1,8 @@
 The MIT License (MIT)
 
-Copyright (c) 2016 Filip Stefansson
-Copyright (c) 2018 MWDelaney
-Copyright (c) 2020 Uwe Jacobs
+Copyright (C) 2016 Filip Stefansson
+Copyright (C) 2018 MWDelaney
+Copyright (C) 2020 Uwe Jacobs
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

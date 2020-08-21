@@ -18,7 +18,7 @@ This plugin creates a simple, out of the way button just above the WordPress Tin
 
 **Requires PHP 5.3 or newer**
 
-For questions, support, or to contribute to this plugin, check out [our GitHub project](https://github.com/uwejacobs/bt4-wp-shortcodes)
+For questions, support, or to contribute to this plugin, check out [our GitHub project](https://github.com/uwejacobs/bt4-shortcodes)
 
 ####Updated for Bootstrap 4.5.x
 Tested and working in the latest version of Bootstrap!

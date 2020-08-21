@@ -23,7 +23,7 @@
 // ======================================================================== //
 
     function bootstrap_shortcodes_styles_all() {
-        wp_register_style( 'bootstrap-shortcodes-help-all', plugins_url( 'bt4-wp-shortcodes/includes/help/css/bootstrap-shortcodes-help-all.css' ) );
+        wp_register_style( 'bootstrap-shortcodes-help-all', plugins_url( 'bt4-shortcodes/includes/help/css/bootstrap-shortcodes-help-all.css' ) );
         wp_enqueue_style( 'bootstrap-shortcodes-help-all' );
     }
 
@@ -121,10 +121,10 @@
 
     function enqueue_bs_plugin_scripts($plugin_array)
     {
-        wp_register_style( 'bootstrap-shortcodes-help', plugins_url( 'bt4-wp-shortcodes/includes/help/css/bootstrap-shortcodes-help.css' ) );
-        wp_register_script( 'bootstrap', plugins_url( 'bt4-wp-shortcodes/includes/help/js/bootstrap.min.js' ) );
-        wp_register_script( 'popper', plugins_url( 'bt4-wp-shortcodes/includes/help/js/popper.min.js' ) );
-        wp_register_style( 'fontawesome', plugins_url( 'bt4-wp-shortcodes/includes/help/css/fontawesome.min.css' ) );
+        wp_register_style( 'bootstrap-shortcodes-help', plugins_url( 'bt4-shortcodes/includes/help/css/bootstrap-shortcodes-help.css' ) );
+        wp_register_script( 'bootstrap', plugins_url( 'bt4-shortcodes/includes/help/js/bootstrap.min.js' ) );
+        wp_register_script( 'popper', plugins_url( 'bt4-shortcodes/includes/help/js/popper.min.js' ) );
+        wp_register_style( 'fontawesome', plugins_url( 'bt4-shortcodes/includes/help/css/fontawesome.min.css' ) );
         wp_enqueue_style( 'bootstrap-shortcodes-help' );
         wp_enqueue_script( 'popper' );
         wp_enqueue_script( 'bootstrap' );
