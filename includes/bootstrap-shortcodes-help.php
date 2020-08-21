@@ -50,7 +50,7 @@ $html = file_get_contents(dirname(__FILE__) . '/help/README.html');
             jQuery('#bs-shortcode-reference').addClass('active');
         
             //Hide header info from the readme, not relevent to documentation.
-            jQuery("#bootstrap-shortcodes-help #bt4-shortcodes").nextUntil("#bootstrap-shortcodes-help #bs-requirements").hide();
+            jQuery("#bootstrap-shortcodes-help #complete-bootstrap-4-shortcodes").nextUntil("#bootstrap-shortcodes-help #bs-requirements").hide();
         
         // ======================================================================== //
         
