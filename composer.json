@@ -1,5 +1,5 @@
 {
-  "name": "uwejacobs/bootstrap-4-shortcodes",
+  "name": "uwejacobs/bt4-wp-shortcodes",
   "description": "WordPress shortcodes for easier use of Bootstrap 4 elements in your content.",
   "keywords": [
     "bootstrap",
@@ -7,7 +7,7 @@
     "wordpress",
     "plugin"
   ],
-  "homepage": "https://github.com/uwejacobs/bootstrap-4-shortcodes",
+  "homepage": "https://github.com/uwejacobs/bt4-wp-shortcodes",
   "license": "MIT",
   "authors": [
     {

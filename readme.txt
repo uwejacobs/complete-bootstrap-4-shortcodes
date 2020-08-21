@@ -1,4 +1,4 @@
-=== Bootstrap Shortcodes for WordPress ===
+=== Bootstrap 4 Shortcodes for WordPress ===
 Contributors: Uwe Jacobs
 Tags: bootstrap, shortcode, shortcodes, responsive, grid, flex, lorem ipsum, dummy image generator
 Requires at least: 3.8
@@ -18,7 +18,7 @@ This plugin creates a simple, out of the way button just above the WordPress Tin
 
 **Requires PHP 5.3 or newer**
 
-For questions, support, or to contribute to this plugin, check out [our GitHub project](https://github.com/uwejacobs/bootstrap-4-shortcodes)
+For questions, support, or to contribute to this plugin, check out [our GitHub project](https://github.com/uwejacobs/bt4-wp-shortcodes)
 
 ####Updated for Bootstrap 4.5.x
 Tested and working in the latest version of Bootstrap!
