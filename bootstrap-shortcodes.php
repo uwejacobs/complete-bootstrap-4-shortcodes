@@ -3,7 +3,7 @@
 Plugin Name: Complete Bootstrap 4 Shortcodes
 Plugin URI: https://github.com/uwejacobs/complete-bootstrap-4-shortcodes
 Description: The plugin adds shortcodes for all Bootstrap 4 elements.
-Version: 4.5.0
+Version: 4.5.2
 Author: Uwe Jacobs
 Author URI:
 License: MIT
@@ -2030,7 +2030,7 @@ License: MIT
 
         if ($atts['words'] && intval($atts['words']) > 0) {
             $return = $lipsum->words(intval($atts['words']), $atts['tag']);
-        } else if ($atts['sentences'] && intval($atts['sentences'], ) > 0) {
+        } else if ($atts['sentences'] && intval($atts['sentences']) > 0) {
             $return = $lipsum->sentences(intval($atts['sentences']), $atts['tag']);
         } else if ($atts['paragraphs'] && intval($atts['paragraphs']) > 0) {
             $return = $lipsum->paragraph(intval($atts['paragraphs']), $atts['tag']);
