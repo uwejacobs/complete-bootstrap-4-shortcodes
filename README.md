@@ -30,8 +30,8 @@ with the [Bootstrap](https://getbootstrap.com/) framework. **This plugin
 does not include the Bootstrap framework**. The icon shortcodes require
 Font Awesome 5 or better.
 
-The plugin is tested to work with `Bootstrap 4` and `WordPress 4.5` and
-**requires PHP 5.3 or later**.
+The plugin is tested to work with `Bootstrap 4.5` and `WordPress 5.5` and
+**requires PHP 5.3 or better**.
 
 Wordpress is not able to process nested shortcodes - like a `card`
 inside a `card` - correctly; see [Wordpress: Nested

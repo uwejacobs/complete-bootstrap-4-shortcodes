@@ -3,6 +3,7 @@ Contributors: uwejacobs
 Tags: bootstrap,shortcode,shortcodes,responsive,grid,flex,lorem ipsum,dummy image generator
 Requires at least: 3.8
 Tested up to: 5.5
+Requires PHP: 5.3
 Stable tag: 4.5.2
 License: MIT License
 License URI: https://mit-license.org/
@@ -16,25 +17,52 @@ Plenty of great WordPress plugins focus on providing or including the Bootstrap 
 
 This plugin creates a simple, out of the way button just above the WordPress TinyMCE editor (next to the "Add Media" button) which pops up the plugin's documentation and shortcode examples for reference and handy "Insert Example" links to send the example shortcodes straight to the editor. There are no additional TinyMCE buttons to clutter up your screen, just great, easy to use shortcodes!
 
-**Requires PHP 5.3 or newer**
-
-For questions, support, or to contribute to this plugin, check out [our GitHub project](https://github.com/uwejacobs/complete-bootstrap-4-shortcodes)
+For questions, support, or to contribute to this plugin, check out [our GitHub project](https://github.com/uwejacobs/complete-bootstrap-4-shortcodes).
 
 == Overview ==
-**Layout:**
-* Grid, Responsive Embeds, Responsive Utilities
+See the shortcodes in action on our [demo page](https://ujsoftware.com/bootstrap-4-shortcodes-demo-4-5-2/).
 
-**Components:**
-* Cards, Icons, Buttons, Button Groups, Button Dropdowns, Navs, Breadcrumbs, Badges, Jumbotron, Alerts, Progress Bars, Media Objects, List Groups
+= Layout: =
+* Grid
+* Responsive Embeds
+* Responsive Utilities
 
-**Content:**
-* Code, Tables, Figures, Images, Blockquote, Lead body copy
+= Components: =
+* Cards
+* Icons
+* Buttons
+* Button Groups
+* Button Dropdowns
+* Navs
+* Breadcrumbs
+* Badges
+* Jumbotron
+* Alerts
+* Progress Bars
+* Media Objects
+* List Groups
 
-**Utilities:**
-* Border, Color, Flex, HTML snippets, Lorem Ipsum Text Generator</p>
+= Content: =
+* Code
+* Tables
+* Figures
+* Images
+* Blockquote
+* Lead body copy
 
-**Javascript:**
-* Tooltip, Popover, Collapse, Carousel, Modal</p>
+= Utilities: =
+* Border
+* Color
+* Flex
+* HTML snippets
+* Lorem Ipsum Text Generator
+
+= Javascript: =
+* Tooltip
+* Popover
+* Collapse
+* Carousel
+* Modal
 
 == Screenshots ==
 1. Rows and Columns
@@ -49,6 +77,10 @@ For questions, support, or to contribute to this plugin, check out [our GitHub p
 10. Flex
 11. Tooltips and Popovers
 12. Accordion
+13. The Bootstrap Shortcodes button in TinyMCE
+14. The Modal with the Shortcode Reference
+15. Shortcode example in TinyMCE
+16. The above shortcode example rendered with WordPress
 
 == Changelog ==
 = 4.5.2 =
