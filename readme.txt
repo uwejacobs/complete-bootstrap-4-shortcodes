@@ -20,6 +20,36 @@ This plugin creates a simple, out of the way button just above the WordPress Tin
 
 For questions, support, or to contribute to this plugin, check out [our GitHub project](https://github.com/uwejacobs/complete-bootstrap-4-shortcodes)
 
+== Overview ==
+**Layout:**
+* Grid, Responsive Embeds, Responsive Utilities
+
+**Components:**
+* Cards, Icons, Buttons, Button Groups, Button Dropdowns, Navs, Breadcrumbs, Badges, Jumbotron, Alerts, Progress Bars, Media Objects, List Groups
+
+**Content:**
+* Code, Tables, Figures, Images, Blockquote, Lead body copy
+
+**Utilities:**
+* Border, Color, Flex, HTML snippets, Lorem Ipsum Text Generator</p>
+
+**Javascript:**
+* Tooltip, Popover, Collapse, Carousel, Modal</p>
+
+== Screenshots ==
+1. Rows and Columns
+2. Nested Rows And Columns
+3. Card Columns
+4. Button Styles and Colors
+5. Jumbotron
+6. Alert Colors
+7. Progress Bar Styles
+8. Media Objects
+9. Border Examples
+10. Flex
+11. Tooltips and Popovers
+12. Accordion
+
 == Changelog ==
 = 4.5.2 =
 * Tested and working in the latest version 4.5.2 of Bootstrap
