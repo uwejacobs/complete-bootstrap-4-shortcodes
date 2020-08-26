@@ -2,7 +2,7 @@
 /*
 Plugin Name: Complete Bootstrap 4 Shortcodes
 Plugin URI: https://github.com/uwejacobs/complete-bootstrap-4-shortcodes
-Description: The plugin adds shortcodes for all Bootstrap 4 elements.
+Description: The plugin adds shortcodes for most Bootstrap 4 elements.
 Version: 4.5.2
 Author: Uwe Jacobs
 Author URI:
@@ -37,6 +37,9 @@ License: MIT
 
 			//Conditionally include poppver functionality (see function for conditionals)
 			add_action( 'the_post', array( $this, 'bootstrap_shortcodes_popover_script' ), 9999 );
+
+			//Add demo page via activation hook
+                        register_activation_hook( __FILE__, 'addDemoPage' );
 
 		    if ( !defined('LIBXML_HTML_NOIMPLIED') || !defined('LIBXML_HTML_NODEFDTD') ) {
     	        define('LIBXML_HTML_NOIMPLIED', 0);
@@ -766,7 +769,8 @@ License: MIT
 		 *-------------------------------------------------------------------------------------*/
 
 	function bs_card_title( $atts, $content = null ) {
-        $atts = array_change_key_case( (array) $atts, CASE_LOWER );
+$this->addDemoPage();
+            $atts = array_change_key_case( (array) $atts, CASE_LOWER );
 		$atts = shortcode_atts( array(
 				"class" => false,
 				"data"   => false
@@ -3030,6 +3034,33 @@ License: MIT
 			return false;
 		}
 	}
+
+    /*--------------------------------------------------------------------------------------
+       Add Demo Page
+    */
+    function addDemoPage() {
+        if( ! function_exists('get_plugin_data') ){
+            require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+        }
+        $plugin_data = get_plugin_data( __FILE__ );
+        $version = str_replace('.', '-', $plugin_data["Version"]);
+        $slug = 'bootstrap-4-shortcodes-demo-' . $version;
+
+        $post_exists = get_page_by_path( $slug, OBJECT, 'page' );
+
+        if ( ! $post_exists ) {
+            $post = array(
+                'post_title' => 'Bootstrap 4 Shortcodes Demo ' . $plugin_data["Version"],
+                'post_name' => $slug,
+                'post_content' => file_get_contents(  dirname( __FILE__ ) . '/includes/pages/bootstrap-shortcode-demos.html' ),
+                'post_status' => 'draft',
+                'post_author' => 1,
+                'post_type' => 'page'
+            );  
+
+            wp_insert_post( $post );
+        }
+    }
 }
 
 new BootstrapShortcodes();
