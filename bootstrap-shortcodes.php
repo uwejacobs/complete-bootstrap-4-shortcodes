@@ -769,7 +769,6 @@ License: MIT
 		 *-------------------------------------------------------------------------------------*/
 
 	function bs_card_title( $atts, $content = null ) {
-$this->addDemoPage();
             $atts = array_change_key_case( (array) $atts, CASE_LOWER );
 		$atts = shortcode_atts( array(
 				"class" => false,
