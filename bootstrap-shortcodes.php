@@ -39,7 +39,7 @@ License: MIT
 			add_action( 'the_post', array( $this, 'bootstrap_shortcodes_popover_script' ), 9999 );
 
 			//Add demo page via activation hook
-                        register_activation_hook( __FILE__, 'addDemoPage' );
+                        register_activation_hook( __FILE__, array( $this, 'addDemoPage' ) );
 
 		    if ( !defined('LIBXML_HTML_NOIMPLIED') || !defined('LIBXML_HTML_NODEFDTD') ) {
     	        define('LIBXML_HTML_NOIMPLIED', 0);
