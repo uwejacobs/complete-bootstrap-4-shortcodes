@@ -3,7 +3,7 @@
 Plugin Name: Complete Bootstrap 4 Shortcodes
 Plugin URI: https://github.com/uwejacobs/complete-bootstrap-4-shortcodes
 Description: The plugin adds shortcodes for most Bootstrap 4 elements.
-Version: 4.5.2
+Version: 4.5.3
 Author: Uwe Jacobs
 Author URI:
 License: MIT
@@ -1532,14 +1532,14 @@ License: MIT
         $atts = array_change_key_case( (array) $atts, CASE_LOWER );
 		$atts = shortcode_atts( array(
 				"prefix" => false,
-				"type"   => false,
+				"name"   => false,
 				"class"  => false,
 				"data"   => false
 		), $atts );
 
         $class = array();
 		$class[] = ( $atts['prefix'] )   ? $atts['prefix'] : 'fas';
-		$class[] = ( $atts['type'] )     ? 'fa-' . $atts['type'] : '';
+		$class[] = ( $atts['name'] )     ? 'fa-' . $atts['name'] : '';
 
 		$data_props = $this->parse_data_attributes( $atts['data'] );
 

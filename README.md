@@ -569,6 +569,14 @@ documentation](https://getbootstrap.com/docs/4.5/components/card/)
 
 ### Icons
 
+<div class="alert alert-warning">
+
+**Note:** The `[icon]` and `[icon-stack]` shortcodes depend on the
+Font Awesome 5 Icon Library, either from your theme or the official
+Font Awesome plugin.
+
+</div>
+
     [icon type="arrow-right"]
 
 #### \[icon\] parameters
