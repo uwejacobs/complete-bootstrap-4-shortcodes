@@ -608,8 +608,8 @@ fad, fal, far (pro)</td>
 <td>fas</td>
 </tr>
 <tr class="even">
-<td>type</td>
-<td>The type of icon you want to display</td>
+<td>name</td>
+<td>The name of icon you want to display</td>
 <td>required</td>
 <td>See <a href="https://fontawesome.com/icons?d=gallery&amp;m=free">Font Awesome Searchable Gallery</a></td>
 <td>none</td>
