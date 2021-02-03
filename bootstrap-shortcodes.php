@@ -3,7 +3,7 @@
 Plugin Name: Complete Bootstrap 4 Shortcodes
 Plugin URI: https://github.com/uwejacobs/complete-bootstrap-4-shortcodes
 Description: The plugin adds shortcodes for most Bootstrap 4 elements.
-Version: 4.5.3
+Version: 4.5.4
 Author: Uwe Jacobs
 Author URI:
 License: MIT
@@ -907,14 +907,13 @@ License: MIT
 			$wrap_after = '';
 
             $id = (isset($GLOBALS['accordion'])) ? ' id="bs-heading' . $GLOBALS['accordion_card'] . '"' : '';
-  			$wrap_before .= ($this->testdom($content, $search_tags)) ? '' : '<div' . $id . '>';
+  			$wrap_before .= ($this->testdom($content, $search_tags)) ? '' : '<div class="card-header"' . $id . '>';
     		$wrap_after .= ($this->testdom($content, $search_tags)) ? '' : '</div>';
 
    			$wrap_before .= (isset($GLOBALS['accordion'])) ? sprintf('<button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapse%1$s" aria-controls="collapse%1$s" aria-expanded="%2$s">', $GLOBALS['accordion_card'], $GLOBALS['accordion_card_show'] ? 'true' : 'false') : '';
     		$wrap_after .= (isset($GLOBALS['accordion'])) ? '</button>' : '';
 
 			$class = array();
-			$class[] = 'card-header';
             $class = array_merge($class, explode(' ', $atts['class']));
 
 			$return = sprintf(
@@ -948,6 +947,7 @@ License: MIT
 
 			$class = array();
 			$class[] = 'card-footer';
+                        $class = array_merge($class, explode(' ', $atts['class']));
 
 			$return = sprintf(
 					'%s',
@@ -1374,7 +1374,7 @@ License: MIT
 
 			$return = $this->addclass( $search_tags, $return, $class );
 			$return = $this->addclass( $li_search_tags, $return, $li_class );
-			$return = $this->addclass( $a_search_tags, $return, $a_class );
+			if ($this->is_flag('linked', $save_atts)) $return = $this->addclass( $a_search_tags, $return, $a_class );
 			$return = $this->adddata( $search_tags, $return, $atts['data'] );
 			$return = $this->striptagfromdom( 'br', $return );
 
@@ -1398,7 +1398,7 @@ License: MIT
 				"data"			=> false
 			), $save_atts );
 
-			$search_tags = array('a', 'button', 'li');
+			$search_tags = array('li');
 
 			$class   = array();
 			$class[] = 'list-group-item';
@@ -2098,7 +2098,12 @@ License: MIT
 				"alt"           => false,
 				"class"         => false,
 				"data"          => false
-		), $atts );
+			), $atts );
+
+	if (!function_exists('imagettftext')) {
+		printf("<p><b>The shortcode [img-gen] requires the PHP extensions GD and FreeType.</b></p>");
+		return;
+	}
 
         /**
          * Handle the “size” parameter.

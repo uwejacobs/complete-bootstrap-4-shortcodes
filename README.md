@@ -1166,7 +1166,7 @@ documentation](https://getbootstrap.com/docs/4.5/content/tables/)
 
 ### Image
 
-    [img type="circle" responsive]
+    [img responsive]
         [img-gen size="200" file="png" bg="C00" color="ff0"]
     [/img]
 
