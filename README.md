@@ -30,7 +30,7 @@ with the [Bootstrap](https://getbootstrap.com/) framework. **This plugin
 does not include the Bootstrap framework**. The icon shortcodes require
 Font Awesome 5 or better.
 
-The plugin is tested to work with `Bootstrap 4.5` and `WordPress 5.5` and
+The plugin is tested to work with `Bootstrap 4.5` and `WordPress 5.6` and
 **requires PHP 5.3 or better**.
 
 Wordpress is not able to process nested shortcodes - like a `card`
@@ -676,6 +676,9 @@ Documentation](https://fontawesome.com/how-to-use/on-the-web/referencing-icons/b
 | outline   | Turn the button into a bordered/outlined button                                                                                                 | optional | 🚩 (flag)                                                              |         |
 | class     | Any extra classes you want to add                                                                                                               | optional | any text                                                              | none    |
 | data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text                                                              | none    |
+| tag       | The html tag of the button                                                                                                                      | optional | `button` or `a`                                                         | button    |
+| link      | The url you want the tag `a` to link to                                                                                                           | optional | any valid link | \#      |
+| target    | Where to open the link for tag `a`                                                                                                                | optional | _self, _blank, _parent, _top | _self   |
 
 [Bootstrap button
 documentation](https://getbootstrap.com/docs/4.5/components/buttons/)

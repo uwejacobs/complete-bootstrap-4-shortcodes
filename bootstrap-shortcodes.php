@@ -3,7 +3,7 @@
 Plugin Name: Complete Bootstrap 4 Shortcodes
 Plugin URI: https://github.com/uwejacobs/complete-bootstrap-4-shortcodes
 Description: The plugin adds shortcodes for most Bootstrap 4 elements.
-Version: 4.5.4
+Version: 4.5.6
 Author: Uwe Jacobs
 Author URI:
 License: MIT
@@ -189,7 +189,7 @@ License: MIT
 		*
 		*-------------------------------------------------------------------------------------*/
 	function bs_button( $save_atts, $content = null ) {
-        $save_atts = array_change_key_case( (array) $save_atts, CASE_LOWER );
+        	$save_atts = array_change_key_case( (array) $save_atts, CASE_LOWER );
 		$atts = shortcode_atts( array(
             // 'block'
             // 'active'
@@ -197,6 +197,9 @@ License: MIT
             // 'dropdown'
             // 'split'
             // 'outline'
+			"tag"			=> 'button',
+			"link"			=> '#',
+			"target"		=> '_self',
 			"type"			=> 'primary',
 			"size"			=> false,
 			"modal"         => false,
@@ -226,15 +229,21 @@ License: MIT
 		$button_data   = array();
 		$button_data[] = ($this->is_flag('dropdown', $save_atts)) ? 'toggle,dropdown' : '';
 		if ($atts['modal']) {
-    		$button_data[] = 'toggle,modal';
-	    	$button_data[] = 'target,#' . $atts['modal'];
-    	}
+    			$button_data[] = 'toggle,modal';
+	    		$button_data[] = 'target,#' . $atts['modal'];
+    		}
 		$button_data   = implode( '|', array_filter($button_data) );
 
-        $search_tags = array('a', 'button', 'input');
+        	$search_tags = array('a', 'button', 'input');
 
-		$wrap_before = ($content && $this->testdom($content, $search_tags)) ? '' : '<button>';
-		$wrap_after  = ($content && $this->testdom($content, $search_tags)) ? '' : '</button>';
+		if ($atts['tag'] == 'a') {
+			$str = '<a role="button" href="' . $atts['link'] . '" target="' . $atts['target'] . '">';
+			$wrap_before = ($content && $this->testdom($content, $search_tags)) ? '' : $str;
+			$wrap_after  = ($content && $this->testdom($content, $search_tags)) ? '' : '</a>';
+		} else {
+			$wrap_before = ($content && $this->testdom($content, $search_tags)) ? '' : '<button>';
+			$wrap_after  = ($content && $this->testdom($content, $search_tags)) ? '' : '</button>';
+		}
 
 		$content = do_shortcode( $wrap_before . $content . $wrap_after );
 		$return = sprintf(
@@ -2101,8 +2110,7 @@ License: MIT
 			), $atts );
 
 	if (!function_exists('imagettftext')) {
-		printf("<p><b>The shortcode [img-gen] requires the PHP extensions GD and FreeType.</b></p>");
-		return;
+		return("<p><b>The shortcode [img-gen] requires the PHP extensions GD and FreeType.</b></p>");
 	}
 
         /**
