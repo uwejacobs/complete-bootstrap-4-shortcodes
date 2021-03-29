@@ -22,7 +22,7 @@ Check the demo page "Bootstrap 4 Shortcodes Demo 4.5.6" after activation for rea
 For questions, support, or to contribute to this plugin, check out [our GitHub project](https://github.com/uwejacobs/complete-bootstrap-4-shortcodes).
 
 == Overview ==
-See the shortcodes in action on our [demo page](https://ujsoftware.com/bootstrap-4-shortcodes-demo-4-5-5/).
+See the shortcodes in action on our [demo page](https://ujsoftware.com/bootstrap-4-shortcodes-demo-4-5-6/).
 
 = Layout: =
 * Grid
@@ -86,7 +86,7 @@ See the shortcodes in action on our [demo page](https://ujsoftware.com/bootstrap
 
 == Changelog ==
 = 4.5.6 =
-* [button] can now create tag <a> with href and target
+* [button] can now create tag <code>a</code> with href and target
 
 = 4.5.5 =
 * Bugfix: [card-footer] didn't insert "class" parameter
