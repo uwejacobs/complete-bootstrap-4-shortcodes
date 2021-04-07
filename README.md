@@ -1,5 +1,4 @@
-Complete Bootstrap 4 Shortcodes
-===============================
+# Complete Bootstrap 4 Shortcodes
 
 ![WordPress
 Rating](https://img.shields.io/wordpress/plugin/r/complete-bootstrap-4-shortcodes.svg)
@@ -10,101 +9,97 @@ WordPress plugin that provides shortcodes for easier use of the
 Bootstrap styles and components in your content.
 
 **Bootstrap 4 Shortcodes for WordPress** creates a simple, out of the
-way button just above the WordPress TinyMCE editor (next to the \"Add
-Media\" button) which pops up the plugin\'s documentation and shortcode
-examples for reference and handy \"Insert Example\" links to send the
+way button just above the WordPress TinyMCE editor (next to the "Add
+Media" button) which pops up the plugin's documentation and shortcode
+examples for reference and handy "Insert Example" links to send the
 example shortcodes straight to the editor. There are no additional
 TinyMCE buttons to clutter up your screen, just great, easy to use
-shortcodes!
+shortcodes\!
 
-Requirements
-------------
+## Requirements
 
 ![Tested in
 WordPress](https://img.shields.io/wordpress/v/complete-bootstrap-4-shortcodes.svg)
 ![PHP 5.3+](https://img.shields.io/badge/PHP-5.3%2B-blue.svg)
 ![Bootstrap](https://img.shields.io/badge/Bootstrap-4.5.x-6f5499.svg)
 
-This plugin won\'t do anything if you don\'t have WordPress theme built
+This plugin won't do anything if you don't have WordPress theme built
 with the [Bootstrap](https://getbootstrap.com/) framework. **This plugin
 does not include the Bootstrap framework**. The icon shortcodes require
 Font Awesome 5 or better.
 
-The plugin is tested to work with `Bootstrap 4.5`{.d-block .p-4} and
-`WordPress 5.6`{.d-block .p-4} and **requires PHP 5.3 or better**.
+The plugin is tested to work with `Bootstrap 4.5` and `WordPress 5.6`
+and **requires PHP 5.3 or better**.
 
-Wordpress is not able to process nested shortcodes - like a
-`card`{.d-block .p-4} inside a `card`{.d-block .p-4} - correctly; see
-[Wordpress: Nested
+Wordpress is not able to process nested shortcodes - like a `card`
+inside a `card` - correctly; see [Wordpress: Nested
 Shortcodes](https://codex.wordpress.org/Shortcode_API#Nested_Shortcodes).
 Some of the shortcodes have aliases with the extension `-outer` to allow
 nesting.
 
-Shortcode Reference
--------------------
+## Shortcode Reference
 
-[](#layout){#layout-header .text-decoration-none}
+[](#layout)
 
 ### Layout
 
--   [Grid](#grid)
--   [Responsive Embeds](#responsive-embeds)
--   [Responsive Utilities](#responsive-utilities)
+  - [Grid](#grid)
+  - [Responsive Embeds](#responsive-embeds)
+  - [Responsive Utilities](#responsive-utilities)
 
-[](#components){#components-header .text-decoration-none}
+[](#components)
 
 ### Components
 
--   [Cards](#cards)
--   [Icons](#icons)
--   [Buttons](#buttons)
--   [Button Groups](#button-groups)
--   [Button Dropdowns](#button-dropdowns)
--   [Navs](#navs)
--   [Breadcrumbs](#breadcrumbs)
--   [Badges](#badges)
--   [Jumbotron](#jumbotron)
--   [Alerts](#alerts)
--   [Progress Bars](#progress-bars)
--   [Media Objects](#media-objects)
--   [List Groups](#list-groups)
+  - [Cards](#cards)
+  - [Icons](#icons)
+  - [Buttons](#buttons)
+  - [Button Groups](#button-groups)
+  - [Button Dropdowns](#button-dropdowns)
+  - [Navs](#navs)
+  - [Breadcrumbs](#breadcrumbs)
+  - [Badges](#badges)
+  - [Jumbotron](#jumbotron)
+  - [Alerts](#alerts)
+  - [Progress Bars](#progress-bars)
+  - [Media Objects](#media-objects)
+  - [List Groups](#list-groups)
 
-[](#content){#content-header .text-decoration-none}
+[](#content)
 
 ### Content
 
--   [Code](#code)
--   [Tables](#tables)
--   [Figures](#figures)
--   [Images](#images)
--   [Blockquote](#blockquote)
--   [Lead body copy](#lead-body-copy)
+  - [Code](#code)
+  - [Tables](#tables)
+  - [Figures](#figures)
+  - [Images](#images)
+  - [Blockquote](#blockquote)
+  - [Lead body copy](#lead-body-copy)
 
-[](#utilities){#utilities-header .text-decoration-none}
+[](#utilities)
 
 ### Utilities
 
--   [Border](#border-classes)
--   [Color](#color-classes)
--   [Flex](#flex)
--   [HTML snippets](#html)
--   [Lorem Ipsum Text Generator](#lorem-ipsum)
--   [Floats and Clearfix](#clearfix-float)
+  - [Border](#border-classes)
+  - [Color](#color-classes)
+  - [Flex](#flex)
+  - [HTML snippets](#html)
+  - [Lorem Ipsum Text Generator](#lorem-ipsum)
+  - [Floats and Clearfix](#clearfix-float)
 
-[](#javascript){#javascript-header .text-decoration-none}
+[](#javascript)
 
 ### Javascript
 
--   [Tooltip](#tooltip)
--   [Popover](#popover)
--   [Collapse](#collapse)
--   [Carousel](#carousel)
--   [Modal](#modal)
+  - [Tooltip](#tooltip)
+  - [Popover](#popover)
+  - [Collapse](#collapse)
+  - [Carousel](#carousel)
+  - [Modal](#modal)
 
-Usage
-=====
+# Usage
 
-### Layout {#layout}
+### Layout
 
 ### Grid
 
@@ -143,7 +138,7 @@ Nested rows and columns.
         [/column-outer]
     [/row-outer]
 
-The container component is also supported in case your theme doesn\'t
+The container component is also supported in case your theme doesn't
 include a container.
 
     [container]
@@ -173,91 +168,91 @@ cases where you want to wrap a container.
         [/container]
     [/container-fluid]
 
-#### \[container\] parameters {#-container-parameters}
+#### \[container\] parameters
 
-  Parameter   Description                                                                                                                                                                       Required   Values     Default
-  ----------- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ---------- ---------- ---------
-  fluid       Create a full width container, spanning the entire width of the viewport. (see [Bootstrap documentation](https://getbootstrap.com/docs/4.5/layout/overview/#fluid) for details)   optional   🚩 (flag)   
-  class       Any extra classes you want to add                                                                                                                                                 optional   any text   none
-  data        Data attribute and value pairs separated by a comma. Pairs separated by pipe. Example: `data="columns,3|index,1"` expands to `data-columns="3" data-index="1"`.                   optional   any text   none
+| Parameter | Description                                                                                                                                                                     | Required | Values   | Default |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------- | ------- |
+| fluid     | Create a full width container, spanning the entire width of the viewport. (see [Bootstrap documentation](https://getbootstrap.com/docs/4.5/layout/overview/#fluid) for details) | optional | 🚩 (flag) |         |
+| class     | Any extra classes you want to add                                                                                                                                               | optional | any text | none    |
+| data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. Example: `data="columns,3\|index,1"` expands to `data-columns="3" data-index="1"`.                | optional | any text | none    |
 
-#### \[container-fluid\] parameters {#-container-fluid-parameters}
+#### \[container-fluid\] parameters
 
-  Parameter   Description                                                                                                                                        Required   Values     Default
-  ----------- -------------------------------------------------------------------------------------------------------------------------------------------------- ---------- ---------- ---------
-  class       Any extra classes you want to add                                                                                                                  optional   any text   none
-  data        Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters)).   optional   any text   none
+| Parameter | Description                                                                                                                                      | Required | Values   | Default |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------ | -------- | -------- | ------- |
+| class     | Any extra classes you want to add                                                                                                                | optional | any text | none    |
+| data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters)). | optional | any text | none    |
 
-#### \[row\] parameters {#-row-parameters}
+#### \[row\] parameters
 
-  Parameter   Description                                                                                                                                       Required   Values     Default
-  ----------- ------------------------------------------------------------------------------------------------------------------------------------------------- ---------- ---------- ---------
-  class       Any extra classes you want to add                                                                                                                 optional   any text   none
-  data        Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters).   optional   any text   none
+| Parameter | Description                                                                                                                                     | Required | Values   | Default |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------- | ------- |
+| class     | Any extra classes you want to add                                                                                                               | optional | any text | none    |
+| data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text | none    |
 
-#### \[column\] parameters {#-column-parameters}
+#### \[column\] parameters
 
-  Parameter   Description                                                                                                                                       Required   Values     Default
-  ----------- ------------------------------------------------------------------------------------------------------------------------------------------------- ---------- ---------- ---------
-  xs          Size of column on extra small screens (less than 576px)                                                                                           optional   1-12       false
-  sm          Size of column on small screens (greater than 576px)                                                                                              optional   1-12       false
-  md          Size of column on medium screens (greater than 768px)                                                                                             optional   1-12       false
-  lg          Size of column on large screens (greater than 992px)                                                                                              optional   1-12       false
-  xl          Size of column on extra large screens (greater than 1200px)                                                                                       optional   1-12       false
-  offset-xs   Offset on extra small screens                                                                                                                     optional   1-12       false
-  offset-sm   Offset on small screens                                                                                                                           optional   1-12       false
-  offset-md   Offset on column on medium screens                                                                                                                optional   1-12       false
-  offset-lg   Offset on column on large screens                                                                                                                 optional   1-12       false
-  class       Any extra classes you want to add                                                                                                                 optional   any text   none
-  data        Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters).   optional   any text   none
+| Parameter | Description                                                                                                                                     | Required | Values   | Default |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------- | ------- |
+| xs        | Size of column on extra small screens (less than 576px)                                                                                         | optional | 1-12     | false   |
+| sm        | Size of column on small screens (greater than 576px)                                                                                            | optional | 1-12     | false   |
+| md        | Size of column on medium screens (greater than 768px)                                                                                           | optional | 1-12     | false   |
+| lg        | Size of column on large screens (greater than 992px)                                                                                            | optional | 1-12     | false   |
+| xl        | Size of column on extra large screens (greater than 1200px)                                                                                     | optional | 1-12     | false   |
+| offset-xs | Offset on extra small screens                                                                                                                   | optional | 1-12     | false   |
+| offset-sm | Offset on small screens                                                                                                                         | optional | 1-12     | false   |
+| offset-md | Offset on column on medium screens                                                                                                              | optional | 1-12     | false   |
+| offset-lg | Offset on column on large screens                                                                                                               | optional | 1-12     | false   |
+| class     | Any extra classes you want to add                                                                                                               | optional | any text | none    |
+| data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text | none    |
 
 [Bootstrap grid
 documentation](https://getbootstrap.com/docs/4.5/layout/grid/).
 
-------------------------------------------------------------------------
+-----
 
 ### Responsive Embeds
 
     [embed-responsive ratio="16by9"]  [/embed-responsive]
 
-Wrap `<iframe>`{.d-block .p-4}, `<embed>`{.d-block .p-4},
-`<video>`{.d-block .p-4}, and `<object>`{.d-block .p-4} elements to make
-them responsive.
+Wrap `<iframe>`, `<embed>`, `<video>`, and `<object>` elements to make
+them
+responsive.
 
-#### \[responsive-embed\] parameters {#-responsive-embed-parameters}
+#### \[responsive-embed\] parameters
 
-  Parameter   Description                                                                                                                                       Required   Values                     Default
-  ----------- ------------------------------------------------------------------------------------------------------------------------------------------------- ---------- -------------------------- ---------
-  ratio       Maintain the aspect ratio of the embed                                                                                                            optional   1by1, 4by3, 16by9, 21by9   false
-  class       Any extra classes you want to add                                                                                                                 optional   any text                   none
-  data        Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters).   optional   any text                   none
+| Parameter | Description                                                                                                                                     | Required | Values                   | Default |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------------------------ | ------- |
+| ratio     | Maintain the aspect ratio of the embed                                                                                                          | optional | 1by1, 4by3, 16by9, 21by9 | false   |
+| class     | Any extra classes you want to add                                                                                                               | optional | any text                 | none    |
+| data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text                 | none    |
 
 [Bootstrap responsive embed
 documentation](https://getbootstrap.com/docs/4.5/utilities/embed/)
 
-------------------------------------------------------------------------
+-----
 
 ### Responsive Utilities
 
     [responsive block="xl lg md" hidden="sm xs"] [lorem-ipsum] [/responsive]
 
-#### \[reponsive\] parameters {#-reponsive-parameters}
+#### \[reponsive\] parameters
 
-  Parameter       Description                                                                                                                                       Required   Values               Default
-  --------------- ------------------------------------------------------------------------------------------------------------------------------------------------- ---------- -------------------- ---------
-  hidden          Sizes at which this element is hidden (separated by spaces)                                                                                       optional   xs, sm, md, lg, xl   false
-  block           Sizes at which this element is visible and displayed as a \"block\" element (separated by spaces)                                                 optional   xs, sm, md, lg, xl   false
-  inline          Sizes at which this element is visible and displayed as an \"inline\" element (separated by spaces)                                               optional   xs, sm, md, lg, xl   false
-  inline\_block   Sizes at which this element is visible and displayed as an \"inline-block\" element (separated by spaces)                                         optional   xs, sm, md, lg, xl   false
-  class           Any extra classes you want to add                                                                                                                 optional   any text             none
-  data            Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters).   optional   any text             none
+| Parameter     | Description                                                                                                                                     | Required | Values             | Default |
+| ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------------------ | ------- |
+| hidden        | Sizes at which this element is hidden (separated by spaces)                                                                                     | optional | xs, sm, md, lg, xl | false   |
+| block         | Sizes at which this element is visible and displayed as a "block" element (separated by spaces)                                                 | optional | xs, sm, md, lg, xl | false   |
+| inline        | Sizes at which this element is visible and displayed as an "inline" element (separated by spaces)                                               | optional | xs, sm, md, lg, xl | false   |
+| inline\_block | Sizes at which this element is visible and displayed as an "inline-block" element (separated by spaces)                                         | optional | xs, sm, md, lg, xl | false   |
+| class         | Any extra classes you want to add                                                                                                               | optional | any text           | none    |
+| data          | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text           | none    |
 
 [Bootstrap display properties
 documentation](https://getbootstrap.com/docs/4.5/utilities/display/#hiding-elements)
 
-------------------------------------------------------------------------
+-----
 
-### Components {#components}
+### Components
 
 ### Cards
 
@@ -379,7 +374,7 @@ width and height columns.
 
 ##### Card deck
 
-Use a card deck for a set of equal width and height cards that aren't
+Use a card deck for a set of equal width and height cards that aren’t
 attached to one another.
 
     [card-deck]
@@ -441,156 +436,203 @@ wrapping them in `[card-columns]`
       [/card]
     [/card-columns]
 
-#### \[card\] parameters {#-card-parameters}
+#### \[card\] parameters
 
-The tag `[card-outer]` allows to nest cards inside a card.
+The tag `[card-outer]` allows to nest cards inside a
+card.
 
-  Parameter   Description                                                                     Required   Values     Default
-  ----------- ------------------------------------------------------------------------------- ---------- ---------- ---------
-  show        Show the collapsible card content by default.                                   optional   🚩 (flag)   
-  class       Any extra classes you want to add.                                              optional   any text   
-  data        Data attribute and value pairs separated by a comma. Pairs separated by pipe.   optional   any text   
+| Parameter | Description                                                                   | Required | Values   | Default |
+| --------- | ----------------------------------------------------------------------------- | -------- | -------- | ------- |
+| show      | Show the collapsible card content by default.                                 | optional | 🚩 (flag) |         |
+| class     | Any extra classes you want to add.                                            | optional | any text |         |
+| data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. | optional | any text |         |
 
-#### \[card-body\] parameters {#-card-body-parameters}
+#### \[card-body\] parameters
 
-::: {.alert .alert-warning}
+<div class="alert alert-warning">
+
 **Note:** Any `p`, `a` or `blockquote` tags within `[card-body]` will
 automatically receive `card-text`, `card-link` or `card-bodyquote`
 classes respectively.
-:::
 
-The tag `[card-body-outer]` allows to nest cards inside a card body.
+</div>
 
-  Parameter   Description                                                                     Required   Values     Default
-  ----------- ------------------------------------------------------------------------------- ---------- ---------- ---------
-  class       Any extra classes you want to add.                                              optional   any text   
-  data        Data attribute and value pairs separated by a comma. Pairs separated by pipe.   optional   any text   
+The tag `[card-body-outer]` allows to nest cards inside a card
+body.
 
-#### \[card-title\] parameters {#-card-title-parameters}
+| Parameter | Description                                                                   | Required | Values   | Default |
+| --------- | ----------------------------------------------------------------------------- | -------- | -------- | ------- |
+| class     | Any extra classes you want to add.                                            | optional | any text |         |
+| data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. | optional | any text |         |
 
-::: {.alert .alert-warning}
+#### \[card-title\] parameters
+
+<div class="alert alert-warning">
+
 **Note:** `[card-title]` should contain a heading tag (`h1`, `h2`, `h3`,
 `h4`, `h5`, or `h6`), inserted using the WordPress editor. If a heading
-tag is not added `h4` will be inserted automatically.
-:::
+tag is not added `h4` will be inserted
+automatically.
 
-  Parameter   Description                                                                     Required   Values     Default
-  ----------- ------------------------------------------------------------------------------- ---------- ---------- ---------
-  class       Any extra classes you want to add.                                              optional   any text   
-  data        Data attribute and value pairs separated by a comma. Pairs separated by pipe.   optional   any text   
+</div>
 
-#### \[card-subtitle\] parameters {#-card-subtitle-parameters}
+| Parameter | Description                                                                   | Required | Values   | Default |
+| --------- | ----------------------------------------------------------------------------- | -------- | -------- | ------- |
+| class     | Any extra classes you want to add.                                            | optional | any text |         |
+| data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. | optional | any text |         |
 
-::: {.alert .alert-warning}
+#### \[card-subtitle\] parameters
+
+<div class="alert alert-warning">
+
 **Note:** `[card-subtitle]` should contain a heading tag (`h1`, `h2`,
 `h3`, `h4`, `h5`, or `h6`), inserted using the WordPress editor. If a
-heading tag is not added `h6` will be inserted automatically.
-:::
+heading tag is not added `h6` will be inserted
+automatically.
 
-  Parameter   Description                                                                     Required   Values     Default
-  ----------- ------------------------------------------------------------------------------- ---------- ---------- ---------
-  class       Any extra classes you want to add.                                              optional   any text   
-  data        Data attribute and value pairs separated by a comma. Pairs separated by pipe.   optional   any text   
+</div>
 
-#### \[card-img\] parameters {#-card-img-parameters}
+| Parameter | Description                                                                   | Required | Values   | Default |
+| --------- | ----------------------------------------------------------------------------- | -------- | -------- | ------- |
+| class     | Any extra classes you want to add.                                            | optional | any text |         |
+| data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. | optional | any text |         |
 
-::: {.alert .alert-warning}
+#### \[card-img\] parameters
+
+<div class="alert alert-warning">
+
 **Note:** `[card-img]` should contain an image inserted using the
-WordPress editor or the `img-gen` tag.
-:::
+WordPress editor or the `img-gen`
+tag.
 
-  Parameter   Description                                                                     Required   Values     Default
-  ----------- ------------------------------------------------------------------------------- ---------- ---------- ---------
-  top         Flag whether this image cap is at the top of the card.                          optional   🚩 (flag)   
-  bottom      Flag whether this image cap is at the bottom of the card.                       optional   🚩 (flag)   
-  class       Any extra classes you want to add.                                              optional   any text   
-  data        Data attribute and value pairs separated by a comma. Pairs separated by pipe.   optional   any text   
+</div>
 
-#### \[card-img-overlay\] parameters {#-card-img-overlay-parameters}
+| Parameter | Description                                                                   | Required | Values   | Default |
+| --------- | ----------------------------------------------------------------------------- | -------- | -------- | ------- |
+| top       | Flag whether this image cap is at the top of the card.                        | optional | 🚩 (flag) |         |
+| bottom    | Flag whether this image cap is at the bottom of the card.                     | optional | 🚩 (flag) |         |
+| class     | Any extra classes you want to add.                                            | optional | any text |         |
+| data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. | optional | any text |         |
 
-  Parameter   Description                                                                     Required   Values     Default
-  ----------- ------------------------------------------------------------------------------- ---------- ---------- ---------
-  class       Any extra classes you want to add.                                              optional   any text   
-  data        Data attribute and value pairs separated by a comma. Pairs separated by pipe.   optional   any text   
+#### \[card-img-overlay\] parameters
 
-#### \[card-header\] parameters {#-card-header-parameters}
+| Parameter | Description                                                                   | Required | Values   | Default |
+| --------- | ----------------------------------------------------------------------------- | -------- | -------- | ------- |
+| class     | Any extra classes you want to add.                                            | optional | any text |         |
+| data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. | optional | any text |         |
 
-::: {.alert .alert-warning}
+#### \[card-header\] parameters
+
+<div class="alert alert-warning">
+
 **Note:** `[card-header]` should contain a heading tag (`h1`, `h2`,
 `h3`, `h4`, `h5`, or `h6`), inserted using the WordPress editor. If a
 heading tag is not added `div` (no heading) will be inserted
 automatically.
-:::
 
-  Parameter   Description                                                                     Required   Values     Default
-  ----------- ------------------------------------------------------------------------------- ---------- ---------- ---------
-  class       Any extra classes you want to add.                                              optional   any text   
-  data        Data attribute and value pairs separated by a comma. Pairs separated by pipe.   optional   any text   
+</div>
 
-#### \[card-footer\] parameters {#-card-footer-parameters}
+| Parameter | Description                                                                   | Required | Values   | Default |
+| --------- | ----------------------------------------------------------------------------- | -------- | -------- | ------- |
+| class     | Any extra classes you want to add.                                            | optional | any text |         |
+| data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. | optional | any text |         |
 
-  Parameter   Description                                                                     Required   Values     Default
-  ----------- ------------------------------------------------------------------------------- ---------- ---------- ---------
-  class       Any extra classes you want to add.                                              optional   any text   
-  data        Data attribute and value pairs separated by a comma. Pairs separated by pipe.   optional   any text   
+#### \[card-footer\] parameters
 
-#### \[card-group\] parameters {#-card-group-parameters}
+| Parameter | Description                                                                   | Required | Values   | Default |
+| --------- | ----------------------------------------------------------------------------- | -------- | -------- | ------- |
+| class     | Any extra classes you want to add.                                            | optional | any text |         |
+| data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. | optional | any text |         |
 
-  Parameter   Description                                                                     Required   Values     Default
-  ----------- ------------------------------------------------------------------------------- ---------- ---------- ---------
-  class       Any extra classes you want to add.                                              optional   any text   
-  data        Data attribute and value pairs separated by a comma. Pairs separated by pipe.   optional   any text   
+#### \[card-group\] parameters
 
-#### \[card-deck\] parameters {#-card-deck-parameters}
+| Parameter | Description                                                                   | Required | Values   | Default |
+| --------- | ----------------------------------------------------------------------------- | -------- | -------- | ------- |
+| class     | Any extra classes you want to add.                                            | optional | any text |         |
+| data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. | optional | any text |         |
 
-  Parameter   Description                                                                     Required   Values     Default
-  ----------- ------------------------------------------------------------------------------- ---------- ---------- ---------
-  class       Any extra classes you want to add.                                              optional   any text   
-  data        Data attribute and value pairs separated by a comma. Pairs separated by pipe.   optional   any text   
+#### \[card-deck\] parameters
 
-#### \[card-columns\] parameters {#-card-columns-parameters}
+| Parameter | Description                                                                   | Required | Values   | Default |
+| --------- | ----------------------------------------------------------------------------- | -------- | -------- | ------- |
+| class     | Any extra classes you want to add.                                            | optional | any text |         |
+| data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. | optional | any text |         |
 
-  Parameter   Description                                                                     Required   Values     Default
-  ----------- ------------------------------------------------------------------------------- ---------- ---------- ---------
-  class       Any extra classes you want to add.                                              optional   any text   
-  data        Data attribute and value pairs separated by a comma. Pairs separated by pipe.   optional   any text   
+#### \[card-columns\] parameters
+
+| Parameter | Description                                                                   | Required | Values   | Default |
+| --------- | ----------------------------------------------------------------------------- | -------- | -------- | ------- |
+| class     | Any extra classes you want to add.                                            | optional | any text |         |
+| data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. | optional | any text |         |
 
 [Bootstrap card
 documentation](https://getbootstrap.com/docs/4.5/components/card/)
 
-------------------------------------------------------------------------
+-----
 
 ### Icons
 
-::: {.alert .alert-warning}
+<div class="alert alert-warning">
+
 **Note:** The `[icon]` and `[icon-stack]` shortcodes depend on the Font
 Awesome 5 Icon Library, either from your theme or the official Font
 Awesome plugin.
-:::
+
+</div>
 
     [icon type="arrow-right"]
 
-#### \[icon\] parameters {#-icon-parameters}
+#### \[icon\] parameters
 
-  --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  Parameter   Description                                                                                                                                       Required   Values                                                                                  Default
-  ----------- ------------------------------------------------------------------------------------------------------------------------------------------------- ---------- --------------------------------------------------------------------------------------- ---------
-  prefix      The icon set of the icon you want to display                                                                                                      optional   fab, fas (free)\                                                                        fas
-                                                                                                                                                                           fad, fal, far (pro)                                                                     
-
-  name        The name of icon you want to display                                                                                                              required   See [Font Awesome Searchable Gallery](https://fontawesome.com/icons?d=gallery&m=free)   none
-
-  class       Any extra classes you want to add                                                                                                                 optional   any text                                                                                none
-
-  data        Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters).   optional   any text                                                                                none
-  --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+<table>
+<thead>
+<tr class="header">
+<th>Parameter</th>
+<th>Description</th>
+<th>Required</th>
+<th>Values</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>prefix</td>
+<td>The icon set of the icon you want to display</td>
+<td>optional</td>
+<td>fab, fas (free)<br />
+fad, fal, far (pro)</td>
+<td>fas</td>
+</tr>
+<tr class="even">
+<td>name</td>
+<td>The name of icon you want to display</td>
+<td>required</td>
+<td>See <a href="https://fontawesome.com/icons?d=gallery&amp;m=free">Font Awesome Searchable Gallery</a></td>
+<td>none</td>
+</tr>
+<tr class="odd">
+<td>class</td>
+<td>Any extra classes you want to add</td>
+<td>optional</td>
+<td>any text</td>
+<td>none</td>
+</tr>
+<tr class="even">
+<td>data</td>
+<td>Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at <a href="#container-parameters">[container] parameters</a>.</td>
+<td>optional</td>
+<td>any text</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
 
 [Font Awesome
 Documentation](https://fontawesome.com/how-to-use/on-the-web/referencing-icons/basic-use)
 
-------------------------------------------------------------------------
+-----
 
-### Icon Stacks {#icon-stack}
+### Icon Stacks
 
 Print multiple icons on top of each other.
 
@@ -599,51 +641,51 @@ Print multiple icons on top of each other.
         [icon type="ban" class="fa-stack-2x text-danger"]
     [/icon-stack]
 
-#### \[icon-stack\] parameters {#-icon-stack-parameters}
+#### \[icon-stack\] parameters
 
-  Parameter   Description                                                                                                                                       Required   Values     Default
-  ----------- ------------------------------------------------------------------------------------------------------------------------------------------------- ---------- ---------- ---------
-  class       Any extra classes you want to add                                                                                                                 optional   any text   none
-  data        Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters).   optional   any text   none
+| Parameter | Description                                                                                                                                     | Required | Values   | Default |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------- | ------- |
+| class     | Any extra classes you want to add                                                                                                               | optional | any text | none    |
+| data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text | none    |
 
 [Font Awesome
 Documentation](https://fontawesome.com/how-to-use/on-the-web/referencing-icons/basic-use)
 
-------------------------------------------------------------------------
+-----
 
 ### Buttons
 
     [button type="success" size="lg"] Action [/button]
 
-#### \[button\] parameters {#-button-parameters}
+#### \[button\] parameters
 
-  Parameter   Description                                                                                                                                       Required   Values                                                                  Default
-  ----------- ------------------------------------------------------------------------------------------------------------------------------------------------- ---------- ----------------------------------------------------------------------- ---------
-  type        The type of the button                                                                                                                            optional   primary, secondary, success, info, warning, danger, dark, light, link   primary
-  size        The size of the button                                                                                                                            optional   sm, md, lg                                                              md
-  block       Whether the button should be a block-level button                                                                                                 optional   🚩 (flag)                                                                
-  dropdown    Whether the button triggers a dropdown menu (see [Button Dropdowns](#button-dropdowns))                                                           optional   🚩 (flag)                                                                
-  modal       Whether the button triggers a modal popup (see [Modal](#modal))                                                                                   optional   The id of the modal                                                     
-  active      Apply the \"active\" style                                                                                                                        optional   🚩 (flag)                                                                
-  disabled    Whether the button will be disabled                                                                                                               optional   🚩 (flag)                                                                
-  split       Create a split button dropdown next to another button or link                                                                                     optional   🚩 (flag)                                                                
-  outline     Turn the button into a bordered/outlined button                                                                                                   optional   🚩 (flag)                                                                
-  class       Any extra classes you want to add                                                                                                                 optional   any text                                                                none
-  data        Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters).   optional   any text                                                                none
-  tag         The html tag of the button                                                                                                                        optional   `button` or `a`                                                         button
-  link        The url you want the tag `a` to link to                                                                                                           optional   any valid link                                                          \\\#
-  target      Where to open the link for tag `a`                                                                                                                optional   \_self, \_blank, \_parent, \_top                                        \_self
+| Parameter | Description                                                                                                                                     | Required | Values                                                                | Default |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------- | --------------------------------------------------------------------- | ------- |
+| type      | The type of the button                                                                                                                          | optional | primary, secondary, success, info, warning, danger, dark, light, link | primary |
+| size      | The size of the button                                                                                                                          | optional | sm, md, lg                                                            | md      |
+| block     | Whether the button should be a block-level button                                                                                               | optional | 🚩 (flag)                                                              |         |
+| dropdown  | Whether the button triggers a dropdown menu (see [Button Dropdowns](#button-dropdowns))                                                         | optional | 🚩 (flag)                                                              |         |
+| modal     | Whether the button triggers a modal popup (see [Modal](#modal))                                                                                 | optional | The id of the modal                                                   |         |
+| active    | Apply the "active" style                                                                                                                        | optional | 🚩 (flag)                                                              |         |
+| disabled  | Whether the button will be disabled                                                                                                             | optional | 🚩 (flag)                                                              |         |
+| split     | Create a split button dropdown next to another button or link                                                                                   | optional | 🚩 (flag)                                                              |         |
+| outline   | Turn the button into a bordered/outlined button                                                                                                 | optional | 🚩 (flag)                                                              |         |
+| class     | Any extra classes you want to add                                                                                                               | optional | any text                                                              | none    |
+| data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text                                                              | none    |
+| tag       | The html tag of the button                                                                                                                      | optional | `button` or `a`                                                       | button  |
+| link      | The url you want the tag `a` to link to                                                                                                         | optional | any valid link                                                        | \\\#    |
+| target    | Where to open the link for tag `a`                                                                                                              | optional | \_self, \_blank, \_parent, \_top                                      | \_self  |
 
 [Bootstrap button
 documentation](https://getbootstrap.com/docs/4.5/components/buttons/)
 
-------------------------------------------------------------------------
+-----
 
 ### Button Groups
 
 The tag `[button-group-outer]` allows nesting of button groups.
 
-#### Basic example {#basic-example-btn-grp}
+#### Basic example
 
     [button-group size="lg" justified]
         [button] Left [/button]
@@ -669,33 +711,33 @@ The tag `[button-group-outer]` allows nesting of button groups.
         [/button-group]
     [/button-toolbar]
 
-#### \[button-group\] parameters {#-button-group-parameters}
+#### \[button-group\] parameters
 
-  Parameter   Description                                                                                                                                       Required   Values            Default
-  ----------- ------------------------------------------------------------------------------------------------------------------------------------------------- ---------- ----------------- ---------
-  size        The size of the button group                                                                                                                      optional   sm, md, lg        md
-  justified   Whether button group is justified                                                                                                                 optional   🚩 (flag)          
-  vertical    Whether button group is vertical                                                                                                                  optional   🚩 (flag)          
-  drop        **Must correspond with the use of \[dropdown\]**                                                                                                  optional   up, left, right   (down)
-  class       Any extra classes you want to add                                                                                                                 optional   any text          none
-  data        Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters).   optional   any text          none
+| Parameter | Description                                                                                                                                     | Required | Values          | Default |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------- | --------------- | ------- |
+| size      | The size of the button group                                                                                                                    | optional | sm, md, lg      | md      |
+| justified | Whether button group is justified                                                                                                               | optional | 🚩 (flag)        |         |
+| vertical  | Whether button group is vertical                                                                                                                | optional | 🚩 (flag)        |         |
+| drop      | **Must correspond with the use of \[dropdown\]**                                                                                                | optional | up, left, right | (down)  |
+| class     | Any extra classes you want to add                                                                                                               | optional | any text        | none    |
+| data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text        | none    |
 
-#### \[button-toolbar\] parameters {#-button-toolbar-parameters}
+#### \[button-toolbar\] parameters
 
-  Parameter   Description                                                                                                                                       Required   Values     Default
-  ----------- ------------------------------------------------------------------------------------------------------------------------------------------------- ---------- ---------- ---------
-  class       Any extra classes you want to add                                                                                                                 optional   any text   none
-  data        Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters).   optional   any text   none
+| Parameter | Description                                                                                                                                     | Required | Values   | Default |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------- | ------- |
+| class     | Any extra classes you want to add                                                                                                               | optional | any text | none    |
+| data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text | none    |
 
 [Bootstrap button groups
 documentation](https://getbootstrap.com/docs/4.5/components/button-group/)
 
-------------------------------------------------------------------------
+-----
 
 ### Button Dropdowns
 
 Button Dropdowns can be accomplished by combining the \[button-group\]
-shortcode, the \"data\" parameters of the \[button\] shortcode, and
+shortcode, the "data" parameters of the \[button\] shortcode, and
 \[dropdown\] or \[dropdown-menu\] shortcode as follows.
 
 #### Single button dropdowns
@@ -726,7 +768,7 @@ shortcode, the \"data\" parameters of the \[button\] shortcode, and
             [/dropdown-menu]
     [/button-group]
 
-#### Drop variation {#dropup-variation}
+#### Drop variation
 
     [button-group drop="up"]
         [button] Drop Up [/button]
@@ -739,50 +781,50 @@ shortcode, the \"data\" parameters of the \[button\] shortcode, and
         [/dropdown-menu]
     [/button-group]
 
-#### \[dropdown\] parameters {#-dropdown-parameters}
+#### \[dropdown\] parameters
 
-  Parameter   Description                                                                                                                                       Required   Values     Default
-  ----------- ------------------------------------------------------------------------------------------------------------------------------------------------- ---------- ---------- ---------
-  class       Any extra classes you want to add                                                                                                                 optional   any text   none
-  data        Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters).   optional   any text   none
+| Parameter | Description                                                                                                                                     | Required | Values   | Default |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------- | ------- |
+| class     | Any extra classes you want to add                                                                                                               | optional | any text | none    |
+| data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text | none    |
 
-#### \[dropdown-menu\] parameters {#-dropdown-menu-parameters}
+#### \[dropdown-menu\] parameters
 
-  Parameter   Description                                                                                                                                       Required   Values     Default
-  ----------- ------------------------------------------------------------------------------------------------------------------------------------------------- ---------- ---------- ---------
-  right       To right-align the menu with the button or link                                                                                                   optional   🚩 (flag)   (left)
-  class       Any extra classes you want to add                                                                                                                 optional   any text   none
-  data        Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters).   optional   any text   none
+| Parameter | Description                                                                                                                                     | Required | Values   | Default |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------- | ------- |
+| right     | To right-align the menu with the button or link                                                                                                 | optional | 🚩 (flag) | (left)  |
+| class     | Any extra classes you want to add                                                                                                               | optional | any text | none    |
+| data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text | none    |
 
-------------------------------------------------------------------------
+-----
 
-#### \[dropdown-item\] parameters {#-dropdown-item-parameters}
+#### \[dropdown-item\] parameters
 
-  Parameter   Description                                                                                                                                       Required   Values           Default
-  ----------- ------------------------------------------------------------------------------------------------------------------------------------------------- ---------- ---------------- ---------
-  link        The url you want the dropdown-item to link to                                                                                                     optional   any valid link   \#
-  disabled    Whether this menu-item is disabled                                                                                                                optional   🚩 (flag)         
-  class       Any extra classes you want to add                                                                                                                 optional   any text         none
-  data        Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters).   optional   any text         none
+| Parameter | Description                                                                                                                                     | Required | Values         | Default |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------------- | ------- |
+| link      | The url you want the dropdown-item to link to                                                                                                   | optional | any valid link | \#      |
+| disabled  | Whether this menu-item is disabled                                                                                                              | optional | 🚩 (flag)       |         |
+| class     | Any extra classes you want to add                                                                                                               | optional | any text       | none    |
+| data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text       | none    |
 
-#### \[dropdown-header\] parameters {#-dropdown-header-parameters}
+#### \[dropdown-header\] parameters
 
-  Parameter   Description                                                                                                                                       Required   Values     Default
-  ----------- ------------------------------------------------------------------------------------------------------------------------------------------------- ---------- ---------- ---------
-  class       Any extra classes you want to add                                                                                                                 optional   any text   none
-  data        Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters).   optional   any text   none
+| Parameter | Description                                                                                                                                     | Required | Values   | Default |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------- | ------- |
+| class     | Any extra classes you want to add                                                                                                               | optional | any text | none    |
+| data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text | none    |
 
-#### \[dropdown-divider\] parameters {#-dropdown-divider-parameters}
+#### \[dropdown-divider\] parameters
 
-  Parameter   Description                                                                                                                                       Required   Values     Default
-  ----------- ------------------------------------------------------------------------------------------------------------------------------------------------- ---------- ---------- ---------
-  class       Any extra classes you want to add                                                                                                                 optional   any text   none
-  data        Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters).   optional   any text   none
+| Parameter | Description                                                                                                                                     | Required | Values   | Default |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------- | ------- |
+| class     | Any extra classes you want to add                                                                                                               | optional | any text | none    |
+| data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text | none    |
 
 [Bootstrap button dropdowns
 documentation](https://getbootstrap.com/docs/4.5/components/dropdowns/)
 
-------------------------------------------------------------------------
+-----
 
 ### Navs
 
@@ -792,7 +834,7 @@ documentation](https://getbootstrap.com/docs/4.5/components/dropdowns/)
         [nav-item link="#"] Link3 [/nav-item]
     [/nav]
 
-#### Nav with active, disabled and dropdowns {#nav-with-dropdowns}
+#### Nav with active, disabled and dropdowns
 
     [nav tabs]
         [nav-item link="#" active] Active [/nav-item]
@@ -804,33 +846,33 @@ documentation](https://getbootstrap.com/docs/4.5/components/dropdowns/)
         [/nav-item]
     [/nav]
 
-#### \[nav\] parameters {#-nav-parameters}
+#### \[nav\] parameters
 
-  Parameter   Description                                                                                                                                       Required   Values     Default
-  ----------- ------------------------------------------------------------------------------------------------------------------------------------------------- ---------- ---------- ---------
-  tabs        Generate a tabbed interface                                                                                                                       optional   🚩 (flag)   
-  pills       Generate a interface with pills                                                                                                                   optional   🚩 (flag)   
-  stacked     Whether the nav is stacked (should be used with \"pills\" type                                                                                    optional   🚩 (flag)   
-  justified   Whether the nav is justified                                                                                                                      optional   🚩 (flag)   
-  fill        Proportionately fill all available space                                                                                                          optional   🚩 (flag)   
-  class       Any extra classes you want to add                                                                                                                 optional   any text   none
-  data        Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters).   optional   any text   none
+| Parameter | Description                                                                                                                                     | Required | Values   | Default |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------- | ------- |
+| tabs      | Generate a tabbed interface                                                                                                                     | optional | 🚩 (flag) |         |
+| pills     | Generate a interface with pills                                                                                                                 | optional | 🚩 (flag) |         |
+| stacked   | Whether the nav is stacked (should be used with "pills" type                                                                                    | optional | 🚩 (flag) |         |
+| justified | Whether the nav is justified                                                                                                                    | optional | 🚩 (flag) |         |
+| fill      | Proportionately fill all available space                                                                                                        | optional | 🚩 (flag) |         |
+| class     | Any extra classes you want to add                                                                                                               | optional | any text | none    |
+| data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text | none    |
 
-#### \[nav-item\] parameters {#-nav-item-parameters}
+#### \[nav-item\] parameters
 
-  Parameter   Description                                                                                                                                       Required   Values     Default
-  ----------- ------------------------------------------------------------------------------------------------------------------------------------------------- ---------- ---------- ---------
-  link        The url you want the dropdown-item to link to                                                                                                     optional   any text   \#
-  dropdown    Whether the item activates a \"dropdown\" menu                                                                                                    optional   🚩 (flag)   
-  active      Whether the item has the \"active\" style applied                                                                                                 optional   🚩 (flag)   
-  disabled    Whether the item is disabled                                                                                                                      optional   🚩 (flag)   
-  class       Any extra classes you want to add                                                                                                                 optional   any text   none
-  data        Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters).   optional   any text   none
+| Parameter | Description                                                                                                                                     | Required | Values   | Default |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------- | ------- |
+| link      | The url you want the dropdown-item to link to                                                                                                   | optional | any text | \#      |
+| dropdown  | Whether the item activates a "dropdown" menu                                                                                                    | optional | 🚩 (flag) |         |
+| active    | Whether the item has the "active" style applied                                                                                                 | optional | 🚩 (flag) |         |
+| disabled  | Whether the item is disabled                                                                                                                    | optional | 🚩 (flag) |         |
+| class     | Any extra classes you want to add                                                                                                               | optional | any text | none    |
+| data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text | none    |
 
 [Bootstrap button navs
 documentation](https://getbootstrap.com/docs/4.5/components/navs/)
 
-------------------------------------------------------------------------
+-----
 
 ### Breadcrumbs
 
@@ -840,79 +882,79 @@ documentation](https://getbootstrap.com/docs/4.5/components/navs/)
         [breadcrumb-item link="#" active] 2020 [/breadcrumb-item]
     [/breadcrumb]
 
-#### \[breadcrumb\] parameters {#-breadcrumb-parameters}
+#### \[breadcrumb\] parameters
 
-  Parameter   Description                                                                                                                                       Required   Values     Default
-  ----------- ------------------------------------------------------------------------------------------------------------------------------------------------- ---------- ---------- ---------
-  class       Any extra classes you want to add                                                                                                                 optional   any text   none
-  data        Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters).   optional   any text   none
+| Parameter | Description                                                                                                                                     | Required | Values   | Default |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------- | ------- |
+| class     | Any extra classes you want to add                                                                                                               | optional | any text | none    |
+| data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text | none    |
 
-#### \[breadcrumb-item\] parameters {#-breadcrumb-item-parameters}
+#### \[breadcrumb-item\] parameters
 
-  Parameter   Description                                                                                                                                       Required   Values           Default
-  ----------- ------------------------------------------------------------------------------------------------------------------------------------------------- ---------- ---------------- ---------
-  link        The url you want the breadcrumb-item to link to                                                                                                   optional   any valid link   \#
-  active      Whether the item has the \"active\" style applied                                                                                                 optional   true, false      false
-  class       Any extra classes you want to add                                                                                                                 optional   any text         none
-  data        Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters).   optional   any text         none
+| Parameter | Description                                                                                                                                     | Required | Values         | Default |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------------- | ------- |
+| link      | The url you want the breadcrumb-item to link to                                                                                                 | optional | any valid link | \#      |
+| active    | Whether the item has the "active" style applied                                                                                                 | optional | true, false    | false   |
+| class     | Any extra classes you want to add                                                                                                               | optional | any text       | none    |
+| data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text       | none    |
 
 [Bootstrap breadcrumb
 documentation](https://getbootstrap.com/docs/4.5/components/breadcrumb/)
 
-------------------------------------------------------------------------
+-----
 
 ### Badges
 
     [badge right] 10 [/badge]
 
-#### \[badge\] parameters {#-badge-parameters}
+#### \[badge\] parameters
 
-  Parameter   Description                                                                                                                                       Required   Values     Default
-  ----------- ------------------------------------------------------------------------------------------------------------------------------------------------- ---------- ---------- ---------
-  right       Whether the badge should align to the right of its container                                                                                      optional   🚩 (flag)   
-  class       Any extra classes you want to add                                                                                                                 optional   any text   none
-  data        Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters).   optional   any text   none
+| Parameter | Description                                                                                                                                     | Required | Values   | Default |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------- | ------- |
+| right     | Whether the badge should align to the right of its container                                                                                    | optional | 🚩 (flag) |         |
+| class     | Any extra classes you want to add                                                                                                               | optional | any text | none    |
+| data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text | none    |
 
 [Bootstrap badge
 documentation](https://getbootstrap.com/docs/4.5/components/badge/)
 
-------------------------------------------------------------------------
+-----
 
 ### Jumbotron
 
     [jumbotron] [lorem-ipsum] [/jumbotron]
 
-#### \[jumbotron\] parameters {#-jumbotron-parameters}
+#### \[jumbotron\] parameters
 
-  Parameter   Description                                                                                                                                       Required   Values     Default
-  ----------- ------------------------------------------------------------------------------------------------------------------------------------------------- ---------- ---------- ---------
-  fluid       Make jumbotron occupy the entire horizontal space of its parent                                                                                   optional   🚩 (flag)   
-  class       Any extra classes you want to add                                                                                                                 optional   any text   none
-  data        Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters).   optional   any text   none
+| Parameter | Description                                                                                                                                     | Required | Values   | Default |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------- | ------- |
+| fluid     | Make jumbotron occupy the entire horizontal space of its parent                                                                                 | optional | 🚩 (flag) |         |
+| class     | Any extra classes you want to add                                                                                                               | optional | any text | none    |
+| data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text | none    |
 
 [Bootstrap jumbotron
 documentation](https://getbootstrap.com/docs/4.5/components/jumbotron/)
 
-------------------------------------------------------------------------
+-----
 
 ### Alerts
 
     [alert type="danger"]  Danger  [/alert]
 
-#### \[alert\] parameters {#-alert-parameters}
+#### \[alert\] parameters
 
-  Parameter     Description                                                                                                                                       Required   Values                                                            Default
-  ------------- ------------------------------------------------------------------------------------------------------------------------------------------------- ---------- ----------------------------------------------------------------- ---------
-  type          The type of the alert                                                                                                                             required   primary, secondary, success, info, warning, danger, dark, light   primary
-  dismissible   If the alert should be dismissible                                                                                                                optional   🚩 (flag)                                                          
-  fade          If the alert should be animated when dismissed                                                                                                    optional   🚩 (flag)                                                          
-  class         Any extra classes you want to add                                                                                                                 optional   any text                                                          none
-  data          Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters).   optional   any text                                                          none
+| Parameter   | Description                                                                                                                                     | Required | Values                                                          | Default |
+| ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------- | --------------------------------------------------------------- | ------- |
+| type        | The type of the alert                                                                                                                           | required | primary, secondary, success, info, warning, danger, dark, light | primary |
+| dismissible | If the alert should be dismissible                                                                                                              | optional | 🚩 (flag)                                                        |         |
+| fade        | If the alert should be animated when dismissed                                                                                                  | optional | 🚩 (flag)                                                        |         |
+| class       | Any extra classes you want to add                                                                                                               | optional | any text                                                        | none    |
+| data        | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text                                                        | none    |
 
 [Bootstrap alert
 documentation](https://getbootstrap.com/docs/4.5/components/alerts/)
 
-------------------------------------------------------------------------
+-----
 
 ### Progress Bars
 
@@ -921,29 +963,29 @@ documentation](https://getbootstrap.com/docs/4.5/components/alerts/)
         [progress-bar striped percent="25" type="success"]
     [/progress]
 
-#### \[progress\] parameters {#-progress-parameters}
+#### \[progress\] parameters
 
-  Parameter   Description                                                                                                                                       Required   Values     Default
-  ----------- ------------------------------------------------------------------------------------------------------------------------------------------------- ---------- ---------- ---------
-  class       Any extra classes you want to add                                                                                                                 optional   any text   none
-  data        Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters).   optional   any text   none
+| Parameter | Description                                                                                                                                     | Required | Values   | Default |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------- | ------- |
+| class     | Any extra classes you want to add                                                                                                               | optional | any text | none    |
+| data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text | none    |
 
-#### \[progress-bar\] parameters {#-progress-bar-parameters}
+#### \[progress-bar\] parameters
 
-  Parameter   Description                                                                                                                                       Required   Values                                                            Default
-  ----------- ------------------------------------------------------------------------------------------------------------------------------------------------- ---------- ----------------------------------------------------------------- ---------
-  percent     The percentage amount to show in the progress bar                                                                                                 required   any number between 0 and 100                                      false
-  label       Whether to show the percentage as a text label inside the bar                                                                                     optional   🚩 (flag)                                                          
-  type        The type of the progress bar                                                                                                                      optional   primary, secondary, success, info, warning, danger, light, dark   primary
-  striped     Whether enclosed progress bars will be striped                                                                                                    optional   🚩 (flag)                                                          
-  animated    Whether enclosed progress bars will be animated                                                                                                   optional   🚩 (flag)                                                          
-  class       Any extra classes you want to add                                                                                                                 optional   any text                                                          none
-  data        Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters).   optional   any text                                                          none
+| Parameter | Description                                                                                                                                     | Required | Values                                                          | Default |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------- | --------------------------------------------------------------- | ------- |
+| percent   | The percentage amount to show in the progress bar                                                                                               | required | any number between 0 and 100                                    | false   |
+| label     | Whether to show the percentage as a text label inside the bar                                                                                   | optional | 🚩 (flag)                                                        |         |
+| type      | The type of the progress bar                                                                                                                    | optional | primary, secondary, success, info, warning, danger, light, dark | primary |
+| striped   | Whether enclosed progress bars will be striped                                                                                                  | optional | 🚩 (flag)                                                        |         |
+| animated  | Whether enclosed progress bars will be animated                                                                                                 | optional | 🚩 (flag)                                                        |         |
+| class     | Any extra classes you want to add                                                                                                               | optional | any text                                                        | none    |
+| data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text                                                        | none    |
 
 [Bootstrap progress bars
 documentation](https://getbootstrap.com/docs/4.5/components/progress/)
 
-------------------------------------------------------------------------
+-----
 
 ### Media Objects
 
@@ -960,31 +1002,32 @@ object.
         [/media-body]
     [/media]
 
-#### \[media\] parameters {#-media-parameters}
+#### \[media\] parameters
 
-  Parameter    Description                                                                                                                                       Required   Values     Default
-  ------------ ------------------------------------------------------------------------------------------------------------------------------------------------- ---------- ---------- ---------
-  list-group   Whether the media is part of a list group                                                                                                         optional   🚩 (flag)   
-  class        Any extra classes you want to add                                                                                                                 optional   any text   none
-  data         Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters).   optional   any text   none
+| Parameter  | Description                                                                                                                                     | Required | Values   | Default |
+| ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------- | ------- |
+| list-group | Whether the media is part of a list group                                                                                                       | optional | 🚩 (flag) |         |
+| class      | Any extra classes you want to add                                                                                                               | optional | any text | none    |
+| data       | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text | none    |
 
-#### \[media-object\] parameters {#-media-object-parameters}
+#### \[media-object\] parameters
 
-  Parameter   Description                                                                                                                                       Required   Values               Default
-  ----------- ------------------------------------------------------------------------------------------------------------------------------------------------- ---------- -------------------- ---------
-  align       Where the media should align with the text.                                                                                                       optional   start, center, end   start
-  class       Any extra classes you want to add                                                                                                                 optional   any text             none
-  data        Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters).   optional   any text             none
+| Parameter | Description                                                                                                                                     | Required | Values             | Default |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------------------ | ------- |
+| align     | Where the media should align with the text.                                                                                                     | optional | start, center, end | start   |
+| class     | Any extra classes you want to add                                                                                                               | optional | any text           | none    |
+| data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text           | none    |
 
-#### \[media-body\] parameters {#-media-body-parameters}
+#### \[media-body\] parameters
 
 The tag `[media-body-outer]` allows to nest media objects inside a media
-object body.
+object
+body.
 
-  Parameter   Description                                                                                                                                       Required   Values     Default
-  ----------- ------------------------------------------------------------------------------------------------------------------------------------------------- ---------- ---------- ---------
-  class       Any extra classes you want to add                                                                                                                 optional   any text   none
-  data        Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters).   optional   any text   none
+| Parameter | Description                                                                                                                                     | Required | Values   | Default |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------- | ------- |
+| class     | Any extra classes you want to add                                                                                                               | optional | any text | none    |
+| data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text | none    |
 
 **NOTE: `media-object` should contain an image, or linked image,
 inserted using the WordPress TinyMCE editor or the `img-gen` tag.**
@@ -992,11 +1035,11 @@ inserted using the WordPress TinyMCE editor or the `img-gen` tag.**
 [Bootstrap media objects
 documentation](https://getbootstrap.com/docs/4.5/components/media-object/)
 
-------------------------------------------------------------------------
+-----
 
 ### List Groups
 
-#### Basic Example {#basic-example-lst-grp}
+#### Basic Example
 
     [list-group]
         [list-group-item]
@@ -1051,75 +1094,75 @@ documentation](https://getbootstrap.com/docs/4.5/components/media-object/)
         [/media]
     [/list-group]​
 
-#### \[list-group\] parameters {#-list-group-parameters}
+#### \[list-group\] parameters
 
-  Parameter   Description                                                                                                                                       Required   Values     Default
-  ----------- ------------------------------------------------------------------------------------------------------------------------------------------------- ---------- ---------- ---------
-  linked      Weather the list group contains links                                                                                                             optional   🚩 (flag)   
-  flush       Remove some borders and rounded corners to render list group items edge-to-edge in a parent container (e.g. cards)                                optional   🚩 (flag)   
-  media       Weather the list group contains media items                                                                                                       optional   🚩 (flag)   
-  class       Any extra classes you want to add                                                                                                                 optional   any text   none
-  data        Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters).   optional   any text   none
+| Parameter | Description                                                                                                                                     | Required | Values   | Default |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------- | ------- |
+| linked    | Weather the list group contains links                                                                                                           | optional | 🚩 (flag) |         |
+| flush     | Remove some borders and rounded corners to render list group items edge-to-edge in a parent container (e.g. cards)                              | optional | 🚩 (flag) |         |
+| media     | Weather the list group contains media items                                                                                                     | optional | 🚩 (flag) |         |
+| class     | Any extra classes you want to add                                                                                                               | optional | any text | none    |
+| data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text | none    |
 
-#### \[list-group-item\] parameters {#-list-group-item-parameters}
+#### \[list-group-item\] parameters
 
-  Parameter   Description                                                                                                                                       Required   Values                                                                  Default
-  ----------- ------------------------------------------------------------------------------------------------------------------------------------------------- ---------- ----------------------------------------------------------------------- ---------
-  type        The type of the list-group-item                                                                                                                   optional   primary, secondary, success, info, warning, danger, light, dark, link   none
-  active      Whether the item has the \"active\" style applied                                                                                                 optional   🚩 (flag)                                                                
-  disabled    Whether the item is deactivated                                                                                                                   optional   🚩 (flag)                                                                
-  class       Any extra classes you want to add                                                                                                                 optional   any text                                                                none
-  data        Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters).   optional   any text                                                                none
+| Parameter | Description                                                                                                                                     | Required | Values                                                                | Default |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------- | --------------------------------------------------------------------- | ------- |
+| type      | The type of the list-group-item                                                                                                                 | optional | primary, secondary, success, info, warning, danger, light, dark, link | none    |
+| active    | Whether the item has the "active" style applied                                                                                                 | optional | 🚩 (flag)                                                              |         |
+| disabled  | Whether the item is deactivated                                                                                                                 | optional | 🚩 (flag)                                                              |         |
+| class     | Any extra classes you want to add                                                                                                               | optional | any text                                                              | none    |
+| data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text                                                              | none    |
 
 [Bootstrap list groups
 documentation](https://getbootstrap.com/docs/4.5/components/list-group/)
 
-------------------------------------------------------------------------
+-----
 
-### Content {#content}
+### Content
 
 ### Code
 
     [code] ... [/code]
 
-#### \[code\] parameters {#-code-parameters}
+#### \[code\] parameters
 
-  Parameter    Description                                                                                                                                       Required   Values     Default
-  ------------ ------------------------------------------------------------------------------------------------------------------------------------------------- ---------- ---------- ---------
-  inline       Display inline code                                                                                                                               optional   🚩 (flag)   
-  scrollable   Set a max height of 350px and provide a scroll bar. Not usable with `inline`.                                                                     optional   🚩 (flag)   
-  class        Any extra classes you want to add                                                                                                                 optional   any text   none
-  data         Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters).   optional   any text   none
+| Parameter  | Description                                                                                                                                     | Required | Values   | Default |
+| ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------- | ------- |
+| inline     | Display inline code                                                                                                                             | optional | 🚩 (flag) |         |
+| scrollable | Set a max height of 350px and provide a scroll bar. Not usable with `inline`.                                                                   | optional | 🚩 (flag) |         |
+| class      | Any extra classes you want to add                                                                                                               | optional | any text | none    |
+| data       | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text | none    |
 
 [Bootstrap code
 documentation](https://getbootstrap.com/docs/4.5/content/code/)
 
-------------------------------------------------------------------------
+-----
 
 ### Tables
 
     [table-wrap bordered striped]
-
+    
                 Standard HTML table code goes here.
-
+    
     [/table-wrap]
 
-#### \[table-wrap\] parameters {#-table-wrap-parameters}
+#### \[table-wrap\] parameters
 
-  Parameter    Description                                                                                                                                                                         Required   Values     Default
-  ------------ ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ---------- ---------- ---------
-  bordered     Set \"bordered\" table style (see Bootstrap documentation)                                                                                                                          optional   🚩 (flag)   
-  striped      Set \"striped\" table style (see Bootstrap documentation)                                                                                                                           optional   🚩 (flag)   
-  hover        Set \"hover\" table style (see Bootstrap documentation)                                                                                                                             optional   🚩 (flag)   
-  condensed    Set \"condensed\" table style (see Bootstrap documentation)                                                                                                                         optional   🚩 (flag)   
-  responsive   Wrap the table in a div with the class \"table-responsive\" (see [Bootstrap responsive table documentation](https://getbootstrap.com/docs/4.5/content/tables/#always-responsive))   optional   🚩 (flag)   
-  class        Any extra classes you want to add                                                                                                                                                   optional   any text   none
-  data         Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters).                                     optional   any text   none
+| Parameter  | Description                                                                                                                                                                     | Required | Values   | Default |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------- | ------- |
+| bordered   | Set "bordered" table style (see Bootstrap documentation)                                                                                                                        | optional | 🚩 (flag) |         |
+| striped    | Set "striped" table style (see Bootstrap documentation)                                                                                                                         | optional | 🚩 (flag) |         |
+| hover      | Set "hover" table style (see Bootstrap documentation)                                                                                                                           | optional | 🚩 (flag) |         |
+| condensed  | Set "condensed" table style (see Bootstrap documentation)                                                                                                                       | optional | 🚩 (flag) |         |
+| responsive | Wrap the table in a div with the class "table-responsive" (see [Bootstrap responsive table documentation](https://getbootstrap.com/docs/4.5/content/tables/#always-responsive)) | optional | 🚩 (flag) |         |
+| class      | Any extra classes you want to add                                                                                                                                               | optional | any text | none    |
+| data       | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters).                                 | optional | any text | none    |
 
 [Bootstrap table
 documentation](https://getbootstrap.com/docs/4.5/content/tables/)
 
-------------------------------------------------------------------------
+-----
 
 ### Images
 
@@ -1128,85 +1171,141 @@ documentation](https://getbootstrap.com/docs/4.5/content/tables/)
     [/img]
 
 Wrap any number of HTML image tags or images inserted via the WordPress
-media manager or the `img-gen` tag.
+media manager or the `img-gen`
+tag.
 
-#### \[img\] parameters {#-img-parameters}
+#### \[img\] parameters
 
-  Parameter    Description                                                                                                                                       Required   Values     Default
-  ------------ ------------------------------------------------------------------------------------------------------------------------------------------------- ---------- ---------- ---------
-  responsive   Make the wrapped images responsive                                                                                                                optional   🚩 (flag)   
-  thumbnail    Add a rounded 1px border appearance. Does not change the size of the image.                                                                       optional   🚩 (flag)   
-  class        Any extra classes you want to add                                                                                                                 optional   any text   none
-  data         Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters).   optional   any text   none
+| Parameter  | Description                                                                                                                                     | Required | Values   | Default |
+| ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------- | ------- |
+| responsive | Make the wrapped images responsive                                                                                                              | optional | 🚩 (flag) |         |
+| thumbnail  | Add a rounded 1px border appearance. Does not change the size of the image.                                                                     | optional | 🚩 (flag) |         |
+| class      | Any extra classes you want to add                                                                                                               | optional | any text | none    |
+| data       | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text | none    |
 
 [Bootstrap images
 documentation](https://getbootstrap.com/docs/4.5/content/images/)
 
-------------------------------------------------------------------------
+-----
 
-### Dynamic Dummy Image Generator {#images-gen}
+### Dynamic Dummy Image Generator
 
     [img-gen type="circle" responsive size="800x600" text="Hello"]
 
 Generate dynamic dummy images with selectable colors and text.
 
-#### \[img-gen\] parameters {#-img-gen-parameters}
+#### \[img-gen\] parameters
 
-  ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  Parameter    Description                                                                                                                                       Required   Values                                             Default
-  ------------ ------------------------------------------------------------------------------------------------------------------------------------------------- ---------- -------------------------------------------------- -------------------------------------
-  type         The effect to apply to wrapped images                                                                                                             optional   rounded, circle, thumbnail                         false
-
-  responsive   Make the wrapped images responsive                                                                                                                optional   🚩 (flag)                                           
-
-  size         The size of the image in pixels                                                                                                                   optional   Examples: 500x250 (= 500px width, 250px height)\   640x480
-                                                                                                                                                                            500 (= 500px square)                               
-
-  file         The image file type                                                                                                                               optional   png, gif, jpg or jpeg                              png
-
-  text         The text shown on top of the image                                                                                                                optional   Any text                                           {Width-Of-Image} x {Hight-Of-Image}
-
-  bg           The background color of the image                                                                                                                 optional   Examples:\                                         000080
-                                                                                                                                                                            f00 (= \#FF0000 as background color)\              
-                                                                                                                                                                            FF0855 (= \#FF0855 as background color)            
-
-  color        The font color of the image                                                                                                                       optional   see bg color                                       FFFFFF
-
-  class        Any extra classes you want to add                                                                                                                 optional   any text                                           none
-
-  data         Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters).   optional   any text                                           none
-  ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+<table>
+<thead>
+<tr class="header">
+<th>Parameter</th>
+<th>Description</th>
+<th>Required</th>
+<th>Values</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>type</td>
+<td>The effect to apply to wrapped images</td>
+<td>optional</td>
+<td>rounded, circle, thumbnail</td>
+<td>false</td>
+</tr>
+<tr class="even">
+<td>responsive</td>
+<td>Make the wrapped images responsive</td>
+<td>optional</td>
+<td>🚩 (flag)</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>size</td>
+<td>The size of the image in pixels</td>
+<td>optional</td>
+<td>Examples: 500x250 (= 500px width, 250px height)<br />
+500 (= 500px square)</td>
+<td>640x480</td>
+</tr>
+<tr class="even">
+<td>file</td>
+<td>The image file type</td>
+<td>optional</td>
+<td>png, gif, jpg or jpeg</td>
+<td>png</td>
+</tr>
+<tr class="odd">
+<td>text</td>
+<td>The text shown on top of the image</td>
+<td>optional</td>
+<td>Any text</td>
+<td>{Width-Of-Image} x {Hight-Of-Image}</td>
+</tr>
+<tr class="even">
+<td>bg</td>
+<td>The background color of the image</td>
+<td>optional</td>
+<td>Examples:<br />
+f00 (= #FF0000 as background color)<br />
+FF0855 (= #FF0855 as background color)</td>
+<td>000080</td>
+</tr>
+<tr class="odd">
+<td>color</td>
+<td>The font color of the image</td>
+<td>optional</td>
+<td>see bg color</td>
+<td>FFFFFF</td>
+</tr>
+<tr class="even">
+<td>class</td>
+<td>Any extra classes you want to add</td>
+<td>optional</td>
+<td>any text</td>
+<td>none</td>
+</tr>
+<tr class="odd">
+<td>data</td>
+<td>Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at <a href="#container-parameters">[container] parameters</a>.</td>
+<td>optional</td>
+<td>any text</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
 
 [Bootstrap images
 documentation](https://getbootstrap.com/docs/4.5/content/images/)
 
-------------------------------------------------------------------------
+-----
 
-### Figurs {#figures}
+### Figurs
 
     [figure]
       [img-gen size="300" class="figure-img img-fluid rounded"]
       [figure-caption]A caption for the above image.[/figure-caption]
     [/figure]
 
-#### \[figure\] parameters {#-figure-parameters}
+#### \[figure\] parameters
 
-  Parameter   Description                                                                                                                                       Required   Values     Default
-  ----------- ------------------------------------------------------------------------------------------------------------------------------------------------- ---------- ---------- ---------
-  class       Any extra classes you want to add                                                                                                                 optional   any text   none
-  data        Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters).   optional   any text   none
+| Parameter | Description                                                                                                                                     | Required | Values   | Default |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------- | ------- |
+| class     | Any extra classes you want to add                                                                                                               | optional | any text | none    |
+| data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text | none    |
 
-#### \[figure-caption\] parameters {#-figure-caption-parameters}
+#### \[figure-caption\] parameters
 
-  Parameter   Description                                                                                                                                       Required   Values     Default
-  ----------- ------------------------------------------------------------------------------------------------------------------------------------------------- ---------- ---------- ---------
-  class       Any extra classes you want to add                                                                                                                 optional   any text   none
-  data        Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters).   optional   any text   none
+| Parameter | Description                                                                                                                                     | Required | Values   | Default |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------- | ------- |
+| class     | Any extra classes you want to add                                                                                                               | optional | any text | none    |
+| data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text | none    |
 
 [Bootstrap figures
 documentation](https://getbootstrap.com/docs/4.5/content/figures/)
 
-------------------------------------------------------------------------
+-----
 
 ### Blockquote
 
@@ -1217,44 +1316,44 @@ documentation](https://getbootstrap.com/docs/4.5/content/figures/)
         [/blockquote-footer]
     [/blockquote]
 
-#### \[blockquote\] parameters {#-blockquote-parameters}
+#### \[blockquote\] parameters
 
-  Parameter   Description                                                                                                                                       Required   Values     Default
-  ----------- ------------------------------------------------------------------------------------------------------------------------------------------------- ---------- ---------- ---------
-  class       Any extra classes you want to add                                                                                                                 optional   any text   none
-  data        Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters).   optional   any text   none
+| Parameter | Description                                                                                                                                     | Required | Values   | Default |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------- | ------- |
+| class     | Any extra classes you want to add                                                                                                               | optional | any text | none    |
+| data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text | none    |
 
-#### \[blockquote-footer\] parameters {#-blockquote-footer-parameters}
+#### \[blockquote-footer\] parameters
 
-  Parameter   Description                                                                                                                                       Required   Values     Default
-  ----------- ------------------------------------------------------------------------------------------------------------------------------------------------- ---------- ---------- ---------
-  class       Any extra classes you want to add                                                                                                                 optional   any text   none
-  data        Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters).   optional   any text   none
+| Parameter | Description                                                                                                                                     | Required | Values   | Default |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------- | ------- |
+| class     | Any extra classes you want to add                                                                                                               | optional | any text | none    |
+| data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text | none    |
 
 [Bootstrap blockquote
 documentation](https://getbootstrap.com/docs/4.5/content/typography/#blockquotes)
 
-------------------------------------------------------------------------
+-----
 
 ### Lead body copy
 
     [lead] [lorem-ipsum] [/lead]
 
-#### \[lead\] parameters {#-lead-parameters}
+#### \[lead\] parameters
 
-  Parameter   Description                                                                                                                                       Required   Values     Default
-  ----------- ------------------------------------------------------------------------------------------------------------------------------------------------- ---------- ---------- ---------
-  class       Any extra classes you want to add                                                                                                                 optional   any text   none
-  data        Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters).   optional   any text   none
+| Parameter | Description                                                                                                                                     | Required | Values   | Default |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------- | ------- |
+| class     | Any extra classes you want to add                                                                                                               | optional | any text | none    |
+| data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text | none    |
 
 [Bootstrap lead
 documentation](https://getbootstrap.com/docs/4.5/content/typography/#lead)
 
-------------------------------------------------------------------------
+-----
 
-### Utilities {#utilities}
+### Utilities
 
-### Border {#border-classes}
+### Border
 
 Use border utilities to quickly style the `border`, `border-radius`,
 `border-size` and `border-color` of an element. Great for images,
@@ -1264,43 +1363,44 @@ buttons, or any other element.
         [lorem-ipsum class="p-3"]
     [/border]
 
-#### \[border\] parameters {#-border-parameters}
+#### \[border\] parameters
 
-  Parameter   Description                                                                                                                                       Required   Values                                                                                Default
-  ----------- ------------------------------------------------------------------------------------------------------------------------------------------------- ---------- ------------------------------------------------------------------------------------- ---------
-  add         The border(s) to add                                                                                                                              optional   all, top, right, bottom, left                                                         all
-  del         The border(s) to subtract                                                                                                                         optional   all, top, right, bottom, left                                                         none
-  radius      The border radius to display                                                                                                                      optional   all, top, right, bottom, left, circle, pill                                           none
-  size        The size of the border radius                                                                                                                     optional   sm, md, lg                                                                            md
-  color       The color of the border                                                                                                                           optional   primary, secondary, success, danger, warning, info, light, dark, body, muted, white   
-  class       Any extra classes you want to add                                                                                                                 optional   any text                                                                              none
-  data        Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters).   optional   any text                                                                              none
+| Parameter | Description                                                                                                                                     | Required | Values                                                                              | Default |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------- | ------- |
+| add       | The border(s) to add                                                                                                                            | optional | all, top, right, bottom, left                                                       | all     |
+| del       | The border(s) to subtract                                                                                                                       | optional | all, top, right, bottom, left                                                       | none    |
+| radius    | The border radius to display                                                                                                                    | optional | all, top, right, bottom, left, circle, pill                                         | none    |
+| size      | The size of the border radius                                                                                                                   | optional | sm, md, lg                                                                          | md      |
+| color     | The color of the border                                                                                                                         | optional | primary, secondary, success, danger, warning, info, light, dark, body, muted, white |         |
+| class     | Any extra classes you want to add                                                                                                               | optional | any text                                                                            | none    |
+| data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text                                                                            | none    |
 
 [Bootstrap border classes
 documentation](https://getbootstrap.com/docs/4.5/utilities/borders/)
 
-------------------------------------------------------------------------
+-----
 
-### Color {#color-classes}
+### Color
 
-Use color utilities to quickly style the `text color` and
-`background color` of an element.
+Use color utilities to quickly style the `text color` and `background
+color` of an
+element.
 
     [color text="success"] [lorem-ipsum] [/color]
 
-#### \[color\] parameters {#-color-parameters}
+#### \[color\] parameters
 
-  Parameter   Description                                                                                                                                       Required   Values                                                                                                    Default
-  ----------- ------------------------------------------------------------------------------------------------------------------------------------------------- ---------- --------------------------------------------------------------------------------------------------------- ---------
-  text        The text color to display                                                                                                                         optional   primary, secondary, success, danger, warning, info, light, dark, body, muted, white, black-50, white-50   none
-  bg          The background color to display                                                                                                                   optional   primary, secondary, success, danger, warning, info, light, dark, white, transparent                       none
-  class       Any extra classes you want to add                                                                                                                 optional   any text                                                                                                  none
-  data        Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters).   optional   any text                                                                                                  none
+| Parameter | Description                                                                                                                                     | Required | Values                                                                                                  | Default |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------- | ------- |
+| text      | The text color to display                                                                                                                       | optional | primary, secondary, success, danger, warning, info, light, dark, body, muted, white, black-50, white-50 | none    |
+| bg        | The background color to display                                                                                                                 | optional | primary, secondary, success, danger, warning, info, light, dark, white, transparent                     | none    |
+| class     | Any extra classes you want to add                                                                                                               | optional | any text                                                                                                | none    |
+| data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text                                                                                                | none    |
 
 [Bootstrap color classes
 documentation](https://getbootstrap.com/docs/4.5/utilities/colors/)
 
-------------------------------------------------------------------------
+-----
 
 ### Flex
 
@@ -1310,46 +1410,46 @@ documentation](https://getbootstrap.com/docs/4.5/utilities/colors/)
         [flex-item class="p-2 bg-primary"]Flex item 3[/flex-item]
     [/flex]
 
-#### \[flex\] parameters {#-flex-parameters}
+#### \[flex\] parameters
 
-  Parameter       Description                                                                                                                                       Required   Values                                         Default
-  --------------- ------------------------------------------------------------------------------------------------------------------------------------------------- ---------- ---------------------------------------------- ---------
-  inline          Set the inline style for the flex container (only takes up as much width as necessary)                                                            optional   🚩 (flag)                                       
-  direction       Set the direction for the flex items                                                                                                              optional   row, row-reverse, column, column-reverse       row
-  justify         Change the alignment of flex items on the main axis                                                                                               optional   start, end, center, between, around            
-  align-content   Set flexbox container to align flex items together on the cross axis. This property has no effect on single rows of flex items.                   optional   start, end, center, between, around, stretch   start
-  align-items     Change the alignment of flex items on the cross axis (the y-axis to start, x-axis if flex-direction column).                                      optional   start, end, center, baseline, stretch          start
-  wrap            Set how flex items wrap in a flex container.                                                                                                      optional   true, reverse                                  false
-  class           Any extra classes you want to add                                                                                                                 optional   any text                                       none
-  data            Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters).   optional   any text                                       none
+| Parameter     | Description                                                                                                                                     | Required | Values                                       | Default |
+| ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------------------------------------------- | ------- |
+| inline        | Set the inline style for the flex container (only takes up as much width as necessary)                                                          | optional | 🚩 (flag)                                     |         |
+| direction     | Set the direction for the flex items                                                                                                            | optional | row, row-reverse, column, column-reverse     | row     |
+| justify       | Change the alignment of flex items on the main axis                                                                                             | optional | start, end, center, between, around          |         |
+| align-content | Set flexbox container to align flex items together on the cross axis. This property has no effect on single rows of flex items.                 | optional | start, end, center, between, around, stretch | start   |
+| align-items   | Change the alignment of flex items on the cross axis (the y-axis to start, x-axis if flex-direction column).                                    | optional | start, end, center, baseline, stretch        | start   |
+| wrap          | Set how flex items wrap in a flex container.                                                                                                    | optional | true, reverse                                | false   |
+| class         | Any extra classes you want to add                                                                                                               | optional | any text                                     | none    |
+| data          | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text                                     | none    |
 
-#### \[flex-item\] parameters {#-flex-item-parameters}
+#### \[flex-item\] parameters
 
-  Parameter   Description                                                                                                                                                                Required   Values                                  Default
-  ----------- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ---------- --------------------------------------- ---------
-  align       Align individual flex items on the cross axis.                                                                                                                             optional   start, end, center, baseline, stretch   start
-  fill        Force elements into widths equal to their content (or equal widths if their content does not surpass their border-boxes) while taking up all available horizontal space.   optional   🚩 (flag)                                
-  grow        Allow flex item ability to grow to fill available space.                                                                                                                   optional   🚩 (flag)                                
-  no-grow     Disallow flex item ability to grow to fill available space.                                                                                                                optional   🚩 (flag)                                
-  shrink      Allow flex item ability to shrink if forced by other elements.                                                                                                             optional   🚩 (flag)                                
-  no-shrink   Disallow flex item ability to shrink if forced by other elements.                                                                                                          optional   🚩 (flag)                                
-  class       Any extra classes you want to add                                                                                                                                          optional   any text                                none
-  data        Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters).                            optional   any text                                none
+| Parameter | Description                                                                                                                                                              | Required | Values                                | Default |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------- | ------------------------------------- | ------- |
+| align     | Align individual flex items on the cross axis.                                                                                                                           | optional | start, end, center, baseline, stretch | start   |
+| fill      | Force elements into widths equal to their content (or equal widths if their content does not surpass their border-boxes) while taking up all available horizontal space. | optional | 🚩 (flag)                              |         |
+| grow      | Allow flex item ability to grow to fill available space.                                                                                                                 | optional | 🚩 (flag)                              |         |
+| no-grow   | Disallow flex item ability to grow to fill available space.                                                                                                              | optional | 🚩 (flag)                              |         |
+| shrink    | Allow flex item ability to shrink if forced by other elements.                                                                                                           | optional | 🚩 (flag)                              |         |
+| no-shrink | Disallow flex item ability to shrink if forced by other elements.                                                                                                        | optional | 🚩 (flag)                              |         |
+| class     | Any extra classes you want to add                                                                                                                                        | optional | any text                              | none    |
+| data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters).                          | optional | any text                              | none    |
 
 [Bootstrap flex
 documentation](https://getbootstrap.com/docs/4.5/utilities/flex/)
 
-------------------------------------------------------------------------
+-----
 
-### HTML snippets {#html}
+### HTML snippets
 
 Allow any html code. This shortcode has no parameters.
 
     [html]<br><hr><br>[/html]
 
-------------------------------------------------------------------------
+-----
 
-### Lorem Ipsum text generator {#lorem-ipsum}
+### Lorem Ipsum text generator
 
 Generate any amount of `lorem ipsum` data. Great for layout tests.
 Without any parameters, the tag will produce one sentence with the `p`
@@ -1357,20 +1457,20 @@ tag.
 
     [lorem-ipsum sentences="3" tag="div"]
 
-#### \[lorem-ipsum\] parameters {#-lorem-ipsum-parameters}
+#### \[lorem-ipsum\] parameters
 
-  Parameter    Description                                                                                                                                       Required   Values                                                      Default
-  ------------ ------------------------------------------------------------------------------------------------------------------------------------------------- ---------- ----------------------------------------------------------- ---------
-  tag          The element tag for the text snippets.                                                                                                            optional   any element tag; use `span` to keep the elements together   p
-  words        The number of words to generate                                                                                                                   optional   any number                                                  none
-  sentences    The number of sentences to generate                                                                                                               optional   any number                                                  none
-  paragraphs   The number of paragraphs to generate                                                                                                              optional   any number                                                  none
-  class        Any extra classes you want to add                                                                                                                 optional   any text                                                    none
-  data         Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters).   optional   any text                                                    none
+| Parameter  | Description                                                                                                                                     | Required | Values                                                    | Default |
+| ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------- | --------------------------------------------------------- | ------- |
+| tag        | The element tag for the text snippets.                                                                                                          | optional | any element tag; use `span` to keep the elements together | p       |
+| words      | The number of words to generate                                                                                                                 | optional | any number                                                | none    |
+| sentences  | The number of sentences to generate                                                                                                             | optional | any number                                                | none    |
+| paragraphs | The number of paragraphs to generate                                                                                                            | optional | any number                                                | none    |
+| class      | Any extra classes you want to add                                                                                                               | optional | any text                                                  | none    |
+| data       | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text                                                  | none    |
 
-------------------------------------------------------------------------
+-----
 
-### Clearfix and Floats {#clearfix-floats}
+### Clearfix and Floats
 
 Quickly and easily clear floated content within a container.
 
@@ -1379,42 +1479,42 @@ Quickly and easily clear floated content within a container.
     [float float="right"] Floating Right [/float]
     [/clearfix]
 
-#### \[clearfix\] parameters {#-clearfix-parameters}
+#### \[clearfix\] parameters
 
-  Parameter   Description                                                                                                                                       Required   Values     Default
-  ----------- ------------------------------------------------------------------------------------------------------------------------------------------------- ---------- ---------- ---------
-  class       Any extra classes you want to add                                                                                                                 optional   any text   none
-  data        Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters).   optional   any text   none
+| Parameter | Description                                                                                                                                     | Required | Values   | Default |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------- | ------- |
+| class     | Any extra classes you want to add                                                                                                               | optional | any text | none    |
+| data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text | none    |
 
-#### \[float\] parameters {#-floats-parameters}
+#### \[float\] parameters
 
-  Parameter   Description                                                                                                                                       Required   Values              Default
-  ----------- ------------------------------------------------------------------------------------------------------------------------------------------------- ---------- ------------------- ---------
-  float       Position to float the elemet to.                                                                                                                  optional   none, left, right   none
-  class       Any extra classes you want to add                                                                                                                 optional   any text            none
-  data        Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters).   optional   any text            none
+| Parameter | Description                                                                                                                                     | Required | Values            | Default |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ----------------- | ------- |
+| float     | Position to float the elemet to.                                                                                                                | optional | none, left, right | none    |
+| class     | Any extra classes you want to add                                                                                                               | optional | any text          | none    |
+| data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text          | none    |
 
-------------------------------------------------------------------------
+-----
 
-### Javascript {#javascript}
+### Javascript
 
 ### Tooltip
 
     [tooltip title="I'm the tooltip title" placement="auto"] Hover over me [/tooltip]
 
-#### \[tooltip\] parameters {#-tooltip-parameters}
+#### \[tooltip\] parameters
 
-  Parameter   Description                                  Required   Values                           Default
-  ----------- -------------------------------------------- ---------- -------------------------------- ---------
-  title       The title of the tooltip                     required   any text                         none
-  placement   The placement of the tooltip                 optional   auto, left, top, bottom, right   right
-  animation   Apply a CSS fade transition to the tooltip   optional   🚩 (flag)                         
-  html        Allow HTML in the tooltip text               optional   🚩 (flag)                         
+| Parameter | Description                                | Required | Values                         | Default |
+| --------- | ------------------------------------------ | -------- | ------------------------------ | ------- |
+| title     | The title of the tooltip                   | required | any text                       | none    |
+| placement | The placement of the tooltip               | optional | auto, left, top, bottom, right | right   |
+| animation | Apply a CSS fade transition to the tooltip | optional | 🚩 (flag)                       |         |
+| html      | Allow HTML in the tooltip text             | optional | 🚩 (flag)                       |         |
 
 [Bootstrap tooltip
 documentation](https://getbootstrap.com/docs/4.5/components/tooltips/)
 
-------------------------------------------------------------------------
+-----
 
 ### Popover
 
@@ -1422,21 +1522,21 @@ documentation](https://getbootstrap.com/docs/4.5/components/tooltips/)
         [button outline class="mr-3"] Click Me [/button]
     [/popover]
 
-#### \[popover\] parameters {#-popover-parameters}
+#### \[popover\] parameters
 
-  Parameter   Description                                  Required   Values                           Default
-  ----------- -------------------------------------------- ---------- -------------------------------- ---------
-  title       The title of the popover                     optional   any text                         none
-  content     The text of the popover                      required   any text                         none
-  placement   The placement of the popover                 optional   auto, left, top, bottom, right   right
-  animation   Apply a CSS fade transition to the tooltip   optional   🚩 (flag)                         
-  html        Allow HTML in the popover text               optional   🚩 (flag)                         
-  trigger     Allow HTML in the popover text               optional   click, hover, focus, manual      click
+| Parameter | Description                                | Required | Values                         | Default |
+| --------- | ------------------------------------------ | -------- | ------------------------------ | ------- |
+| title     | The title of the popover                   | optional | any text                       | none    |
+| content   | The text of the popover                    | required | any text                       | none    |
+| placement | The placement of the popover               | optional | auto, left, top, bottom, right | right   |
+| animation | Apply a CSS fade transition to the tooltip | optional | 🚩 (flag)                       |         |
+| html      | Allow HTML in the popover text             | optional | 🚩 (flag)                       |         |
+| trigger   | Allow HTML in the popover text             | optional | click, hover, focus, manual    | click   |
 
 [Bootstrap popovers
 documentation](https://getbootstrap.com/docs/4.5/components/popovers/)
 
-------------------------------------------------------------------------
+-----
 
 ### Collapse
 
@@ -1459,17 +1559,17 @@ Create an accordion by wrapping `[card]`s in `[accordion]`.
         [/card]
     [/accordion]
 
-#### \[accordion\] parameters {#-accordion-parameters}
+#### \[accordion\] parameters
 
-  Parameter   Description                                                                     Required   Values     Default
-  ----------- ------------------------------------------------------------------------------- ---------- ---------- ---------
-  class       Any extra classes you want to add.                                              optional   any text   
-  data        Data attribute and value pairs separated by a comma. Pairs separated by pipe.   optional   any text   
+| Parameter | Description                                                                   | Required | Values   | Default |
+| --------- | ----------------------------------------------------------------------------- | -------- | -------- | ------- |
+| class     | Any extra classes you want to add.                                            | optional | any text |         |
+| data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. | optional | any text |         |
 
 [Bootstrap collapse
 documentation](https://getbootstrap.com/docs/4.5/components/collapse/)
 
-------------------------------------------------------------------------
+-----
 
 ### Carousel
 
@@ -1495,22 +1595,23 @@ documentation](https://getbootstrap.com/docs/4.5/components/collapse/)
 \[carousel-item\] wraps an HTML image tag, image inserted via the
 WordPress editor or the `img-gen` tag. It can also be used for text
 slides but you may need to use additional utilities or custom styles to
-appropriately size content.
+appropriately size
+content.
 
-#### \[carousel\] parameters {#-carousel-parameters}
+#### \[carousel\] parameters
 
-  Parameter    Description                                                                                                                                                             Required   Values                            Default
-  ------------ ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- ---------- --------------------------------- ---------
-  interval     The amount of time to delay between automatically cycling an item. If false, carousel will not automatically cycle.                                                     optional   any number (in ms) or \"false\"   5000
-  pause        Pauses the carousel from going through the next slide when the mouse pointer enters the carousel, and resumes the sliding when the mouse pointer leaves the carousel.   optional   hover, false                      hover
-  wrap         Whether the carousel should cycle continuously or have hard stops.                                                                                                      optional   true, false                       true
-  indicators   Whether the carousel should show the slide indicator.                                                                                                                   optional   🚩 (flag)                          
-  controls     Whether the carousel should show the previous and next slide controls.                                                                                                  optional   🚩 (flag)                          
-  fade         To animate slides with a fade transition instead of a slide.                                                                                                            optional   🚩 (flag)                          
-  class        Any extra classes you want to add                                                                                                                                       optional   any text                          none
-  data         Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters).                         optional   any text                          none
+| Parameter  | Description                                                                                                                                                           | Required | Values                        | Default |
+| ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ----------------------------- | ------- |
+| interval   | The amount of time to delay between automatically cycling an item. If false, carousel will not automatically cycle.                                                   | optional | any number (in ms) or "false" | 5000    |
+| pause      | Pauses the carousel from going through the next slide when the mouse pointer enters the carousel, and resumes the sliding when the mouse pointer leaves the carousel. | optional | hover, false                  | hover   |
+| wrap       | Whether the carousel should cycle continuously or have hard stops.                                                                                                    | optional | true, false                   | true    |
+| indicators | Whether the carousel should show the slide indicator.                                                                                                                 | optional | 🚩 (flag)                      |         |
+| controls   | Whether the carousel should show the previous and next slide controls.                                                                                                | optional | 🚩 (flag)                      |         |
+| fade       | To animate slides with a fade transition instead of a slide.                                                                                                          | optional | 🚩 (flag)                      |         |
+| class      | Any extra classes you want to add                                                                                                                                     | optional | any text                      | none    |
+| data       | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters).                       | optional | any text                      | none    |
 
-#### \[carousel-item\] parameters {#-carousel-item-parameters}
+#### \[carousel-item\] parameters
 
 Parameter
 
@@ -1524,8 +1625,8 @@ Default
 
 active
 
-Whether the item has the \"active\" style applied. One item MUST be set
-as active.
+Whether the item has the "active" style applied. One item MUST be set as
+active.
 
 optional
 
@@ -1548,21 +1649,22 @@ pipe. See example at [\[container\] parameters](#container-parameters).
 
 optional
 
-any text
+any
+text
 
 none
 
-#### \[carousel-caption\] parameters {#-carousel-caption-parameters}
+#### \[carousel-caption\] parameters
 
-  Parameter   Description                                                                                                                                       Required   Values     Default
-  ----------- ------------------------------------------------------------------------------------------------------------------------------------------------- ---------- ---------- ---------
-  class       Any extra classes you want to add                                                                                                                 optional   any text   none
-  data        Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters).   optional   any text   none
+| Parameter | Description                                                                                                                                     | Required | Values   | Default |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------- | ------- |
+| class     | Any extra classes you want to add                                                                                                               | optional | any text | none    |
+| data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text | none    |
 
 [Bootstrap carousel
 documentation](https://getbootstrap.com/docs/4.5/components/carousel/)
 
-------------------------------------------------------------------------
+-----
 
 ### Modal
 
@@ -1578,43 +1680,43 @@ documentation](https://getbootstrap.com/docs/4.5/components/carousel/)
         [/modal-footer]
     [/modal]
 
-#### \[modal\] parameters {#-modal-parameters}
+#### \[modal\] parameters
 
-  Parameter    Description                                                                                                                                       Required   Values                   Default
-  ------------ ------------------------------------------------------------------------------------------------------------------------------------------------- ---------- ------------------------ ------------------------------------------
-  fade         Slide modal down and fade in from the top of the page                                                                                             optional   🚩 (flag)                 
-  centered     Vertically center the modal                                                                                                                       optional   🚩 (flag)                 
-  scrollable   Allows scrolling the modal body                                                                                                                   optional   🚩 (flag)                 
-  size         Optional modal size                                                                                                                               optional   sm, lg, xl               Default
-  id           Unique id for the modal (see `modal` at [Buttons](#buttons)                                                                                       required   any text without space   modal-{counter}; {counter} starting at 0
-  backdrop     Apply the modal \"backdrop\" style; `static` will not close the modal when clicking outside of it                                                 optional   false, true, static      true
-  class        Any extra classes you want to add to the trigger link                                                                                             optional   any text                 none
-  data         Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters).   optional   any text                 none
+| Parameter  | Description                                                                                                                                     | Required | Values                 | Default                                  |
+| ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ---------------------- | ---------------------------------------- |
+| fade       | Slide modal down and fade in from the top of the page                                                                                           | optional | 🚩 (flag)               |                                          |
+| centered   | Vertically center the modal                                                                                                                     | optional | 🚩 (flag)               |                                          |
+| scrollable | Allows scrolling the modal body                                                                                                                 | optional | 🚩 (flag)               |                                          |
+| size       | Optional modal size                                                                                                                             | optional | sm, lg, xl             | Default                                  |
+| id         | Unique id for the modal (see `modal` at [Buttons](#buttons)                                                                                     | required | any text without space | modal-{counter}; {counter} starting at 0 |
+| backdrop   | Apply the modal "backdrop" style; `static` will not close the modal when clicking outside of it                                                 | optional | false, true, static    | true                                     |
+| class      | Any extra classes you want to add to the trigger link                                                                                           | optional | any text               | none                                     |
+| data       | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text               | none                                     |
 
-#### \[modal-header\] parameters {#-modal-header-parameters}
+#### \[modal-header\] parameters
 
-  Parameter   Description                                                                                                                                       Required   Values     Default
-  ----------- ------------------------------------------------------------------------------------------------------------------------------------------------- ---------- ---------- ---------
-  class       Any extra classes you want to add                                                                                                                 optional   any text   none
-  data        Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters).   optional   any text   none
+| Parameter | Description                                                                                                                                     | Required | Values   | Default |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------- | ------- |
+| class     | Any extra classes you want to add                                                                                                               | optional | any text | none    |
+| data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text | none    |
 
-#### \[modal-body\] parameters {#-modal-body-parameters}
+#### \[modal-body\] parameters
 
-  Parameter   Description                                                                                                                                       Required   Values     Default
-  ----------- ------------------------------------------------------------------------------------------------------------------------------------------------- ---------- ---------- ---------
-  class       Any extra classes you want to add                                                                                                                 optional   any text   none
-  data        Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters).   optional   any text   none
+| Parameter | Description                                                                                                                                     | Required | Values   | Default |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------- | ------- |
+| class     | Any extra classes you want to add                                                                                                               | optional | any text | none    |
+| data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text | none    |
 
-#### \[modal-footer\] parameters {#-modal-footer-parameters}
+#### \[modal-footer\] parameters
 
-  Parameter   Description                                                                                                                                       Required   Values     Default
-  ----------- ------------------------------------------------------------------------------------------------------------------------------------------------- ---------- ---------- ---------
-  class       Any extra classes you want to add                                                                                                                 optional   any text   none
-  data        Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters).   optional   any text   none
+| Parameter | Description                                                                                                                                     | Required | Values   | Default |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------- | ------- |
+| class     | Any extra classes you want to add                                                                                                               | optional | any text | none    |
+| data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text | none    |
 
 [Bootstrap modal
 documentation](https://getbootstrap.com/docs/4.5/components/modal/)
 
-------------------------------------------------------------------------
+-----
 
 .
