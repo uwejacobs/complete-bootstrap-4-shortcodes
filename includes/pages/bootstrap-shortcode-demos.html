@@ -1231,21 +1231,27 @@ Inner Header
 <p>[card]<br>[card-header class="lead"]Code Snippet[/card-header]<br>[card-body class="p4"]</p>
 <p>[code]<br>&lt;h4 id="-modal-footer-parameters"&gt;modal-footer parameters&lt;/h4&gt;<br>&lt;table&gt;<br>&lt;thead&gt;<br>&lt;tr&gt;<br>&lt;th&gt;Parameter&lt;/th&gt;<br>&lt;th&gt;Description&lt;/th&gt;<br>&lt;th&gt;Required&lt;/th&gt;<br>&lt;th&gt;Values&lt;/th&gt;<br>q&lt;th&gt;Default&lt;/th&gt;<br>&lt;/tr&gt;<br>&lt;/thead&gt;<br>&lt;tbody&gt;<br>&lt;tr&gt;<br>&lt;td&gt;class&lt;/td&gt;<br>&lt;td&gt;Any extra classes you want to add&lt;/td&gt;<br>&lt;td&gt;optional&lt;/td&gt;<br>&lt;td&gt;any text&lt;/td&gt;<br>&lt;td&gt;none&lt;/td&gt;<br>&lt;/tr&gt;<br>&lt;tr&gt;<br>&lt;td&gt;data&lt;/td&gt;<br>&lt;td&gt;Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at &lt;a href="#container-parameters"&gt;container parameters&lt;/a&gt;.&lt;/td&gt;<br>&lt;td&gt;optional&lt;/td&gt;<br>&lt;td&gt;any text&lt;/td&gt;<br>&lt;td&gt;none&lt;/td&gt;<br>&lt;/tr&gt;<br>&lt;/tbody&gt;<br>&lt;/table&gt;<br>[/code]</p>
 <p>[/card-body]<br>[card-footer][/card-footer]<br>[/card]</p>
+
 <!-- wp:separator {"color":"black","className":"is-style-wide"} -->
 <hr class="wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
 <!-- /wp:separator -->
+
 <p>[card]<br>[card-header class="lead"]Scrollable Code Snippet[/card-header]<br>[card-body class="p4"]</p>
 <p>[code scrollable]<br>&lt;h4 id="-modal-footer-parameters"&gt;modal-footer parameters&lt;/h4&gt;<br>&lt;table&gt;<br>&lt;thead&gt;<br>&lt;tr&gt;<br>&lt;th&gt;Parameter&lt;/th&gt;<br>&lt;th&gt;Description&lt;/th&gt;<br>&lt;th&gt;Required&lt;/th&gt;<br>&lt;th&gt;Values&lt;/th&gt;<br>q&lt;th&gt;Default&lt;/th&gt;<br>&lt;/tr&gt;<br>&lt;/thead&gt;<br>&lt;tbody&gt;<br>&lt;tr&gt;<br>&lt;td&gt;class&lt;/td&gt;<br>&lt;td&gt;Any extra classes you want to add&lt;/td&gt;<br>&lt;td&gt;optional&lt;/td&gt;<br>&lt;td&gt;any text&lt;/td&gt;<br>&lt;td&gt;none&lt;/td&gt;<br>&lt;/tr&gt;<br>&lt;tr&gt;<br>&lt;td&gt;data&lt;/td&gt;<br>&lt;td&gt;Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at &lt;a href="#container-parameters"&gt;container parameters&lt;/a&gt;.&lt;/td&gt;<br>&lt;td&gt;optional&lt;/td&gt;<br>&lt;td&gt;any text&lt;/td&gt;<br>&lt;td&gt;none&lt;/td&gt;<br>&lt;/tr&gt;<br>&lt;/tbody&gt;<br>&lt;/table&gt;<br>[/code]</p>
 <p>[/card-body]<br>[card-footer][/card-footer]<br>[/card]</p>
+
 <!-- wp:separator {"color":"black","className":"is-style-wide"} -->
 <hr class="wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
 <!-- /wp:separator -->
+
 <p>[card]<br>[card-header class="lead"]Inline Code[/card-header]<br>[card-body class="p4"]</p>
 <p>Use the [code inline]media[/code] flag at the [code inline]list-group[/code] tag and the [code inline]listgroup[/code] flag at the [code inline]media[/code] tag.</p>
 <p>[/card-body]<br>[card-footer][/card-footer]<br>[/card]</p>
+
 <!-- wp:separator {"color":"black","className":"is-style-wide"} -->
 <hr class="wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
 <!-- /wp:separator -->
+
 <h2>Tables</h2>
 
 <!-- wp:shortcode -->
@@ -2075,3 +2081,46 @@ Automatically created by lorem ipsum generator
 [card-footer]  [/card-footer]
 [/card]
 <!-- /wp:shortcode -->
+
+<h2>Float and Clearfix</h2>
+
+<!-- wp:shortcode -->
+[card]
+[card-header class="lead"]Float and Clearfix Examples[/card-header]
+[card-body class="p4"]
+
+[clearfix class="bg-warning"]
+[float float="none"] No Float [/float]
+[float float="left"] Left Float [/float]
+[/clearfix]
+
+[clearfix class="mt-3 bg-warning"]
+[float float="left"] Left Float [/float]
+[float float="right"] Right Float [/float]
+[/clearfix]
+
+[clearfix class="mt-3 bg-warning"]
+[float float="none"] No Float [/float]
+[float float="right"] Right Float [/float]
+[/clearfix]
+
+[clearfix class="mt-3 bg-warning"]
+[float float="left"] Float Left [/float]
+[img-gen class="float-right" size="200" text="Image Right Float"]
+[/clearfix]
+
+[clearfix class="mt-3 bg-warning"]
+[img-gen class="float-left" size="200" text="Image Left Float"]
+[img-gen class="float-right" size="200" text="Image Right Float"]
+[/clearfix]
+
+[clearfix class="mt-3 bg-info"]
+[button class="btn-secondary float-left"]Example Button floated left[/button]
+[button class="btn-secondary float-right"]Example Button floated right[/button]
+[/clearfix]
+
+[/card-body]
+[card-footer]  [/card-footer]
+[/card]
+<!-- /wp:shortcode -->
+

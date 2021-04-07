@@ -3850,10 +3850,10 @@ a#bootstrap-shortcodes-help .thumbnail.active {
 #bootstrap-shortcodes-help .alert > p + p {
   margin-top: 5px;
 }
-#bootstrap-shortcodes-help .alert-dismissable {
+#bootstrap-shortcodes-help .alert-dismissible {
   padding-right: 35px;
 }
-#bootstrap-shortcodes-help .alert-dismissable .close {
+#bootstrap-shortcodes-help .alert-dismissible .close {
   position: relative;
   top: -2px;
   right: -21px;

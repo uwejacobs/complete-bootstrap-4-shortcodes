@@ -1,7 +1,3 @@
-<!-- TODO
-- New Tags
-  navbar
--->
 <h1 id="complete-bootstrap-4-shortcodes">Complete Bootstrap 4 Shortcodes</h1>
 <p><img src="https://img.shields.io/wordpress/plugin/r/complete-bootstrap-4-shortcodes.svg" alt="WordPress Rating"> <img src="https://img.shields.io/wordpress/plugin/dt/complete-bootstrap-4-shortcodes.svg" alt="WordPress Downloads"></p>
 <p>WordPress plugin that provides shortcodes for easier use of the Bootstrap styles and components in your content.</p>
@@ -50,6 +46,7 @@
     <li><a href="#flex">Flex</a></li>
     <li><a href="#html">HTML snippets</a></li>
     <li><a href="#lorem-ipsum">Lorem Ipsum Text Generator</a></li>
+    <li><a href="#clearfix-float">Floats and Clearfix</a></li>
 </ul>
 <a id="javascript-header" class="text-decoration-none" href="#javascript"><h3>Javascript</h3></a>
 <ul>
@@ -1767,8 +1764,8 @@
             <td>primary</td>
         </tr>
         <tr>
-            <td>dismissable</td>
-            <td>If the alert should be dismissable</td>
+            <td>dismissible</td>
+            <td>If the alert should be dismissible</td>
             <td>optional</td>
             <td>🚩 (flag)</td>
             <td></td>
@@ -2319,7 +2316,7 @@
         </tr>
         <tr>
             <td>thumbnail</td>
-            <td>Add a rounded 1px border appearance</td>
+            <td>Add a rounded 1px border appearance. Does not change the size of the image.</td>
             <td>optional</td>
             <td>🚩 (flag)</td>
             <td></td>
@@ -2916,6 +2913,78 @@
             <td>The number of paragraphs to generate</td>
             <td>optional</td>
             <td>any number</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at <a href="#container-parameters">[container] parameters</a>.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+    </tbody>
+</table>
+<hr>
+<h3 id="clearfix-floats">Clearfix and Floats</h3>
+<p>Quickly and easily clear floated content within a container.</p>
+<pre><code class="d-block p-4">
+[clearfix]
+[float float="left"] Floating Left [/float]
+[float float="right"] Floating Right [/float]
+[/clearfix]
+</code></pre>
+<h4 id="-clearfix-parameters">[clearfix] parameters</h4>
+<table>
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at <a href="#container-parameters">[container] parameters</a>.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+    </tbody>
+</table>
+<h4 id="-floats-parameters">[float] parameters</h4>
+<table>
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>float</td>
+            <td>Position to float the elemet to.</td>
+            <td>optional</td>
+            <td>none, left, right</td>
             <td>none</td>
         </tr>
         <tr>

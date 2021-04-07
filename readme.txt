@@ -4,7 +4,7 @@ Tags: bootstrap,shortcode,shortcodes,responsive,grid,flex,lorem ipsum,dummy imag
 Requires at least: 3.8
 Tested up to: 5.7
 Requires PHP: 5.3
-Stable tag: 4.5.6
+Stable tag: 4.5.7
 License: MIT License
 License URI: https://mit-license.org/
 
@@ -17,12 +17,12 @@ Plenty of great WordPress plugins focus on providing or including the Bootstrap 
 
 This plugin creates a simple, out of the way button just above the WordPress TinyMCE editor (next to the "Add Media" button) which pops up the plugin's documentation and shortcode examples for reference and handy "Insert Example" links to send the example shortcodes straight to the editor. There are no additional TinyMCE buttons to clutter up your screen, just great, easy to use shortcodes!
 
-Check the demo page "Bootstrap 4 Shortcodes Demo 4.5.6" after activation for ready to use shortcodes examples.
+Check the demo page "Bootstrap 4 Shortcodes Demo 4.5.7" after activation for ready to use shortcodes examples.
 
 For questions, support, or to contribute to this plugin, check out [our GitHub project](https://github.com/uwejacobs/complete-bootstrap-4-shortcodes).
 
 == Overview ==
-See the shortcodes in action on our [demo page](https://ujsoftware.com/bootstrap-4-shortcodes-demo-4-5-6/).
+See the shortcodes in action on our [demo page](https://ujsoftware.com/bootstrap-4-shortcodes-demo-4-5-7/).
 
 = Layout: =
 * Grid
@@ -85,6 +85,13 @@ See the shortcodes in action on our [demo page](https://ujsoftware.com/bootstrap
 16. The above shortcode example rendered with WordPress
 
 == Changelog ==
+= 4.5.7 =
+* Added clearfix shortcode
+* Added float shortcode
+* Bugfix: Fixed spelling of `dismissible` for alerts
+* Clarified img-thumbnail functionality in documentation
+* Minor fixes for shortcode demo page
+
 = 4.5.6 =
 * [button] can now create tag <code>a</code> with href and target
 
