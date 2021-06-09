@@ -3,7 +3,7 @@
 Plugin Name: Complete Bootstrap 4 Shortcodes
 Plugin URI: https://github.com/uwejacobs/complete-bootstrap-4-shortcodes
 Description: The plugin adds shortcodes for most Bootstrap 4 elements.
-Version: 4.5.7
+Version: 4.5.8
 Author: Uwe Jacobs
 Author URI:
 License: MIT
@@ -42,6 +42,12 @@ class BootstrapShortcodes {
         add_action('the_post', array(
             $this,
             'bootstrap_shortcodes_popover_script'
+        ) , 9999);
+
+        //Conditionally include accordion plus/minus icon functionality (see function for conditionals)
+        add_action('the_post', array(
+            $this,
+            'bootstrap_shortcodes_accordion_icon_script'
         ) , 9999);
 
         //Add demo page via activation hook
@@ -94,6 +100,23 @@ class BootstrapShortcodes {
         if (has_shortcode($post->post_content, 'popover')) {
             // Bootstrap popover js
             wp_enqueue_script('bootstrap-shortcodes-popover', BS_SHORTCODES_URL . 'js/bootstrap-shortcodes-popover.js', array(
+                'jquery'
+            ) , false, true);
+        }
+    }
+
+    // ======================================================================== //
+
+    // ======================================================================== //
+    // Conditionally include accordion plus/minus icon initialization script.
+    //
+    //  Only includes script if content contains [accordion] shortcode
+    // ======================================================================== //
+    function bootstrap_shortcodes_accordion_icon_script() {
+        global $post;
+        if (has_shortcode($post->post_content, 'accordion')) {
+            // Bootstrap accordion icon js
+            wp_enqueue_script('bootstrap-shortcodes-accordion-icon', BS_SHORTCODES_URL . 'js/bootstrap-shortcodes-accordion-icon.js', array(
                 'jquery'
             ) , false, true);
         }
@@ -186,6 +209,7 @@ class BootstrapShortcodes {
             'row-outer',
             'table-wrap',
             'tooltip',
+            'wrapper',
         );
 
         foreach ($shortcodes as $shortcode) {
@@ -213,6 +237,7 @@ class BootstrapShortcodes {
             // 'dropdown'
             // 'split'
             // 'outline'
+            "id" => false,
             "tag" => 'button',
             "link" => '#',
             "target" => '_self',
@@ -226,7 +251,7 @@ class BootstrapShortcodes {
         if (isset($GLOBALS['button_count'])) $GLOBALS['button_count']++;
         else $GLOBALS['button_count'] = 0;
 
-        $id = 'bs4-button-' . $GLOBALS['button_count'];
+        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : 'bs4-button-' . $GLOBALS['button_count']);
         $GLOBALS['dropdown_button'] = $id;
 
         $class = array();
@@ -301,6 +326,7 @@ class BootstrapShortcodes {
         $atts = shortcode_atts(array(
             // "vertical"  => false,
             // "justified" => false,
+            "id" => false,
             "drop" => false,
             "size" => false,
             "class" => false,
@@ -314,20 +340,22 @@ class BootstrapShortcodes {
         $class[] = ($this->is_flag('justified', $save_atts)) ? 'btn-group-justified' : '';
         $class[] = ($atts['drop']) ? 'drop' . $atts['drop'] : '';
 
+        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        return sprintf('<div role="group"%s%s>%s</div>', $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
+        return sprintf('<div%s role="group"%s%s>%s</div>', esc_attr($id), $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
     }
 
     /*--------------------------------------------------------------------------------------
      *
      * bs_button_toolbar
      *
-     *
      *-------------------------------------------------------------------------------------*/
     function bs_button_toolbar($atts, $content = null) {
         $atts = array_change_key_case((array)$atts, CASE_LOWER);
         $atts = shortcode_atts(array(
+            "id" => false,
             "class" => false,
             "data" => false
         ) , $atts);
@@ -335,9 +363,33 @@ class BootstrapShortcodes {
         $class = array();
         $class[] = 'btn-toolbar';
 
+        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        return sprintf('<div role="toolbar"%s%s>%s</div>', $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
+        return sprintf('<div%s role="toolbar"%s%s>%s</div>', esc_attr($id), $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
+    }
+
+    /*--------------------------------------------------------------------------------------
+     *
+     * bs_wrapper
+     *
+     *-------------------------------------------------------------------------------------*/
+    function bs_wrapper($save_atts, $content = null) {
+        $save_atts = array_change_key_case((array)$save_atts, CASE_LOWER);
+        $atts = shortcode_atts(array(
+            "type" => "div",
+            "id" => false,
+            "class" => false,
+            "data" => false
+        ) , $save_atts);
+
+        $class = array();
+        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+
+        $data_props = $this->parse_data_attributes($atts['data']);
+
+        return sprintf('<%1$s%2$s%3$s%4$s>%5$s</%1$s>', $atts['type'], esc_attr($id), $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
     }
 
     /*--------------------------------------------------------------------------------------
@@ -352,16 +404,24 @@ class BootstrapShortcodes {
         $save_atts = array_change_key_case((array)$save_atts, CASE_LOWER);
         $atts = shortcode_atts(array(
             // "fluid"
+            "id" => false,
+            "size" => false,
             "class" => false,
             "data" => false
         ) , $save_atts);
 
         $class = array();
-        $class[] = 'container' . ($this->is_flag('fluid', $save_atts) ? '-fluid' : '');
+        if ($this->is_flag('fluid', $save_atts)) {
+            $class[] = 'container-fluid';
+        } else {
+            $class[] = 'container' . ($atts['size'] ? '-' . $atts['size'] : '');
+        }
+
+        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
 
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        return sprintf('<div%s%s>%s</div>', $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
+        return sprintf('<div%s%s%s>%s</div>', esc_attr($id), $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
     }
 
     /*--------------------------------------------------------------------------------------
@@ -373,18 +433,8 @@ class BootstrapShortcodes {
      *
      *-------------------------------------------------------------------------------------*/
     function bs_container_fluid($atts, $content = null) {
-        $atts = array_change_key_case((array)$atts, CASE_LOWER);
-        $atts = shortcode_atts(array(
-            "class" => false,
-            "data" => false
-        ) , $atts);
-
-        $class = array();
-        $class[] = 'container-fluid';
-
-        $data_props = $this->parse_data_attributes($atts['data']);
-
-        return sprintf('<div%s%s>%s</div>', $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
+        $atts[] = 'fluid';
+        return ($this->bs_container($atts, $content));
     }
 
     /*--------------------------------------------------------------------------------------
@@ -397,6 +447,7 @@ class BootstrapShortcodes {
     function bs_dropdown($atts, $content = null) {
         $atts = array_change_key_case((array)$atts, CASE_LOWER);
         $atts = shortcode_atts(array(
+            "id" => false,
             "class" => false,
             "data" => false
         ) , $atts);
@@ -404,9 +455,11 @@ class BootstrapShortcodes {
         $class = array();
         $class[] = 'dropdown';
 
+        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        return sprintf('<div role="menu"%s%s>%s</div>', $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
+        return sprintf('<div%s role="menu"%s%s>%s</div>', esc_attr($id), $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
     }
 
     /*--------------------------------------------------------------------------------------
@@ -420,6 +473,7 @@ class BootstrapShortcodes {
         $save_atts = array_change_key_case((array)$save_atts, CASE_LOWER);
         $atts = shortcode_atts(array(
             // "disabled"
+            "id" => false,
             "link" => '#',
             "class" => false,
             "data" => false
@@ -429,9 +483,11 @@ class BootstrapShortcodes {
         $class[] = 'dropdown-item';
         $class[] = ($this->is_flag('disabled', $save_atts)) ? 'disabled' : '';
 
+        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        return sprintf('<a href="%s"%s%s>%s</a>', esc_url($atts['link']) , $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
+        return sprintf('<a%S href="%s"%s%s>%s</a>', esc_attr($id), esc_url($atts['link']) , $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
     }
 
     /*--------------------------------------------------------------------------------------
@@ -466,6 +522,7 @@ class BootstrapShortcodes {
     function bs_dropdown_header($atts, $content = null) {
         $atts = array_change_key_case((array)$atts, CASE_LOWER);
         $atts = shortcode_atts(array(
+            "id" => false,
             "class" => false,
             "data" => false
         ) , $atts);
@@ -473,9 +530,11 @@ class BootstrapShortcodes {
         $class = array();
         $class[] = 'dropdown-header';
 
+        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        return sprintf('<div%s%s>%s</div>', $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
+        return sprintf('<div%s%s%s>%s</div>', esc_attr($id), $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
     }
 
     /**
@@ -488,6 +547,7 @@ class BootstrapShortcodes {
         $save_atts = array_change_key_case((array)$save_atts, CASE_LOWER);
         $atts = shortcode_atts(array(
             // "right"
+            "id" => false,
             "class" => false,
             "data" => false,
         ) , $save_atts);
@@ -506,7 +566,9 @@ class BootstrapShortcodes {
             unset($GLOBALS['dropdown_button']);
         }
 
-        $wrap_before = ($this->testdom($content, $search_tags)) ? '' : '<div' . $this->class_output($class, $atts["class"]) . $aria_labelledby . '>';
+        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+
+        $wrap_before = ($this->testdom($content, $search_tags)) ? '' : '<div' . esc_attr($id) . $this->class_output($class, $atts["class"]) . $aria_labelledby . '>';
         $wrap_after = ($this->testdom($content, $search_tags)) ? '' : '</div>';
 
         $a_class = array();
@@ -552,6 +614,7 @@ class BootstrapShortcodes {
             // 'pills'
             // 'fill'
             // 'justified'
+            "id" => false,
             "class" => false,
             "data" => false
         ) , $save_atts);
@@ -561,7 +624,9 @@ class BootstrapShortcodes {
             'nav'
         );
 
-        $wrap_before = ($this->testdom($content, $search_tags)) ? '' : '<ul>';
+        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+
+        $wrap_before = ($this->testdom($content, $search_tags)) ? '' : '<ul' . esc_attr($id) . '>';
         $wrap_after = ($this->testdom($content, $search_tags)) ? '' : '</ul>';
 
         $class = array();
@@ -594,6 +659,7 @@ class BootstrapShortcodes {
             // "active"
             // "disabled"
             // "dropdown"
+            "id" => false,
             "link" => '#',
             "class" => false,
             "data" => false,
@@ -610,13 +676,15 @@ class BootstrapShortcodes {
         $a_class[] = ($this->is_flag('disabled', $save_atts)) ? 'disabled' : '';
         $a_aria = ($this->is_flag('disabled', $save_atts)) ? ' aria-disabled="true"' : '';
 
+        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+
         $data_props = $this->parse_data_attributes($atts['data']);
 
         //* If we have a dropdown shortcode inside the content we end the link before the dropdown shortcode, else all content goes inside the link
         $content = ($this->is_flag('dropdown', $save_atts)) ? str_replace("<br />\n", '', $content) : $content;
         $content = ($this->is_flag('dropdown', $save_atts)) ? str_replace('[dropdown-menu]', '</a>[dropdown-menu]', $content) : $content;
 
-        return sprintf('<li%1$s><a href="%2$s"%3$s%4$s%5$s%6$s>%7$s</a></li>', $this->class_output($li_class) , esc_url($atts['link']) , $this->class_output($a_class, $atts["class"]) , ($this->is_flag('dropdown', $save_atts)) ? ' data-toggle="dropdown"' : '', $data_props, $a_aria, do_shortcode($content));
+        return sprintf('<li%8$s%1$s><a href="%2$s"%3$s%4$s%5$s%6$s>%7$s</a></li>', $this->class_output($li_class) , esc_url($atts['link']) , $this->class_output($a_class, $atts["class"]) , ($this->is_flag('dropdown', $save_atts)) ? ' data-toggle="dropdown"' : '', $data_props, $a_aria, do_shortcode($content), esc_attr($id));
 
     }
 
@@ -628,6 +696,7 @@ class BootstrapShortcodes {
     function bs_accordion($save_atts, $content = null) {
         $save_atts = array_change_key_case((array)$save_atts, CASE_LOWER);
         $atts = shortcode_atts(array(
+            "id" => false,
             "class" => false,
             "data" => false,
         ) , $save_atts);
@@ -639,11 +708,11 @@ class BootstrapShortcodes {
         $class = array();
         $class[] = "accordion";
 
+        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : 'accordion' . $GLOBALS['accordion_count']);
+
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        $id = 'accordion' . $GLOBALS['accordion_count'];
-
-        $return = sprintf('<div id="%s"%s role="tablist"%s>%s</div>', $id, $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
+        $return = sprintf('<div id="%s"%s role="tablist"%s>%s</div>', esc_attr($id), $this->class_output($class, $atts["class"]), $data_props, do_shortcode($content));
 
         unset($GLOBALS['accordion']);
         return $return;
@@ -661,6 +730,7 @@ class BootstrapShortcodes {
         $save_atts = array_change_key_case((array)$save_atts, CASE_LOWER);
         $atts = shortcode_atts(array(
             // show
+            "id" => false,
             "class" => false,
             "data" => false
         ) , $save_atts);
@@ -679,9 +749,11 @@ class BootstrapShortcodes {
         $class = array();
         $class[] = 'card';
 
+        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        return sprintf('<div%s%s>%s</div>', $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
+        return sprintf('<div%s%s%s>%s</div>', esc_attr($id), $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
     }
 
     /*--------------------------------------------------------------------------------------
@@ -695,6 +767,7 @@ class BootstrapShortcodes {
     function bs_card_body($save_atts, $content = null) {
         $save_atts = array_change_key_case((array)$save_atts, CASE_LOWER);
         $atts = shortcode_atts(array(
+            "id" => false,
             "class" => false,
             "data" => false
         ) , $save_atts);
@@ -721,9 +794,11 @@ class BootstrapShortcodes {
             'blockquote'
         );
 
+        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        $return = sprintf('<div%s%s>%s</div>', $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
+        $return = sprintf('<div%s%s%s>%s</div>', esc_attr($id), $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
 
         $return = $wrap_before . $return . $wrap_after;
         $return = $this->addclass($p_tags, $return, $p_class);
@@ -889,10 +964,11 @@ class BootstrapShortcodes {
         $wrap_after = '';
 
         $id = (isset($GLOBALS['accordion'])) ? ' id="bs-heading' . $GLOBALS['accordion_card'] . '"' : '';
-        $wrap_before .= ($this->testdom($content, $search_tags)) ? '' : '<div class="card-header"' . $id . '>';
+        $wrap_before .= ($this->testdom($content, $search_tags)) ? '' : '<div class="card-header"' . esc_attr($id) . '>';
         $wrap_after .= ($this->testdom($content, $search_tags)) ? '' : '</div>';
 
         $wrap_before .= (isset($GLOBALS['accordion'])) ? sprintf('<button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapse%1$s" aria-controls="collapse%1$s" aria-expanded="%2$s">', $GLOBALS['accordion_card'], $GLOBALS['accordion_card_show'] ? 'true' : 'false') : '';
+        $wrap_before .= (isset($GLOBALS['accordion'])) ? '<i class="fa fa-plus float-right"></i>' : '';
         $wrap_after .= (isset($GLOBALS['accordion'])) ? '</button>' : '';
 
         $class = array();
@@ -946,6 +1022,7 @@ class BootstrapShortcodes {
     function bs_card_group($atts, $content = null) {
         $atts = array_change_key_case((array)$atts, CASE_LOWER);
         $atts = shortcode_atts(array(
+            "id" => false,
             "class" => false,
             "data" => false
         ) , $atts);
@@ -953,9 +1030,11 @@ class BootstrapShortcodes {
         $class = array();
         $class[] = 'card-group';
 
+        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        $return = sprintf('<div%s%s>%s</div>', $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
+        $return = sprintf('<div%s%s%s>%s</div>', esc_attr($id), $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
 
         return $return;
     }
@@ -968,6 +1047,7 @@ class BootstrapShortcodes {
     function bs_card_deck($atts, $content = null) {
         $atts = array_change_key_case((array)$atts, CASE_LOWER);
         $atts = shortcode_atts(array(
+            "id" => false,
             "class" => false,
             "data" => false
         ) , $atts);
@@ -975,9 +1055,11 @@ class BootstrapShortcodes {
         $class = array();
         $class[] = 'card-deck';
 
+        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        $return = sprintf('<div%s%s>%s</div>', $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
+        $return = sprintf('<div%s%s%s>%s</div>', esc_attr($id), $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
 
         return $return;
     }
@@ -990,6 +1072,7 @@ class BootstrapShortcodes {
     function bs_card_columns($atts, $content = null) {
         $atts = array_change_key_case((array)$atts, CASE_LOWER);
         $atts = shortcode_atts(array(
+            "id" => false,
             "class" => false,
             "data" => false
         ) , $atts);
@@ -997,9 +1080,11 @@ class BootstrapShortcodes {
         $class = array();
         $class[] = 'card-columns';
 
+        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        $return = sprintf('<div%s%s>%s</div>', $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
+        $return = sprintf('<div%s%s%s>%s</div>', esc_attr($id), $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
 
         return $return;
     }
@@ -1017,6 +1102,7 @@ class BootstrapShortcodes {
         $atts = shortcode_atts(array(
             // "dismissible"
             // "fade"
+            "id" => false,
             "type" => false,
             "class" => false,
             "data" => false
@@ -1031,9 +1117,11 @@ class BootstrapShortcodes {
 
         $dismissible = ($this->is_flag('dismissible', $save_atts)) ? $this->close_icon("alert") : '';
 
+        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        return sprintf('<div role="alert"%s%s>%s%s</div>', $this->class_output($class, $atts["class"]) , $data_props, $dismissible, do_shortcode($content));
+        return sprintf('<div%s role="alert"%s%s>%s%s</div>', esc_attr($id), $this->class_output($class, $atts["class"]) , $data_props, $dismissible, do_shortcode($content));
     }
 
     /*--------------------------------------------------------------------------------------
@@ -1045,6 +1133,7 @@ class BootstrapShortcodes {
     function bs_progress($save_atts, $content = null) {
         $save_atts = array_change_key_case((array)$save_atts, CASE_LOWER);
         $atts = shortcode_atts(array(
+            "id" => false,
             "class" => false,
             "data" => false
         ) , $save_atts);
@@ -1052,9 +1141,11 @@ class BootstrapShortcodes {
         $class = array();
         $class[] = 'progress';
 
+        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        return sprintf('<div%s%s>%s</div>', $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
+        return sprintf('<div%s%s%s>%s</div>', esc_attr($id), $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
     }
 
     /*--------------------------------------------------------------------------------------
@@ -1069,6 +1160,7 @@ class BootstrapShortcodes {
             // "striped"
             // "animated"
             // "label"
+            "id" => false,
             "type" => false,
             "percent" => false,
             "class" => false,
@@ -1081,9 +1173,11 @@ class BootstrapShortcodes {
         $class[] = ($this->is_flag('striped', $save_atts)) ? 'progress-bar-striped' : '';
         $class[] = ($this->is_flag('animated', $save_atts)) ? 'progress-bar-animated' : '';
 
+        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        return sprintf('<div%s role="progressbar" %s%s>%s</div>', $this->class_output($class, $atts["class"]) , ($atts['percent']) ? ' style="width: ' . (int)$atts['percent'] . '%;"' : '', $data_props, ($atts['percent']) ? sprintf('<span%s>%s</span>', (!$this->is_flag('label', $save_atts)) ? ' class="sr-only"' : '', (int)$atts['percent'] . '%') : '');
+        return sprintf('<div%s%s role="progressbar" %s%s>%s</div>', esc_attr($id), $this->class_output($class, $atts["class"]) , ($atts['percent']) ? ' style="width: ' . (int)$atts['percent'] . '%;"' : '', $data_props, ($atts['percent']) ? sprintf('<span%s>%s</span>', (!$this->is_flag('label', $save_atts)) ? ' class="sr-only"' : '', (int)$atts['percent'] . '%') : '');
     }
 
     /*--------------------------------------------------------------------------------------
@@ -1099,6 +1193,7 @@ class BootstrapShortcodes {
         $atts = shortcode_atts(array(
             // "inline"
             // "scrollable"
+            "id" => false,
             "class" => false,
             "data" => false
         ) , $save_atts);
@@ -1106,9 +1201,11 @@ class BootstrapShortcodes {
         $class = array();
         $class[] = ($this->is_flag('scrollable', $save_atts)) ? 'pre-scrollable' : '';
 
+        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        return sprintf('<%1$s%2$s%3$s>%4$s</%1$s>', ($this->is_flag('inline', $save_atts)) ? 'code' : 'pre', $this->class_output($class, $atts["class"]) , $data_props, $content);
+        return sprintf('<%1$s%5$s%2$s%3$s>%4$s</%1$s>', ($this->is_flag('inline', $save_atts)) ? 'code' : 'pre', $this->class_output($class, $atts["class"]) , $data_props, $content, esc_attr($id));
     }
 
     /*--------------------------------------------------------------------------------------
@@ -1125,6 +1222,7 @@ class BootstrapShortcodes {
     function bs_row($atts, $content = null) {
         $atts = array_change_key_case((array)$atts, CASE_LOWER);
         $atts = shortcode_atts(array(
+            "id" => false,
             "class" => false,
             "data" => false
         ) , $atts);
@@ -1132,9 +1230,11 @@ class BootstrapShortcodes {
         $class = array();
         $class[] = 'row';
 
+        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        return sprintf('<div%s%s>%s</div>', $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
+        return sprintf('<div%s%s%s>%s</div>', esc_attr($id), $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
     }
 
     /*--------------------------------------------------------------------------------------
@@ -1150,6 +1250,7 @@ class BootstrapShortcodes {
     function bs_column($atts, $content = null) {
         $atts = array_change_key_case((array)$atts, CASE_LOWER);
         $atts = shortcode_atts(array(
+            "id" => false,
             "xl" => false,
             "lg" => false,
             "md" => false,
@@ -1177,9 +1278,11 @@ class BootstrapShortcodes {
         $class[] = ($atts['offset-sm'] || $atts['offset-sm'] === "0") ? 'offset-sm-' . $atts['offset-sm'] : '';
         $class[] = ($atts['offset-xs'] || $atts['offset-xs'] === "0") ? 'offset-' . $atts['offset-xs'] : '';
 
+        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        return sprintf('<div%s%s>%s</div>', $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
+        return sprintf('<div%s%s%s>%s</div>', esc_attr($id), $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
     }
 
     /*--------------------------------------------------------------------------------------
@@ -1193,6 +1296,7 @@ class BootstrapShortcodes {
         $save_atts = array_change_key_case((array)$save_atts, CASE_LOWER);
         $atts = shortcode_atts(array(
             // "inline"
+            "id" => false,
             "direction" => false,
             "justify" => false,
             "align-items" => false,
@@ -1210,9 +1314,11 @@ class BootstrapShortcodes {
         $class[] .= ($atts['align-items']) ? 'align-items-' . $atts['align-items'] : '';
         $class[] .= ($atts['wrap']) ? ($atts['wrap'] == "reverse" ? 'flex-wrap-reverse' : 'flex-wrap') : 'flex-nowrap';
 
+        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        return sprintf('<div%s%s>%s</div>', $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
+        return sprintf('<div%s%s%s>%s</div>', esc_attr($id), $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
     }
 
     /*--------------------------------------------------------------------------------------
@@ -1231,6 +1337,7 @@ class BootstrapShortcodes {
             // "no-grow"             => false,
             // "shrink"              => false,
             // "no-shrink"           => false,
+            "id" => false,
             "class" => false,
             "data" => false
         ) , $save_atts);
@@ -1243,9 +1350,11 @@ class BootstrapShortcodes {
         $class[] = ($this->is_flag('shrink', $save_atts)) ? 'flex-shrink-1' : '';
         $class[] = ($this->is_flag('no-shrink', $save_atts)) ? 'flex-shrink-0' : '';
 
+        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        return sprintf('<div%s%s>%s</div>', $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
+        return sprintf('<div%s%s%s>%s</div>', esc_attr($id), $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
     }
 
     /**
@@ -1260,6 +1369,7 @@ class BootstrapShortcodes {
             // "flush"
             // "media"
             // "linked"
+            "id" => false,
             "class" => false,
             "data" => false
         ) , $save_atts);
@@ -1268,7 +1378,8 @@ class BootstrapShortcodes {
             'ul',
             'div'
         );
-        $wrap_before = ($this->testdom($content, $search_tags)) ? '' : ($this->is_flag('linked', $save_atts)) ? '<div>' : '<ul>';
+        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+        $wrap_before = ($this->testdom($content, $search_tags)) ? '' : ($this->is_flag('linked', $save_atts)) ? '<div' . esc_attr($id) . '>' : '<ul' . esc_attr($id) . '>';
         $wrap_after = ($this->testdom($content, $search_tags)) ? '' : ($this->is_flag('linked', $save_atts)) ? '</div>' : '</ul>';
 
         $class = array();
@@ -1313,6 +1424,7 @@ class BootstrapShortcodes {
         $atts = shortcode_atts(array(
             // "active"
             // "disabled"
+            "id" => false,
             "type" => false,
             "class" => false,
             "data" => false
@@ -1330,7 +1442,9 @@ class BootstrapShortcodes {
 
         $content = do_shortcode($content);
 
-        $return = sprintf('%s%s%s', ($this->testdom($content, $search_tags)) ? '' : '<li>', $content, ($this->testdom($content, $search_tags)) ? '' : '</li>');
+        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+
+        $return = sprintf('%s%s%s', ($this->testdom($content, $search_tags)) ? '' : '<li' . esc_attr($id) . '>', $content, ($this->testdom($content, $search_tags)) ? '' : '</li>');
 
         $return = $this->addclass($search_tags, $return, $class);
         $return = $this->adddata($search_tags, $return, $atts['data']);
@@ -1348,6 +1462,7 @@ class BootstrapShortcodes {
     function bs_breadcrumb($atts, $content = null) {
         $atts = array_change_key_case((array)$atts, CASE_LOWER);
         $atts = shortcode_atts(array(
+            "id" => false,
             "class" => false,
             "data" => false
         ) , $atts);
@@ -1355,9 +1470,11 @@ class BootstrapShortcodes {
         $class = array();
         $class[] = 'breadcrumb';
 
+        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        return sprintf('<ul%s%s>%s</ul>', $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
+        return sprintf('<ul%s%s%s>%s</ul>', esc_attr($id), $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
     }
 
     /*--------------------------------------------------------------------------------------
@@ -1371,6 +1488,7 @@ class BootstrapShortcodes {
         $save_atts = array_change_key_case((array)$save_atts, CASE_LOWER);
         $atts = shortcode_atts(array(
             // "active"
+            "id" => false,
             "link" => '#',
             "class" => false,
             "data" => false
@@ -1382,13 +1500,15 @@ class BootstrapShortcodes {
         $li_class[] = 'breadcrumb-item';
         $li_class[] = ($this->is_flag('active', $save_atts)) ? 'active' : '';
 
+        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+
         $data_props = $this->parse_data_attributes($atts['data']);
 
         $content = do_shortcode($content);
 
         $link = sprintf('<a href="%s"%s%s>%s</a>', esc_url($atts['link']) , $this->class_output($class, $atts["class"]) , $data_props, $content);
 
-        return sprintf('<li%s>%s</li>', $this->class_output($li_class) , ($this->is_flag('active', $save_atts)) ? $content : $link);
+        return sprintf('<li%s%s>%s</li>', esc_attr($id), $this->class_output($li_class) , ($this->is_flag('active', $save_atts)) ? $content : $link);
     }
 
     /*--------------------------------------------------------------------------------------
@@ -1403,6 +1523,7 @@ class BootstrapShortcodes {
         $save_atts = array_change_key_case((array)$save_atts, CASE_LOWER);
         $atts = shortcode_atts(array(
             // "right"
+            "id" => false,
             "class" => false,
             "data" => false
         ) , $save_atts);
@@ -1411,9 +1532,11 @@ class BootstrapShortcodes {
         $class[] = 'badge';
         $class[] = ($this->is_flag('right', $save_atts)) ? 'float-right' : '';
 
+        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        return sprintf('<span%s%s>%s</span>', $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
+        return sprintf('<span%s%s%s>%s</span>', esc_attr($id), $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
     }
 
     /*--------------------------------------------------------------------------------------
@@ -1427,6 +1550,7 @@ class BootstrapShortcodes {
     function bs_icon($atts, $content = null) {
         $atts = array_change_key_case((array)$atts, CASE_LOWER);
         $atts = shortcode_atts(array(
+            "id" => false,
             "prefix" => false,
             "name" => false,
             "class" => false,
@@ -1437,9 +1561,11 @@ class BootstrapShortcodes {
         $class[] = ($atts['prefix']) ? $atts['prefix'] : 'fas';
         $class[] = ($atts['name']) ? 'fa-' . $atts['name'] : '';
 
+        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        return sprintf('<i%s%s>%s</i>', $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
+        return sprintf('<i%s%s%s>%s</i>', esc_attr($id), $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
     }
 
     /*--------------------------------------------------------------------------------------
@@ -1453,6 +1579,7 @@ class BootstrapShortcodes {
     function bs_icon_stack($atts, $content = null) {
         $atts = array_change_key_case((array)$atts, CASE_LOWER);
         $atts = shortcode_atts(array(
+            "id" => false,
             "class" => false,
             "data" => false
         ) , $atts);
@@ -1460,9 +1587,11 @@ class BootstrapShortcodes {
         $class = array();
         $class[] = 'fa-stack';
 
+        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        return sprintf('<span%s%s>%s</span>', $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
+        return sprintf('<span%s%s%s>%s</span>', esc_attr($id), $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
     }
 
     /*--------------------------------------------------------------------------------------
@@ -1481,6 +1610,7 @@ class BootstrapShortcodes {
             // "hover"
             // "condensed"
             // "responsive"
+            "id" => false,
             "class" => false,
             "data" => false
         ) , $save_atts);
@@ -1499,7 +1629,9 @@ class BootstrapShortcodes {
 
         $return = do_shortcode($content);
 
-        $return = ($this->is_flag('responsive', $save_atts)) ? '<div class="table-responsive">' . $return . '</div>' : $return;
+        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+
+        $return = ($this->is_flag('responsive', $save_atts)) ? '<div' . esc_attr($id) . ' class="table-responsive">' . $return . '</div>' : $return;
 
         $return = $this->addclass($tag, $return, $class);
         $return = $this->adddata($tag, $return, $atts['data']);
@@ -1519,6 +1651,7 @@ class BootstrapShortcodes {
             // "controls"
             // "indicators"
             // "fade"
+            "id" => false,
             "interval" => false,
             "pause" => 'hover',
             "wrap" => 'true',
@@ -1529,7 +1662,7 @@ class BootstrapShortcodes {
         if (isset($GLOBALS['carousel_count'])) $GLOBALS['carousel_count']++;
         else $GLOBALS['carousel_count'] = 0;
 
-        $id = 'bs4-carousel-' . $GLOBALS['carousel_count'];
+        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : 'bs4-carousel-' . $GLOBALS['carousel_count']);
 
         $class = array();
         $class[] = 'carousel';
@@ -1601,6 +1734,7 @@ class BootstrapShortcodes {
         $save_atts = array_change_key_case((array)$save_atts, CASE_LOWER);
         $atts = shortcode_atts(array(
             // "active"
+            "id" => false,
             "class" => false,
             "data" => false
         ) , $save_atts);
@@ -1609,9 +1743,11 @@ class BootstrapShortcodes {
         $class[] = 'carousel-item';
         $class[] = ($this->is_flag('active', $save_atts)) ? 'active' : '';
 
+        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        return sprintf('<div%s%s>%s</div>', $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
+        return sprintf('<div%s%s%s>%s</div>', esc_attr($id), $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
     }
 
     /*--------------------------------------------------------------------------------------
@@ -1622,6 +1758,7 @@ class BootstrapShortcodes {
     function bs_carousel_caption($save_atts, $content = null) {
         $save_atts = array_change_key_case((array)$save_atts, CASE_LOWER);
         $atts = shortcode_atts(array(
+            "id" => false,
             "class" => false,
             "data" => false
         ) , $save_atts);
@@ -1629,9 +1766,11 @@ class BootstrapShortcodes {
         $class = array();
         $class[] = 'carousel-caption';
 
+        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        return sprintf('<div%s%s>%s</div>', $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
+        return sprintf('<div%s%s%s>%s</div>', esc_attr($id), $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
     }
 
     /**
@@ -1713,6 +1852,7 @@ class BootstrapShortcodes {
         $save_atts = array_change_key_case((array)$save_atts, CASE_LOWER);
         $atts = shortcode_atts(array(
             // "list-group"
+            "id" => false,
             "class" => false,
             "data" => false
         ) , $save_atts);
@@ -1722,9 +1862,11 @@ class BootstrapShortcodes {
         $class = array();
         $class[] = 'media';
 
+        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        return sprintf('<%s%s%s>%s</%s>', $div, $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content) , $div);
+        return sprintf('<%s%s%s%s>%s</%s>', $div, esc_attr($id), $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content) , $div);
     }
 
     function bs_media_object($atts, $content = null) {
@@ -1763,6 +1905,7 @@ class BootstrapShortcodes {
     function bs_media_body($atts, $content = null) {
         $atts = array_change_key_case((array)$atts, CASE_LOWER);
         $atts = shortcode_atts(array(
+            "id" => false,
             "class" => false,
             "data" => false
         ) , $atts);
@@ -1781,9 +1924,11 @@ class BootstrapShortcodes {
             'h6'
         );
 
+        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        $return = sprintf('<div%s%s>%s</div>', $this->class_output($div_class, $atts["class"]) , $data_props, do_shortcode($content));
+        $return = sprintf('<div%s%s%s>%s</div>', esc_attr($id), $this->class_output($div_class, $atts["class"]) , $data_props, do_shortcode($content));
 
         $return = $this->addclass($h_search_tags, $return, $h_class);
 
@@ -1800,6 +1945,7 @@ class BootstrapShortcodes {
         $save_atts = array_change_key_case((array)$save_atts, CASE_LOWER);
         $atts = shortcode_atts(array(
             // "fluid"
+            "id" => false,
             "class" => false,
             "data" => false
         ) , $save_atts);
@@ -1808,9 +1954,11 @@ class BootstrapShortcodes {
         $class[] = 'jumbotron';
         $class[] = ($this->is_flag('fluid', $save_atts)) ? 'jumbotron-fluid' : '';
 
+        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        return sprintf('<div%s%s>%s%s%s</div>', $this->class_output($class, $atts["class"]) , $data_props, ($this->is_flag('fluid', $save_atts)) ? '<div class="container">' : '', do_shortcode($content) , ($this->is_flag('fluid', $save_atts)) ? '</div>' : '');
+        return sprintf('<div%S%s%s>%s%s%s</div>', esc_attr($id), $this->class_output($class, $atts["class"]) , $data_props, ($this->is_flag('fluid', $save_atts)) ? '<div class="container">' : '', do_shortcode($content) , ($this->is_flag('fluid', $save_atts)) ? '</div>' : '');
     }
 
     /*--------------------------------------------------------------------------------------
@@ -1822,6 +1970,7 @@ class BootstrapShortcodes {
     function bs_lead($atts, $content = null) {
         $atts = array_change_key_case((array)$atts, CASE_LOWER);
         $atts = shortcode_atts(array(
+            "id" => false,
             "class" => false,
             "data" => false
         ) , $atts);
@@ -1829,11 +1978,16 @@ class BootstrapShortcodes {
         $class = array();
         $class[] = 'lead';
 
+        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+
         $data_props = $this->parse_data_attributes($atts['data']);
 
         $return = sprintf('%s', do_shortcode($content));
 
         $return = $this->addclass(null, $return, $class);
+        if (!empty($atts['id'])) {
+            $return = $this->addattribute(null, $return, 'id', $atts['id'], '');
+        }
 
         return $return;
     }
@@ -1910,6 +2064,7 @@ class BootstrapShortcodes {
     function bs_img($save_atts, $content = null) {
         $save_atts = array_change_key_case((array)$save_atts, CASE_LOWER);
         $atts = shortcode_atts(array(
+            // "center"
             // "responsive"
             // "thumbnail"
             "class" => false,
@@ -1925,7 +2080,11 @@ class BootstrapShortcodes {
         $tag = array(
             'img'
         );
-        $return = do_shortcode($content);
+
+        $return = ($this->is_flag('center', $save_atts)) ? '<div class="text-center">' : '';
+	$return .= do_shortcode($content);
+        $return = ($this->is_flag('center', $save_atts)) ? '</div>' : '';
+
         $return = $this->addclass($tag, $return, $class);
         $return = $this->adddata($tag, $return, $atts['data']);
 
@@ -2104,6 +2263,7 @@ class BootstrapShortcodes {
     function bs_blockquote($atts, $content = null) {
         $atts = array_change_key_case((array)$atts, CASE_LOWER);
         $atts = shortcode_atts(array(
+            "id" => false,
             "class" => false,
             "data" => false
         ) , $atts);
@@ -2111,9 +2271,11 @@ class BootstrapShortcodes {
         $class = array();
         $class[] = 'blockquote';
 
+        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        return sprintf('<blockquote%s%s>%s</blockquote>', $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
+        return sprintf('<blockquote%s%s%s>%s</blockquote>', esc_attr($id), $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
     }
 
     /*--------------------------------------------------------------------------------------
@@ -2125,6 +2287,7 @@ class BootstrapShortcodes {
     function bs_blockquote_footer($atts, $content = null) {
         $atts = array_change_key_case((array)$atts, CASE_LOWER);
         $atts = shortcode_atts(array(
+            "id" => false,
             "class" => false,
             "data" => false
         ) , $atts);
@@ -2132,9 +2295,11 @@ class BootstrapShortcodes {
         $class = array();
         $class[] = 'blockquote-footer';
 
+        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        return sprintf('<footer%s%s>%s</footer>', $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
+        return sprintf('<footer%s%s%s>%s</footer>', esc_attr($id), $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
     }
 
     /*--------------------------------------------------------------------------------------
@@ -2146,6 +2311,7 @@ class BootstrapShortcodes {
     function bs_embed_responsive($atts, $content = null) {
         $atts = array_change_key_case((array)$atts, CASE_LOWER);
         $atts = shortcode_atts(array(
+            "id" => false,
             "ratio" => false,
             "class" => false,
             "data" => false
@@ -2167,9 +2333,11 @@ class BootstrapShortcodes {
         $content = do_shortcode($content);
         $content = $this->addclass($tag, $content, $embed_class);
 
+        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        return sprintf('<div%s%s>%s</div>', $this->class_output($class, $atts["class"]) , $data_props, $content);
+        return sprintf('<div%s%s%s>%s</div>', esc_attr($id), $this->class_output($class, $atts["class"]) , $data_props, $content);
     }
 
     /*--------------------------------------------------------------------------------------
@@ -2181,6 +2349,7 @@ class BootstrapShortcodes {
     function bs_responsive($atts, $content = null) {
         $atts = array_change_key_case((array)$atts, CASE_LOWER);
         $atts = shortcode_atts(array(
+            "id" => false,
             "hidden" => false,
             "block" => false,
             "inline" => false,
@@ -2215,9 +2384,11 @@ class BootstrapShortcodes {
             endforeach;
         }
 
+        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        return sprintf('<div%s%s>%s</div>', $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
+        return sprintf('<div%s%s%s>%s</div>', esc_attr($id), $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
     }
 
     /**
@@ -2234,6 +2405,7 @@ class BootstrapShortcodes {
             // "scrollable"
             "size" => false,
             "backdrop" => 'true',
+            "keyboard" => 'true',
             "id" => false,
             "class" => false,
             "data" => false
@@ -2257,13 +2429,13 @@ class BootstrapShortcodes {
 
         $content = do_shortcode($content);
 
-        $return = sprintf('<div id="%s"%s data-backdrop="%s" aria-labelledby="%s" aria-hidden="true" tabindex="-1" role="dialog" %s>
+        $return = sprintf('<div id="%s"%s data-backdrop="%s" data-keyboard="%s" aria-labelledby="%s" aria-hidden="true" tabindex="-1" role="dialog" %s>
             <div%s role="document">
               <div class="modal-content">
                 %s
               </div>
             </div>
-          </div>', $id, $this->class_output($class, $atts['class']) , $atts['backdrop'], $id, $data_props, $this->class_output($dialog_class) , do_shortcode($content));
+          </div>', esc_attr($id), $this->class_output($class, $atts['class']) , $atts['backdrop'], $atts['keyboard'], esc_attr($id), $data_props, $this->class_output($dialog_class) , do_shortcode($content));
 
         return $return;
     }
@@ -2277,6 +2449,7 @@ class BootstrapShortcodes {
     function bs_modal_header($atts, $content = null) {
         $atts = array_change_key_case((array)$atts, CASE_LOWER);
         $atts = shortcode_atts(array(
+            "id" => false,
             "class" => false,
             "data" => false
         ) , $atts);
@@ -2299,14 +2472,13 @@ class BootstrapShortcodes {
         $h_class = array();
         $h_class[] = "modal-title";
 
+        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+
         $data_props = $this->parse_data_attributes($atts['data']);
 
         $content = do_shortcode($wrap_before . $content . $wrap_after);
 
-        $return = sprintf('<div%s%s>
-          %s
-          %s
-        </div>', $this->class_output($class, $atts['class']) , $data_props, $content, $this->close_icon("modal"));
+        $return = sprintf('<div%s%s%s>%s%s</div>', esc_attr($id), $this->class_output($class, $atts['class']) , $data_props, $content, $this->close_icon("modal"));
 
         $return = $this->addclass($search_tags, $return, $h_class);
 
@@ -2322,6 +2494,7 @@ class BootstrapShortcodes {
     function bs_modal_body($atts, $content = null) {
         $atts = array_change_key_case((array)$atts, CASE_LOWER);
         $atts = shortcode_atts(array(
+            "id" => false,
             "class" => false,
             "data" => false
         ) , $atts);
@@ -2329,11 +2502,11 @@ class BootstrapShortcodes {
         $class = array();
         $class[] = 'modal-body';
 
+        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        $return = sprintf('<div%s%s>
-          %s
-        </div>', $this->class_output($class, $atts['class']) , $data_props, do_shortcode($content));
+        $return = sprintf('<div%s%s>%s</div>', esc_attr($id), $this->class_output($class, $atts['class']) , $data_props, do_shortcode($content));
 
         return $return;
     }
@@ -2347,6 +2520,7 @@ class BootstrapShortcodes {
     function bs_modal_footer($atts, $content = null) {
         $atts = array_change_key_case((array)$atts, CASE_LOWER);
         $atts = shortcode_atts(array(
+            "id" => false,
             "class" => false,
             "data" => false
         ) , $atts);
@@ -2354,11 +2528,11 @@ class BootstrapShortcodes {
         $class = array();
         $class[] = 'modal-footer';
 
+        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        $return = sprintf('<div%s%s>
-          %s
-        </div>', $this->class_output($class, $atts['class']) , $data_props, do_shortcode($content));
+        $return = sprintf('<div%s%s>%s</div>', esc_attr($id), $this->class_output($class, $atts['class']) , $data_props, do_shortcode($content));
 
         return $return;
     }
@@ -2443,6 +2617,7 @@ class BootstrapShortcodes {
     function bs_figure($atts, $content = null) {
         $atts = array_change_key_case((array)$atts, CASE_LOWER);
         $atts = shortcode_atts(array(
+            "id" => false,
             "class" => false,
             "data" => false
         ) , $atts);
@@ -2457,9 +2632,11 @@ class BootstrapShortcodes {
             "img"
         );
 
+        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        $return = sprintf('<figure%s%s>%s</figure>', $this->class_output($class, $atts['class']) , $data_props, do_shortcode($content));
+        $return = sprintf('<figure%s%s%s>%s</figure>', esc_attr($id), $this->class_output($class, $atts['class']) , $data_props, do_shortcode($content));
 
         $return = $this->addclass($i_tags, $return, $i_class);
 
@@ -2475,6 +2652,7 @@ class BootstrapShortcodes {
     function bs_figure_caption($atts, $content = null) {
         $atts = array_change_key_case((array)$atts, CASE_LOWER);
         $atts = shortcode_atts(array(
+            "id" => false,
             "class" => false,
             "data" => false
         ) , $atts);
@@ -2482,9 +2660,11 @@ class BootstrapShortcodes {
         $class = array();
         $class[] = "figure-caption";
 
+        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        $return = sprintf('<figcaption%s%s>%s</figcaption>', $this->class_output($class, $atts['class']) , $data_props, do_shortcode($content));
+        $return = sprintf('<figcaption%s%s%s>%s</figcaption>', esc_attr($id), $this->class_output($class, $atts['class']) , $data_props, do_shortcode($content));
 
         return $return;
     }
@@ -2497,6 +2677,7 @@ class BootstrapShortcodes {
     function bs_clearfix($atts, $content = null) {
         $atts = array_change_key_case((array)$atts, CASE_LOWER);
         $atts = shortcode_atts(array(
+            "id" => false,
             "class" => false,
             "data" => false
         ) , $atts);
@@ -2504,9 +2685,11 @@ class BootstrapShortcodes {
         $class = array();
         $class[] = 'clearfix';
 
+        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        return sprintf('<div%s%s>%s</div>', $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
+        return sprintf('<div%s%s%s>%s</div>', esc_attr($id), $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
     }
 
     /*--------------------------------------------------------------------------------------
@@ -2517,6 +2700,7 @@ class BootstrapShortcodes {
     function bs_float($atts, $content = null) {
         $atts = array_change_key_case((array)$atts, CASE_LOWER);
         $atts = shortcode_atts(array(
+            "id" => false,
             "float" => "none", // none, left, right
             "class" => false,
             "data" => false
@@ -2525,9 +2709,11 @@ class BootstrapShortcodes {
         $class = array();
         $class[] = 'float-' . $atts['float'];
 
+        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        return sprintf('<div%s%s>%s</div>', $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
+        return sprintf('<div%s%s%s>%s</div>', esc_attr($id), $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
     }
 
     /*--------------------------------------------------------------------------------------
@@ -2753,6 +2939,10 @@ class BootstrapShortcodes {
      * Strip tags by name from DOM
      */
     public static function striptagfromdom($tag, $content) {
+        if (empty($content) || empty($tag)) {
+            return '';
+        }
+
         // Hide warnings while we run this function
         $previous_value = libxml_use_internal_errors(true);
 

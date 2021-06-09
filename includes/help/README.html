@@ -8,7 +8,7 @@
 <p>The plugin is tested to work with <code class="d-block p-4">Bootstrap 4.5</code> and <code class="d-block p-4">WordPress 5.6</code> and <strong>requires PHP 5.3 or better</strong>.</p>
 <p>Wordpress is not able to process nested shortcodes - like a <code class="d-block p-4">card</code> inside a <code class="d-block p-4">card</code> - correctly; see <a href="https://codex.wordpress.org/Shortcode_API#Nested_Shortcodes" target="_blank">Wordpress: Nested Shortcodes</a>. Some of the shortcodes have aliases with the extension <code>-outer</code> to allow nesting.</p>
 <h2 id="shortcode-reference">Shortcode Reference</h2>
-<a id="layout-header" class="text-decoration-none" href="#layout"><h3>Layout</h3></a>
+<a id="layout_header" class="text-decoration-none" href="#layout"><h3>Layout</h3></a>
 <ul>
     <li><a href="#grid">Grid</a></li>
     <li><a href="#responsive-embeds">Responsive Embeds</a></li>
@@ -38,6 +38,7 @@
     <li><a href="#images">Images</a></li>
     <li><a href="#blockquote">Blockquote</a></li>
     <li><a href="#lead-body-copy">Lead body copy</a></li>
+    <li><a href="#wrapper">Wrap section with any HTML element</a></li>
 </ul>
 <a id="utilities-header" class="text-decoration-none" href="#utilities"><h3>Utilities</h3></a>
 <ul>
@@ -135,9 +136,23 @@
     <tbody>
         <tr>
             <td>fluid</td>
-            <td>Create a full width container, spanning the entire width of the viewport. (see <a href="https://getbootstrap.com/docs/4.5/layout/overview/#fluid">Bootstrap documentation</a> for details)</td>
+            <td>Create a full width container, spanning the entire width of the viewport. (see <a href="https://getbootstrap.com/docs/4.5/layout/overview/#fluid">Bootstrap documentation</a> for details). This overrides the size parameter.</td>
             <td>optional</td>
             <td>🚩 (flag)</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>size</td>
+            <td>Use the container size to create responsive containers where the max-width of the container will change on different screen sizes/viewports.</td>
+            <td>optional</td>
+            <td>sm, md, lg or xl</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>id</td>
+            <td>Name the container for processing in custom CSS or JavaScript.</td>
+            <td>optional</td>
+            <td>Unique text identifier</td>
             <td></td>
         </tr>
         <tr>
@@ -169,6 +184,13 @@
     </thead>
     <tbody>
         <tr>
+            <td>id</td>
+            <td>Name the container for processing in custom CSS or JavaScript.</td>
+            <td>optional</td>
+            <td>Unique text identifier</td>
+            <td></td>
+        </tr>
+        <tr>
             <td>class</td>
             <td>Any extra classes you want to add</td>
             <td>optional</td>
@@ -197,6 +219,13 @@
     </thead>
     <tbody>
         <tr>
+            <td>id</td>
+            <td>Name the container for processing in custom CSS or JavaScript.</td>
+            <td>optional</td>
+            <td>Unique text identifier</td>
+            <td></td>
+        </tr>
+        <tr>
             <td>class</td>
             <td>Any extra classes you want to add</td>
             <td>optional</td>
@@ -224,6 +253,13 @@
         </tr>
     </thead>
     <tbody>
+        <tr>
+            <td>id</td>
+            <td>Name the container for processing in custom CSS or JavaScript.</td>
+            <td>optional</td>
+            <td>Unique text identifier</td>
+            <td></td>
+        </tr>
         <tr>
             <td>xs</td>
             <td>Size of column on extra small screens (less than 576px)</td>
@@ -323,6 +359,13 @@
     </thead>
     <tbody>
         <tr>
+            <td>id</td>
+            <td>Name the container for processing in custom CSS or JavaScript.</td>
+            <td>optional</td>
+            <td>Unique text identifier</td>
+            <td></td>
+        </tr>
+        <tr>
             <td>ratio</td>
             <td>Maintain the aspect ratio of the embed</td>
             <td>optional</td>
@@ -363,6 +406,13 @@
         </tr>
     </thead>
     <tbody>
+        <tr>
+            <td>id</td>
+            <td>Name the container for processing in custom CSS or JavaScript.</td>
+            <td>optional</td>
+            <td>Unique text identifier</td>
+            <td></td>
+        </tr>
         <tr>
             <td>hidden</td>
             <td>Sizes at which this element is hidden (separated by spaces)</td>
@@ -586,6 +636,13 @@
     </thead>
     <tbody>
         <tr>
+            <td>id</td>
+            <td>Name the container for processing in custom CSS or JavaScript.</td>
+            <td>optional</td>
+            <td>Unique text identifier</td>
+            <td></td>
+        </tr>
+        <tr>
             <td>show</td>
             <td>Show the collapsible card content by default.</td>
             <td>optional</td>
@@ -622,6 +679,13 @@
         </tr>
     </thead>
     <tbody>
+        <tr>
+            <td>id</td>
+            <td>Name the container for processing in custom CSS or JavaScript.</td>
+            <td>optional</td>
+            <td>Unique text identifier</td>
+            <td></td>
+        </tr>
         <tr>
             <td>class</td>
             <td>Any extra classes you want to add.</td>
@@ -837,6 +901,13 @@
     </thead>
     <tbody>
         <tr>
+            <td>id</td>
+            <td>Name the container for processing in custom CSS or JavaScript.</td>
+            <td>optional</td>
+            <td>Unique text identifier</td>
+            <td></td>
+        </tr>
+        <tr>
             <td>class</td>
             <td>Any extra classes you want to add.</td>
             <td>optional</td>
@@ -865,6 +936,13 @@
     </thead>
     <tbody>
         <tr>
+            <td>id</td>
+            <td>Name the container for processing in custom CSS or JavaScript.</td>
+            <td>optional</td>
+            <td>Unique text identifier</td>
+            <td></td>
+        </tr>
+        <tr>
             <td>class</td>
             <td>Any extra classes you want to add.</td>
             <td>optional</td>
@@ -883,6 +961,13 @@
 <h4 id="-card-columns-parameters">[card-columns] parameters</h4>
 <table class="table table-striped table-bordered">
     <thead>
+        <tr>
+            <td>id</td>
+            <td>Name the container for processing in custom CSS or JavaScript.</td>
+            <td>optional</td>
+            <td>Unique text identifier</td>
+            <td></td>
+        </tr>
         <tr>
             <th>Parameter</th>
             <th>Description</th>
@@ -913,7 +998,7 @@
 <h3 id="icons">Icons</h3>
 <div class="alert alert-warning"><strong>Note:</strong> The <code>[icon]</code> and <code>[icon-stack]</code> shortcodes depend on the Font Awesome 5 Icon Library, either from your theme or the official Font Awesome plugin.</div>
 <pre><code class="d-block p-4">
-[icon type=&quot;arrow-right&quot;]
+[icon name=&quot;arrow-right&quot;]
 </code></pre>
 <h4 id="-icon-parameters">[icon] parameters</h4>
 <table>
@@ -934,6 +1019,13 @@
             <td>fab, fas (free)
                 <br>fad, fal, far (pro)</td>
             <td>fas</td>
+        </tr>
+        <tr>
+            <td>id</td>
+            <td>Name the container for processing in custom CSS or JavaScript.</td>
+            <td>optional</td>
+            <td>Unique text identifier</td>
+            <td></td>
         </tr>
         <tr>
             <td>name</td>
@@ -964,8 +1056,8 @@
 <p>Print multiple icons on top of each other.</p>
 <pre><code class="d-block p-4">
 [icon-stack]
-    [icon type=&quot;camera&quot; class=&quot;fa-stack-1x&quot;]
-    [icon type=&quot;ban&quot; class=&quot;fa-stack-2x text-danger&quot;]
+    [icon name=&quot;camera&quot; class=&quot;fa-stack-1x&quot;]
+    [icon name=&quot;ban&quot; class=&quot;fa-stack-2x text-danger&quot;]
 [/icon-stack]
 </code></pre>
 <h4 id="-icon-stack-parameters">[icon-stack] parameters</h4>
@@ -980,6 +1072,13 @@
         </tr>
     </thead>
     <tbody>
+        <tr>
+            <td>id</td>
+            <td>Name the container for processing in custom CSS or JavaScript.</td>
+            <td>optional</td>
+            <td>Unique text identifier</td>
+            <td></td>
+        </tr>
         <tr>
             <td>class</td>
             <td>Any extra classes you want to add</td>
@@ -1014,6 +1113,13 @@
         </tr>
     </thead>
     <tbody>
+        <tr>
+            <td>id</td>
+            <td>Name the container for processing in custom CSS or JavaScript.</td>
+            <td>optional</td>
+            <td>Unique text identifier</td>
+            <td>bs4-button-###</td>
+        </tr>
         <tr>
             <td>type</td>
             <td>The type of the button</td>
@@ -1157,6 +1263,13 @@
     </thead>
     <tbody>
         <tr>
+            <td>id</td>
+            <td>Name the container for processing in custom CSS or JavaScript.</td>
+            <td>optional</td>
+            <td>Unique text identifier</td>
+            <td></td>
+        </tr>
+        <tr>
             <td>size</td>
             <td>The size of the button group</td>
             <td>optional</td>
@@ -1212,6 +1325,13 @@
         </tr>
     </thead>
     <tbody>
+        <tr>
+            <td>id</td>
+            <td>Name the container for processing in custom CSS or JavaScript.</td>
+            <td>optional</td>
+            <td>Unique text identifier</td>
+            <td></td>
+        </tr>
         <tr>
             <td>class</td>
             <td>Any extra classes you want to add</td>
@@ -1286,6 +1406,13 @@
     </thead>
     <tbody>
         <tr>
+            <td>id</td>
+            <td>Name the container for processing in custom CSS or JavaScript.</td>
+            <td>optional</td>
+            <td>Unique text identifier</td>
+            <td></td>
+        </tr>
+        <tr>
             <td>class</td>
             <td>Any extra classes you want to add</td>
             <td>optional</td>
@@ -1313,6 +1440,13 @@
         </tr>
     </thead>
     <tbody>
+        <tr>
+            <td>id</td>
+            <td>Name the container for processing in custom CSS or JavaScript.</td>
+            <td>optional</td>
+            <td>Unique text identifier</td>
+            <td></td>
+        </tr>
         <tr>
             <td>right</td>
             <td>To right-align the menu with the button or link</td>
@@ -1349,6 +1483,13 @@
         </tr>
     </thead>
     <tbody>
+        <tr>
+            <td>id</td>
+            <td>Name the container for processing in custom CSS or JavaScript.</td>
+            <td>optional</td>
+            <td>Unique text identifier</td>
+            <td></td>
+        </tr>
         <tr>
             <td>link</td>
             <td>The url you want the dropdown-item to link to</td>
@@ -1391,6 +1532,13 @@
         </tr>
     </thead>
     <tbody>
+        <tr>
+            <td>id</td>
+            <td>Name the container for processing in custom CSS or JavaScript.</td>
+            <td>optional</td>
+            <td>Unique text identifier</td>
+            <td></td>
+        </tr>
         <tr>
             <td>class</td>
             <td>Any extra classes you want to add</td>
@@ -1470,6 +1618,13 @@
     </thead>
     <tbody>
         <tr>
+            <td>id</td>
+            <td>Name the container for processing in custom CSS or JavaScript.</td>
+            <td>optional</td>
+            <td>Unique text identifier</td>
+            <td></td>
+        </tr>
+        <tr>
             <td>tabs</td>
             <td>Generate a tabbed interface</td>
             <td>optional</td>
@@ -1532,6 +1687,13 @@
         </tr>
     </thead>
     <tbody>
+        <tr>
+            <td>id</td>
+            <td>Name the container for processing in custom CSS or JavaScript.</td>
+            <td>optional</td>
+            <td>Unique text identifier</td>
+            <td></td>
+        </tr>
         <tr>
             <td>link</td>
             <td>The url you want the dropdown-item to link to</td>
@@ -1599,6 +1761,13 @@
     </thead>
     <tbody>
         <tr>
+            <td>id</td>
+            <td>Name the container for processing in custom CSS or JavaScript.</td>
+            <td>optional</td>
+            <td>Unique text identifier</td>
+            <td></td>
+        </tr>
+        <tr>
             <td>class</td>
             <td>Any extra classes you want to add</td>
             <td>optional</td>
@@ -1626,6 +1795,13 @@
         </tr>
     </thead>
     <tbody>
+        <tr>
+            <td>id</td>
+            <td>Name the container for processing in custom CSS or JavaScript.</td>
+            <td>optional</td>
+            <td>Unique text identifier</td>
+            <td></td>
+        </tr>
         <tr>
             <td>link</td>
             <td>The url you want the breadcrumb-item to link to</td>
@@ -1675,6 +1851,13 @@
     </thead>
     <tbody>
         <tr>
+            <td>id</td>
+            <td>Name the container for processing in custom CSS or JavaScript.</td>
+            <td>optional</td>
+            <td>Unique text identifier</td>
+            <td></td>
+        </tr>
+        <tr>
             <td>right</td>
             <td>Whether the badge should align to the right of its container</td>
             <td>optional</td>
@@ -1715,6 +1898,13 @@
         </tr>
     </thead>
     <tbody>
+        <tr>
+            <td>id</td>
+            <td>Name the container for processing in custom CSS or JavaScript.</td>
+            <td>optional</td>
+            <td>Unique text identifier</td>
+            <td></td>
+        </tr>
         <tr>
             <td>fluid</td>
             <td>Make jumbotron occupy the entire horizontal space of its parent</td>
@@ -1815,6 +2005,13 @@
     </thead>
     <tbody>
         <tr>
+            <td>id</td>
+            <td>Name the container for processing in custom CSS or JavaScript.</td>
+            <td>optional</td>
+            <td>Unique text identifier</td>
+            <td></td>
+        </tr>
+        <tr>
             <td>class</td>
             <td>Any extra classes you want to add</td>
             <td>optional</td>
@@ -1842,6 +2039,13 @@
         </tr>
     </thead>
     <tbody>
+        <tr>
+            <td>id</td>
+            <td>Name the container for processing in custom CSS or JavaScript.</td>
+            <td>optional</td>
+            <td>Unique text identifier</td>
+            <td></td>
+        </tr>
         <tr>
             <td>percent</td>
             <td>The percentage amount to show in the progress bar</td>
@@ -1921,6 +2125,13 @@
     </thead>
     <tbody>
         <tr>
+            <td>id</td>
+            <td>Name the container for processing in custom CSS or JavaScript.</td>
+            <td>optional</td>
+            <td>Unique text identifier</td>
+            <td></td>
+        </tr>
+        <tr>
             <td>list-group</td>
             <td>Whether the media is part of a list group</td>
             <td>optional</td>
@@ -1991,6 +2202,13 @@
         </tr>
     </thead>
     <tbody>
+        <tr>
+            <td>id</td>
+            <td>Name the container for processing in custom CSS or JavaScript.</td>
+            <td>optional</td>
+            <td>Unique text identifier</td>
+            <td></td>
+        </tr>
         <tr>
             <td>class</td>
             <td>Any extra classes you want to add</td>
@@ -2079,6 +2297,13 @@
     </thead>
     <tbody>
         <tr>
+            <td>id</td>
+            <td>Name the container for processing in custom CSS or JavaScript.</td>
+            <td>optional</td>
+            <td>Unique text identifier</td>
+            <td></td>
+        </tr>
+        <tr>
             <td>linked</td>
             <td>Weather the list group contains links</td>
             <td>optional</td>
@@ -2127,6 +2352,13 @@
         </tr>
     </thead>
     <tbody>
+        <tr>
+            <td>id</td>
+            <td>Name the container for processing in custom CSS or JavaScript.</td>
+            <td>optional</td>
+            <td>Unique text identifier</td>
+            <td></td>
+        </tr>
         <tr>
             <td>type</td>
             <td>The type of the list-group-item</td>
@@ -2184,6 +2416,13 @@
     </thead>
     <tbody>
         <tr>
+            <td>id</td>
+            <td>Name the container for processing in custom CSS or JavaScript.</td>
+            <td>optional</td>
+            <td>Unique text identifier</td>
+            <td></td>
+        </tr>
+        <tr>
             <td>inline</td>
             <td>Display inline code</td>
             <td>optional</td>
@@ -2235,6 +2474,13 @@
         </tr>
     </thead>
     <tbody>
+        <tr>
+            <td>id</td>
+            <td>Name the container for processing in custom CSS or JavaScript.</td>
+            <td>optional</td>
+            <td>Unique text identifier</td>
+            <td></td>
+        </tr>
         <tr>
             <td>bordered</td>
             <td>Set &quot;bordered&quot; table style (see Bootstrap documentation)</td>
@@ -2307,6 +2553,13 @@
         </tr>
     </thead>
     <tbody>
+        <tr>
+            <td>center</td>
+            <td>Center the wrapped image</td>
+            <td>optional</td>
+            <td>🚩 (flag)</td>
+            <td></td>
+        </tr>
         <tr>
             <td>responsive</td>
             <td>Make the wrapped images responsive</td>
@@ -2446,6 +2699,13 @@
     </thead>
     <tbody>
         <tr>
+            <td>id</td>
+            <td>Name the container for processing in custom CSS or JavaScript.</td>
+            <td>optional</td>
+            <td>Unique text identifier</td>
+            <td></td>
+        </tr>
+        <tr>
             <td>class</td>
             <td>Any extra classes you want to add</td>
             <td>optional</td>
@@ -2473,6 +2733,13 @@
         </tr>
     </thead>
     <tbody>
+        <tr>
+            <td>id</td>
+            <td>Name the container for processing in custom CSS or JavaScript.</td>
+            <td>optional</td>
+            <td>Unique text identifier</td>
+            <td></td>
+        </tr>
         <tr>
             <td>class</td>
             <td>Any extra classes you want to add</td>
@@ -2513,6 +2780,13 @@
     </thead>
     <tbody>
         <tr>
+            <td>id</td>
+            <td>Name the container for processing in custom CSS or JavaScript.</td>
+            <td>optional</td>
+            <td>Unique text identifier</td>
+            <td></td>
+        </tr>
+        <tr>
             <td>class</td>
             <td>Any extra classes you want to add</td>
             <td>optional</td>
@@ -2540,6 +2814,13 @@
         </tr>
     </thead>
     <tbody>
+        <tr>
+            <td>id</td>
+            <td>Name the container for processing in custom CSS or JavaScript.</td>
+            <td>optional</td>
+            <td>Unique text identifier</td>
+            <td></td>
+        </tr>
         <tr>
             <td>class</td>
             <td>Any extra classes you want to add</td>
@@ -2575,6 +2856,13 @@
     </thead>
     <tbody>
         <tr>
+            <td>id</td>
+            <td>Name the container for processing in custom CSS or JavaScript.</td>
+            <td>optional</td>
+            <td>Unique text identifier</td>
+            <td></td>
+        </tr>
+        <tr>
             <td>class</td>
             <td>Any extra classes you want to add</td>
             <td>optional</td>
@@ -2584,6 +2872,54 @@
         <tr>
             <td>data</td>
             <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at <a href="#container-parameters">[container] parameters</a>.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+    </tbody>
+</table>
+<p><a href="https://getbootstrap.com/docs/4.5/content/typography/#lead">Bootstrap lead documentation</a></p>
+<hr>
+<h3 id="Wrapper">Wrap section with HTML element</h3>
+<pre><code class="d-block p-4">
+[wrapper type="span" class="d-flex text-success"] [icon name="arrow-right" class="fa-2x mr-2"][lorem-ipsum] [/wrapper]
+</code></pre>
+<h4 id="-lead-parameters">[lead] parameters</h4>
+<table>
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>type</td>
+            <td>The HTML element to wrap the section with.</td>
+            <td>optional</td>
+            <td>Any HTML element</td>
+            <td>div</td>
+        </tr>
+        <tr>
+            <td>id</td>
+            <td>Name the container for processing in custom CSS or JavaScript.</td>
+            <td>optional</td>
+            <td>Unique text identifier</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe. Example: <code>data="columns,3|index,1"</code> expands to <code>data-columns="3" data-index="1"</code>.</td>
             <td>optional</td>
             <td>any text</td>
             <td>none</td>
@@ -2735,6 +3071,13 @@
     </thead>
     <tbody>
         <tr>
+            <td>id</td>
+            <td>Name the container for processing in custom CSS or JavaScript.</td>
+            <td>optional</td>
+            <td>Unique text identifier</td>
+            <td></td>
+        </tr>
+        <tr>
             <td>inline</td>
             <td>Set the inline style for the flex container (only takes up as much width as necessary)</td>
             <td>optional</td>
@@ -2804,6 +3147,13 @@
         </tr>
     </thead>
     <tbody>
+        <tr>
+            <td>id</td>
+            <td>Name the container for processing in custom CSS or JavaScript.</td>
+            <td>optional</td>
+            <td>Unique text identifier</td>
+            <td></td>
+        </tr>
         <tr>
             <td>align</td>
             <td>Align individual flex items on the cross axis.</td>
@@ -2953,6 +3303,13 @@
     </thead>
     <tbody>
         <tr>
+            <td>id</td>
+            <td>Name the container for processing in custom CSS or JavaScript.</td>
+            <td>optional</td>
+            <td>Unique text identifier</td>
+            <td></td>
+        </tr>
+        <tr>
             <td>class</td>
             <td>Any extra classes you want to add</td>
             <td>optional</td>
@@ -2980,6 +3337,13 @@
         </tr>
     </thead>
     <tbody>
+        <tr>
+            <td>id</td>
+            <td>Name the container for processing in custom CSS or JavaScript.</td>
+            <td>optional</td>
+            <td>Unique text identifier</td>
+            <td></td>
+        </tr>
         <tr>
             <td>float</td>
             <td>Position to float the elemet to.</td>
@@ -3149,6 +3513,13 @@
     </thead>
     <tbody>
         <tr>
+            <td>id</td>
+            <td>Name the container for processing in custom CSS or JavaScript.</td>
+            <td>optional</td>
+            <td>Unique text identifier</td>
+            <td>accordion###</td>
+        </tr>
+        <tr>
             <td>class</td>
             <td>Any extra classes you want to add.</td>
             <td>optional</td>
@@ -3200,6 +3571,13 @@
         </tr>
     </thead>
     <tbody>
+        <tr>
+            <td>id</td>
+            <td>Name the container for processing in custom CSS or JavaScript.</td>
+            <td>optional</td>
+            <td>Unique text identifier</td>
+            <td>bs4-carousel-###</td>
+        </tr>
         <tr>
             <td>interval</td>
             <td>The amount of time to delay between automatically cycling an item. If false, carousel will not automatically cycle.</td>
@@ -3271,6 +3649,13 @@
     </thead>
     <tbody>
         <tr>
+            <td>id</td>
+            <td>Name the container for processing in custom CSS or JavaScript.</td>
+            <td>optional</td>
+            <td>Unique text identifier</td>
+            <td></td>
+        </tr>
+        <tr>
             <td>active</td>
             <td>Whether the item has the &quot;active&quot; style applied. One item MUST be set as active.</td>
             <td>optional</td>
@@ -3312,6 +3697,13 @@
         </tr>
     </thead>
     <tbody>
+        <tr>
+            <td>id</td>
+            <td>Name the container for processing in custom CSS or JavaScript.</td>
+            <td>optional</td>
+            <td>Unique text identifier</td>
+            <td></td>
+        </tr>
         <tr>
             <td>class</td>
             <td>Any extra classes you want to add</td>
@@ -3357,6 +3749,13 @@
     </thead>
     <tbody>
         <tr>
+            <td>id</td>
+            <td>Name the container for processing in custom CSS or JavaScript.</td>
+            <td>optional</td>
+            <td>Unique text identifier</td>
+            <td>modal-###</td>
+        </tr>
+        <tr>
             <td>fade</td>
             <td>Slide modal down and fade in from the top of the page</td>
             <td>optional</td>
@@ -3399,6 +3798,13 @@
             <td>true</td>
         </tr>
         <tr>
+            <td>keyboard</td>
+            <td>Closes the modal when escape key is pressed</td>
+            <td>optional</td>
+            <td>false, true</td>
+            <td>true</td>
+        </tr>
+        <tr>
             <td>class</td>
             <td>Any extra classes you want to add to the trigger link</td>
             <td>optional</td>
@@ -3426,6 +3832,13 @@
         </tr>
     </thead>
     <tbody>
+        <tr>
+            <td>id</td>
+            <td>Name the container for processing in custom CSS or JavaScript.</td>
+            <td>optional</td>
+            <td>Unique text identifier</td>
+            <td></td>
+        </tr>
         <tr>
             <td>class</td>
             <td>Any extra classes you want to add</td>
@@ -3455,6 +3868,13 @@
     </thead>
     <tbody>
         <tr>
+            <td>id</td>
+            <td>Name the container for processing in custom CSS or JavaScript.</td>
+            <td>optional</td>
+            <td>Unique text identifier</td>
+            <td></td>
+        </tr>
+        <tr>
             <td>class</td>
             <td>Any extra classes you want to add</td>
             <td>optional</td>
@@ -3483,6 +3903,13 @@
     </thead>
     <tbody>
         <tr>
+            <td>id</td>
+            <td>Name the container for processing in custom CSS or JavaScript.</td>
+            <td>optional</td>
+            <td>Unique text identifier</td>
+            <td></td>
+        </tr>
+        <tr>
             <td>class</td>
             <td>Any extra classes you want to add</td>
             <td>optional</td>
@@ -3500,3 +3927,4 @@
 </table>
 <p><a href="https://getbootstrap.com/docs/4.5/components/modal/">Bootstrap modal documentation</a></p>
 <hr>
+<!-- pandoc --to gfm --from html --standalone includes/help/README.html -->

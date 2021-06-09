@@ -1,10 +1,8 @@
 <h2>Rows and Columns</h2>
 
-<!-- wp:shortcode -->
 [card]
 [card-header class="lead"]3 same size columns on medium and larger screens[/card-header]
 [card-body class="p4"]
-
 [row]
   [column md="4" class="bg-info"]
     Column 1 (33%)
@@ -19,21 +17,15 @@
     [lorem-ipsum/]
   [/column]
 [/row]
-
 [/card-body]
 [card-footer]Narrow your browser window to see the columns stack. [/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
-<!-- wp:separator {"color":"black","className":"is-style-wide"} -->
 <hr class="wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-<!-- /wp:separator -->
 
-<!-- wp:shortcode -->
 [card]
 [card-header class="lead"]3 columns[/card-header]
 [card-body class="p4"]
-
 [row]
 [column xs="3" class="bg-info"]
 Column 1 (25%)[lorem-ipsum/]
@@ -45,17 +37,12 @@ Column 2 (50%)[lorem-ipsum sentences="2"/]
 Column 3 (25%)[lorem-ipsum/]
 [/column]
 [/row]
-
 [/card-body]
 [card-footer]These columns will not stack when you narrow your browser window. [/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
-<!-- wp:separator {"color":"black","className":"is-style-wide"} -->
 <hr class="wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-<!-- /wp:separator -->
 
-<!-- wp:shortcode -->
 [card]
 [card-header class="lead"]2 columns with an offset in between[/card-header]
 [card-body class="p4"]
@@ -70,17 +57,12 @@ Column 2 (50%)[lorem-ipsum/]
 [/card-body]
 [card-footer]These columns will not stack when you narrow your browser window. [/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
-<!-- wp:separator {"color":"black","className":"is-style-wide"} -->
 <hr class="wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-<!-- /wp:separator -->
 
-<!-- wp:shortcode -->
 [card]
     [card-header class="lead"]Nested Rows and Columns[/card-header]
     [card-body class="p4"]
-
         [row-outer]
             [column-outer xs="3" class="bg-info text-center"]
                 Col 1
@@ -104,57 +86,44 @@ Column 2 (50%)[lorem-ipsum/]
                 [/row]
             [/column-outer]
         [/row-outer]
-
     [/card-body]
     [card-footer]These columns will not stack when you narrow your browser window. [/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
 <h2>Responsive Embed</h2>
 
-<!-- wp:shortcode -->
 [card]
 [card-header class="lead"]Embedded Video[/card-header]
 [card-body class="p4"]
-
 [embed-responsive ratio="16by9"]
 <iframe src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0"></iframe>
 [/embed-responsive]
-
 [/card-body]
 [card-footer]Narrow your browser window to see the video size adjust. [/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
 <h2>Responsive Utilities</h2>
 
-<!-- wp:shortcode -->
 [card]
 [card-header class="lead"]Show text depending on screen size[/card-header]
 [card-body class="p4"]
-
 [card-title]Sample 1: This text disappears on small and extra small screens.[/card-title]
 [responsive block="md" hidden="xs"]
 [lorem-ipsum class="bg-success"/]
 [/responsive]
-
 [card-title]Sample 2: This text will not be shown on large and extra large screens.[/card-title]
 [responsive block="xs" hidden="lg"]
 [lorem-ipsum class="bg-info"/]
 [/responsive]
-
 [/card-body]
 [card-footer]Narrow and widen your browser window to see the effect. [/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
 <h2>Cards</h2>
 
-<!-- wp:shortcode -->
 [card-outer]
 [card-header class="lead"]Simple card with a body element[/card-header]
 [card-body-outer class="p4"]
-
 [card]
 [card-body]
 [list-group flush]
@@ -164,21 +133,15 @@ Column 2 (50%)[lorem-ipsum/]
 [/list-group]
 [/card-body]
 [/card]​
-
 [/card-body-outer]
 [card-footer]List group is flush with the card[/card-footer]
 [/card-outer]
-<!-- /wp:shortcode -->
 
-<!-- wp:separator {"color":"black","className":"is-style-wide"} -->
 <hr class="wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-<!-- /wp:separator -->
 
-<!-- wp:shortcode -->
 [card-outer]
 [card-header class="lead"]Kitchen Sink[/card-header]
 [card-body-outer class="p4"]
-
 ​​​[card class="w-50"]
 [card-img top]
 [img responsive][img-gen size="200" text="Card Image Top"]​[/img]
@@ -196,21 +159,15 @@ Some quick example text to build on the card title and make up the bulk of the c
 Lorem Ipsup Dolor Sit
 [/card-body]
 [/card]
-
 [/card-body-outer]
 [card-footer]List group is flush with the card. Links in footer are next to each other.[/card-footer]
 [/card-outer]
-<!-- /wp:shortcode -->
 
-<!-- wp:separator {"color":"black","className":"is-style-wide"} -->
 <hr class="wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-<!-- /wp:separator -->
 
-<!-- wp:shortcode -->
 [card-outer]
 [card-header class="lead"]Simple card with image cap[/card-header]
 [card-body-outer class="p4"]
-
 [card class="w-25"]
 [card-img top]
 [img responsive][img-gen bg="f00" text="Sample Image"][/img]
@@ -220,21 +177,15 @@ Lorem Ipsup Dolor Sit
 Lorem ipsum dolor sit.
 [/card-body]
 [/card]
-
 [/card-body-outer]
 [card-footer]Image caps are supported with the <code>[[card-img]]</code> shortcode and the <code>top</code> or <code>bottom</code> flag.[/card-footer]
 [/card-outer]
-<!-- /wp:shortcode -->
 
-<!-- wp:separator {"color":"black","className":"is-style-wide"} -->
 <hr class="wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-<!-- /wp:separator -->
 
-<!-- wp:shortcode -->
 [card-outer]
 [card-header class="lead"]Simple card with image overlay[/card-header]
 [card-body-outer class="p4"]
-
 [card class="w-25"]
 [card-img]
 [img responsive][img-gen bg="f00" text=" "][/img]
@@ -244,21 +195,15 @@ Lorem ipsum dolor sit.
 Lorem ipsum dolor sit.
 [/card-img-overlay]
 [/card]
-
 [/card-body-outer]
 [card-footer]Image overlay cards are supported with the <code>[[card-img-overlay]]</code> shortcode.[/card-footer]
 [/card-outer]
-<!-- /wp:shortcode -->
 
-<!-- wp:separator {"color":"black","className":"is-style-wide"} -->
 <hr class="wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-<!-- /wp:separator -->
 
-<!-- wp:shortcode -->
 [card-outer]
 [card-header class="lead"]Card with header and footer[/card-header]
 [card-body-outer class="p4"]
-
 [card class="w-25"]
 [card-header]Example Header[/card-header]
 [card-body]
@@ -267,21 +212,15 @@ Lorem ipsum dolor sit.
 [/card-body]
 [card-footer]Example footer.[/card-footer]
 [/card]
-
 [/card-body-outer]
 [card-footer]Card header and card footers are supported with the <code>[[card-header]]</code> and <code>[[card-footer]]</code> shortcodes.[/card-footer]
 [/card-outer]
-<!-- /wp:shortcode -->
 
-<!-- wp:separator {"color":"black","className":"is-style-wide"} -->
 <hr class="wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-<!-- /wp:separator -->
 
-<!-- wp:shortcode -->
 [card-outer]
 [card-header class="lead"]Card group[/card-header]
 [card-body-outer class="p4"]
-
 [card-group]
 [card class="bg-info"]
 [card-body]
@@ -302,21 +241,15 @@ Dapibus ac facilisis in.
 [/card-body]
 [/card]
 [/card-group]​
-
 [/card-body-outer]
 [card-footer]Use card groups to render cards as a single, attached element with equal width and height columns.[/card-footer]
 [/card-outer]
-<!-- /wp:shortcode -->
 
-<!-- wp:separator {"color":"black","className":"is-style-wide"} -->
 <hr class="wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-<!-- /wp:separator -->
 
-<!-- wp:shortcode -->
 [card-outer]
 [card-header class="lead"]Card deck[/card-header]
 [card-body-outer class="p4"]
-
 [card-deck]
 [card class="bg-info"]
 [card-body]
@@ -337,21 +270,15 @@ Dapibus ac facilisis in.
 [/card-body]
 [/card]
 [/card-deck]
-
 [/card-body-outer]
 [card-footer]Use a card deck for a set of equal width and height cards that aren’t attached to one another.[/card-footer]
 [/card-outer]
-<!-- /wp:shortcode -->
 
-<!-- wp:separator {"color":"black","className":"is-style-wide"} -->
 <hr class="wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-<!-- /wp:separator -->
 
-<!-- wp:shortcode -->
 [card-outer]
 [card-header class="lead"]Card columns[/card-header]
 [card-body-outer class="p4"]
-
 [card-columns]
 [card class="bg-info"]
 [card-body]
@@ -408,21 +335,15 @@ Nascetur commodo imperdiet.
 [/card-body]
 [/card]
 [/card-columns]
-
 [/card-body-outer]
 [card-footer]Cards can be organized into Masonry-like columns with just CSS by wrapping them in <code>[[card-columns]]</code>.[/card-footer]
 [/card-outer]
-<!-- /wp:shortcode -->
 
-<!-- wp:separator {"color":"black","className":"is-style-wide"} -->
 <hr class="wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-<!-- /wp:separator -->
 
-<!-- wp:shortcode -->
 [card-outer]
 [card-header class="lead"]Cards with shadows[/card-header]
 [card-body-outer class="p4"]
-
 [card-deck]
 [card class="w-25 shadow-none"]
 [card-body]
@@ -450,19 +371,15 @@ Nascetur commodo imperdiet.
 [/card-body]
 [/card]​
 [/card-deck]
-
 [/card-body-outer]
 [card-footer]Use the <code>shadow</code> utilities to add a shadow to the cards.[/card-footer]
 [/card-outer]
-<!-- /wp:shortcode -->
 
 <h2>Icons</h2>
 
-<!-- wp:shortcode -->
 [card-outer]
 [card-header class="lead"]Free Icons[/card-header]
 [card-body-outer class="p4"]
-
 [list-group flush]
 [list-group-item][icon prefix="fab" name="facebook"] Facebook[/list-group-item]
 [list-group-item][icon name="arrow-left"] Arrow Lft[/list-group-item]
@@ -477,38 +394,28 @@ Nascetur commodo imperdiet.
 [list-group-item][icon prefix="fas" name="bars"] Bars[/list-group-item]
 [list-group-item][icon prefix="fas" name="thumbs-up"] Thumbs Up[/list-group-item]
 [/list-group]
-
 [/card-body-outer]
 [card-footer]See the <a href="https://fontawesome.com/icons?d=gallery&amp;m=free" target="blank" rel="noopener noreferrer">Font Awesome Gallery</a> for more icons.[/card-footer]
 [/card-outer]
-<!-- /wp:shortcode -->
 
-<!-- wp:separator {"color":"black","className":"is-style-wide"} -->
 <hr class="wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-<!-- /wp:separator -->
 
-<!-- wp:shortcode -->
 [card]
 [card-header class="lead"]Stacked Icons[/card-header]
 [card-body class="p4"]
-
 [icon-stack]
 [icon name="camera" class="fa-stack-1x"]
 [icon name="ban" class="fa-stack-2x text-danger"]
 [/icon-stack]​​​
-
 [/card-body]
 [card-footer]The second icon is bigger than the first.[/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
 <h2>Buttons</h2>
 
-<!-- wp:shortcode -->
 [card]
 [card-header class="lead"]Standard buttons[/card-header]
 [card-body class="p4"]
-
 [button type="primary"]Primary[/button]
 [button type="secondary"]Secondary[/button]
 [button type="success"]Success[/button]
@@ -519,21 +426,15 @@ Nascetur commodo imperdiet.
 [button type="dark"]Dark[/button]
 [button type="link"]Link[/button]
 [button tag="a" link="https://wordpress.org/plugins/complete-bootstrap-4-shortcodes/" target="_blank"]Hyperlink[/button]
-
 [/card-body]
 [card-footer][/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
-<!-- wp:separator {"color":"black","className":"is-style-wide"} -->
 <hr class="wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-<!-- /wp:separator -->
 
-<!-- wp:shortcode -->
 [card]
 [card-header class="lead"]Outlined buttons[/card-header]
 [card-body class="p4"]
-
 [button type="primary" outline]Primary[/button]
 [button type="secondary" outline]Secondary[/button]
 [button type="success" outline]Success[/button]
@@ -544,17 +445,12 @@ Nascetur commodo imperdiet.
 [button type="dark" outline]Dark[/button]
 [button type="link" outline]Link[/button]
 [button outline tag="a" link="https://wordpress.org/plugins/complete-bootstrap-4-shortcodes/" target="_blank"]Hyperlink[/button]
-
 [/card-body]
 [card-footer][/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
-<!-- wp:separator {"color":"black","className":"is-style-wide"} -->
 <hr class="wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-<!-- /wp:separator -->
 
-<!-- wp:shortcode -->
 [row]
 [column md="6"]
 ...
@@ -566,94 +462,65 @@ Nascetur commodo imperdiet.
 [card]
 [card-header class="lead"]Button size[/card-header]
 [card-body class="p4"]
-
 [button size="sm"]Small[/button]
 [button size="md"]Medium[/button]
 [button size="lg"]Large[/button]
-
 [/card-body]
 [card-footer][/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
-<!-- wp:separator {"color":"black","className":"is-style-wide"} -->
 <hr class="wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-<!-- /wp:separator -->
 
-<!-- wp:shortcode -->
 [card]
 [card-header class="lead"]Active buttons[/card-header]
 [card-body class="p4"]
-
 [button active]Button[/button]
 [button type="link" active]Link[/button]
-
 [/card-body]
 [card-footer][/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
-<!-- wp:separator {"color":"black","className":"is-style-wide"} -->
 <hr class="wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-<!-- /wp:separator -->
 
-<!-- wp:shortcode -->
 [card]
 [card-header class="lead"]Disabled buttons[/card-header]
 [card-body class="p4"]
-
 [button disabled]Button[/button]
 [button type="link" disabled]Link[/button]
-
 [/card-body]
 [card-footer][/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
-<!-- wp:separator {"color":"black","className":"is-style-wide"} -->
 <hr class="wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-<!-- /wp:separator -->
 
-<!-- wp:shortcode -->
 [card]
 [card-header class="lead"]Block level buttons[/card-header]
 [card-body class="p4"]
-
 [button block]Button 1[/button]
 [button type="secondary" block]Button 2[/button]
-
 [/card-body]
 [card-footer][/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
 <h2>Button Groups</h2>
 
-<!-- wp:shortcode -->
 [card]
 [card-header class="lead"]Basic example[/card-header]
 [card-body class="p4"]
-
 [button-group size="lg" justified]
 [button] Left [/button]
 [button] Middle [/button]
 [button] Right [/button]
 [/button-group]
-
 [/card-body]
 [card-footer]The large button group is justified and vertical. [/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
-<!-- wp:separator {"color":"black","className":"is-style-wide"} -->
 <hr class="wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-<!-- /wp:separator -->
 
-<!-- wp:shortcode -->
 [card]
 [card-header class="lead"]Button Toolbar[/card-header]
 [card-body class="p4"]
-
 [button-toolbar]
 [button-group class="mr-2"]
 [button] Left 1 [/button]
@@ -669,19 +536,15 @@ Nascetur commodo imperdiet.
 [button] Single [/button]
 [/button-group]
 [/button-toolbar]
-
 [/card-body]
 [card-footer]Combine sets of button groups into button toolbars for more complex components. Use utility classes as needed to space out groups, buttons, and more.[/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
 <h2>Dropdowns</h2>
 
-<!-- wp:shortcode -->
 [card]
 [card-header class="lead"]Single Button Dropdown[/card-header]
 [card-body class="p4"]
-
 [dropdown]
 [button type="warning" dropdown] Action[/button]
 [dropdown-menu]
@@ -693,21 +556,15 @@ Nascetur commodo imperdiet.
 [dropdown-item link="#"]Separated link[/dropdown-item]
 [/dropdown-menu]
 [/dropdown]
-
 [/card-body]
 [card-footer]Any single [<code>button</code>] or link can be turned into a dropdown toggle with some markup changes.[/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
-<!-- wp:separator {"color":"black","className":"is-style-wide"} -->
 <hr class="wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-<!-- /wp:separator -->
 
-<!-- wp:shortcode -->
 [card]
 [card-header class="lead"]Split Button Dropdown[/card-header]
 [card-body class="p4"]
-
 [button-group]
 [button type="danger"] Split Action[/button]
 [button type="danger" dropdown split][/button]
@@ -719,21 +576,15 @@ Nascetur commodo imperdiet.
 [dropdown-item link="#"]Separated link[/dropdown-item]
 [/dropdown-menu]
 [/button-group]
-
 [/card-body]
 [card-footer]Similarly, create split button dropdowns with virtually the same markup as single button dropdowns, but with the addition of <code>split</code> for proper spacing around the dropdown caret.[/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
-<!-- wp:separator {"color":"black","className":"is-style-wide"} -->
 <hr class="wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-<!-- /wp:separator -->
 
-<!-- wp:shortcode -->
 [card]
 [card-header class="lead"]Drop Variations[/card-header]
 [card-body class="p4"]
-
 [button-group drop="up"]
 [button] Drop Up [/button]
 [button dropdown][/button]
@@ -744,7 +595,6 @@ Nascetur commodo imperdiet.
 [dropdown-item link="#"] Separated Action [/dropdown-item]
 [/dropdown-menu]
 [/button-group]
-
 [button-group drop="left"]
 [button] Drop left [/button]
 [button dropdown][/button]
@@ -755,7 +605,6 @@ Nascetur commodo imperdiet.
 [dropdown-item link="#"] Separated Action [/dropdown-item]
 [/dropdown-menu]
 [/button-group]
-
 [button-group drop="right"]
 [button] Drop right [/button]
 [button dropdown][/button]
@@ -766,39 +615,29 @@ Nascetur commodo imperdiet.
 [dropdown-item link="#"] Separated Action [/dropdown-item]
 [/dropdown-menu]
 [/button-group]
-
 [/card-body]
 [card-footer]Use <code>drop="up|left|right"</code> to show the dropdown over, left or right to the button or link.[/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
 <h2>Navs</h2>
 
-<!-- wp:shortcode -->
 [card]
 [card-header class="lead"]Simple Navigation Links[/card-header]
 [card-body class="p4"]
-
 [nav tabs]
 [nav-item link="#"] Link1 [/nav-item]
 [nav-item link="#"] Link2 [/nav-item]
 [nav-item link="#"] Link3 [/nav-item]
 [/nav]
-
 [/card-body]
 [card-footer][/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
-<!-- wp:separator {"color":"black","className":"is-style-wide"} -->
 <hr class="wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-<!-- /wp:separator -->
 
-<!-- wp:shortcode -->
 [card]
 [card-header class="lead"]Navigation Link and Dropdown with Pills[/card-header]
 [card-body class="p4"]
-
 [nav pills]
 [nav-item link="#" active] Active [/nav-item]
 [nav-item dropdown link="#"] Drop
@@ -809,21 +648,15 @@ Nascetur commodo imperdiet.
 [/nav-item]
 [nav-item link="#" disabled] Disabled [/nav-item]
 [/nav]
-
 [/card-body]
 [card-footer]Note: The [<code>dropdown-menu</code>] has to be inside the [<code>nav-item</code>]. [/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
-<!-- wp:separator {"color":"black","className":"is-style-wide"} -->
 <hr class="wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-<!-- /wp:separator -->
 
-<!-- wp:shortcode -->
 [card]
 [card-header class="lead"]Navigation Link and Dropdown with Tabs[/card-header]
 [card-body class="p4"]
-
 [nav tabs]
 [nav-item link="#" active] Active [/nav-item]
 [nav-item dropdown link="#"] Drop [dropdown-menu]
@@ -833,93 +666,67 @@ Nascetur commodo imperdiet.
 [/nav-item]
 [nav-item link="#" disabled] Disabled [/nav-item]
 [/nav]
-
 [/card-body]
 [card-footer]Note: The [<code>dropdown-menu</code>] has to be inside the [<code>nav-item</code>]. [/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
 <h2>Breadcrumb</h2>
 
-<!-- wp:shortcode -->
 [card]
 [card-header class="lead"]Breadcrumb style links[/card-header]
 [card-body class="p4"]
-
 [breadcrumb]
 [breadcrumb-item link="#"] Pictures [/breadcrumb-item]
 [breadcrumb-item link="#"] Vacation [/breadcrumb-item]
 [breadcrumb-item link="#" active] 2020 [/breadcrumb-item]
 [/breadcrumb]
-
 [/card-body]
 [card-footer]Use <code>active</code> for the currently active breadcrumb.[/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
 <h2>Badge</h2>
 
-<!-- wp:shortcode -->
 [card class="w-50"]
 [card-header class="lead"]Badge styles[/card-header]
 [card-body class="p4"]
-
 New Messages[badge] 9 [/badge]​
 New Messages[badge class="bg-primary"] 9 [/badge]​
 New Messages[badge right] 9 [/badge]​
-
 [/card-body]
 [card-footer]Use utility <code>class</code> to format the badge and <code>right</code> to float the badge to align to the right of its container.[/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
 <h2>Jumbotron</h2>
 
-<!-- wp:shortcode -->
 [card]
 [card-header class="lead"]Normal Jumbotron[/card-header]
 [card-body class="p4"]
-
 [jumbotron]
-
 <h3>Header Line</h3>
-
 [lorem-ipsum]
 [/jumbotron]
-
 [/card-body]
 [card-footer][/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
-<!-- wp:separator {"color":"black","className":"is-style-wide"} -->
 <hr class="wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-<!-- /wp:separator -->
 
-<!-- wp:shortcode -->
 [card]
 [card-header class="lead"]Fluid Jumbotron[/card-header]
 [card-body class="p4"]
-
 [jumbotron fluid]
-
 <h3>Header Line</h3>
-
 [lorem-ipsum]
 [/jumbotron]
-
 [/card-body]
 [card-footer]The fluid jumbotron is still confined to its parent's container.[/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
 <h2>Alerts</h2>
 
-<!-- wp:shortcode -->
 [card]
 [card-header class="lead"]Alerts[/card-header]
 [card-body class="p4"]
-
 [alert] <strong> Default </strong> [lorem-ipsum words="4" tag='span'] [/alert][alert type="primary"] <strong> Primary </strong> [lorem-ipsum words="4" tag='span'] [/alert]
 [alert type="secondary"] <strong> Secondary </strong> [lorem-ipsum words="4" tag='span'] [/alert]
 [alert type="success"] <strong> Success </strong> [lorem-ipsum words="4" tag='span'] [/alert]
@@ -928,21 +735,15 @@ New Messages[badge right] 9 [/badge]​
 [alert type="danger"] <strong> Danger </strong> [lorem-ipsum words="4" tag='span'] [/alert]
 [alert type="dark"] <strong> Dark </strong> [lorem-ipsum words="4" tag='span'] [/alert]
 [alert type="light"] <strong> Light </strong> [lorem-ipsum words="4" tag='span'] [/alert]
-
 [/card-body]
 [card-footer]Use the [code inline]alert-link[/code] class to quickly provide matching colored links within any alert. [/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
-<!-- wp:separator {"color":"black","className":"is-style-wide"} -->
 <hr class="wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-<!-- /wp:separator -->
 
-<!-- wp:shortcode -->
 [card]
 [card-header class="lead"]Dismissable Alerts[/card-header]
 [card-body class="p4"]
-
 [alert dismissable type="primary"] <strong> Primary </strong> [lorem-ipsum words="4" tag='span'] [/alert]
 [alert dismissable type="secondary"] <strong> Secondary </strong> [lorem-ipsum words="4" tag='span'] [/alert]
 [alert dismissable type="success"] <strong> Success </strong> [lorem-ipsum words="4" tag='span'] [/alert]
@@ -951,21 +752,15 @@ New Messages[badge right] 9 [/badge]​
 [alert dismissable type="danger"] <strong> Danger </strong> [lorem-ipsum words="4" tag='span'] [/alert]
 [alert dismissable type="dark"] <strong> Dark </strong> [lorem-ipsum words="4" tag='span'] [/alert]
 [alert dismissable type="light"] <strong> Light </strong> [lorem-ipsum words="4" tag='span'] [/alert]
-
 [/card-body]
 [card-footer][/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
-<!-- wp:separator {"color":"black","className":"is-style-wide"} -->
 <hr class="wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-<!-- /wp:separator -->
 
-<!-- wp:shortcode -->
 [card]
 [card-header class="lead"]Dismissable Alerts with Fade Effect[/card-header]
 [card-body class="p4"]
-
 [alert dismissable fade type="primary"] <strong> Primary </strong> [lorem-ipsum words="4" tag='span'] [/alert]
 [alert dismissable fade type="secondary"] <strong> Secondary </strong> [lorem-ipsum words="4" tag='span'] [/alert]
 [alert dismissable fade type="success"] <strong> Success </strong> [lorem-ipsum words="4" tag='span'] [/alert]
@@ -974,173 +769,129 @@ New Messages[badge right] 9 [/badge]​
 [alert dismissable fade type="danger"] <strong> Danger </strong> [lorem-ipsum words="4" tag='span'] [/alert]
 [alert dismissable fade type="dark"] <strong> Dark </strong> [lorem-ipsum words="4" tag='span'] [/alert]
 [alert dismissable fade type="light"] <strong> Light </strong> [lorem-ipsum words="4" tag='span'] [/alert]
-
 [/card-body]
 [card-footer][/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
 <h2>Progress Bar</h2>
 
-<!-- wp:shortcode -->
 [card]
 [card-header class="lead"]Progress Bar Styles[/card-header]
 [card-body class="p4"]
-
 [card-header]Simple[/card-header]
 [progress]
 [progress-bar percent="50"]
 [/progress]
-
 [card-header]Striped[/card-header]
 [progress]
 [progress-bar striped percent="50"]
 [/progress]
-
 [card-header]Striped and Animated[/card-header]
 [progress]
 [progress-bar striped animated percent="50"]
 [/progress]
-
 [card-header]Stacked[/card-header]
 [progress]
 [progress-bar striped percent="50"]
 [progress-bar striped percent="25" type="success"]
 [progress-bar striped percent="5" type="danger"]
 [/progress]
-
 [card-header]Stacked and Labeled[/card-header]
 [progress]
 [progress-bar label percent="50"]
 [progress-bar label percent="25" type="success"]
 [progress-bar label percent="5" type="danger"]
 [/progress]
-
 [/card-body]
 [card-footer][/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
 <h2>Media Object</h2>
 
-<!-- wp:shortcode -->
 [card]
 [card-header class="lead"]Top Aligned Media[/card-header]
 [card-body class="p4"]
-
 [media]
 [media-object class="mr-3"]
 [img responsive][img-gen size="150" text="Demo"][/img]
 [/media-object]
 [media-body]
-
 Header
-
 [lorem-ipsum sentences="3"]
 [/media-body]
 [/media]
-
 [/card-body]
 [card-footer][/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
-<!-- wp:separator {"color":"black","className":"is-style-wide"} -->
 <hr class="wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-<!-- /wp:separator -->
 
-<!-- wp:shortcode -->
 [card]
 [card-header class="lead"]Center Aligned[/card-header]
 [card-body class="p4"]
-
 [media]
 [media-object align="center" class="mr-3"]
 [img responsive][img-gen size="150" text="Demo"][/img]
 [/media-object]
 [media-body]
-
 Header
-
 [lorem-ipsum sentences="3"]
 [/media-body]
 [/media]
-
 [/card-body]
 [card-footer][/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
-<!-- wp:separator {"color":"black","className":"is-style-wide"} -->
 <hr class="wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-<!-- /wp:separator -->
 
-<!-- wp:shortcode -->
 [card]
 [card-header class="lead"]Bottom Aligned[/card-header]
 [card-body class="p4"]
-
 [media]
 [media-object align="end" class="mr-3"]
 [img responsive][img-gen size="150" text="Demo"][/img]
 [/media-object]
 [media-body]
-
 Header
-
 [lorem-ipsum sentences="3"]
 [/media-body]
 [/media]
-
 [/card-body]
 [card-footer][/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
-<!-- wp:separator {"color":"black","className":"is-style-wide"} -->
 <hr class="wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-<!-- /wp:separator -->
 
-<!-- wp:shortcode -->
 [card]
 [card-header class="lead"]Nested[/card-header]
 [card-body class="p4"]
-
 [media-outer]
 [media-object class="mr-3"]
 [img responsive][img-gen size="150" text="Demo"][/img]
 [/media-object]
 [media-body-outer]
-
 Outer Header
-
 [lorem-ipsum sentences="3"]
 [media]
 [media-object class="mr-3"]
 [img responsive][img-gen size="150" text="Demo"][/img]
 [/media-object]
 [media-body]
-
 Inner Header
-
 [lorem-ipsum sentences="3"]
 [/media-body]
 [/media]
 [/media-body-outer]
 [/media-outer]
-
 [/card-body]
 [card-footer][/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
 <h2>List Groups</h2>
 
-<!-- wp:shortcode -->
 [card]
 [card-header class="lead"]Basic List Group[/card-header]
 [card-body class="p4"]
-
 [list-group]
 [list-group-item]
 [lorem-ipsum]
@@ -1152,44 +903,31 @@ Inner Header
 [lorem-ipsum]
 [/list-group-item]
 [/list-group]
-
 [/card-body]
 [card-footer][/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
-<!-- wp:separator {"color":"black","className":"is-style-wide"} -->
 <hr class="wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-<!-- /wp:separator -->
 
-<!-- wp:shortcode -->
 [card]
 [card-header class="lead"]Linked Items[/card-header]
 [card-body class="p4"]
-
 [list-group linked]
 [list-group-item active]<a href="#">Active</a>[/list-group-item]
 [list-group-item disabled]<a href="#">Disabled</a>[/list-group-item]
 [list-group-item]<a href="#">Link 1</a>[/list-group-item]
 [list-group-item]<a href="#">Link 2</a>[/list-group-item]
 [/list-group]
-
 [/card-body]
 [card-footer][/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
-<!-- wp:separator {"color":"black","className":"is-style-wide"} -->
 <hr class="wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-<!-- /wp:separator -->
 
-<!-- wp:shortcode -->
 [card]
 [card-header class="lead"]Media List Group[/card-header]
 [card-body class="p4"]
-
 [list-group media]
-
 [media list-group]
 [media-object class="mr-3"]
 [img responsive][img-gen size="150" text="Demo 1" bg="f00"][/img]
@@ -1199,7 +937,6 @@ Inner Header
 [lorem-ipsum sentences="3"]
 [/media-body]
 [/media]
-
 [media list-group class="mt-4"]
 [media-object class="mr-3"]
 [img responsive][img-gen size="150" text="Demo 2" bg="0f0"][/img]
@@ -1209,7 +946,6 @@ Inner Header
 [lorem-ipsum sentences="3"]
 [/media-body]
 [/media]
-
 [media list-group class="mt-4"]
 [media-object class="mr-3"]
 [img responsive][img-gen size="150" text="Demo 3" bg="00f"][/img]
@@ -1219,42 +955,32 @@ Inner Header
 [lorem-ipsum sentences="3"]
 [/media-body]
 [/media]
-
 [/list-group]​
-
 [/card-body]
 [card-footer]Use the [code inline]media[/code] flag at the [code inline][list-group][/code] tag and the [code inline]list-group[/code] flag at the [code inline][media][/code] tag.[/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
 <h2>Code</h2>
 <p>[card]<br>[card-header class="lead"]Code Snippet[/card-header]<br>[card-body class="p4"]</p>
 <p>[code]<br>&lt;h4 id="-modal-footer-parameters"&gt;modal-footer parameters&lt;/h4&gt;<br>&lt;table&gt;<br>&lt;thead&gt;<br>&lt;tr&gt;<br>&lt;th&gt;Parameter&lt;/th&gt;<br>&lt;th&gt;Description&lt;/th&gt;<br>&lt;th&gt;Required&lt;/th&gt;<br>&lt;th&gt;Values&lt;/th&gt;<br>q&lt;th&gt;Default&lt;/th&gt;<br>&lt;/tr&gt;<br>&lt;/thead&gt;<br>&lt;tbody&gt;<br>&lt;tr&gt;<br>&lt;td&gt;class&lt;/td&gt;<br>&lt;td&gt;Any extra classes you want to add&lt;/td&gt;<br>&lt;td&gt;optional&lt;/td&gt;<br>&lt;td&gt;any text&lt;/td&gt;<br>&lt;td&gt;none&lt;/td&gt;<br>&lt;/tr&gt;<br>&lt;tr&gt;<br>&lt;td&gt;data&lt;/td&gt;<br>&lt;td&gt;Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at &lt;a href="#container-parameters"&gt;container parameters&lt;/a&gt;.&lt;/td&gt;<br>&lt;td&gt;optional&lt;/td&gt;<br>&lt;td&gt;any text&lt;/td&gt;<br>&lt;td&gt;none&lt;/td&gt;<br>&lt;/tr&gt;<br>&lt;/tbody&gt;<br>&lt;/table&gt;<br>[/code]</p>
 <p>[/card-body]<br>[card-footer][/card-footer]<br>[/card]</p>
 
-<!-- wp:separator {"color":"black","className":"is-style-wide"} -->
 <hr class="wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-<!-- /wp:separator -->
 
 <p>[card]<br>[card-header class="lead"]Scrollable Code Snippet[/card-header]<br>[card-body class="p4"]</p>
 <p>[code scrollable]<br>&lt;h4 id="-modal-footer-parameters"&gt;modal-footer parameters&lt;/h4&gt;<br>&lt;table&gt;<br>&lt;thead&gt;<br>&lt;tr&gt;<br>&lt;th&gt;Parameter&lt;/th&gt;<br>&lt;th&gt;Description&lt;/th&gt;<br>&lt;th&gt;Required&lt;/th&gt;<br>&lt;th&gt;Values&lt;/th&gt;<br>q&lt;th&gt;Default&lt;/th&gt;<br>&lt;/tr&gt;<br>&lt;/thead&gt;<br>&lt;tbody&gt;<br>&lt;tr&gt;<br>&lt;td&gt;class&lt;/td&gt;<br>&lt;td&gt;Any extra classes you want to add&lt;/td&gt;<br>&lt;td&gt;optional&lt;/td&gt;<br>&lt;td&gt;any text&lt;/td&gt;<br>&lt;td&gt;none&lt;/td&gt;<br>&lt;/tr&gt;<br>&lt;tr&gt;<br>&lt;td&gt;data&lt;/td&gt;<br>&lt;td&gt;Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at &lt;a href="#container-parameters"&gt;container parameters&lt;/a&gt;.&lt;/td&gt;<br>&lt;td&gt;optional&lt;/td&gt;<br>&lt;td&gt;any text&lt;/td&gt;<br>&lt;td&gt;none&lt;/td&gt;<br>&lt;/tr&gt;<br>&lt;/tbody&gt;<br>&lt;/table&gt;<br>[/code]</p>
 <p>[/card-body]<br>[card-footer][/card-footer]<br>[/card]</p>
 
-<!-- wp:separator {"color":"black","className":"is-style-wide"} -->
 <hr class="wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-<!-- /wp:separator -->
 
 <p>[card]<br>[card-header class="lead"]Inline Code[/card-header]<br>[card-body class="p4"]</p>
 <p>Use the [code inline]media[/code] flag at the [code inline]list-group[/code] tag and the [code inline]listgroup[/code] flag at the [code inline]media[/code] tag.</p>
 <p>[/card-body]<br>[card-footer][/card-footer]<br>[/card]</p>
 
-<!-- wp:separator {"color":"black","className":"is-style-wide"} -->
 <hr class="wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-<!-- /wp:separator -->
 
 <h2>Tables</h2>
 
-<!-- wp:shortcode -->
 [table-wrap responsive bordered striped class="xxx yyy zzz"]
 <table>
 <thead>
@@ -1328,50 +1054,37 @@ Inner Header
 </tfoot>
 </table>
 [/table-wrap]
-<!-- /wp:shortcode -->
 
 <h2>Images</h2>
 
-<!-- wp:shortcode -->
 [card]
 [card-header class="lead"]Images[/card-header]
 [card-body class="p4"]
-
 [img-gen size="200" file="jpg" bg="C00" color="ff0" text="Normal"]
 [img responsive][img-gen size="200" file="jpg" bg="C00" color="ff0" text="Responsive"][/img]
-
 [/card-body]
 [card-footer] Some bootstrap themes already have their <code>[[img]]</code> tag set to [code inline]responsive[/code]. [/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
-<!-- wp:separator {"color":"black","className":"is-style-wide"} -->
 <hr class="wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-<!-- /wp:separator -->
 
-<!-- wp:shortcode -->
 [card]
 [card-header class="lead"]Image Borders and Thumbnails[/card-header]
 [card-body class="p4"]
-
 [img responsive thumbnail class="mr-3"][img-gen size="200" file="jpg" bg="C00" color="ff0" text="Normal"][/img]
 [img responsive thumbnail class="mr-3"][border radius="all"][img-gen size="200" file="jpg" bg="C00" color="ff0" text="Rounded"][/border][/img]
 [img responsive thumbnail class="mr-3"][border radius="all" size="lg"][img-gen size="200" file="jpg" bg="C00" color="ff0" text="Rounded Large"][/border][/img]
 [img responsive thumbnail class="mr-3"][border radius="circle"][img-gen size="200" file="jpg" bg="C00" color="ff0" text="Circle"][/border][/img]
 [img responsive thumbnail class="mr-3"][border radius="pill"][img-gen size="200x150" file="jpg" bg="C00" color="ff0" text="Pill"][/border][/img]
-
 [/card-body]
 [card-footer] Images generated with [code inline]img-gen[/code]. [/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
 <h2>Figures</h2>
 
-<!-- wp:shortcode -->
 [card]
 [card-header class="lead"]Image with Text above[/card-header]
 [card-body class="p4"]
-
 [figure class="p-2"]
   [figure-caption]A caption for the above image.[/figure-caption]
   [img-gen size="300" class="rounded"]
@@ -1380,21 +1093,15 @@ Inner Header
   [figure-caption class="text-right"]A caption for the above image.[/figure-caption]
   [img-gen size="300" class="rounded"]
 [/figure]
-
 [/card-body]
 [card-footer] Images generated with [code inline]img-gen[/code]. [/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
-<!-- wp:separator {"color":"black","className":"is-style-wide"} -->
 <hr class="wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-<!-- /wp:separator -->
 
-<!-- wp:shortcode -->
 [card]
 [card-header class="lead"]Image with Text below[/card-header]
 [card-body class="p4"]
-
 [figure class="p-2"]
   [img-gen size="300" class="rounded"]
   [figure-caption]A caption for the above image.[/figure-caption]
@@ -1403,86 +1110,64 @@ Inner Header
   [img-gen size="300" class="rounded"]
   [figure-caption class="text-right"]A caption for the above image.[/figure-caption]
 [/figure]
-
 [/card-body]
 [card-footer] Images generated with [code inline]img-gen[/code]. [/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
 <h2>Blockquote</h2>
 
-<!-- wp:shortcode -->
 [card]
 [card-header class="lead"]Blockquote[/card-header]
 [card-body class="p4"]
-
 [blockquote]
 [lorem-ipsum sentences="2"]
 [blockquote-footer]
 Automatically created by lorem ipsum generator
 [/blockquote-footer]
 [/blockquote]​
-
 [/card-body]
 [card-footer] Images generated with [code inline]img-gen[/code]. [/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
 <h2>Lead</h2>
 
-<!-- wp:shortcode -->
 [card]
 [card-header class="lead"]Lead[/card-header]
 [card-body class="p4"]
-
 [lead][lorem-ipsum sentences="1"][/lead]
 [lorem-ipsum sentences="1"]
-
 [/card-body]
 [card-footer] First paragraph uses [code inline]lead[/code]. [/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
 <h2>​Border</h2>
 
-<!-- wp:shortcode -->
 [card]
 [card-header class="lead"]Colored Text Examples[/card-header]
 [card-body class="p4"]
-
 [border color="dark"] [lorem-ipsum class="p-3"] [/border]
-
 [border radius="pill" color="danger"] [lorem-ipsum class="p-3"] [/border]
-
 [border radius="top" color="info"] [lorem-ipsum class="p-3"] [/border]
-
 [/card-body]
 [card-footer] [/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
 <h2>Color</h2>
 
-<!-- wp:shortcode -->
 [card]
 [card-header class="lead"]Colored Text Examples[/card-header]
 [card-body class="p4"]
-
 [color bg="primary" text="white"][lorem-ipsum class="p-2"][/color]
 [color bg="info" text="black"][lorem-ipsum class="p-2"][/color]
-
 [/card-body]
 [card-footer] [/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
 <h2>Flex</h2>
 
-<!-- wp:shortcode -->
 [card]
 [card-header class="lead"]Flex Row[/card-header]
 [card-body class="p4"]
-
 [flex class="p-3 bg-secondary text-white"]
 [flex-item class="p-2 bg-info"]Flex item 1[/flex-item]
 [flex-item class="p-2 bg-warning"]Flex item 2[/flex-item]
@@ -1491,21 +1176,15 @@ Automatically created by lorem ipsum generator
 [flex-item class="p-2 bg-warning"]Flex item 5[/flex-item]
 [flex-item class="p-2 bg-primary"]Flex item 6[/flex-item]
 [/flex]
-
 [/card-body]
 [card-footer] [/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
-<!-- wp:separator {"color":"black","className":"is-style-wide"} -->
 <hr class="wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-<!-- /wp:separator -->
 
-<!-- wp:shortcode -->
 [card]
 [card-header class="lead"]Flex Reverse Row[/card-header]
 [card-body class="p4"]
-
 [flex direction="row-reverse" class="p-3 bg-secondary text-white"]
 [flex-item class="p-2 bg-info"]Flex item 1[/flex-item]
 [flex-item class="p-2 bg-warning"]Flex item 2[/flex-item]
@@ -1514,21 +1193,15 @@ Automatically created by lorem ipsum generator
 [flex-item class="p-2 bg-warning"]Flex item 5[/flex-item]
 [flex-item class="p-2 bg-primary"]Flex item 6[/flex-item]
 [/flex]
-
 [/card-body]
 [card-footer] [/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
-<!-- wp:separator {"color":"black","className":"is-style-wide"} -->
 <hr class="wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-<!-- /wp:separator -->
 
-<!-- wp:shortcode -->
 [card]
 [card-header class="lead"]Inline Flex[/card-header]
 [card-body class="p4"]
-
 [flex inline class="p-3 bg-secondary text-white"]
 [flex-item class="p-2 bg-info"]Flex item 1[/flex-item]
 [flex-item class="p-2 bg-warning"]Flex item 2[/flex-item]
@@ -1537,21 +1210,15 @@ Automatically created by lorem ipsum generator
 [flex-item class="p-2 bg-warning"]Flex item 5[/flex-item]
 [flex-item class="p-2 bg-primary"]Flex item 6[/flex-item]
 [/flex]
-
 [/card-body]
 [card-footer] [/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
-<!-- wp:separator {"color":"black","className":"is-style-wide"} -->
 <hr class="wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-<!-- /wp:separator -->
 
-<!-- wp:shortcode -->
 [card]
 [card-header class="lead"]Inline Reverse Row Flex[/card-header]
 [card-body class="p4"]
-
 [flex inline direction="row-reverse" class="p-3 bg-secondary text-white"]
 [flex-item class="p-2 bg-info"]Flex item 1[/flex-item]
 [flex-item class="p-2 bg-warning"]Flex item 2[/flex-item]
@@ -1560,21 +1227,15 @@ Automatically created by lorem ipsum generator
 [flex-item class="p-2 bg-warning"]Flex item 5[/flex-item]
 [flex-item class="p-2 bg-primary"]Flex item 6[/flex-item]
 [/flex]
-
 [/card-body]
 [card-footer] [/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
-<!-- wp:separator {"color":"black","className":"is-style-wide"} -->
 <hr class="wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-<!-- /wp:separator -->
 
-<!-- wp:shortcode -->
 [card]
 [card-header class="lead"]Flex Column[/card-header]
 [card-body class="p4"]
-
 [flex direction="column" class="p-3 bg-secondary text-white"]
 [flex-item class="p-2 bg-info"]Flex item 1[/flex-item]
 [flex-item class="p-2 bg-warning"]Flex item 2[/flex-item]
@@ -1583,21 +1244,15 @@ Automatically created by lorem ipsum generator
 [flex-item class="p-2 bg-warning"]Flex item 5[/flex-item]
 [flex-item class="p-2 bg-primary"]Flex item 6[/flex-item]
 [/flex]
-
 [/card-body]
 [card-footer] [/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
-<!-- wp:separator {"color":"black","className":"is-style-wide"} -->
 <hr class="wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-<!-- /wp:separator -->
 
-<!-- wp:shortcode -->
 [card]
 [card-header class="lead"]Flex Reverse Column[/card-header]
 [card-body class="p4"]
-
 [flex direction="column-reverse" class="p-3 bg-secondary text-white"]
 [flex-item class="p-2 bg-info"]Flex item 1[/flex-item]
 [flex-item class="p-2 bg-warning"]Flex item 2[/flex-item]
@@ -1606,21 +1261,15 @@ Automatically created by lorem ipsum generator
 [flex-item class="p-2 bg-warning"]Flex item 5[/flex-item]
 [flex-item class="p-2 bg-primary"]Flex item 6[/flex-item]
 [/flex]
-
 [/card-body]
 [card-footer] [/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
-<!-- wp:separator {"color":"black","className":"is-style-wide"} -->
 <hr class="wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-<!-- /wp:separator -->
 
-<!-- wp:shortcode -->
 [card]
 [card-header class="lead"]Flex Justify Center[/card-header]
 [card-body class="p4"]
-
 [flex justify="center" class="p-3 bg-secondary text-white"]
 [flex-item class="p-2 bg-info"]Flex item 1[/flex-item]
 [flex-item class="p-2 bg-warning"]Flex item 2[/flex-item]
@@ -1629,22 +1278,16 @@ Automatically created by lorem ipsum generator
 [flex-item class="p-2 bg-warning"]Flex item 5[/flex-item]
 [flex-item class="p-2 bg-primary"]Flex item 6[/flex-item]
 [/flex]
-
 [/card-body]
 [card-footer] [/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
-<!-- wp:separator {"color":"black","className":"is-style-wide"} -->
 <hr class="wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-<!-- /wp:separator -->
 
-<!-- wp:shortcode -->
 <style>.h150px{height:150px;}</style>
 [card]
 [card-header class="lead"]Flex Align Items Center[/card-header]
 [card-body class="p4"]
-
 [flex align-items="center" class="h150px p-3 bg-secondary text-white"]
 [flex-item class="p-2 bg-info"]Flex item 1[/flex-item]
 [flex-item class="p-2 bg-warning"]Flex item 2[/flex-item]
@@ -1653,21 +1296,15 @@ Automatically created by lorem ipsum generator
 [flex-item class="p-2 bg-warning"]Flex item 5[/flex-item]
 [flex-item class="p-2 bg-primary"]Flex item 6[/flex-item]
 [/flex]
-
 [/card-body]
 [card-footer] The flex container has a fixed height of 150px. [/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
-<!-- wp:separator {"color":"black","className":"is-style-wide"} -->
 <hr class="wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-<!-- /wp:separator -->
 
-<!-- wp:shortcode -->
 [card]
 [card-header class="lead"]Flex Item Self-Align[/card-header]
 [card-body class="p4"]
-
 [flex class="p-3 bg-secondary text-white"]
 [flex-item class="p-2 bg-info"]Flex<br>item<br>1[/flex-item]
 [flex-item  align="start" class="p-2 bg-warning"]Flex item 2[/flex-item]
@@ -1676,21 +1313,15 @@ Automatically created by lorem ipsum generator
 [flex-item class="p-2 bg-warning"]Flex<br>item<br>5[/flex-item]
 [flex-item  align="end" class="p-2 bg-primary"]Flex item 6[/flex-item]
 [/flex]
-
 [/card-body]
 [card-footer] 2 is aligned at <code>start</code>, 4 at <code>center</code> and 6 at <code>end</code> [/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
-<!-- wp:separator {"color":"black","className":"is-style-wide"} -->
 <hr class="wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-<!-- /wp:separator -->
 
-<!-- wp:shortcode -->
 [card]
 [card-header class="lead"]Flex Wrap[/card-header]
 [card-body class="p4"]
-
 [card-title]No Wrap[/card-title]
 [flex class="p-3 bg-secondary text-white"]
 [flex-item class="p-2 bg-info"]Flex item 1[/flex-item]
@@ -1714,7 +1345,6 @@ Automatically created by lorem ipsum generator
 [flex-item class="p-2 bg-primary"]Flex item 19[/flex-item]
 [flex-item class="p-2 bg-danger"]Flex item 20[/flex-item]
 [/flex]
-
 [card-title]Wrap[/card-title]
 [flex wrap="true" class="p-3 bg-secondary text-white"]
 [flex-item class="p-2 bg-info"]Flex item 1[/flex-item]
@@ -1738,7 +1368,6 @@ Automatically created by lorem ipsum generator
 [flex-item class="p-2 bg-primary"]Flex item 19[/flex-item]
 [flex-item class="p-2 bg-danger"]Flex item 20[/flex-item]
 [/flex]
-
 [card-title]Reverse Wrap[/card-title]
 [flex wrap="reverse" class="p-3 bg-secondary text-white"]
 [flex-item class="p-2 bg-info"]Flex item 1[/flex-item]
@@ -1762,137 +1391,101 @@ Automatically created by lorem ipsum generator
 [flex-item class="p-2 bg-primary"]Flex item 19[/flex-item]
 [flex-item class="p-2 bg-danger"]Flex item 20[/flex-item]
 [/flex]
-
 [/card-body]
 [card-footer] [/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
-<!-- wp:separator {"color":"black","className":"is-style-wide"} -->
 <hr class="wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-<!-- /wp:separator -->
 
-<!-- wp:shortcode -->
 [card]
 [card-header class="lead"]Flex Row Fill[/card-header]
 [card-body class="p4"]
-
 [flex class="p-3 bg-secondary text-white"]
 [flex-item fill class="p-2 bg-info"]Flex item 1[/flex-item]
 [flex-item fill class="p-2 bg-warning"]Flex item 2[/flex-item]
 [flex-item fill class="p-2 bg-primary"]Flex item 3[/flex-item]
 [/flex]
-
 [/card-body]
 [card-footer] [/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
-<!-- wp:separator {"color":"black","className":"is-style-wide"} -->
 <hr class="wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-<!-- /wp:separator -->
 
-<!-- wp:shortcode -->
 [card]
 [card-header class="lead"]Flex Grow[/card-header]
 [card-body class="p4"]
-
 [flex class="p-3 bg-secondary text-white"]
 [flex-item grow class="p-2 bg-info"]Flex grow item 1[/flex-item]
 [flex-item class="p-2 bg-warning"]Flex item 2[/flex-item]
 [flex-item class="p-2 bg-primary"]Flex item 3[/flex-item]
 [/flex]
-
 [/card-body]
 [card-footer] [/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
-<!-- wp:separator {"color":"black","className":"is-style-wide"} -->
 <hr class="wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-<!-- /wp:separator -->
 
-<!-- wp:shortcode -->
 [card]
 [card-header class="lead"]Flex Shrink[/card-header]
 [card-body class="p4"]
-
 [flex class="p-3 bg-secondary text-white"]
 [flex-item shrink class="p-2 bg-info"]Flex shrink item 1[/flex-item]
 [flex-item class="w-50 p-2 bg-warning"]Flex item 2[/flex-item]
 [flex-item class="w-50 p-2 bg-primary"]Flex item 3[/flex-item]
 [/flex]
-
 [/card-body]
 [card-footer] [/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
-<!-- wp:separator {"color":"black","className":"is-style-wide"} -->
 <hr class="wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-<!-- /wp:separator -->
 
-<!-- wp:shortcode -->
 [card]
 [card-header class="lead"]Flex No Shrink[/card-header]
 [card-body class="p4"]
-
 [flex class="p-3 bg-secondary text-white"]
 [flex-item no-shrink class="p-2 bg-info"]Flex no-shrink item 1[/flex-item]
 [flex-item class="w-50 p-2 bg-warning"]Flex item 2[/flex-item]
 [flex-item class="w-50 p-2 bg-primary"]Flex item 3[/flex-item]
 [/flex]
-
 [/card-body]
 [card-footer] [/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
 <h2>Tooltip</h2>
 
-<!-- wp:shortcode -->
 [card]
 [card-header class="lead"]Tooltip Examples[/card-header]
 [card-body class="p4"]
-
 [tooltip title="I'm the title" placement="auto" animation][button outline class="mr-3"] Auto [/button][/tooltip]
 [tooltip title="I'm the title" placement="left"][button outline class="mr-3"] Left [/button][/tooltip]
 [tooltip title="I'm the title" placement="top"][button outline class="mr-3"] Top [/button][/tooltip]
 [tooltip title="I'm the title" placement="bottom"][button outline class="mr-3"] Bottom [/button][/tooltip]
 [tooltip title="I'm the title" placement="right"][button outline class="mr-3"] Right [/button][/tooltip]
 [tooltip title="I'm the <b>title</b> with <u>HTML</u>" placement="top" html][button outline] HTML [/button][/tooltip]
-
 [/card-body]
 [card-footer] Tooltips work best with [code inline][button][/code]s or links but can be attached to any element. [/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
 <h2>Popover</h2>
 
-<!-- wp:shortcode -->
 [card]
 [card-header class="lead"]popover Examples[/card-header]
 [card-body class="p4"]
-
 [popover title="I'm the title" content="And this is the content" placement="auto" animation][button outline class="mr-3"] Auto [/button][/popover]
 [popover title="I'm the title" content="And this is the content" placement="left"][button outline class="mr-3"] Left [/button][/popover]
 [popover title="I'm the title" content="And this is the content" placement="top"][button outline class="mr-3"] Top [/button][/popover]
 [popover title="I'm the title" content="And this is the content" placement="bottom"][button outline class="mr-3"] Bottom [/button][/popover]
 [popover title="I'm the title" content="And this is the content" placement="right"][button outline class="mr-3"] Right [/button][/popover]
 [popover title="I'm the <b>title</b> with <u>HTML</u>" content="And this is the <b>content</b> <u>with even more</u> <em>HTML</em>" placement="top" html][button outline] HTML [/button][/popover]
-
 [/card-body]
 [card-footer] Popovers work best with [code inline][button][/code]s or links but can be attached to any element. [/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
 <h2>Accordion</h2>
 
-<!-- wp:shortcode -->
 [card-outer]
 [card-header class="lead"]Basic Accordion[/card-header]
 [card-body-outer class="p4"]
-
 [accordion]
     [card show]
         [card-header] Header 1 [/card-header]
@@ -1907,61 +1500,45 @@ Automatically created by lorem ipsum generator
         [card-body][lorem-ipsum][/card-body]
     [/card]
 [/accordion]
-
 [/card-body-outer]
 [card-footer] [/card-footer]
 [/card-outer]
-<!-- /wp:shortcode -->
 
 <h2>Carousel</h2>
 
-<!-- wp:shortcode -->
 [card]
 [card-header class="lead"]Carousel with text[/card-header]
 [card-body class="p4"]
-
 [carousel]
 [carousel-item active][lorem-ipsum tag="div"][/carousel-item]
 [carousel-item][lorem-ipsum tag="div"][/carousel-item]
 [carousel-item][lorem-ipsum tag="div"][/carousel-item]
 [carousel-item][lorem-ipsum tag="div"][/carousel-item]
 [/carousel]
-
 [/card-body]
 [card-footer] Card body adjust to paragraph height. [/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
-<!-- wp:separator {"color":"black","className":"is-style-wide"} -->
 <hr class="wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-<!-- /wp:separator -->
 
-<!-- wp:shortcode -->
 [card]
 [card-header class="lead"]Standard Carousel[/card-header]
 [card-body class="p4"]
-
 [carousel]
 [carousel-item active][img-gen responsive size="1200x200" text="Slide 1"][/carousel-item]
 [carousel-item][img-gen responsive size="1200x200" text="Slide 2" bg="C0C0C0"][/carousel-item]
 [carousel-item][img-gen responsive size="1200x200" text="Slide 3" bg="F00000"][/carousel-item]
 [carousel-item][img-gen responsive size="1200x200" text="Slide 4" bg="00F000"][/carousel-item]
 [/carousel]
-
 [/card-body]
 [card-footer] 4 slides, pause, no controls, no indicator, wrap, interval 5000ms[/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
-<!-- wp:separator {"color":"black","className":"is-style-wide"} -->
 <hr class="wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-<!-- /wp:separator -->
 
-<!-- wp:shortcode -->
 [card]
 [card-header class="lead"]Customized Carousel[/card-header]
 [card-body class="p4"]
-
 [carousel pause="false" interval="1000" controls indicators fade]
 [carousel-item active]
     [img-gen responsive size="1200x200" text=" "]
@@ -1980,19 +1557,15 @@ Automatically created by lorem ipsum generator
     [carousel-caption] Caption 4 [/carousel-caption]
 [/carousel-item]
 [/carousel]
-
 [/card-body]
 [card-footer] 4 slides, no pause, controls, indicator, wrap, interval 1000ms [/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
 <h2>Modal</h2>
 
-<!-- wp:shortcode -->
 [card]
 [card-header class="lead"]Standard Modal Examples[/card-header]
 [card-body class="p4"]
-
 [button type="info" modal="example-modal-1"] No Backdrop [/button]
 [modal fade id="example-modal-1" backdrop="false"]
 [modal-header]Standard No Backdrop[/modal-header]
@@ -2004,7 +1577,6 @@ Automatically created by lorem ipsum generator
 [button type="primary"] Ipsum [/button]
 [/modal-footer]
 [/modal]
-
 [button type="info" modal="example-modal-2"] Backdrop [/button]
 [modal fade id="example-modal-2" backdrop="true"]
 [modal-header]Standard Backdrop[/modal-header]
@@ -2017,7 +1589,6 @@ Automatically created by lorem ipsum generator
 [/modal-footer]
 [/modal]
 
-
 [button type="info" modal="example-modal-3"] Static Backdrop [/button]
 [modal fade id="example-modal-3" backdrop="static"]
 [modal-header]Standard Static Backdrop[/modal-header]
@@ -2029,17 +1600,13 @@ Automatically created by lorem ipsum generator
 [button type="primary"] Ipsum [/button]
 [/modal-footer]
 [/modal]
-
 [/card-body]
 [card-footer]  [/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
-<!-- wp:shortcode -->
 [card]
 [card-header class="lead"]Centered Small Modal Examples[/card-header]
 [card-body class="p4"]
-
 [button type="info" modal="example-modal-sm-1"] No Backdrop [/button]
 [modal size="sm" fade centered id="example-modal-sm-1" backdrop="false"]
 [modal-header]Small Centered No Backdrop[/modal-header]
@@ -2051,7 +1618,6 @@ Automatically created by lorem ipsum generator
 [button type="primary"] Ipsum [/button]
 [/modal-footer]
 [/modal]
-
 [button type="info" modal="example-modal-sm2"] Backdrop [/button]
 [modal size="sm" fade centered id="example-modal-sm2" backdrop="true"]
 [modal-header]Small Centered Backdrop[/modal-header]
@@ -2064,7 +1630,6 @@ Automatically created by lorem ipsum generator
 [/modal-footer]
 [/modal]
 
-
 [button type="info" modal="example-modal-sm3"] Static Backdrop [/button]
 [modal size="sm" fade centered id="example-modal-sm3" backdrop="static"]
 [modal-header]Small Centered Static Backdrop[/modal-header]
@@ -2076,51 +1641,54 @@ Automatically created by lorem ipsum generator
 [button type="primary"] Ipsum [/button]
 [/modal-footer]
 [/modal]
-
 [/card-body]
 [card-footer]  [/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
 <h2>Float and Clearfix</h2>
 
-<!-- wp:shortcode -->
 [card]
 [card-header class="lead"]Float and Clearfix Examples[/card-header]
 [card-body class="p4"]
-
 [clearfix class="bg-warning"]
 [float float="none"] No Float [/float]
 [float float="left"] Left Float [/float]
 [/clearfix]
-
 [clearfix class="mt-3 bg-warning"]
 [float float="left"] Left Float [/float]
 [float float="right"] Right Float [/float]
 [/clearfix]
-
 [clearfix class="mt-3 bg-warning"]
 [float float="none"] No Float [/float]
 [float float="right"] Right Float [/float]
 [/clearfix]
-
 [clearfix class="mt-3 bg-warning"]
 [float float="left"] Float Left [/float]
 [img-gen class="float-right" size="200" text="Image Right Float"]
 [/clearfix]
-
 [clearfix class="mt-3 bg-warning"]
 [img-gen class="float-left" size="200" text="Image Left Float"]
 [img-gen class="float-right" size="200" text="Image Right Float"]
 [/clearfix]
-
 [clearfix class="mt-3 bg-info"]
 [button class="btn-secondary float-left"]Example Button floated left[/button]
 [button class="btn-secondary float-right"]Example Button floated right[/button]
 [/clearfix]
-
 [/card-body]
 [card-footer]  [/card-footer]
 [/card]
-<!-- /wp:shortcode -->
 
+<h2>Wrapper</h2>
+
+[card]
+[card-header class="lead"]Wrapper Example (set color for icon and text[/card-header]
+[card-body class="p4"]
+
+[wrapper type="span" class="text-success d-flex"]
+[icon name="arrow-right" class="mr-2 fa-2x"]
+[lorem-ipsum]
+[/wrapper]
+
+[/card-body]
+[card-footer] Icon and Text inside [code inline]span[/code] with "success" color. [/card-footer]
+[/card]
