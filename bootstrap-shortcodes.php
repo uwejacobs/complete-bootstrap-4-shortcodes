@@ -2082,8 +2082,8 @@ class BootstrapShortcodes {
         );
 
         $return = ($this->is_flag('center', $save_atts)) ? '<div class="text-center">' : '';
-	$return .= do_shortcode($content);
-        $return = ($this->is_flag('center', $save_atts)) ? '</div>' : '';
+	    $return .= do_shortcode($content);
+        $return .= ($this->is_flag('center', $save_atts)) ? '</div>' : '';
 
         $return = $this->addclass($tag, $return, $class);
         $return = $this->adddata($tag, $return, $atts['data']);
