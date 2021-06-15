@@ -3,7 +3,7 @@
 Plugin Name: Complete Bootstrap 4 Shortcodes
 Plugin URI: https://github.com/uwejacobs/complete-bootstrap-4-shortcodes
 Description: The plugin adds shortcodes for most Bootstrap 4 elements.
-Version: 4.5.8
+Version: 4.5.9
 Author: Uwe Jacobs
 Author URI:
 License: MIT
@@ -2506,7 +2506,7 @@ class BootstrapShortcodes {
 
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        $return = sprintf('<div%s%s>%s</div>', esc_attr($id), $this->class_output($class, $atts['class']) , $data_props, do_shortcode($content));
+        $return = sprintf('<div%s%s%s>%s</div>', esc_attr($id), $this->class_output($class, $atts['class']) , $data_props, do_shortcode($content));
 
         return $return;
     }
@@ -2532,7 +2532,7 @@ class BootstrapShortcodes {
 
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        $return = sprintf('<div%s%s>%s</div>', esc_attr($id), $this->class_output($class, $atts['class']) , $data_props, do_shortcode($content));
+        $return = sprintf('<div%s%s%s>%s</div>', esc_attr($id), $this->class_output($class, $atts['class']) , $data_props, do_shortcode($content));
 
         return $return;
     }
@@ -2778,6 +2778,10 @@ class BootstrapShortcodes {
      * @return string          Modified DOM content
      */
     function addclass($finds, $content, $class, $nth = null) {
+        if (empty($content)) {
+            return '';
+        }
+
         // Hide warnings while we run this function
         $previous_value = libxml_use_internal_errors(true);
 
@@ -2838,6 +2842,10 @@ class BootstrapShortcodes {
      * @return string          Modified DOM content
      */
     public static function adddata($finds, $content, $data) {
+        if (empty($content)) {
+            return '';
+        }
+
         // Hide warnings while we run this function
         $previous_value = libxml_use_internal_errors(true);
 
@@ -2924,8 +2932,11 @@ class BootstrapShortcodes {
             }
         }
         else {
-            $tagname = $dom
-                ->documentElement->tagName;
+            if (isset($dom->documentElement->tagName)) {
+                $tagname = $dom->documentElement->tagName;
+            } else {
+                return false;
+            }
         }
 
         if (in_array($tagname, $tags)) {
