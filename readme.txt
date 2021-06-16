@@ -2,9 +2,9 @@
 Contributors: uwejacobs
 Tags: bootstrap,shortcode,shortcodes,responsive,grid,flex,lorem ipsum,dummy image generator
 Requires at least: 3.8
-Tested up to: 5.7
+Tested up to: 5.7.2
 Requires PHP: 5.3
-Stable tag: 4.5.9
+Stable tag: 4.5.10
 License: MIT License
 License URI: https://mit-license.org/
 
@@ -17,12 +17,12 @@ Plenty of great WordPress plugins focus on providing or including the Bootstrap 
 
 This plugin creates a simple, out of the way button just above the WordPress TinyMCE editor (next to the "Add Media" button) which pops up the plugin's documentation and shortcode examples for reference and handy "Insert Example" links to send the example shortcodes straight to the editor. There are no additional TinyMCE buttons to clutter up your screen, just great, easy to use shortcodes!
 
-Check the demo page "Bootstrap 4 Shortcodes Demo 4.5.9" after activation for ready to use shortcodes examples.
+Check the demo page "Bootstrap 4 Shortcodes Demo 4.5.10" after activation for ready to use shortcodes examples.
 
 For questions, support, or to contribute to this plugin, check out [our GitHub project](https://github.com/uwejacobs/complete-bootstrap-4-shortcodes).
 
 == Overview ==
-See the shortcodes in action on our [demo page](https://ujsoftware.com/bootstrap-4-shortcodes-demo-4-5-9/).
+See the shortcodes in action on our [demo page](https://ujsoftware.com/bootstrap-4-shortcodes-demo-4-5-10/).
 
 = Layout: =
 * Grid
@@ -85,6 +85,11 @@ See the shortcodes in action on our [demo page](https://ujsoftware.com/bootstrap
 16. The above shortcode example rendered with WordPress
 
 == Changelog ==
+= 4.5.10 =
+* Fixed all HTML errors reported by https://validator.w3.org
+* Fixed list group with linked items
+* Fixed several id options
+
 = 4.5.9 =
 * Fixed empty modal body and footer
 * Fixed warnings in WP_DEBUG mode

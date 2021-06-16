@@ -3,7 +3,7 @@
 Plugin Name: Complete Bootstrap 4 Shortcodes
 Plugin URI: https://github.com/uwejacobs/complete-bootstrap-4-shortcodes
 Description: The plugin adds shortcodes for most Bootstrap 4 elements.
-Version: 4.5.9
+Version: 4.5.10
 Author: Uwe Jacobs
 Author URI:
 License: MIT
@@ -251,7 +251,7 @@ class BootstrapShortcodes {
         if (isset($GLOBALS['button_count'])) $GLOBALS['button_count']++;
         else $GLOBALS['button_count'] = 0;
 
-        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : 'bs4-button-' . $GLOBALS['button_count']);
+        $id = (!empty($atts['id']) ? ' id="' . esc_attr($atts['id']) . '"' : 'bs4-button-' . $GLOBALS['button_count']);
         $GLOBALS['dropdown_button'] = $id;
 
         $class = array();
@@ -340,11 +340,11 @@ class BootstrapShortcodes {
         $class[] = ($this->is_flag('justified', $save_atts)) ? 'btn-group-justified' : '';
         $class[] = ($atts['drop']) ? 'drop' . $atts['drop'] : '';
 
-        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+        $id = (!empty($atts['id']) ? ' id="' . esc_attr($atts['id']) . '"' : '');
 
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        return sprintf('<div%s role="group"%s%s>%s</div>', esc_attr($id), $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
+        return sprintf('<div%s role="group"%s%s>%s</div>', $id, $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
     }
 
     /*--------------------------------------------------------------------------------------
@@ -363,11 +363,11 @@ class BootstrapShortcodes {
         $class = array();
         $class[] = 'btn-toolbar';
 
-        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+        $id = (!empty($atts['id']) ? ' id="' . esc_attr($atts['id']) . '"' : '');
 
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        return sprintf('<div%s role="toolbar"%s%s>%s</div>', esc_attr($id), $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
+        return sprintf('<div%s role="toolbar"%s%s>%s</div>', $id, $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
     }
 
     /*--------------------------------------------------------------------------------------
@@ -385,11 +385,11 @@ class BootstrapShortcodes {
         ) , $save_atts);
 
         $class = array();
-        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+        $id = (!empty($atts['id']) ? ' id="' . esc_attr($atts['id']) . '"' : '');
 
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        return sprintf('<%1$s%2$s%3$s%4$s>%5$s</%1$s>', $atts['type'], esc_attr($id), $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
+        return sprintf('<%1$s%2$s%3$s%4$s>%5$s</%1$s>', $atts['type'], $id, $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
     }
 
     /*--------------------------------------------------------------------------------------
@@ -417,11 +417,11 @@ class BootstrapShortcodes {
             $class[] = 'container' . ($atts['size'] ? '-' . $atts['size'] : '');
         }
 
-        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+        $id = (!empty($atts['id']) ? ' id="' . esc_attr($atts['id']) . '"' : '');
 
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        return sprintf('<div%s%s%s>%s</div>', esc_attr($id), $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
+        return sprintf('<div%s%s%s>%s</div>', $id, $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
     }
 
     /*--------------------------------------------------------------------------------------
@@ -455,11 +455,11 @@ class BootstrapShortcodes {
         $class = array();
         $class[] = 'dropdown';
 
-        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+        $id = (!empty($atts['id']) ? ' id="' . esc_attr($atts['id']) . '"' : '');
 
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        return sprintf('<div%s role="menu"%s%s>%s</div>', esc_attr($id), $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
+        return sprintf('<div%s role="menu"%s%s>%s</div>', $id, $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
     }
 
     /*--------------------------------------------------------------------------------------
@@ -483,11 +483,11 @@ class BootstrapShortcodes {
         $class[] = 'dropdown-item';
         $class[] = ($this->is_flag('disabled', $save_atts)) ? 'disabled' : '';
 
-        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+        $id = (!empty($atts['id']) ? ' id="' . esc_attr($atts['id']) . '"' : '');
 
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        return sprintf('<a%S href="%s"%s%s>%s</a>', esc_attr($id), esc_url($atts['link']) , $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
+        return sprintf('<a%S href="%s"%s%s>%s</a>', $id, esc_url($atts['link']) , $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
     }
 
     /*--------------------------------------------------------------------------------------
@@ -530,11 +530,11 @@ class BootstrapShortcodes {
         $class = array();
         $class[] = 'dropdown-header';
 
-        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+        $id = (!empty($atts['id']) ? ' id="' . esc_attr($atts['id']) . '"' : '');
 
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        return sprintf('<div%s%s%s>%s</div>', esc_attr($id), $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
+        return sprintf('<div%s%s%s>%s</div>', $id, $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
     }
 
     /**
@@ -566,7 +566,7 @@ class BootstrapShortcodes {
             unset($GLOBALS['dropdown_button']);
         }
 
-        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+        $id = (!empty($atts['id']) ? ' id="' . esc_attr($atts['id']) . '"' : '');
 
         $wrap_before = ($this->testdom($content, $search_tags)) ? '' : '<div' . esc_attr($id) . $this->class_output($class, $atts["class"]) . $aria_labelledby . '>';
         $wrap_after = ($this->testdom($content, $search_tags)) ? '' : '</div>';
@@ -624,7 +624,7 @@ class BootstrapShortcodes {
             'nav'
         );
 
-        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+        $id = (!empty($atts['id']) ? ' id="' . esc_attr($atts['id']) . '"' : '');
 
         $wrap_before = ($this->testdom($content, $search_tags)) ? '' : '<ul' . esc_attr($id) . '>';
         $wrap_after = ($this->testdom($content, $search_tags)) ? '' : '</ul>';
@@ -676,7 +676,7 @@ class BootstrapShortcodes {
         $a_class[] = ($this->is_flag('disabled', $save_atts)) ? 'disabled' : '';
         $a_aria = ($this->is_flag('disabled', $save_atts)) ? ' aria-disabled="true"' : '';
 
-        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+        $id = (!empty($atts['id']) ? ' id="' . esc_attr($atts['id']) . '"' : '');
 
         $data_props = $this->parse_data_attributes($atts['data']);
 
@@ -684,7 +684,7 @@ class BootstrapShortcodes {
         $content = ($this->is_flag('dropdown', $save_atts)) ? str_replace("<br />\n", '', $content) : $content;
         $content = ($this->is_flag('dropdown', $save_atts)) ? str_replace('[dropdown-menu]', '</a>[dropdown-menu]', $content) : $content;
 
-        return sprintf('<li%8$s%1$s><a href="%2$s"%3$s%4$s%5$s%6$s>%7$s</a></li>', $this->class_output($li_class) , esc_url($atts['link']) , $this->class_output($a_class, $atts["class"]) , ($this->is_flag('dropdown', $save_atts)) ? ' data-toggle="dropdown"' : '', $data_props, $a_aria, do_shortcode($content), esc_attr($id));
+        return sprintf('<li%8$s%1$s><a href="%2$s"%3$s%4$s%5$s%6$s>%7$s</a></li>', $this->class_output($li_class) , esc_url($atts['link']) , $this->class_output($a_class, $atts["class"]) , ($this->is_flag('dropdown', $save_atts)) ? ' data-toggle="dropdown"' : '', $data_props, $a_aria, do_shortcode($content), $id);
 
     }
 
@@ -708,11 +708,11 @@ class BootstrapShortcodes {
         $class = array();
         $class[] = "accordion";
 
-        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : 'accordion' . $GLOBALS['accordion_count']);
+        $id = (!empty($atts['id']) ? esc_attr($atts['id']) : 'accordion' . $GLOBALS['accordion_count']);
 
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        $return = sprintf('<div id="%s"%s role="tablist"%s>%s</div>', esc_attr($id), $this->class_output($class, $atts["class"]), $data_props, do_shortcode($content));
+        $return = sprintf('<div id="%s"%s role="tablist"%s>%s</div>', $id, $this->class_output($class, $atts["class"]), $data_props, do_shortcode($content));
 
         unset($GLOBALS['accordion']);
         return $return;
@@ -749,11 +749,11 @@ class BootstrapShortcodes {
         $class = array();
         $class[] = 'card';
 
-        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+        $id = (!empty($atts['id']) ? ' id="' . esc_attr($atts['id']) . '"' : '');
 
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        return sprintf('<div%s%s%s>%s</div>', esc_attr($id), $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
+        return sprintf('<div%s%s%s>%s</div>', $id, $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
     }
 
     /*--------------------------------------------------------------------------------------
@@ -794,11 +794,11 @@ class BootstrapShortcodes {
             'blockquote'
         );
 
-        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+        $id = (!empty($atts['id']) ? ' id="' . esc_attr($atts['id']) . '"' : '');
 
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        $return = sprintf('<div%s%s%s>%s</div>', esc_attr($id), $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
+        $return = sprintf('<div%s%s%s>%s</div>', $id, $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
 
         $return = $wrap_before . $return . $wrap_after;
         $return = $this->addclass($p_tags, $return, $p_class);
@@ -964,7 +964,7 @@ class BootstrapShortcodes {
         $wrap_after = '';
 
         $id = (isset($GLOBALS['accordion'])) ? ' id="bs-heading' . $GLOBALS['accordion_card'] . '"' : '';
-        $wrap_before .= ($this->testdom($content, $search_tags)) ? '' : '<div class="card-header"' . esc_attr($id) . '>';
+        $wrap_before .= ($this->testdom($content, $search_tags)) ? '' : '<div class="card-header"' . $id . '>';
         $wrap_after .= ($this->testdom($content, $search_tags)) ? '' : '</div>';
 
         $wrap_before .= (isset($GLOBALS['accordion'])) ? sprintf('<button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapse%1$s" aria-controls="collapse%1$s" aria-expanded="%2$s">', $GLOBALS['accordion_card'], $GLOBALS['accordion_card_show'] ? 'true' : 'false') : '';
@@ -1030,11 +1030,11 @@ class BootstrapShortcodes {
         $class = array();
         $class[] = 'card-group';
 
-        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+        $id = (!empty($atts['id']) ? ' id="' . esc_attr($atts['id']) . '"' : '');
 
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        $return = sprintf('<div%s%s%s>%s</div>', esc_attr($id), $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
+        $return = sprintf('<div%s%s%s>%s</div>', $id, $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
 
         return $return;
     }
@@ -1055,11 +1055,11 @@ class BootstrapShortcodes {
         $class = array();
         $class[] = 'card-deck';
 
-        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+        $id = (!empty($atts['id']) ? ' id="' . esc_attr($atts['id']) . '"' : '');
 
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        $return = sprintf('<div%s%s%s>%s</div>', esc_attr($id), $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
+        $return = sprintf('<div%s%s%s>%s</div>', $id, $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
 
         return $return;
     }
@@ -1080,11 +1080,11 @@ class BootstrapShortcodes {
         $class = array();
         $class[] = 'card-columns';
 
-        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+        $id = (!empty($atts['id']) ? ' id="' . esc_attr($atts['id']) . '"' : '');
 
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        $return = sprintf('<div%s%s%s>%s</div>', esc_attr($id), $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
+        $return = sprintf('<div%s%s%s>%s</div>', $id, $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
 
         return $return;
     }
@@ -1117,11 +1117,11 @@ class BootstrapShortcodes {
 
         $dismissible = ($this->is_flag('dismissible', $save_atts)) ? $this->close_icon("alert") : '';
 
-        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+        $id = (!empty($atts['id']) ? ' id="' . esc_attr($atts['id']) . '"' : '');
 
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        return sprintf('<div%s role="alert"%s%s>%s%s</div>', esc_attr($id), $this->class_output($class, $atts["class"]) , $data_props, $dismissible, do_shortcode($content));
+        return sprintf('<div%s role="alert"%s%s>%s%s</div>', $id, $this->class_output($class, $atts["class"]) , $data_props, $dismissible, do_shortcode($content));
     }
 
     /*--------------------------------------------------------------------------------------
@@ -1141,11 +1141,11 @@ class BootstrapShortcodes {
         $class = array();
         $class[] = 'progress';
 
-        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+        $id = (!empty($atts['id']) ? ' id="' . esc_attr($atts['id']) . '"' : '');
 
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        return sprintf('<div%s%s%s>%s</div>', esc_attr($id), $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
+        return sprintf('<div%s%s%s>%s</div>', $id, $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
     }
 
     /*--------------------------------------------------------------------------------------
@@ -1173,11 +1173,11 @@ class BootstrapShortcodes {
         $class[] = ($this->is_flag('striped', $save_atts)) ? 'progress-bar-striped' : '';
         $class[] = ($this->is_flag('animated', $save_atts)) ? 'progress-bar-animated' : '';
 
-        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+        $id = (!empty($atts['id']) ? ' id="' . esc_attr($atts['id']) . '"' : '');
 
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        return sprintf('<div%s%s role="progressbar" %s%s>%s</div>', esc_attr($id), $this->class_output($class, $atts["class"]) , ($atts['percent']) ? ' style="width: ' . (int)$atts['percent'] . '%;"' : '', $data_props, ($atts['percent']) ? sprintf('<span%s>%s</span>', (!$this->is_flag('label', $save_atts)) ? ' class="sr-only"' : '', (int)$atts['percent'] . '%') : '');
+        return sprintf('<div%s%s role="progressbar" %s%s>%s</div>', $id, $this->class_output($class, $atts["class"]) , ($atts['percent']) ? ' style="width: ' . (int)$atts['percent'] . '%;"' : '', $data_props, ($atts['percent']) ? sprintf('<span%s>%s</span>', (!$this->is_flag('label', $save_atts)) ? ' class="sr-only"' : '', (int)$atts['percent'] . '%') : '');
     }
 
     /*--------------------------------------------------------------------------------------
@@ -1201,11 +1201,11 @@ class BootstrapShortcodes {
         $class = array();
         $class[] = ($this->is_flag('scrollable', $save_atts)) ? 'pre-scrollable' : '';
 
-        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+        $id = (!empty($atts['id']) ? ' id="' . esc_attr($atts['id']) . '"' : '');
 
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        return sprintf('<%1$s%5$s%2$s%3$s>%4$s</%1$s>', ($this->is_flag('inline', $save_atts)) ? 'code' : 'pre', $this->class_output($class, $atts["class"]) , $data_props, $content, esc_attr($id));
+        return sprintf('<%1$s%5$s%2$s%3$s>%4$s</%1$s>', ($this->is_flag('inline', $save_atts)) ? 'code' : 'pre', $this->class_output($class, $atts["class"]) , $data_props, $content, $id);
     }
 
     /*--------------------------------------------------------------------------------------
@@ -1230,11 +1230,11 @@ class BootstrapShortcodes {
         $class = array();
         $class[] = 'row';
 
-        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+        $id = (!empty($atts['id']) ? ' id="' . esc_attr($atts['id']) . '"' : '');
 
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        return sprintf('<div%s%s%s>%s</div>', esc_attr($id), $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
+        return sprintf('<div%s%s%s>%s</div>', $id, $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
     }
 
     /*--------------------------------------------------------------------------------------
@@ -1278,11 +1278,11 @@ class BootstrapShortcodes {
         $class[] = ($atts['offset-sm'] || $atts['offset-sm'] === "0") ? 'offset-sm-' . $atts['offset-sm'] : '';
         $class[] = ($atts['offset-xs'] || $atts['offset-xs'] === "0") ? 'offset-' . $atts['offset-xs'] : '';
 
-        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+        $id = (!empty($atts['id']) ? ' id="' . esc_attr($atts['id']) . '"' : '');
 
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        return sprintf('<div%s%s%s>%s</div>', esc_attr($id), $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
+        return sprintf('<div%s%s%s>%s</div>', $id, $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
     }
 
     /*--------------------------------------------------------------------------------------
@@ -1314,11 +1314,11 @@ class BootstrapShortcodes {
         $class[] .= ($atts['align-items']) ? 'align-items-' . $atts['align-items'] : '';
         $class[] .= ($atts['wrap']) ? ($atts['wrap'] == "reverse" ? 'flex-wrap-reverse' : 'flex-wrap') : 'flex-nowrap';
 
-        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+        $id = (!empty($atts['id']) ? ' id="' . esc_attr($atts['id']) . '"' : '');
 
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        return sprintf('<div%s%s%s>%s</div>', esc_attr($id), $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
+        return sprintf('<div%s%s%s>%s</div>', $id, $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
     }
 
     /*--------------------------------------------------------------------------------------
@@ -1350,11 +1350,11 @@ class BootstrapShortcodes {
         $class[] = ($this->is_flag('shrink', $save_atts)) ? 'flex-shrink-1' : '';
         $class[] = ($this->is_flag('no-shrink', $save_atts)) ? 'flex-shrink-0' : '';
 
-        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+        $id = (!empty($atts['id']) ? ' id="' . esc_attr($atts['id']) . '"' : '');
 
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        return sprintf('<div%s%s%s>%s</div>', esc_attr($id), $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
+        return sprintf('<div%s%s%s>%s</div>', $id, $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
     }
 
     /**
@@ -1378,9 +1378,11 @@ class BootstrapShortcodes {
             'ul',
             'div'
         );
-        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
-        $wrap_before = ($this->testdom($content, $search_tags)) ? '' : ($this->is_flag('linked', $save_atts)) ? '<div' . esc_attr($id) . '>' : '<ul' . esc_attr($id) . '>';
-        $wrap_after = ($this->testdom($content, $search_tags)) ? '' : ($this->is_flag('linked', $save_atts)) ? '</div>' : '</ul>';
+        $id = (!empty($atts['id']) ? ' id="' . esc_attr($atts['id']) . '"' : '');
+        $wrap_before = ($this->testdom($content, $search_tags)) ? '' : ($this->is_flag('linked', $save_atts) ? '<div' . $id . '>' : '<ul' . $id . '>');
+        $wrap_after = ($this->testdom($content, $search_tags)) ? '' : ($this->is_flag('linked', $save_atts) ? '</div>' : '</ul>');
+
+        $GLOBALS['linked_list'] = $this->is_flag('linked', $save_atts);
 
         $class = array();
         $class[] = 'list-group';
@@ -1414,7 +1416,7 @@ class BootstrapShortcodes {
     }
 
     /**
-     * List Group type shortcode
+     * List Group item shortcode
      * @param  [type] $atts    shortcode attributes
      * @param  string $content shortcode contents
      * @return string
@@ -1431,7 +1433,7 @@ class BootstrapShortcodes {
         ) , $save_atts);
 
         $search_tags = array(
-            'li'
+            $GLOBALS['linked_list'] ? 'a' : 'li'
         );
 
         $class = array();
@@ -1442,12 +1444,17 @@ class BootstrapShortcodes {
 
         $content = do_shortcode($content);
 
-        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+        $id = (!empty($atts['id']) ? ' id="' . esc_attr($atts['id']) . '"' : '');
+        $wrap_before = $GLOBALS['linked_list'] ? '' : ($this->testdom($content, $search_tags) ? '' : '<li' . $id . '>');
+        $wrap_after = $GLOBALS['linked_list'] ? '' : ($this->testdom($content, $search_tags) ? '' : '</li>');
 
-        $return = sprintf('%s%s%s', ($this->testdom($content, $search_tags)) ? '' : '<li' . esc_attr($id) . '>', $content, ($this->testdom($content, $search_tags)) ? '' : '</li>');
+        $return = sprintf('%s%s%s', $wrap_before, $content, $wrap_after);
 
         $return = $this->addclass($search_tags, $return, $class);
         $return = $this->adddata($search_tags, $return, $atts['data']);
+        if ($GLOBALS['linked_list'] && !empty($atts['id'])) {
+            $return = $this->addattribute($search_tags, $return, 'id', esc_attr($atts['id']), '');
+        }
         $return = $this->striptagfromdom('br', $return);
 
         return $return;
@@ -1470,11 +1477,11 @@ class BootstrapShortcodes {
         $class = array();
         $class[] = 'breadcrumb';
 
-        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+        $id = (!empty($atts['id']) ? ' id="' . esc_attr($atts['id']) . '"' : '');
 
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        return sprintf('<ul%s%s%s>%s</ul>', esc_attr($id), $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
+        return sprintf('<ul%s%s%s>%s</ul>', $id, $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
     }
 
     /*--------------------------------------------------------------------------------------
@@ -1500,7 +1507,7 @@ class BootstrapShortcodes {
         $li_class[] = 'breadcrumb-item';
         $li_class[] = ($this->is_flag('active', $save_atts)) ? 'active' : '';
 
-        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+        $id = (!empty($atts['id']) ? ' id="' . esc_attr($atts['id']) . '"' : '');
 
         $data_props = $this->parse_data_attributes($atts['data']);
 
@@ -1508,7 +1515,7 @@ class BootstrapShortcodes {
 
         $link = sprintf('<a href="%s"%s%s>%s</a>', esc_url($atts['link']) , $this->class_output($class, $atts["class"]) , $data_props, $content);
 
-        return sprintf('<li%s%s>%s</li>', esc_attr($id), $this->class_output($li_class) , ($this->is_flag('active', $save_atts)) ? $content : $link);
+        return sprintf('<li%s%s>%s</li>', $id, $this->class_output($li_class) , ($this->is_flag('active', $save_atts)) ? $content : $link);
     }
 
     /*--------------------------------------------------------------------------------------
@@ -1532,11 +1539,11 @@ class BootstrapShortcodes {
         $class[] = 'badge';
         $class[] = ($this->is_flag('right', $save_atts)) ? 'float-right' : '';
 
-        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+        $id = (!empty($atts['id']) ? ' id="' . esc_attr($atts['id']) . '"' : '');
 
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        return sprintf('<span%s%s%s>%s</span>', esc_attr($id), $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
+        return sprintf('<span%s%s%s>%s</span>', $id, $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
     }
 
     /*--------------------------------------------------------------------------------------
@@ -1561,11 +1568,11 @@ class BootstrapShortcodes {
         $class[] = ($atts['prefix']) ? $atts['prefix'] : 'fas';
         $class[] = ($atts['name']) ? 'fa-' . $atts['name'] : '';
 
-        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+        $id = (!empty($atts['id']) ? ' id="' . esc_attr($atts['id']) . '"' : '');
 
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        return sprintf('<i%s%s%s>%s</i>', esc_attr($id), $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
+        return sprintf('<i%s%s%s>%s</i>', $id, $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
     }
 
     /*--------------------------------------------------------------------------------------
@@ -1587,11 +1594,11 @@ class BootstrapShortcodes {
         $class = array();
         $class[] = 'fa-stack';
 
-        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+        $id = (!empty($atts['id']) ? ' id="' . esc_attr($atts['id']) . '"' : '');
 
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        return sprintf('<span%s%s%s>%s</span>', esc_attr($id), $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
+        return sprintf('<span%s%s%s>%s</span>', $id, $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
     }
 
     /*--------------------------------------------------------------------------------------
@@ -1629,7 +1636,7 @@ class BootstrapShortcodes {
 
         $return = do_shortcode($content);
 
-        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+        $id = (!empty($atts['id']) ? ' id="' . esc_attr($atts['id']) . '"' : '');
 
         $return = ($this->is_flag('responsive', $save_atts)) ? '<div' . esc_attr($id) . ' class="table-responsive">' . $return . '</div>' : $return;
 
@@ -1662,7 +1669,7 @@ class BootstrapShortcodes {
         if (isset($GLOBALS['carousel_count'])) $GLOBALS['carousel_count']++;
         else $GLOBALS['carousel_count'] = 0;
 
-        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : 'bs4-carousel-' . $GLOBALS['carousel_count']);
+        $id = (!empty($atts['id']) ? esc_attr($atts['id']) : 'bs4-carousel-' . $GLOBALS['carousel_count']);
 
         $class = array();
         $class[] = 'carousel';
@@ -1715,7 +1722,7 @@ class BootstrapShortcodes {
 
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        $return = sprintf('<div%s id="%s" data-ride="carousel"%s%s%s%s>%s<div class="carousel-inner" role="listbox">%s</div>%s</div>', $this->class_output($class, $atts['class']) , esc_attr($id) , ($atts['interval']) ? sprintf(' data-interval="%d"', $atts['interval']) : '', ($atts['pause']) ? sprintf(' data-pause="%s"', esc_attr($atts['pause'])) : '', ($atts['wrap']) ? sprintf(' data-wrap="%s"', esc_attr($atts['wrap'])) : '', $data_props, ($this->is_flag('indicators', $save_atts)) ? '<ol class="carousel-indicators">' . implode($indicators) . '</ol>' : '', $content, ($this->is_flag('controls', $save_atts)) ? $controls : '');
+        $return = sprintf('<div%s id="%s" data-ride="carousel"%s%s%s%s>%s<div class="carousel-inner" role="listbox">%s</div>%s</div>', $this->class_output($class, $atts['class']) , $id , ($atts['interval']) ? sprintf(' data-interval="%d"', $atts['interval']) : '', ($atts['pause']) ? sprintf(' data-pause="%s"', esc_attr($atts['pause'])) : '', ($atts['wrap']) ? sprintf(' data-wrap="%s"', esc_attr($atts['wrap'])) : '', $data_props, ($this->is_flag('indicators', $save_atts)) ? '<ol class="carousel-indicators">' . implode($indicators) . '</ol>' : '', $content, ($this->is_flag('controls', $save_atts)) ? $controls : '');
 
         $return = $this->addclass($item_tags, $return, $item_class);
         $return = $this->addclass($item_tags, $return, $active_class, '1');
@@ -1743,11 +1750,11 @@ class BootstrapShortcodes {
         $class[] = 'carousel-item';
         $class[] = ($this->is_flag('active', $save_atts)) ? 'active' : '';
 
-        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+        $id = (!empty($atts['id']) ? ' id="' . esc_attr($atts['id']) . '"' : '');
 
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        return sprintf('<div%s%s%s>%s</div>', esc_attr($id), $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
+        return sprintf('<div%s%s%s>%s</div>', $id, $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
     }
 
     /*--------------------------------------------------------------------------------------
@@ -1766,11 +1773,11 @@ class BootstrapShortcodes {
         $class = array();
         $class[] = 'carousel-caption';
 
-        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+        $id = (!empty($atts['id']) ? ' id="' . esc_attr($atts['id']) . '"' : '');
 
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        return sprintf('<div%s%s%s>%s</div>', esc_attr($id), $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
+        return sprintf('<div%s%s%s>%s</div>', $id, $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
     }
 
     /**
@@ -1862,11 +1869,11 @@ class BootstrapShortcodes {
         $class = array();
         $class[] = 'media';
 
-        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+        $id = (!empty($atts['id']) ? ' id="' . esc_attr($atts['id']) . '"' : '');
 
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        return sprintf('<%s%s%s%s>%s</%s>', $div, esc_attr($id), $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content) , $div);
+        return sprintf('<%s%s%s%s>%s</%s>', $div, $id, $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content) , $div);
     }
 
     function bs_media_object($atts, $content = null) {
@@ -1924,11 +1931,11 @@ class BootstrapShortcodes {
             'h6'
         );
 
-        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+        $id = (!empty($atts['id']) ? ' id="' . esc_attr($atts['id']) . '"' : '');
 
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        $return = sprintf('<div%s%s%s>%s</div>', esc_attr($id), $this->class_output($div_class, $atts["class"]) , $data_props, do_shortcode($content));
+        $return = sprintf('<div%s%s%s>%s</div>', $id, $this->class_output($div_class, $atts["class"]) , $data_props, do_shortcode($content));
 
         $return = $this->addclass($h_search_tags, $return, $h_class);
 
@@ -1954,11 +1961,11 @@ class BootstrapShortcodes {
         $class[] = 'jumbotron';
         $class[] = ($this->is_flag('fluid', $save_atts)) ? 'jumbotron-fluid' : '';
 
-        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+        $id = (!empty($atts['id']) ? ' id="' . esc_attr($atts['id']) . '"' : '');
 
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        return sprintf('<div%S%s%s>%s%s%s</div>', esc_attr($id), $this->class_output($class, $atts["class"]) , $data_props, ($this->is_flag('fluid', $save_atts)) ? '<div class="container">' : '', do_shortcode($content) , ($this->is_flag('fluid', $save_atts)) ? '</div>' : '');
+        return sprintf('<div%S%s%s>%s%s%s</div>', $id, $this->class_output($class, $atts["class"]) , $data_props, ($this->is_flag('fluid', $save_atts)) ? '<div class="container">' : '', do_shortcode($content) , ($this->is_flag('fluid', $save_atts)) ? '</div>' : '');
     }
 
     /*--------------------------------------------------------------------------------------
@@ -1978,15 +1985,13 @@ class BootstrapShortcodes {
         $class = array();
         $class[] = 'lead';
 
-        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
-
         $data_props = $this->parse_data_attributes($atts['data']);
 
         $return = sprintf('%s', do_shortcode($content));
 
         $return = $this->addclass(null, $return, $class);
         if (!empty($atts['id'])) {
-            $return = $this->addattribute(null, $return, 'id', $atts['id'], '');
+            $return = $this->addattribute(null, $return, 'id', esc_attr($atts['id']), '');
         }
 
         return $return;
@@ -2271,11 +2276,11 @@ class BootstrapShortcodes {
         $class = array();
         $class[] = 'blockquote';
 
-        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+        $id = (!empty($atts['id']) ? ' id="' . esc_attr($atts['id']) . '"' : '');
 
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        return sprintf('<blockquote%s%s%s>%s</blockquote>', esc_attr($id), $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
+        return sprintf('<blockquote%s%s%s>%s</blockquote>', $id, $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
     }
 
     /*--------------------------------------------------------------------------------------
@@ -2295,11 +2300,11 @@ class BootstrapShortcodes {
         $class = array();
         $class[] = 'blockquote-footer';
 
-        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+        $id = (!empty($atts['id']) ? ' id="' . esc_attr($atts['id']) . '"' : '');
 
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        return sprintf('<footer%s%s%s>%s</footer>', esc_attr($id), $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
+        return sprintf('<footer%s%s%s>%s</footer>', $id, $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
     }
 
     /*--------------------------------------------------------------------------------------
@@ -2333,11 +2338,11 @@ class BootstrapShortcodes {
         $content = do_shortcode($content);
         $content = $this->addclass($tag, $content, $embed_class);
 
-        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+        $id = (!empty($atts['id']) ? ' id="' . esc_attr($atts['id']) . '"' : '');
 
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        return sprintf('<div%s%s%s>%s</div>', esc_attr($id), $this->class_output($class, $atts["class"]) , $data_props, $content);
+        return sprintf('<div%s%s%s>%s</div>', $id, $this->class_output($class, $atts["class"]) , $data_props, $content);
     }
 
     /*--------------------------------------------------------------------------------------
@@ -2384,11 +2389,11 @@ class BootstrapShortcodes {
             endforeach;
         }
 
-        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+        $id = (!empty($atts['id']) ? ' id="' . esc_attr($atts['id']) . '"' : '');
 
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        return sprintf('<div%s%s%s>%s</div>', esc_attr($id), $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
+        return sprintf('<div%s%s%s>%s</div>', $id, $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
     }
 
     /**
@@ -2413,7 +2418,7 @@ class BootstrapShortcodes {
 
         (isset($GLOBALS['modal_count'])) ? $GLOBALS['modal_count']++ : $GLOBALS['modal_count'] = 0;
 
-        $id = ($atts['id'] != false) ? $atts['id'] : 'modal-' . $GLOBALS['modal_count'];
+        $id = ($atts['id'] != false) ? esc_attr($atts['id']) : 'modal-' . $GLOBALS['modal_count'];
 
         $class = array();
         $class[] = 'modal';
@@ -2435,7 +2440,7 @@ class BootstrapShortcodes {
                 %s
               </div>
             </div>
-          </div>', esc_attr($id), $this->class_output($class, $atts['class']) , $atts['backdrop'], $atts['keyboard'], esc_attr($id), $data_props, $this->class_output($dialog_class) , do_shortcode($content));
+          </div>', $id, $this->class_output($class, $atts['class']) , $atts['backdrop'], $atts['keyboard'], $id, $data_props, $this->class_output($dialog_class) , do_shortcode($content));
 
         return $return;
     }
@@ -2472,13 +2477,13 @@ class BootstrapShortcodes {
         $h_class = array();
         $h_class[] = "modal-title";
 
-        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+        $id = (!empty($atts['id']) ? ' id="' . esc_attr($atts['id']) . '"' : '');
 
         $data_props = $this->parse_data_attributes($atts['data']);
 
         $content = do_shortcode($wrap_before . $content . $wrap_after);
 
-        $return = sprintf('<div%s%s%s>%s%s</div>', esc_attr($id), $this->class_output($class, $atts['class']) , $data_props, $content, $this->close_icon("modal"));
+        $return = sprintf('<div%s%s%s>%s%s</div>', $id, $this->class_output($class, $atts['class']) , $data_props, $content, $this->close_icon("modal"));
 
         $return = $this->addclass($search_tags, $return, $h_class);
 
@@ -2502,11 +2507,11 @@ class BootstrapShortcodes {
         $class = array();
         $class[] = 'modal-body';
 
-        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+        $id = (!empty($atts['id']) ? ' id="' . esc_attr($atts['id']) . '"' : '');
 
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        $return = sprintf('<div%s%s%s>%s</div>', esc_attr($id), $this->class_output($class, $atts['class']) , $data_props, do_shortcode($content));
+        $return = sprintf('<div%s%s%s>%s</div>', $id, $this->class_output($class, $atts['class']) , $data_props, do_shortcode($content));
 
         return $return;
     }
@@ -2528,11 +2533,11 @@ class BootstrapShortcodes {
         $class = array();
         $class[] = 'modal-footer';
 
-        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+        $id = (!empty($atts['id']) ? ' id="' . esc_attr($atts['id']) . '"' : '');
 
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        $return = sprintf('<div%s%s%s>%s</div>', esc_attr($id), $this->class_output($class, $atts['class']) , $data_props, do_shortcode($content));
+        $return = sprintf('<div%s%s%s>%s</div>', $id, $this->class_output($class, $atts['class']) , $data_props, do_shortcode($content));
 
         return $return;
     }
@@ -2632,11 +2637,11 @@ class BootstrapShortcodes {
             "img"
         );
 
-        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+        $id = (!empty($atts['id']) ? ' id="' . esc_attr($atts['id']) . '"' : '');
 
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        $return = sprintf('<figure%s%s%s>%s</figure>', esc_attr($id), $this->class_output($class, $atts['class']) , $data_props, do_shortcode($content));
+        $return = sprintf('<figure%s%s%s>%s</figure>', $id, $this->class_output($class, $atts['class']) , $data_props, do_shortcode($content));
 
         $return = $this->addclass($i_tags, $return, $i_class);
 
@@ -2660,11 +2665,11 @@ class BootstrapShortcodes {
         $class = array();
         $class[] = "figure-caption";
 
-        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+        $id = (!empty($atts['id']) ? ' id="' . esc_attr($atts['id']) . '"' : '');
 
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        $return = sprintf('<figcaption%s%s%s>%s</figcaption>', esc_attr($id), $this->class_output($class, $atts['class']) , $data_props, do_shortcode($content));
+        $return = sprintf('<figcaption%s%s%s>%s</figcaption>', $id, $this->class_output($class, $atts['class']) , $data_props, do_shortcode($content));
 
         return $return;
     }
@@ -2685,11 +2690,11 @@ class BootstrapShortcodes {
         $class = array();
         $class[] = 'clearfix';
 
-        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+        $id = (!empty($atts['id']) ? ' id="' . esc_attr($atts['id']) . '"' : '');
 
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        return sprintf('<div%s%s%s>%s</div>', esc_attr($id), $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
+        return sprintf('<div%s%s%s>%s</div>', $id, $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
     }
 
     /*--------------------------------------------------------------------------------------
@@ -2709,11 +2714,11 @@ class BootstrapShortcodes {
         $class = array();
         $class[] = 'float-' . $atts['float'];
 
-        $id = (!empty($atts['id']) ? ' id="' . $atts['id'] . '"' : '');
+        $id = (!empty($atts['id']) ? ' id="' . esc_attr($atts['id']) . '"' : '');
 
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        return sprintf('<div%s%s%s>%s</div>', esc_attr($id), $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
+        return sprintf('<div%s%s%s>%s</div>', $id, $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
     }
 
     /*--------------------------------------------------------------------------------------
