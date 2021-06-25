@@ -22,7 +22,7 @@ Check the demo page "Bootstrap 4 Shortcodes Demo 4.5.10" after activation for re
 For questions, support, or to contribute to this plugin, check out [our GitHub project](https://github.com/uwejacobs/complete-bootstrap-4-shortcodes).
 
 == Overview ==
-See the shortcodes in action on our [demo page](https://ujsoftware.com/bootstrap-4-shortcodes-demo-4-5-10/).
+See the shortcodes in action on our [demo page](https://ujsoftware.com/bootstrap-4-shortcodes-demo-4-5-11/).
 
 = Layout: =
 * Grid
@@ -85,6 +85,18 @@ See the shortcodes in action on our [demo page](https://ujsoftware.com/bootstrap
 16. The above shortcode example rendered with WordPress
 
 == Changelog ==
+= 4.5.11 =
+* Added collapsible vertical and horizontal navigation bar
+* Added bootstrap button to classic editor
+* Added [br] shortcode for linebreak
+* Fixed extra linebreaks from editor in shortcode contents
+  * Added utility classes to demo page for proper spacing
+  * Note: This might require minor reformatting for existing pages
+* Fixed linefeed when inserting sample snippets in visual and text mode
+* Fixed embeded video in help file
+* Fixed minor spelling errors
+* All plugin generated HTML ids start now with bs4-
+
 = 4.5.10 =
 * Fixed all HTML errors reported by https://validator.w3.org
 * Fixed list group with linked items

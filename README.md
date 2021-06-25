@@ -57,6 +57,7 @@ nesting.
   - [Button Groups](#button-groups)
   - [Button Dropdowns](#button-dropdowns)
   - [Navs](#navs)
+  - [Navigation Bars](#navbars)
   - [Breadcrumbs](#breadcrumbs)
   - [Badges](#badges)
   - [Jumbotron](#jumbotron)
@@ -85,6 +86,7 @@ nesting.
   - [Color](#color-classes)
   - [Flex](#flex)
   - [HTML snippets](#html)
+  - [Line Breaks](#br)
   - [Lorem Ipsum Text Generator](#lorem-ipsum)
   - [Floats and Clearfix](#clearfix-float)
 
@@ -933,6 +935,106 @@ documentation](https://getbootstrap.com/docs/4.5/components/navs/)
 
 -----
 
+### Navigation Bars
+
+#### Collapsible Navigation Bar
+
+    [navbar expand="md" class="navbar-light bg-light"]
+      [navbar-brand link="#"][img-gen type="circle" responsive size="150x50" text="Brand"][/navbar-brand]
+      [navbar-toggler]
+      [navbar-content]
+        [nav bar class="ml-auto"]
+          [nav-item link="#" active]Home[/nav-item]
+          [nav-item link="#"]Link[/nav-item]
+          [nav-item link="#"]Another Link[/nav-item]
+          [nav-item dropdown link="#"]Dropdown
+            [dropdown-menu]
+              [dropdown-header]Header[/dropdown-header]
+              [dropdown-item link="#"]Action[/dropdown-item]
+              [dropdown-item link="#"]Another action[/dropdown-item]
+              [dropdown-item link="#"]Something else here[/dropdown-item]
+              [dropdown-divider]
+              [dropdown-item link="#"]Separated link[/dropdown-item]
+            [/dropdown-menu]
+          [/nav-item]
+          [nav-item link="#" disabled]Disabled[/nav-item]
+        [/nav]
+      [/navbar-content]
+    [/navbar]
+
+#### Vertical Navigation Bar
+
+    [navbar class="navbar-light bg-light"]
+        [nav bar class="mr-auto"]
+          [nav-item link="#" active]Home[/nav-item]
+          [nav-item link="#"]Link[/nav-item]
+          [nav-item link="#"]Another Link[/nav-item]
+          [nav-item dropdown link="#"]Dropdown
+            [dropdown-menu]
+              [dropdown-header]Header[/dropdown-header]
+              [dropdown-item link="#"]Action[/dropdown-item]
+              [dropdown-item link="#"]Another action[/dropdown-item]
+              [dropdown-item link="#"]Something else here[/dropdown-item]
+              [dropdown-divider]
+              [dropdown-item link="#"]Separated link[/dropdown-item]
+            [/dropdown-menu]
+          [/nav-item]
+          [nav-item link="#" disabled]Disabled[/nav-item]
+        [/nav]
+    [/navbar]
+
+#### \[navbar\] parameters
+
+| Parameter | Description                                                                                                                                            | Required | Values                 | Default |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | -------- | ---------------------- | ------- |
+| id        | Name the container for processing in custom CSS or JavaScript.                                                                                         | optional | Unique text identifier |         |
+| expand    | Navbars utilize `[navbar-toggler]`, `[navbar-collapse]`, and `expand={sm\|md\|lg\|xl}` classes to change when their content collapses behind a button. | optional | sm, md, lg, xl         | none    |
+| class     | Any extra classes you want to add                                                                                                                      | optional | any text               | none    |
+| data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters).        | optional | any text               | none    |
+
+[Bootstrap Navbar
+documentation](https://getbootstrap.com/docs/4.0/components/navbar/)
+
+#### \[navbar-brand\] parameters
+
+| Parameter | Description                                                                                                                                     | Required | Values                 | Default |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ---------------------- | ------- |
+| id        | Name the container for processing in custom CSS or JavaScript.                                                                                  | optional | Unique text identifier |         |
+| link      | The url you want the navbar-brand to link to                                                                                                    | optional | any valid link         | none    |
+| class     | Any extra classes you want to add                                                                                                               | optional | any text               | none    |
+| data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text               | none    |
+
+The `[navbar-brand]` can be applied to most elements, but an anchor
+works best as some elements might require utility classes or custom
+styles.
+
+#### \[navbar-toggler\] parameters
+
+| Parameter | Description                                                                                                                                     | Required | Values   | Default |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------- | ------- |
+| class     | Any extra classes you want to add                                                                                                               | optional | any text | none    |
+| data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text | none    |
+
+`[navbar-toggler]` adds a button when the navigation bar is collapsed.
+Navbar togglers are left-aligned by default, but should they follow a
+sibling element like a .navbar-brand, they’ll automatically be aligned
+to the far
+right.
+
+#### \[navbar-content\] parameters
+
+| Parameter | Description                                                                                                                                     | Required | Values                 | Default |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ---------------------- | ------- |
+| id        | Name the container for processing in custom CSS or JavaScript.                                                                                  | optional | Unique text identifier |         |
+| link      | The url you want the navbar-content to link to                                                                                                  | optional | any valid link         | none    |
+| class     | Any extra classes you want to add                                                                                                               | optional | any text               | none    |
+| data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text               | none    |
+
+`[nav-bar-content]` is used for grouping and hiding navbar contents by a
+parent breakpoint.
+
+-----
+
 ### Breadcrumbs
 
     [breadcrumb]
@@ -1353,7 +1455,7 @@ documentation](https://getbootstrap.com/docs/4.5/content/images/)
 
 -----
 
-### Figurs
+### Figures
 
     [figure]
       [img-gen size="300" class="figure-img img-fluid rounded"]
@@ -1432,7 +1534,7 @@ documentation](https://getbootstrap.com/docs/4.5/content/typography/#lead)
 
     [wrapper type="span" class="d-flex text-success"] [icon name="arrow-right" class="fa-2x mr-2"][lorem-ipsum] [/wrapper]
 
-#### \[lead\] parameters
+#### \[wrapper\] parameters
 
 | Parameter | Description                                                                                                                                                      | Required | Values                 | Default |
 | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ---------------------- | ------- |
@@ -1542,7 +1644,17 @@ documentation](https://getbootstrap.com/docs/4.5/utilities/flex/)
 
 Allow any html code. This shortcode has no parameters.
 
-    [html]<br><hr><br>[/html]
+    [html]<hr class="m-5">[/html]
+
+-----
+
+### Line Breaks
+
+Insert line break. The plugin tries very aggressively to eliminate all
+line breaks inserted by the editor. Use this shortcode to add
+intentional line breaks. This shortcode has no parameters.
+
+    [br]
 
 -----
 

@@ -3,7 +3,7 @@
 Plugin Name: Complete Bootstrap 4 Shortcodes
 Plugin URI: https://github.com/uwejacobs/complete-bootstrap-4-shortcodes
 Description: The plugin adds shortcodes for most Bootstrap 4 elements.
-Version: 4.5.10
+Version: 4.5.11
 Author: Uwe Jacobs
 Author URI:
 License: MIT
@@ -140,6 +140,7 @@ class BootstrapShortcodes {
             'blockquote',
             'blockquote-footer',
             'border',
+            'br',
             'breadcrumb',
             'breadcrumb-item',
             'button',
@@ -200,7 +201,11 @@ class BootstrapShortcodes {
             'modal-body',
             'modal-footer',
             'nav',
-            'nav-item',
+	        'nav-item',
+	        'navbar',
+            'navbar-brand',
+            'navbar-toggler',
+            'navbar-content',
             'popover',
             'progress',
             'progress-bar',
@@ -219,7 +224,6 @@ class BootstrapShortcodes {
                 $this,
                 $function
             ));
-
         }
     }
 
@@ -247,6 +251,8 @@ class BootstrapShortcodes {
             "class" => false,
             "data" => false
         ) , $save_atts);
+        
+        $content = $this->deleteTrailingEmptyLines($content);
 
         if (isset($GLOBALS['button_count'])) $GLOBALS['button_count']++;
         else $GLOBALS['button_count'] = 0;
@@ -280,7 +286,7 @@ class BootstrapShortcodes {
         );
 
         if ($atts['tag'] == 'a') {
-            $str = '<a role="button" href="' . $atts['link'] . '" target="' . $atts['target'] . '">';
+            $str = '<a role="button" href="' . esc_url($atts['link']) . '" target="' . $atts['target'] . '">';
             $wrap_before = ($content && $this->testdom($content, $search_tags)) ? '' : $str;
             $wrap_after = ($content && $this->testdom($content, $search_tags)) ? '' : '</a>';
         }
@@ -333,6 +339,8 @@ class BootstrapShortcodes {
             "data" => false
         ) , $save_atts);
 
+        $content = $this->deleteTrailingEmptyLines($content);
+
         $class = array();
         $class[] = 'btn-group';
         $class[] = ($atts['size'] && $atts['size'] != "md") ? 'btn-group-' . $atts['size'] : '';
@@ -360,6 +368,8 @@ class BootstrapShortcodes {
             "data" => false
         ) , $atts);
 
+        $content = $this->deleteTrailingEmptyLines($content);
+
         $class = array();
         $class[] = 'btn-toolbar';
 
@@ -383,6 +393,8 @@ class BootstrapShortcodes {
             "class" => false,
             "data" => false
         ) , $save_atts);
+
+        $content = $this->deleteTrailingEmptyLines($content);
 
         $class = array();
         $id = (!empty($atts['id']) ? ' id="' . esc_attr($atts['id']) . '"' : '');
@@ -409,6 +421,8 @@ class BootstrapShortcodes {
             "class" => false,
             "data" => false
         ) , $save_atts);
+
+        $content = $this->deleteTrailingEmptyLines($content);
 
         $class = array();
         if ($this->is_flag('fluid', $save_atts)) {
@@ -452,6 +466,8 @@ class BootstrapShortcodes {
             "data" => false
         ) , $atts);
 
+        $content = $this->deleteTrailingEmptyLines($content);
+
         $class = array();
         $class[] = 'dropdown';
 
@@ -479,6 +495,8 @@ class BootstrapShortcodes {
             "data" => false
         ) , $save_atts);
 
+        $content = $this->deleteTrailingEmptyLines($content);
+
         $class = array();
         $class[] = 'dropdown-item';
         $class[] = ($this->is_flag('disabled', $save_atts)) ? 'disabled' : '';
@@ -504,9 +522,11 @@ class BootstrapShortcodes {
             "data" => false
         ) , $atts);
 
+        $content = $this->deleteTrailingEmptyLines($content);
+
         $class = array();
         $class[] = 'dropdown-divider';
-
+        
         $data_props = $this->parse_data_attributes($atts['data']);
 
         return sprintf('<div%s%s>%s</div>', $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
@@ -526,6 +546,8 @@ class BootstrapShortcodes {
             "class" => false,
             "data" => false
         ) , $atts);
+
+        $content = $this->deleteTrailingEmptyLines($content);
 
         $class = array();
         $class[] = 'dropdown-header';
@@ -551,6 +573,8 @@ class BootstrapShortcodes {
             "class" => false,
             "data" => false,
         ) , $save_atts);
+
+        $content = $this->deleteTrailingEmptyLines($content);
 
         $search_tags = array(
             'div'
@@ -614,10 +638,13 @@ class BootstrapShortcodes {
             // 'pills'
             // 'fill'
             // 'justified'
+            // 'bar'
             "id" => false,
             "class" => false,
             "data" => false
         ) , $save_atts);
+
+        $content = $this->deleteTrailingEmptyLines($content);
 
         $search_tags = array(
             'ul',
@@ -626,11 +653,11 @@ class BootstrapShortcodes {
 
         $id = (!empty($atts['id']) ? ' id="' . esc_attr($atts['id']) . '"' : '');
 
-        $wrap_before = ($this->testdom($content, $search_tags)) ? '' : '<ul' . esc_attr($id) . '>';
+        $wrap_before = ($this->testdom($content, $search_tags)) ? '' : '<ul' . $id . '>';
         $wrap_after = ($this->testdom($content, $search_tags)) ? '' : '</ul>';
 
         $class = array();
-        $class[] = 'nav';
+        $class[] = ($this->is_flag('bar', $save_atts)) ? 'navbar-nav' : 'nav';
         $class[] = ($this->is_flag('stacked', $save_atts)) ? 'flex-column' : '';
         $class[] = ($this->is_flag('tabs', $save_atts)) ? 'nav-tabs' : '';
         $class[] = ($this->is_flag('pills', $save_atts)) ? 'nav-pills' : '';
@@ -665,6 +692,8 @@ class BootstrapShortcodes {
             "data" => false,
         ) , $save_atts);
 
+        $content = $this->deleteTrailingEmptyLines($content);
+
         $li_class = array();
         $li_class[] = 'nav-item';
         $li_class[] = ($this->is_flag('dropdown', $save_atts)) ? 'dropdown' : '';
@@ -680,12 +709,163 @@ class BootstrapShortcodes {
 
         $data_props = $this->parse_data_attributes($atts['data']);
 
+        $content = $this->deleteTrailingEmptyLines($content);
+
         //* If we have a dropdown shortcode inside the content we end the link before the dropdown shortcode, else all content goes inside the link
-        $content = ($this->is_flag('dropdown', $save_atts)) ? str_replace("<br />\n", '', $content) : $content;
         $content = ($this->is_flag('dropdown', $save_atts)) ? str_replace('[dropdown-menu]', '</a>[dropdown-menu]', $content) : $content;
 
         return sprintf('<li%8$s%1$s><a href="%2$s"%3$s%4$s%5$s%6$s>%7$s</a></li>', $this->class_output($li_class) , esc_url($atts['link']) , $this->class_output($a_class, $atts["class"]) , ($this->is_flag('dropdown', $save_atts)) ? ' data-toggle="dropdown"' : '', $data_props, $a_aria, do_shortcode($content), $id);
+    }
 
+    /*--------------------------------------------------------------------------------------
+     *
+     * bs_navbar
+     *
+     *
+     *-------------------------------------------------------------------------------------*/
+    function bs_navbar($save_atts, $content = null) {
+        $save_atts = array_change_key_case((array)$save_atts, CASE_LOWER);
+        $atts = shortcode_atts(array(
+            "id" => false,
+            "expand" => false,
+            "class" => false,
+            "data" => false,
+        ) , $save_atts);
+
+        $content = $this->deleteTrailingEmptyLines($content);
+
+        (isset($GLOBALS['navbar_count'])) ? $GLOBALS['navbar_count']++ : $GLOBALS['navbar_count'] = 0;
+
+        $GLOBALS['navbar'] = true;
+
+        $id = (!empty($atts['id']) ? ' id="' . esc_attr($atts['id']) . '"' : '');
+
+        $class = array();
+        $class[] = 'navbar';
+        $class = array_merge($class, explode(' ', $atts['class']));
+
+        if (!empty($atts['expand'])) {
+            $class[] = 'navbar-expand-' . $atts['expand'];
+        }
+
+        $data_props = $this->parse_data_attributes($atts['data']);
+
+        $return = sprintf('<nav%s%s%s>%s</nav>', $id, $this->class_output($class) , $data_props, do_shortcode($content));
+
+        unset($GLOBALS['navbar']);
+        return $return;
+    }
+
+    /*--------------------------------------------------------------------------------------
+     *
+     * bs_navbar_brand
+     *
+     *
+     *-------------------------------------------------------------------------------------*/
+    function bs_navbar_brand($save_atts, $content = null) {
+        $save_atts = array_change_key_case((array)$save_atts, CASE_LOWER);
+        $atts = shortcode_atts(array(
+            "id" => false,
+            "link" => false,
+            "class" => false,
+            "data" => false,
+        ) , $save_atts);
+
+        $content = $this->deleteTrailingEmptyLines($content);
+
+        if ($this->testdom($content, array('a'))) {
+            $wrap_before = '';
+            $wrap_after = '';
+        } else {
+            $wrap_before = ((!empty($atts['link'])) ? '<a' : '<span') . ( !empty($atts['link']) ? ' href="' . esc_url($atts['link']) . '"' : '') . '>';
+            $wrap_after = (!empty($atts['link'])) ? '</a>' : '</span>';
+        }
+
+        $class = array();
+        $class[] = 'navbar-brand';
+        $class = array_merge($class, explode(' ', $atts['class']));
+
+        $content = do_shortcode($wrap_before . $content . $wrap_after);
+
+        $return = sprintf('%s', $content);
+
+        $search_tags = array(
+            'a',
+            'span'
+        );
+
+        $return = $this->addclass($search_tags, $return, $class);
+        $return = $this->adddata($search_tags, $return, $atts['data']);
+        if (!empty($atts['id'])) {
+            $return = $this->addattribute($search_tags, $return, 'id', esc_attr($atts['id']), '');
+        }
+
+        return $return;
+    }
+
+    /*--------------------------------------------------------------------------------------
+     *
+     * bs_navbar_toggler
+     *
+     *
+     *-------------------------------------------------------------------------------------*/
+    function bs_navbar_toggler($save_atts, $content = null) {
+        $save_atts = array_change_key_case((array)$save_atts, CASE_LOWER);
+        $atts = shortcode_atts(array(
+            "class" => false,
+            "data" => false,
+        ) , $save_atts);
+
+        $GLOBALS['navbar-collapse'] = 'bs4-navbar-' . $GLOBALS['navbar_count'];
+
+        $class = array();
+        $class[] = 'navbar-toggler';
+
+        $data_props = $this->parse_data_attributes($atts['data']);
+
+        $return = '<button' . $this->class_output($class, $atts["class"]) . $data_props;
+        $return .= ' type="button" data-toggle="collapse" data-target="#';
+        $return .= $GLOBALS['navbar-collapse'];
+        $return .='" aria-controls="';
+        $return .= $GLOBALS['navbar-collapse'];
+        $return .='" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>';
+
+        return $return;
+    }
+
+    /*--------------------------------------------------------------------------------------
+     *
+     * bs_navbar_content
+     *
+     *
+     *-------------------------------------------------------------------------------------*/
+    function bs_navbar_content($save_atts, $content = null) {
+        $save_atts = array_change_key_case((array)$save_atts, CASE_LOWER);
+        $atts = shortcode_atts(array(
+            // "active"
+            // "disabled"
+            // "dropdown"
+            "id" => false,
+            "link" => '#',
+            "class" => false,
+            "data" => false,
+        ) , $save_atts);
+
+        $content = $this->deleteTrailingEmptyLines($content);
+
+        $id = !empty($GLOBALS['navbar-collapse']) ? ' id="' . $GLOBALS['navbar-collapse'] . '"' : '';
+
+        $class = array();
+        $class[] = 'collapse';
+        $class[] = 'navbar-collapse';
+
+        $data_props = $this->parse_data_attributes($atts['data']);
+
+        $return = '<div' . $this->class_output($class, $atts["class"]) . $data_props . $id . '>';
+        $return .= do_shortcode($content);
+        $return .= '</div>';
+
+        return $return;
     }
 
     /*--------------------------------------------------------------------------------------
@@ -701,6 +881,8 @@ class BootstrapShortcodes {
             "data" => false,
         ) , $save_atts);
 
+        $content = $this->deleteTrailingEmptyLines($content);
+
         (isset($GLOBALS['accordion_count'])) ? $GLOBALS['accordion_count']++ : $GLOBALS['accordion_count'] = 0;
 
         $GLOBALS['accordion'] = true;
@@ -708,7 +890,7 @@ class BootstrapShortcodes {
         $class = array();
         $class[] = "accordion";
 
-        $id = (!empty($atts['id']) ? esc_attr($atts['id']) : 'accordion' . $GLOBALS['accordion_count']);
+        $id = (!empty($atts['id']) ? esc_attr($atts['id']) : 'bs4-accordion-' . $GLOBALS['accordion_count']);
 
         $data_props = $this->parse_data_attributes($atts['data']);
 
@@ -734,6 +916,8 @@ class BootstrapShortcodes {
             "class" => false,
             "data" => false
         ) , $save_atts);
+
+        $content = $this->deleteTrailingEmptyLines($content);
 
         if (isset($GLOBALS['accordion'])) {
             if (!isset($GLOBALS['accordion_card'])) {
@@ -772,11 +956,13 @@ class BootstrapShortcodes {
             "data" => false
         ) , $save_atts);
 
+        $content = $this->deleteTrailingEmptyLines($content);
+
         if (isset($GLOBALS['accordion'])) {
             $show = ($GLOBALS['accordion_card_show']) ? ' show' : '';
         }
 
-        $wrap_before = (isset($GLOBALS['accordion'])) ? sprintf('<div id="collapse%s" class="collapse%s" data-parent="#accordion%s" aria-labelledby="bs-heading%s">', $GLOBALS['accordion_card'], $show, $GLOBALS['accordion_count'], $GLOBALS['accordion_card']) : '';
+        $wrap_before = (isset($GLOBALS['accordion'])) ? sprintf('<div id="bs4-collapse-%s" class="collapse%s" data-parent="#bs4-accordion-%s" aria-labelledby="bs4-heading-%s">', $GLOBALS['accordion_card'], $show, $GLOBALS['accordion_count'], $GLOBALS['accordion_card']) : '';
         $wrap_after = (isset($GLOBALS['accordion'])) ? '</div>' : '';
 
         $class = array();
@@ -820,6 +1006,8 @@ class BootstrapShortcodes {
             "data" => false
         ) , $atts);
 
+        $content = $this->deleteTrailingEmptyLines($content);
+
         $search_tags = array(
             'h1',
             'h2',
@@ -854,6 +1042,8 @@ class BootstrapShortcodes {
             "class" => false,
             "data" => false
         ) , $atts);
+
+        $content = $this->deleteTrailingEmptyLines($content);
 
         $search_tags = array(
             'h1',
@@ -891,6 +1081,8 @@ class BootstrapShortcodes {
             "class" => false,
             "data" => false
         ) , $save_atts);
+
+        $content = $this->deleteTrailingEmptyLines($content);
 
         $class = array();
         if ($this->is_flag('top', $save_atts)) {
@@ -930,6 +1122,8 @@ class BootstrapShortcodes {
             "data" => false
         ) , $atts);
 
+        $content = $this->deleteTrailingEmptyLines($content);
+
         $class = array();
         $class[] = 'card-img-overlay';
 
@@ -950,6 +1144,8 @@ class BootstrapShortcodes {
             "data" => false
         ) , $atts);
 
+        $content = $this->deleteTrailingEmptyLines($content);
+
         $search_tags = array(
             'h1',
             'h2',
@@ -963,11 +1159,11 @@ class BootstrapShortcodes {
         $wrap_before = '';
         $wrap_after = '';
 
-        $id = (isset($GLOBALS['accordion'])) ? ' id="bs-heading' . $GLOBALS['accordion_card'] . '"' : '';
+        $id = (isset($GLOBALS['accordion'])) ? ' id="bs4-heading-' . $GLOBALS['accordion_card'] . '"' : '';
         $wrap_before .= ($this->testdom($content, $search_tags)) ? '' : '<div class="card-header"' . $id . '>';
         $wrap_after .= ($this->testdom($content, $search_tags)) ? '' : '</div>';
 
-        $wrap_before .= (isset($GLOBALS['accordion'])) ? sprintf('<button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapse%1$s" aria-controls="collapse%1$s" aria-expanded="%2$s">', $GLOBALS['accordion_card'], $GLOBALS['accordion_card_show'] ? 'true' : 'false') : '';
+        $wrap_before .= (isset($GLOBALS['accordion'])) ? sprintf('<button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#bs4-collapse-%1$s" aria-controls="bs4-collapse-%1$s" aria-expanded="%2$s">', $GLOBALS['accordion_card'], $GLOBALS['accordion_card_show'] ? 'true' : 'false') : '';
         $wrap_before .= (isset($GLOBALS['accordion'])) ? '<i class="fa fa-plus float-right"></i>' : '';
         $wrap_after .= (isset($GLOBALS['accordion'])) ? '</button>' : '';
 
@@ -994,6 +1190,8 @@ class BootstrapShortcodes {
             "class" => false,
             "data" => false
         ) , $atts);
+
+        $content = $this->deleteTrailingEmptyLines($content);
 
         $search_tags = array(
             'div'
@@ -1027,6 +1225,8 @@ class BootstrapShortcodes {
             "data" => false
         ) , $atts);
 
+        $content = $this->deleteTrailingEmptyLines($content);
+
         $class = array();
         $class[] = 'card-group';
 
@@ -1052,6 +1252,8 @@ class BootstrapShortcodes {
             "data" => false
         ) , $atts);
 
+        $content = $this->deleteTrailingEmptyLines($content);
+
         $class = array();
         $class[] = 'card-deck';
 
@@ -1076,6 +1278,8 @@ class BootstrapShortcodes {
             "class" => false,
             "data" => false
         ) , $atts);
+
+        $content = $this->deleteTrailingEmptyLines($content);
 
         $class = array();
         $class[] = 'card-columns';
@@ -1108,6 +1312,8 @@ class BootstrapShortcodes {
             "data" => false
         ) , $save_atts);
 
+        $content = $this->deleteTrailingEmptyLines($content);
+
         $class = array();
         $class[] = 'alert';
         $class[] = ($atts['type']) ? 'alert-' . $atts['type'] : 'alert-primary';
@@ -1138,6 +1344,8 @@ class BootstrapShortcodes {
             "data" => false
         ) , $save_atts);
 
+        $content = $this->deleteTrailingEmptyLines($content);
+
         $class = array();
         $class[] = 'progress';
 
@@ -1166,6 +1374,8 @@ class BootstrapShortcodes {
             "class" => false,
             "data" => false
         ) , $save_atts);
+
+        $content = $this->deleteTrailingEmptyLines($content);
 
         $class = array();
         $class[] = 'progress-bar';
@@ -1198,6 +1408,8 @@ class BootstrapShortcodes {
             "data" => false
         ) , $save_atts);
 
+        $content = $this->deleteTrailingEmptyLines($content);
+
         $class = array();
         $class[] = ($this->is_flag('scrollable', $save_atts)) ? 'pre-scrollable' : '';
 
@@ -1226,6 +1438,8 @@ class BootstrapShortcodes {
             "class" => false,
             "data" => false
         ) , $atts);
+
+        $content = $this->deleteTrailingEmptyLines($content);
 
         $class = array();
         $class[] = 'row';
@@ -1264,6 +1478,8 @@ class BootstrapShortcodes {
             "class" => false,
             "data" => false
         ) , $atts);
+
+        $content = $this->deleteTrailingEmptyLines($content);
 
         $class = array();
         $class[] = '';
@@ -1306,6 +1522,8 @@ class BootstrapShortcodes {
             "data" => false
         ) , $save_atts);
 
+        $content = $this->deleteTrailingEmptyLines($content);
+
         $class = array();
         $class[] .= 'd' . ($this->is_flag('inline', $save_atts) ? '-inline' : '') . '-flex';
         $class[] .= ($atts['direction']) ? 'flex-' . $atts['direction'] : '';
@@ -1342,6 +1560,8 @@ class BootstrapShortcodes {
             "data" => false
         ) , $save_atts);
 
+        $content = $this->deleteTrailingEmptyLines($content);
+
         $class = array();
         $class[] = ($atts['align']) ? 'align-self-' . $atts['align'] : '';
         $class[] = ($this->is_flag('fill', $save_atts)) ? 'flex-fill' : '';
@@ -1373,6 +1593,8 @@ class BootstrapShortcodes {
             "class" => false,
             "data" => false
         ) , $save_atts);
+
+        $content = $this->deleteTrailingEmptyLines($content);
 
         $search_tags = array(
             'ul',
@@ -1432,6 +1654,8 @@ class BootstrapShortcodes {
             "data" => false
         ) , $save_atts);
 
+        $content = $this->deleteTrailingEmptyLines($content);
+
         $search_tags = array(
             $GLOBALS['linked_list'] ? 'a' : 'li'
         );
@@ -1474,6 +1698,8 @@ class BootstrapShortcodes {
             "data" => false
         ) , $atts);
 
+        $content = $this->deleteTrailingEmptyLines($content);
+
         $class = array();
         $class[] = 'breadcrumb';
 
@@ -1500,6 +1726,8 @@ class BootstrapShortcodes {
             "class" => false,
             "data" => false
         ) , $save_atts);
+
+        $content = $this->deleteTrailingEmptyLines($content);
 
         $class = array();
 
@@ -1535,6 +1763,8 @@ class BootstrapShortcodes {
             "data" => false
         ) , $save_atts);
 
+        $content = $this->deleteTrailingEmptyLines($content);
+
         $class = array();
         $class[] = 'badge';
         $class[] = ($this->is_flag('right', $save_atts)) ? 'float-right' : '';
@@ -1564,6 +1794,8 @@ class BootstrapShortcodes {
             "data" => false
         ) , $atts);
 
+        $content = $this->deleteTrailingEmptyLines($content);
+
         $class = array();
         $class[] = ($atts['prefix']) ? $atts['prefix'] : 'fas';
         $class[] = ($atts['name']) ? 'fa-' . $atts['name'] : '';
@@ -1590,6 +1822,8 @@ class BootstrapShortcodes {
             "class" => false,
             "data" => false
         ) , $atts);
+
+        $content = $this->deleteTrailingEmptyLines($content);
 
         $class = array();
         $class[] = 'fa-stack';
@@ -1621,6 +1855,8 @@ class BootstrapShortcodes {
             "class" => false,
             "data" => false
         ) , $save_atts);
+
+        $content = $this->deleteTrailingEmptyLines($content);
 
         $class = array();
         $class[] = 'table';
@@ -1665,6 +1901,8 @@ class BootstrapShortcodes {
             "class" => false,
             "data" => false
         ) , $save_atts);
+
+        $content = $this->deleteTrailingEmptyLines($content);
 
         if (isset($GLOBALS['carousel_count'])) $GLOBALS['carousel_count']++;
         else $GLOBALS['carousel_count'] = 0;
@@ -1746,6 +1984,8 @@ class BootstrapShortcodes {
             "data" => false
         ) , $save_atts);
 
+        $content = $this->deleteTrailingEmptyLines($content);
+
         $class = array();
         $class[] = 'carousel-item';
         $class[] = ($this->is_flag('active', $save_atts)) ? 'active' : '';
@@ -1770,6 +2010,8 @@ class BootstrapShortcodes {
             "data" => false
         ) , $save_atts);
 
+        $content = $this->deleteTrailingEmptyLines($content);
+
         $class = array();
         $class[] = 'carousel-caption';
 
@@ -1792,6 +2034,8 @@ class BootstrapShortcodes {
             "title" => false,
             "data" => false,
         ) , $save_atts);
+
+        $content = $this->deleteTrailingEmptyLines($content);
 
         $tooltip_data = array();
         $tooltip_data[] = "toggle,tooltip";
@@ -1824,6 +2068,8 @@ class BootstrapShortcodes {
             "content" => false,
             "data" => false,
         ) , $save_atts);
+
+        $content = $this->deleteTrailingEmptyLines($content);
 
         $popover_data = array();
         $popover_data[] = "toggle,popover";
@@ -1864,6 +2110,8 @@ class BootstrapShortcodes {
             "data" => false
         ) , $save_atts);
 
+        $content = $this->deleteTrailingEmptyLines($content);
+
         $div = ($this->is_flag('list-group', $save_atts)) ? 'li' : 'div';
 
         $class = array();
@@ -1883,6 +2131,8 @@ class BootstrapShortcodes {
             "class" => false,
             "data" => false
         ) , $atts);
+
+        $content = $this->deleteTrailingEmptyLines($content);
 
         $class = array();
         $class[] = $atts['class'];
@@ -1916,6 +2166,8 @@ class BootstrapShortcodes {
             "class" => false,
             "data" => false
         ) , $atts);
+
+        $content = $this->deleteTrailingEmptyLines($content);
 
         $div_class = array();
         $div_class[] = 'media-body';
@@ -1957,6 +2209,8 @@ class BootstrapShortcodes {
             "data" => false
         ) , $save_atts);
 
+        $content = $this->deleteTrailingEmptyLines($content);
+
         $class = array();
         $class[] = 'jumbotron';
         $class[] = ($this->is_flag('fluid', $save_atts)) ? 'jumbotron-fluid' : '';
@@ -1982,6 +2236,8 @@ class BootstrapShortcodes {
             "data" => false
         ) , $atts);
 
+        $content = $this->deleteTrailingEmptyLines($content);
+
         $class = array();
         $class[] = 'lead';
 
@@ -2006,11 +2262,12 @@ class BootstrapShortcodes {
      *
      *-------------------------------------------------------------------------------------*/
     function bs_html($atts, $content = null) {
-
         $content = str_replace("&#8221;", '"', $content);
         $content = str_replace("&#8217;", '"', $content);
         $content = str_replace("&#8243;", '"', $content);
         $content = wp_specialchars_decode($content, ENT_QUOTES);
+        $content = $this->deleteTrailingEmptyLines($content);
+
         return ($content);
     }
 
@@ -2273,6 +2530,8 @@ class BootstrapShortcodes {
             "data" => false
         ) , $atts);
 
+        $content = $this->deleteTrailingEmptyLines($content);
+
         $class = array();
         $class[] = 'blockquote';
 
@@ -2296,6 +2555,8 @@ class BootstrapShortcodes {
             "class" => false,
             "data" => false
         ) , $atts);
+
+        $content = $this->deleteTrailingEmptyLines($content);
 
         $class = array();
         $class[] = 'blockquote-footer';
@@ -2321,6 +2582,8 @@ class BootstrapShortcodes {
             "class" => false,
             "data" => false
         ) , $atts);
+
+        $content = $this->deleteTrailingEmptyLines($content);
 
         $class = array();
         $class[] = 'embed-responsive';
@@ -2362,6 +2625,8 @@ class BootstrapShortcodes {
             "class" => false,
             "data" => false
         ) , $atts);
+
+        $content = $this->deleteTrailingEmptyLines($content);
 
         $class = array();
         if ($atts['hidden']) {
@@ -2416,9 +2681,11 @@ class BootstrapShortcodes {
             "data" => false
         ) , $save_atts);
 
+        $content = $this->deleteTrailingEmptyLines($content);
+
         (isset($GLOBALS['modal_count'])) ? $GLOBALS['modal_count']++ : $GLOBALS['modal_count'] = 0;
 
-        $id = ($atts['id'] != false) ? esc_attr($atts['id']) : 'modal-' . $GLOBALS['modal_count'];
+        $id = ($atts['id'] != false) ? esc_attr($atts['id']) : 'bs4-modal-' . $GLOBALS['modal_count'];
 
         $class = array();
         $class[] = 'modal';
@@ -2458,6 +2725,8 @@ class BootstrapShortcodes {
             "class" => false,
             "data" => false
         ) , $atts);
+
+        $content = $this->deleteTrailingEmptyLines($content);
 
         $search_tags = array(
             'h1',
@@ -2504,6 +2773,8 @@ class BootstrapShortcodes {
             "data" => false
         ) , $atts);
 
+        $content = $this->deleteTrailingEmptyLines($content);
+
         $class = array();
         $class[] = 'modal-body';
 
@@ -2529,6 +2800,8 @@ class BootstrapShortcodes {
             "class" => false,
             "data" => false
         ) , $atts);
+
+        $content = $this->deleteTrailingEmptyLines($content);
 
         $class = array();
         $class[] = 'modal-footer';
@@ -2556,6 +2829,8 @@ class BootstrapShortcodes {
             "class" => false,
             "data" => false
         ) , $atts);
+
+        $content = $this->deleteTrailingEmptyLines($content);
 
         $class = array();
         $class[] = ($atts['text']) ? 'text-' . $atts['text'] : '';
@@ -2585,6 +2860,8 @@ class BootstrapShortcodes {
             "class" => false,
             "data" => false
         ) , $save_atts);
+
+        $content = $this->deleteTrailingEmptyLines($content);
 
         $class = array();
         if ($atts['add']) {
@@ -2627,6 +2904,8 @@ class BootstrapShortcodes {
             "data" => false
         ) , $atts);
 
+        $content = $this->deleteTrailingEmptyLines($content);
+
         $class = array();
         $class[] = "figure";
 
@@ -2662,6 +2941,8 @@ class BootstrapShortcodes {
             "data" => false
         ) , $atts);
 
+        $content = $this->deleteTrailingEmptyLines($content);
+
         $class = array();
         $class[] = "figure-caption";
 
@@ -2687,6 +2968,8 @@ class BootstrapShortcodes {
             "data" => false
         ) , $atts);
 
+        $content = $this->deleteTrailingEmptyLines($content);
+
         $class = array();
         $class[] = 'clearfix';
 
@@ -2711,6 +2994,8 @@ class BootstrapShortcodes {
             "data" => false
         ) , $atts);
 
+        $content = $this->deleteTrailingEmptyLines($content);
+
         $class = array();
         $class[] = 'float-' . $atts['float'];
 
@@ -2719,6 +3004,16 @@ class BootstrapShortcodes {
         $data_props = $this->parse_data_attributes($atts['data']);
 
         return sprintf('<div%s%s%s>%s</div>', $id, $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
+    }
+
+    /*--------------------------------------------------------------------------------------
+     *
+     * bs_br
+     *
+     *-------------------------------------------------------------------------------------*/
+    function bs_br($atts, $content = null) {
+
+        return '<br>';
     }
 
     /*--------------------------------------------------------------------------------------
@@ -3111,6 +3406,22 @@ class BootstrapShortcodes {
             return false;
         }
     }
+
+    /*--------------------------------------------------------------------------------------
+     * Delete trailing <br /> and empty <p></p> lines inserted by the WordPress editor
+     * @param  string  $content the short code content
+     * @return string  the cleaned content
+    */
+    public static function deleteTrailingEmptyLines($content) {
+$x = $content;
+        if ($content) {
+            $content = str_replace("<br />\n", '', $content);
+            $content = str_replace("<p></p>", '', $content);
+        }
+if($x != $content) error_log($x . '\n\n' . $content);
+        return $content;
+    }
+
 
     /*--------------------------------------------------------------------------------------
        Add Demo Page

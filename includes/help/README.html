@@ -22,6 +22,7 @@
     <li><a href="#button-groups">Button Groups</a></li>
     <li><a href="#button-dropdowns">Button Dropdowns</a></li>
     <li><a href="#navs">Navs</a></li>
+    <li><a href="#navbars">Navigation Bars</a></li>
     <li><a href="#breadcrumbs">Breadcrumbs</a></li>
     <li><a href="#badges">Badges</a></li>
     <li><a href="#jumbotron">Jumbotron</a></li>
@@ -46,6 +47,7 @@
     <li><a href="#color-classes">Color</a></li>
     <li><a href="#flex">Flex</a></li>
     <li><a href="#html">HTML snippets</a></li>
+    <li><a href="#br">Line Breaks</a></li>
     <li><a href="#lorem-ipsum">Lorem Ipsum Text Generator</a></li>
     <li><a href="#clearfix-float">Floats and Clearfix</a></li>
 </ul>
@@ -343,7 +345,7 @@
 <hr>
 <h3 id="responsive-embeds">Responsive Embeds</h3>
 <pre><code class="d-block p-4">
-[embed-responsive ratio=&quot;16by9&quot;] <iframe src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0"></iframe> [/embed-responsive]
+[embed-responsive ratio=&quot;16by9&quot;] <iframe src="https://novaarchers.org/wp/wp-content/uploads/NORVA-bowspray.mp4"></iframe> [/embed-responsive]
 </code></pre>
 <p>Wrap <code class="d-block p-4">&lt;iframe&gt;</code>, <code class="d-block p-4">&lt;embed&gt;</code>, <code class="d-block p-4">&lt;video&gt;</code>, and <code class="d-block p-4">&lt;object&gt;</code> elements to make them responsive.</p>
 <h4 id="-responsive-embed-parameters">[responsive-embed] parameters</h4>
@@ -1740,6 +1742,212 @@
 </table>
 <p><a href="https://getbootstrap.com/docs/4.5/components/navs/">Bootstrap button navs documentation</a></p>
 <hr>
+<h3 id="navbars">Navigation Bars</h3>
+<h4 id="navbars-collapsible">Collapsible Navigation Bar</h4>
+<pre><code class="d-block p-4">
+[navbar expand="md" class="navbar-light bg-light"]
+  [navbar-brand link="#"][img-gen type="circle" responsive size="150x50" text="Brand"][/navbar-brand]
+  [navbar-toggler]
+  [navbar-content]
+    [nav bar class="ml-auto"]
+      [nav-item link="#" active]Home[/nav-item]
+      [nav-item link="#"]Link[/nav-item]
+      [nav-item link="#"]Another Link[/nav-item]
+      [nav-item dropdown link="#"]Dropdown
+        [dropdown-menu]
+          [dropdown-header]Header[/dropdown-header]
+          [dropdown-item link="#"]Action[/dropdown-item]
+          [dropdown-item link="#"]Another action[/dropdown-item]
+          [dropdown-item link="#"]Something else here[/dropdown-item]
+          [dropdown-divider]
+          [dropdown-item link="#"]Separated link[/dropdown-item]
+        [/dropdown-menu]
+      [/nav-item]
+      [nav-item link="#" disabled]Disabled[/nav-item]
+    [/nav]
+  [/navbar-content]
+[/navbar]
+</code></pre>
+<h4 id="navbars-vertical">Vertical Navigation Bar</h4>
+<pre><code class="d-block p-4">
+[navbar class="navbar-light bg-light"]
+    [nav bar class="mr-auto"]
+      [nav-item link="#" active]Home[/nav-item]
+      [nav-item link="#"]Link[/nav-item]
+      [nav-item link="#"]Another Link[/nav-item]
+      [nav-item dropdown link="#"]Dropdown
+        [dropdown-menu]
+          [dropdown-header]Header[/dropdown-header]
+          [dropdown-item link="#"]Action[/dropdown-item]
+          [dropdown-item link="#"]Another action[/dropdown-item]
+          [dropdown-item link="#"]Something else here[/dropdown-item]
+          [dropdown-divider]
+          [dropdown-item link="#"]Separated link[/dropdown-item]
+        [/dropdown-menu]
+      [/nav-item]
+      [nav-item link="#" disabled]Disabled[/nav-item]
+    [/nav]
+[/navbar]
+</code></pre>
+<h4 id="-navbar-parameters">[navbar] parameters</h4>
+<table>
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>id</td>
+            <td>Name the container for processing in custom CSS or JavaScript.</td>
+            <td>optional</td>
+            <td>Unique text identifier</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>expand</td>
+            <td>Navbars utilize <code>[navbar-toggler]</code>, <code>[navbar-collapse]</code>, and <code>expand={sm|md|lg|xl}</code> classes to change when their content collapses behind a button.</td>
+            <td>optional</td>
+            <td>sm, md, lg, xl</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at <a href="#container-parameters">[container] parameters</a>.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+    </tbody>
+</table>
+<p><a href="https://getbootstrap.com/docs/4.0/components/navbar/">Bootstrap Navbar documentation</a></p>
+<h4 id="-navbar-brand-parameters">[navbar-brand] parameters</h4>
+<table>
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>id</td>
+            <td>Name the container for processing in custom CSS or JavaScript.</td>
+            <td>optional</td>
+            <td>Unique text identifier</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>link</td>
+            <td>The url you want the navbar-brand to link to</td>
+            <td>optional</td>
+            <td>any valid link</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at <a href="#container-parameters">[container] parameters</a>.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+    </tbody>
+</table>
+<p>The <code>[navbar-brand]</code> can be applied to most elements, but an anchor works best as some elements might require utility classes or custom styles.</p>
+<h4 id="-navbar-toggler-parameters">[navbar-toggler] parameters</h4>
+<table>
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at <a href="#container-parameters">[container] parameters</a>.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+    </tbody>
+</table>
+<p><code>[navbar-toggler]</code> adds a button when the navigation bar is collapsed. Navbar togglers are left-aligned by default, but should they follow a sibling element like a .navbar-brand, they’ll automatically be aligned to the far right.</code></p>
+<h4 id="-navbar-content-parameters">[navbar-content] parameters</h4>
+<table>
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Required</th>
+            <th>Values</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>id</td>
+            <td>Name the container for processing in custom CSS or JavaScript.</td>
+            <td>optional</td>
+            <td>Unique text identifier</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>link</td>
+            <td>The url you want the navbar-content to link to</td>
+            <td>optional</td>
+            <td>any valid link</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>class</td>
+            <td>Any extra classes you want to add</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
+            <td>data</td>
+            <td>Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at <a href="#container-parameters">[container] parameters</a>.</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+    </tbody>
+</table>
+<p><code>[nav-bar-content]</code> is used for grouping and hiding navbar contents by a parent breakpoint.</p>
+<hr>
 <h3 id="breadcrumbs">Breadcrumbs</h3>
 <pre><code class="d-block p-4">
 [breadcrumb]
@@ -2679,7 +2887,7 @@
 </table>
 <p><a href="https://getbootstrap.com/docs/4.5/content/images/">Bootstrap images documentation</a></p>
 <hr>
-<h3 id="figures">Figurs</h3>
+<h3 id="figures">Figures</h3>
 <pre><code class="d-block p-4">
 [figure]
   [img-gen size="300" class="figure-img img-fluid rounded"]
@@ -2880,11 +3088,11 @@
 </table>
 <p><a href="https://getbootstrap.com/docs/4.5/content/typography/#lead">Bootstrap lead documentation</a></p>
 <hr>
-<h3 id="Wrapper">Wrap section with HTML element</h3>
+<h3 id="wrapper">Wrap section with HTML element</h3>
 <pre><code class="d-block p-4">
 [wrapper type="span" class="d-flex text-success"] [icon name="arrow-right" class="fa-2x mr-2"][lorem-ipsum] [/wrapper]
 </code></pre>
-<h4 id="-lead-parameters">[lead] parameters</h4>
+<h4 id="-lead-parameters">[wrapper] parameters</h4>
 <table>
     <thead>
         <tr>
@@ -3217,7 +3425,13 @@
 <h3 id="html">HTML snippets</h3>
 <p>Allow any html code. This shortcode has no parameters.</p>
 <pre><code class="d-block p-4">
-[html]&lt;br&gt;&lt;hr&gt;&lt;br&gt;[/html]
+[html]&lt;hr class="m-5"&gt;[/html]
+</code></pre>
+<hr>
+<h3 id="br">Line Breaks</h3>
+<p>Insert line break. The plugin tries very aggressively to eliminate all line breaks inserted by the editor. Use this shortcode to add intentional line breaks. This shortcode has no parameters.</p>
+<pre><code class="d-block p-4">
+[br]
 </code></pre>
 <hr>
 <h3 id="lorem-ipsum">Lorem Ipsum text generator</h3>
@@ -3282,7 +3496,7 @@
     </tbody>
 </table>
 <hr>
-<h3 id="clearfix-floats">Clearfix and Floats</h3>
+<h3 id="clearfix-float">Clearfix and Floats</h3>
 <p>Quickly and easily clear floated content within a container.</p>
 <pre><code class="d-block p-4">
 [clearfix]

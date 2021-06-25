@@ -18,7 +18,7 @@
             return {
                 longname : "Bootstrap 4 Shortcodes Button",
                 author : "Uwe Jacobs",
-                version : "4.5.0"
+                version : "4.5.11"
             };
         }
     });

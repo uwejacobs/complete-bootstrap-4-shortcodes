@@ -21,13 +21,18 @@ $html = file_get_contents(dirname(__FILE__) . '/help/README.html');
         // button is clicked.
         // ======================================================================== //
         
-            jQuery(".insert-code").click(function() {
-                var example = jQuery( this ).parent().prev().find("code").text();
+	    jQuery(".insert-code").click(function() {
+		var example = jQuery( this ).parent().prev().find("code").text();
                 var lines = example.split('\n');
-                var paras = '';
+		var paras = '';
+		if ((typeof tinyMCE != "undefined") && tinyMCE.activeEditor && !tinyMCE.activeEditor.isHidden()) {
+			eol = '<br>';
+		} else {
+			eol = '\r\n';
+		}
                 jQuery.each(lines, function(i, line) {
                     if (line) {
-                        paras += line + '<br>';
+                        paras += line + eol;
                     }
                 });
                 var win = window.dialogArguments || opener || parent || top;

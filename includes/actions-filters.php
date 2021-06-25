@@ -43,10 +43,12 @@
             ']<br />' => ']',
             '<br />[' => '[',
             ']<br>' => ']',
-            '<br>[' => '['
+            '<br>[' => '[',
+            '<200b>' => ''
         );
 
         $content = strtr($content, $array);
+        $content = preg_replace('/<br \/>[\n\r\s]+\[/', '[', $content);
         return $content;
     }
 
@@ -78,7 +80,7 @@
     function bs_fullscreenbuttons($buttons) {
         $buttons[] = 'separator';
         $buttons['bootstrap-shortcodes'] = array(
-            'title' => __('Bootsrap 4 Shortcodes Help'),
+            'title' => __('Bootstrap 4 Shortcodes Help'),
             'onclick' => "jQuery('#bootstrap-shortcodes-help').modal('show');",
             'both' => false 
         );
@@ -145,11 +147,6 @@
 
 
 
-
-
-
-
-
     function sidebar_plugin_register() {
         wp_register_script(
             'plugin-sidebar-js',
@@ -163,4 +160,27 @@
         wp_enqueue_script( 'plugin-sidebar-js' );
     }
     add_action( 'enqueue_block_editor_assets', 'sidebar_plugin_script_enqueue' );
+
+
+
+
+    function add_bs4_button() {
+        global $pagenow;
+	if( isset( $pagenow) &&  $pagenow=='admin-ajax.php' ) return ;
+
+        wp_register_style( 'bootstrap-shortcodes-help', plugins_url( 'complete-bootstrap-4-shortcodes/includes/help/css/bootstrap-shortcodes-help.css' ) );
+        wp_register_style( 'bootstrap', plugins_url( 'complete-bootstrap-4-shortcodes/includes/help/css/bootstrap.min.css' ) );
+        wp_register_script( 'bootstrap', plugins_url( 'complete-bootstrap-4-shortcodes/includes/help/js/bootstrap.min.js' ) );
+	wp_register_script( 'popper', plugins_url( 'complete-bootstrap-4-shortcodes/includes/help/js/popper.min.js' ) );
+        wp_enqueue_style( 'bootstrap-shortcodes-help' );
+        wp_enqueue_style( 'bootstrap' );
+        wp_enqueue_script( 'bootstrap' );
+        wp_enqueue_script( 'popper' );
+
+
+        echo '<button type="button" data-toggle="modal" data-target="#bootstrap-shortcodes-help"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAA3lBMVEUAAABZPXpWPXxWPHxWPXxXPHxXQHpVPn1WPXxWPXxXPX1WPXxWPXxWPXxWPXxWPXxVPn1TO31WPn1VPXlWPXxZQX9hSoWKeKT////o5e64rshqVIv29fh9apr8/P27scvCudDg2+fo5O1XP335+Pqom7t1YZRgSISGdKFbQ4D9/f2Ofqjk4er6+vt4ZJaCcJ6qnr339vn08/fx7/T7+vyvo8H6+fttV417aJmzqMSUhazi3uh4ZZf+/v55ZZetob/8+/xcRIFxW5Grnr7Nxtjz8fbTzN2xpsOai7BwW5A5ZpDEAAAAFHRSTlMALqbo56UsWvn4WKT+/eajLStWKigdCssAAAABYktHRBibaYUeAAAAB3RJTUUH4wsICSsl3MXI0wAAAOtJREFUOMuF03tTgkAUBfArKgYaWK52yxS1oiylh1r5Rsoe3/8LuWg4NS1nz187ww84u3OXiDJGViiTy5skUzgQqbFs+T54LoVJhoApUhaDHJUwKFGyqtaS/BV7cML7nJ7VMWA+byhB04vTakvRuVCBy5/llRQ+AtcS3CDQvdV84Y65p+zQD+LcPzzyU4C3OfB15zAcKcHzyzavY1lygkqKEfMUghnzvIvAQtaoI7BkDleqkrt5iN5C5ne8TV5HGHxE/8/B95J8fn3/HjnN0B7qxt6hPAYulS149Y6IbCCs4/h6m0Un5f9uhWgDHJpYkq/KzR0AAAAldEVYdGRhdGU6Y3JlYXRlADIwMTktMTEtMDhUMDk6NDM6MzcrMDA6MDCC18JaAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDE5LTExLTA4VDA5OjQzOjM3KzAwOjAw84p65gAAAABJRU5ErkJggg=="></button>';
+}
+
+add_action('media_buttons', 'add_bs4_button', 15);
+
 // ======================================================================== // 
