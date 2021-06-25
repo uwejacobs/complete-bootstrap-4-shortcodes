@@ -662,7 +662,8 @@ class BootstrapShortcodes {
         $class[] = ($this->is_flag('tabs', $save_atts)) ? 'nav-tabs' : '';
         $class[] = ($this->is_flag('pills', $save_atts)) ? 'nav-pills' : '';
         $class[] = ($this->is_flag('fill', $save_atts)) ? 'nav-fill' : '';
-        $class[] = ($this->is_flag('justified', $save_atts)) ? 'nav-justified' : '';
+	$class[] = ($this->is_flag('justified', $save_atts)) ? 'nav-justified' : '';
+	$class[] = ($atts['class']) ? $atts['class'] : '';
 
         $content = do_shortcode($wrap_before . $content . $wrap_after);
 

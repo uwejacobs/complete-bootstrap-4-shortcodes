@@ -962,6 +962,12 @@ documentation](https://getbootstrap.com/docs/4.5/components/navs/)
       [/navbar-content]
     [/navbar]
 
+Use the classes `ml_auto`, `mx_auto` and `mr_auto` to position the
+labels to the right, centered, or to the left; left is the default. The
+`[navbar]` shortcode must include the class `navbar_dark` or
+`navbar_light`, depending on the background color of the navigation bar,
+or the labels and the hamburger will not have a color assigned.
+
 #### Vertical Navigation Bar
 
     [navbar class="navbar-light bg-light"]

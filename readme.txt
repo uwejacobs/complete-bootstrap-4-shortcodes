@@ -36,6 +36,7 @@ See the shortcodes in action on our [demo page](https://ujsoftware.com/bootstrap
 * Button Groups
 * Button Dropdowns
 * Navs
+* Navigation Bars
 * Breadcrumbs
 * Badges
 * Jumbotron
@@ -51,13 +52,16 @@ See the shortcodes in action on our [demo page](https://ujsoftware.com/bootstrap
 * Images
 * Blockquote
 * Lead body copy
+* Wrap section
 
 = Utilities: =
 * Border
 * Color
 * Flex
 * HTML snippets
+* Line Breaks
 * Lorem Ipsum Text Generator
+* Floats and Clearfix
 
 = Javascript: =
 * Tooltip
