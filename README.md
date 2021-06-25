@@ -57,7 +57,7 @@ nesting.
   - [Button Groups](#button-groups)
   - [Button Dropdowns](#button-dropdowns)
   - [Navs](#navs)
-  - [Navigation Bars](#navbars)
+  - [Navigation Bars](#navigation-bars)
   - [Breadcrumbs](#breadcrumbs)
   - [Badges](#badges)
   - [Jumbotron](#jumbotron)
@@ -76,19 +76,19 @@ nesting.
   - [Images](#images)
   - [Blockquote](#blockquote)
   - [Lead body copy](#lead-body-copy)
-  - [Wrap section with any HTML element](#wrapper)
+  - [Wrap section](#wrap-section)
 
 [](#utilities)
 
 ### Utilities
 
-  - [Border](#border-classes)
-  - [Color](#color-classes)
+  - [Border](#border)
+  - [Color](#color)
   - [Flex](#flex)
-  - [HTML snippets](#html)
-  - [Line Breaks](#br)
-  - [Lorem Ipsum Text Generator](#lorem-ipsum)
-  - [Floats and Clearfix](#clearfix-float)
+  - [HTML snippets](#html-snippets)
+  - [Line Breaks](#line-breaks)
+  - [Lorem Ipsum Text Generator](#lorem-ipsum-text-generator)
+  - [Floats and Clearfix](#floats-and-clearfix)
 
 [](#javascript)
 
@@ -1017,7 +1017,7 @@ styles.
 
 `[navbar-toggler]` adds a button when the navigation bar is collapsed.
 Navbar togglers are left-aligned by default, but should they follow a
-sibling element like a .navbar-brand, they’ll automatically be aligned
+sibling element like a `navbar-brand`, they’ll automatically be aligned
 to the far
 right.
 
@@ -1530,7 +1530,7 @@ documentation](https://getbootstrap.com/docs/4.5/content/typography/#lead)
 
 -----
 
-### Wrap section with HTML element
+### Wrap section
 
     [wrapper type="span" class="d-flex text-success"] [icon name="arrow-right" class="fa-2x mr-2"][lorem-ipsum] [/wrapper]
 
@@ -1679,7 +1679,7 @@ tag.
 
 -----
 
-### Clearfix and Floats
+### Floats and Clearfix
 
 Quickly and easily clear floated content within a container.
 
