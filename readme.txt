@@ -1,10 +1,11 @@
 === Bootstrap 4 Shortcodes for WordPress ===
 Contributors: uwejacobs
 Tags: bootstrap,shortcode,shortcodes,responsive,grid,flex,lorem ipsum,dummy image generator
+Donate link: 
 Requires at least: 3.8
-Tested up to: 5.7.2
-Requires PHP: 5.3
-Stable tag: 4.5.10
+Tested up to: 5.8
+Requires PHP: 7.0
+Stable tag: 4.5.12
 License: MIT License
 License URI: https://mit-license.org/
 
@@ -22,7 +23,7 @@ Check the demo page "Bootstrap 4 Shortcodes Demo 4.5.10" after activation for re
 For questions, support, or to contribute to this plugin, check out [our GitHub project](https://github.com/uwejacobs/complete-bootstrap-4-shortcodes).
 
 == Overview ==
-See the shortcodes in action on our [demo page](https://ujsoftware.com/bootstrap-4-shortcodes-demo-4-5-11/).
+See the shortcodes in action on our [demo page](https://ujsoftware.com/bootstrap-4-shortcodes-demo-4-5-12/).
 
 = Layout: =
 * Grid
@@ -89,6 +90,11 @@ See the shortcodes in action on our [demo page](https://ujsoftware.com/bootstrap
 16. The above shortcode example rendered with WordPress
 
 == Changelog ==
+= 4.5.12 =
+* Tested with Wordpress 5.8
+* Added option to assign class to the nav-item itself in addition to the link
+* Deleted the embedded video example because it creates considerable network load
+
 = 4.5.11 =
 * Added collapsible vertical and horizontal navigation bar
 * Added bootstrap button to classic editor

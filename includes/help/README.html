@@ -345,7 +345,7 @@
 <hr>
 <h3 id="responsive-embeds">Responsive Embeds</h3>
 <pre><code class="d-block p-4">
-[embed-responsive ratio=&quot;16by9&quot;] <iframe src="https://novaarchers.org/wp/wp-content/uploads/NORVA-bowspray.mp4"></iframe> [/embed-responsive]
+[embed-responsive ratio=&quot;16by9&quot;] [/embed-responsive]
 </code></pre>
 <p>Wrap <code class="d-block p-4">&lt;iframe&gt;</code>, <code class="d-block p-4">&lt;embed&gt;</code>, <code class="d-block p-4">&lt;video&gt;</code>, and <code class="d-block p-4">&lt;object&gt;</code> elements to make them responsive.</p>
 <h4 id="responsive-embed-parameters">[responsive-embed] parameters</h4>
@@ -1725,8 +1725,15 @@
             <td></td>
         </tr>
         <tr>
+            <td>listclass</td>
+            <td>Any extra classes you want to add to the list</td>
+            <td>optional</td>
+            <td>any text</td>
+            <td>none</td>
+        </tr>
+        <tr>
             <td>class</td>
-            <td>Any extra classes you want to add</td>
+            <td>Any extra classes you want to add to the link</td>
             <td>optional</td>
             <td>any text</td>
             <td>none</td>
