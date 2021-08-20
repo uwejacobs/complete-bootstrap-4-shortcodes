@@ -3,7 +3,7 @@
 Plugin Name: Complete Bootstrap 4 Shortcodes
 Plugin URI: https://github.com/uwejacobs/complete-bootstrap-4-shortcodes
 Description: The plugin adds shortcodes for most Bootstrap 4 elements.
-Version: 4.5.12
+Version: 4.6.0
 Author: Uwe Jacobs
 Author URI:
 License: MIT
@@ -343,10 +343,10 @@ class BootstrapShortcodes {
 
         $class = array();
         $class[] = 'btn-group';
-        $class[] = ($atts['size'] && $atts['size'] != "md") ? 'btn-group-' . $atts['size'] : '';
+        $class[] = ($atts['size'] && $atts['size'] != "md") ? 'btn-group-' . esc_attr($atts['size']) : '';
         $class[] = ($this->is_flag('vertical', $save_atts)) ? 'btn-group-vertical' : '';
         $class[] = ($this->is_flag('justified', $save_atts)) ? 'btn-group-justified' : '';
-        $class[] = ($atts['drop']) ? 'drop' . $atts['drop'] : '';
+        $class[] = ($atts['drop']) ? 'drop' . esc_attr($atts['drop']) : '';
 
         $id = (!empty($atts['id']) ? ' id="' . esc_attr($atts['id']) . '"' : '');
 
@@ -428,7 +428,7 @@ class BootstrapShortcodes {
         if ($this->is_flag('fluid', $save_atts)) {
             $class[] = 'container-fluid';
         } else {
-            $class[] = 'container' . ($atts['size'] ? '-' . $atts['size'] : '');
+            $class[] = 'container' . ($atts['size'] ? '-' . esc_attr($atts['size']) : '');
         }
 
         $id = (!empty($atts['id']) ? ' id="' . esc_attr($atts['id']) . '"' : '');
@@ -586,7 +586,7 @@ class BootstrapShortcodes {
 
         $aria_labelledby = '';
         if (isset($GLOBALS['dropdown_button'])) {
-            $aria_labelledby = ' aria-labelledby="' . $GLOBALS['dropdown_button'] . '"';
+            $aria_labelledby = ' aria-labelledby="' . esc_attr($GLOBALS['dropdown_button']) . '"';
             unset($GLOBALS['dropdown_button']);
         }
 
@@ -663,7 +663,7 @@ class BootstrapShortcodes {
         $class[] = ($this->is_flag('pills', $save_atts)) ? 'nav-pills' : '';
         $class[] = ($this->is_flag('fill', $save_atts)) ? 'nav-fill' : '';
 	$class[] = ($this->is_flag('justified', $save_atts)) ? 'nav-justified' : '';
-	$class[] = ($atts['class']) ? $atts['class'] : '';
+	$class[] = ($atts['class']) ? esc_attr($atts['class']) : '';
 
         $content = do_shortcode($wrap_before . $content . $wrap_after);
 
@@ -747,7 +747,7 @@ class BootstrapShortcodes {
         $class = array_merge($class, explode(' ', $atts['class']));
 
         if (!empty($atts['expand'])) {
-            $class[] = 'navbar-expand-' . $atts['expand'];
+            $class[] = 'navbar-expand-' . esc_attr($atts['expand']);
         }
 
         $data_props = $this->parse_data_attributes($atts['data']);
@@ -818,7 +818,7 @@ class BootstrapShortcodes {
             "data" => false,
         ) , $save_atts);
 
-        $GLOBALS['navbar-collapse'] = 'bs4-navbar-' . $GLOBALS['navbar_count'];
+        $GLOBALS['navbar-collapse'] = 'bs4-navbar-' . esc_attr($GLOBALS['navbar_count']);
 
         $class = array();
         $class[] = 'navbar-toggler';
@@ -855,7 +855,7 @@ class BootstrapShortcodes {
 
         $content = $this->deleteTrailingEmptyLines($content);
 
-        $id = !empty($GLOBALS['navbar-collapse']) ? ' id="' . $GLOBALS['navbar-collapse'] . '"' : '';
+        $id = !empty($GLOBALS['navbar-collapse']) ? ' id="' . esc_attr($GLOBALS['navbar-collapse']) . '"' : '';
 
         $class = array();
         $class[] = 'collapse';
@@ -892,7 +892,7 @@ class BootstrapShortcodes {
         $class = array();
         $class[] = "accordion";
 
-        $id = (!empty($atts['id']) ? esc_attr($atts['id']) : 'bs4-accordion-' . $GLOBALS['accordion_count']);
+        $id = (!empty($atts['id']) ? esc_attr($atts['id']) : 'bs4-accordion-' . esc_attr($GLOBALS['accordion_count']));
 
         $data_props = $this->parse_data_attributes($atts['data']);
 
@@ -964,7 +964,7 @@ class BootstrapShortcodes {
             $show = ($GLOBALS['accordion_card_show']) ? ' show' : '';
         }
 
-        $wrap_before = (isset($GLOBALS['accordion'])) ? sprintf('<div id="bs4-collapse-%s" class="collapse%s" data-parent="#bs4-accordion-%s" aria-labelledby="bs4-heading-%s">', $GLOBALS['accordion_card'], $show, $GLOBALS['accordion_count'], $GLOBALS['accordion_card']) : '';
+        $wrap_before = (isset($GLOBALS['accordion'])) ? sprintf('<div id="bs4-collapse-%s" class="collapse%s" data-parent="#bs4-accordion-%s" aria-labelledby="bs4-heading-%s">', esc_attr($GLOBALS['accordion_card']), $show, esc_attr($GLOBALS['accordion_count']), esc_attr($GLOBALS['accordion_card'])) : '';
         $wrap_after = (isset($GLOBALS['accordion'])) ? '</div>' : '';
 
         $class = array();
@@ -1161,11 +1161,11 @@ class BootstrapShortcodes {
         $wrap_before = '';
         $wrap_after = '';
 
-        $id = (isset($GLOBALS['accordion'])) ? ' id="bs4-heading-' . $GLOBALS['accordion_card'] . '"' : '';
+        $id = (isset($GLOBALS['accordion'])) ? ' id="bs4-heading-' . esc_attr($GLOBALS['accordion_card']) . '"' : '';
         $wrap_before .= ($this->testdom($content, $search_tags)) ? '' : '<div class="card-header"' . $id . '>';
         $wrap_after .= ($this->testdom($content, $search_tags)) ? '' : '</div>';
 
-        $wrap_before .= (isset($GLOBALS['accordion'])) ? sprintf('<button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#bs4-collapse-%1$s" aria-controls="bs4-collapse-%1$s" aria-expanded="%2$s">', $GLOBALS['accordion_card'], $GLOBALS['accordion_card_show'] ? 'true' : 'false') : '';
+        $wrap_before .= (isset($GLOBALS['accordion'])) ? sprintf('<button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#bs4-collapse-%1$s" aria-controls="bs4-collapse-%1$s" aria-expanded="%2$s">', esc_attr($GLOBALS['accordion_card']), esc_attr($GLOBALS['accordion_card_show']) ? 'true' : 'false') : '';
         $wrap_before .= (isset($GLOBALS['accordion'])) ? '<i class="fa fa-plus float-right"></i>' : '';
         $wrap_after .= (isset($GLOBALS['accordion'])) ? '</button>' : '';
 
@@ -1318,7 +1318,7 @@ class BootstrapShortcodes {
 
         $class = array();
         $class[] = 'alert';
-        $class[] = ($atts['type']) ? 'alert-' . $atts['type'] : 'alert-primary';
+        $class[] = ($atts['type']) ? 'alert-' . esc_attr($atts['type']) : 'alert-primary';
         $class[] = ($this->is_flag('dismissible', $save_atts)) ? 'alert-dismissible' : '';
         $class[] = ($this->is_flag('fade', $save_atts)) ? 'fade' : '';
         $class[] = ($this->is_flag('fade', $save_atts)) ? 'show' : '';
@@ -1381,7 +1381,7 @@ class BootstrapShortcodes {
 
         $class = array();
         $class[] = 'progress-bar';
-        $class[] = ($atts['type']) ? 'bg-' . $atts['type'] : '';
+        $class[] = ($atts['type']) ? 'bg-' . esc_attr($atts['type']) : '';
         $class[] = ($this->is_flag('striped', $save_atts)) ? 'progress-bar-striped' : '';
         $class[] = ($this->is_flag('animated', $save_atts)) ? 'progress-bar-animated' : '';
 
@@ -1485,16 +1485,16 @@ class BootstrapShortcodes {
 
         $class = array();
         $class[] = '';
-        $class[] = ($atts['xl']) ? 'col-xl-' . $atts['xl'] : '';
-        $class[] = ($atts['lg']) ? 'col-lg-' . $atts['lg'] : '';
-        $class[] = ($atts['md']) ? 'col-md-' . $atts['md'] : '';
-        $class[] = ($atts['sm']) ? 'col-sm-' . $atts['sm'] : '';
-        $class[] = ($atts['xs']) ? 'col-' . $atts['xs'] : '';
-        $class[] = ($atts['offset-xl'] || $atts['offset-xl'] === "0") ? 'offset-xl-' . $atts['offset-xl'] : '';
-        $class[] = ($atts['offset-lg'] || $atts['offset-lg'] === "0") ? 'offset-lg-' . $atts['offset-lg'] : '';
-        $class[] = ($atts['offset-md'] || $atts['offset-md'] === "0") ? 'offset-md-' . $atts['offset-md'] : '';
-        $class[] = ($atts['offset-sm'] || $atts['offset-sm'] === "0") ? 'offset-sm-' . $atts['offset-sm'] : '';
-        $class[] = ($atts['offset-xs'] || $atts['offset-xs'] === "0") ? 'offset-' . $atts['offset-xs'] : '';
+        $class[] = ($atts['xl']) ? 'col-xl-' . esc_attr($atts['xl']) : '';
+        $class[] = ($atts['lg']) ? 'col-lg-' . esc_attr($atts['lg']) : '';
+        $class[] = ($atts['md']) ? 'col-md-' . esc_attr($atts['md']) : '';
+        $class[] = ($atts['sm']) ? 'col-sm-' . esc_attr($atts['sm']) : '';
+        $class[] = ($atts['xs']) ? 'col-' . esc_attr($atts['xs']) : '';
+        $class[] = ($atts['offset-xl'] || $atts['offset-xl'] === "0") ? 'offset-xl-' . esc_attr($atts['offset-xl']) : '';
+        $class[] = ($atts['offset-lg'] || $atts['offset-lg'] === "0") ? 'offset-lg-' . esc_attr($atts['offset-lg']) : '';
+        $class[] = ($atts['offset-md'] || $atts['offset-md'] === "0") ? 'offset-md-' . esc_attr($atts['offset-md']) : '';
+        $class[] = ($atts['offset-sm'] || $atts['offset-sm'] === "0") ? 'offset-sm-' . esc_attr($atts['offset-sm']) : '';
+        $class[] = ($atts['offset-xs'] || $atts['offset-xs'] === "0") ? 'offset-' . esc_attr($atts['offset-xs']) : '';
 
         $id = (!empty($atts['id']) ? ' id="' . esc_attr($atts['id']) . '"' : '');
 
@@ -1528,10 +1528,10 @@ class BootstrapShortcodes {
 
         $class = array();
         $class[] .= 'd' . ($this->is_flag('inline', $save_atts) ? '-inline' : '') . '-flex';
-        $class[] .= ($atts['direction']) ? 'flex-' . $atts['direction'] : '';
-        $class[] .= ($atts['justify']) ? 'justify-content-' . $atts['justify'] : '';
-        $class[] .= ($atts['align-content']) ? 'align-content-' . $atts['align-content'] : '';
-        $class[] .= ($atts['align-items']) ? 'align-items-' . $atts['align-items'] : '';
+        $class[] .= ($atts['direction']) ? 'flex-' . esc_attr($atts['direction']) : '';
+        $class[] .= ($atts['justify']) ? 'justify-content-' . esc_attr($atts['justify']) : '';
+        $class[] .= ($atts['align-content']) ? 'align-content-' . esc_attr($atts['align-content']) : '';
+        $class[] .= ($atts['align-items']) ? 'align-items-' . esc_attr($atts['align-items']) : '';
         $class[] .= ($atts['wrap']) ? ($atts['wrap'] == "reverse" ? 'flex-wrap-reverse' : 'flex-wrap') : 'flex-nowrap';
 
         $id = (!empty($atts['id']) ? ' id="' . esc_attr($atts['id']) . '"' : '');
@@ -1664,7 +1664,7 @@ class BootstrapShortcodes {
 
         $class = array();
         $class[] = 'list-group-item';
-        $class[] = ($atts['type']) ? 'list-group-item-' . $atts['type'] : '';
+        $class[] = ($atts['type']) ? 'list-group-item-' . esc_attr($atts['type']) : '';
         $class[] = ($this->is_flag('active', $save_atts)) ? 'active' : '';
         $class[] = ($this->is_flag('disabled', $save_atts)) ? 'disabled ' : '';
 
@@ -1799,8 +1799,8 @@ class BootstrapShortcodes {
         $content = $this->deleteTrailingEmptyLines($content);
 
         $class = array();
-        $class[] = ($atts['prefix']) ? $atts['prefix'] : 'fas';
-        $class[] = ($atts['name']) ? 'fa-' . $atts['name'] : '';
+        $class[] = ($atts['prefix']) ? esc_attr($atts['prefix']) : 'fas';
+        $class[] = ($atts['name']) ? 'fa-' . esc_attr($atts['name']) : '';
 
         $id = (!empty($atts['id']) ? ' id="' . esc_attr($atts['id']) . '"' : '');
 
@@ -1876,7 +1876,7 @@ class BootstrapShortcodes {
 
         $id = (!empty($atts['id']) ? ' id="' . esc_attr($atts['id']) . '"' : '');
 
-        $return = ($this->is_flag('responsive', $save_atts)) ? '<div' . esc_attr($id) . ' class="table-responsive">' . $return . '</div>' : $return;
+        $return = ($this->is_flag('responsive', $save_atts)) ? '<div' . $id . ' class="table-responsive">' . $return . '</div>' : $return;
 
         $return = $this->addclass($tag, $return, $class);
         $return = $this->adddata($tag, $return, $atts['data']);
@@ -1909,7 +1909,7 @@ class BootstrapShortcodes {
         if (isset($GLOBALS['carousel_count'])) $GLOBALS['carousel_count']++;
         else $GLOBALS['carousel_count'] = 0;
 
-        $id = (!empty($atts['id']) ? esc_attr($atts['id']) : 'bs4-carousel-' . $GLOBALS['carousel_count']);
+        $id = (!empty($atts['id']) ? esc_attr($atts['id']) : 'bs4-carousel-' . esc_attr($GLOBALS['carousel_count']));
 
         $class = array();
         $class[] = 'carousel';
@@ -1917,8 +1917,6 @@ class BootstrapShortcodes {
         $class[] = ($this->is_flag('fade', $save_atts)) ? 'carousel-fade' : '';
 
         $item_class = array();
-        //$item_class[]  = 'carousel-item';
-        //$item_class[]  = 'img-fluid';
         $active_class = array();
         $active_class[] = 'active';
 
@@ -1962,7 +1960,7 @@ class BootstrapShortcodes {
 
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        $return = sprintf('<div%s id="%s" data-ride="carousel"%s%s%s%s>%s<div class="carousel-inner" role="listbox">%s</div>%s</div>', $this->class_output($class, $atts['class']) , $id , ($atts['interval']) ? sprintf(' data-interval="%d"', $atts['interval']) : '', ($atts['pause']) ? sprintf(' data-pause="%s"', esc_attr($atts['pause'])) : '', ($atts['wrap']) ? sprintf(' data-wrap="%s"', esc_attr($atts['wrap'])) : '', $data_props, ($this->is_flag('indicators', $save_atts)) ? '<ol class="carousel-indicators">' . implode($indicators) . '</ol>' : '', $content, ($this->is_flag('controls', $save_atts)) ? $controls : '');
+        $return = sprintf('<div%s id="%s" data-ride="carousel"%s%s%s%s>%s<div class="carousel-inner" role="listbox">%s</div>%s</div>', $this->class_output($class, $atts['class']) , $id , ($atts['interval']) ? sprintf(' data-interval="%d"', esc_attr($atts['interval'])) : '', ($atts['pause']) ? sprintf(' data-pause="%s"', esc_attr($atts['pause'])) : '', ($atts['wrap']) ? sprintf(' data-wrap="%s"', esc_attr($atts['wrap'])) : '', $data_props, ($this->is_flag('indicators', $save_atts)) ? '<ol class="carousel-indicators">' . implode($indicators) . '</ol>' : '', $content, ($this->is_flag('controls', $save_atts)) ? $controls : '');
 
         $return = $this->addclass($item_tags, $return, $item_class);
         $return = $this->addclass($item_tags, $return, $active_class, '1');
@@ -2041,7 +2039,7 @@ class BootstrapShortcodes {
 
         $tooltip_data = array();
         $tooltip_data[] = "toggle,tooltip";
-        $tooltip_data[] = "placement," . $atts['placement'];
+        $tooltip_data[] = "placement," . esc_attr($atts['placement']);
         $tooltip_data[] = ($this->is_flag('html', $save_atts)) ? 'html,true' : '';
         $tooltip_data[] = ($this->is_flag('animation', $save_atts)) ? 'animation,true' : '';
         $tooltip_data = implode('|', array_filter($tooltip_data));
@@ -2075,10 +2073,10 @@ class BootstrapShortcodes {
 
         $popover_data = array();
         $popover_data[] = "toggle,popover";
-        $popover_data[] = "placement," . $atts['placement'];
-        $popover_data[] = "container," . $atts['container'];
-        $popover_data[] = "content," . $atts['content'];
-        $popover_data[] = "trigger," . $atts['trigger'];
+        $popover_data[] = "placement," . esc_attr($atts['placement']);
+        $popover_data[] = "container," . esc_attr($atts['container']);
+        $popover_data[] = "content," . wp_kses_post($atts['content']);
+        $popover_data[] = "trigger," . esc_attr($atts['trigger']);
         $popover_data[] = ($this->is_flag('html', $save_atts)) ? 'html,true' : '';
         $popover_data[] = ($this->is_flag('animation', $save_atts)) ? 'animation,true' : '';
         $popover_data = implode('|', array_filter($popover_data));
@@ -2138,7 +2136,7 @@ class BootstrapShortcodes {
 
         $class = array();
         $class[] = $atts['class'];
-        $class[] = ($atts['align']) ? 'align-self-' . $atts['align'] : '';
+        $class[] = ($atts['align']) ? 'align-self-' . esc_attr($atts['align']) : '';
         $class[] = ($atts['class']) ? $atts['class'] : '';
 
         $return = '';
@@ -2297,13 +2295,13 @@ class BootstrapShortcodes {
         $lipsum = new joshtronic\LoremIpsum();
 
         if ($atts['words'] && intval($atts['words']) > 0) {
-            $return = $lipsum->words(intval($atts['words']) , $atts['tag']);
+            $return = $lipsum->words(intval($atts['words']), $atts['tag']);
         }
         else if ($atts['sentences'] && intval($atts['sentences']) > 0) {
-            $return = $lipsum->sentences(intval($atts['sentences']) , $atts['tag']);
+            $return = $lipsum->sentences(intval($atts['sentences']), $atts['tag']);
         }
         else if ($atts['paragraphs'] && intval($atts['paragraphs']) > 0) {
-            $return = $lipsum->paragraph(intval($atts['paragraphs']) , $atts['tag']);
+            $return = $lipsum->paragraph(intval($atts['paragraphs']), $atts['tag']);
         }
         else {
             $return = $lipsum->sentences(1, $atts['tag']);
@@ -2589,7 +2587,7 @@ class BootstrapShortcodes {
 
         $class = array();
         $class[] = 'embed-responsive';
-        $class[] = ($atts['ratio']) ? 'embed-responsive-' . $atts['ratio'] : '';
+        $class[] = ($atts['ratio']) ? 'embed-responsive-' . esc_attr($atts['ratio']) : '';
 
         $embed_class = array();
         $embed_class[] = 'embed-responsive-item';
@@ -2633,25 +2631,29 @@ class BootstrapShortcodes {
         $class = array();
         if ($atts['hidden']) {
             $hidden = explode(' ', $atts['hidden']);
-            foreach ($hidden as $h):
+	    foreach ($hidden as $h):
+		$h = esc_attr($h);
                 $class[] = ($h == "xs" ? "d-none" : "d-$h-none");
             endforeach;
         }
         if ($atts['block']) {
             $block = explode(' ', $atts['block']);
             foreach ($block as $b):
+		$b = esc_attr($b);
                 $class[] = ($b == "xs" ? "d-block" : "d-$b-block");
             endforeach;
         }
         if ($atts['inline']) {
             $inline = explode(' ', $atts['inline']);
             foreach ($inline as $i):
+		$i = esc_attr($i);
                 $class[] = ($i == "xs" ? "d-inline" : "d-$i-inline");
             endforeach;
         }
         if ($atts['inline_block']) {
             $inline_block = explode(' ', $atts['inline_block']);
             foreach ($inline_block as $ib):
+		$ib = esc_attr($ib);
                 $class[] = ($ib == "xs" ? "d-inline-block" : "d-$ib-inline-block");
             endforeach;
         }
@@ -2687,7 +2689,7 @@ class BootstrapShortcodes {
 
         (isset($GLOBALS['modal_count'])) ? $GLOBALS['modal_count']++ : $GLOBALS['modal_count'] = 0;
 
-        $id = ($atts['id'] != false) ? esc_attr($atts['id']) : 'bs4-modal-' . $GLOBALS['modal_count'];
+        $id = ($atts['id'] != false) ? esc_attr($atts['id']) : 'bs4-modal-' . esc_attr($GLOBALS['modal_count']);
 
         $class = array();
         $class[] = 'modal';
@@ -2695,7 +2697,7 @@ class BootstrapShortcodes {
 
         $dialog_class = array();
         $dialog_class[] = 'modal-dialog';
-        $dialog_class[] = ($atts['size']) ? 'modal-' . $atts['size'] : '';
+        $dialog_class[] = ($atts['size']) ? 'modal-' . esc_attr($atts['size']) : '';
         $dialog_class[] = ($this->is_flag('centered', $save_atts)) ? 'modal-dialog-centered' : '';
         $dialog_class[] = ($this->is_flag('scrollable', $save_atts)) ? 'modal-dialog-scrollable' : '';
 
@@ -2835,8 +2837,8 @@ class BootstrapShortcodes {
         $content = $this->deleteTrailingEmptyLines($content);
 
         $class = array();
-        $class[] = ($atts['text']) ? 'text-' . $atts['text'] : '';
-        $class[] = ($atts['bg']) ? 'bg-' . $atts['bg'] : '';
+        $class[] = ($atts['text']) ? 'text-' . esc_attr($atts['text']) : '';
+        $class[] = ($atts['bg']) ? 'bg-' . esc_attr($atts['bg']) : '';
 
         $return = sprintf('%s', do_shortcode($content));
 
@@ -2868,7 +2870,8 @@ class BootstrapShortcodes {
         $class = array();
         if ($atts['add']) {
             $add = explode(' ', $atts['add']);
-            foreach ($add as $a):
+	    foreach ($add as $a):
+		$a = esc_attr($a);
                 $class[] = ($a == "all" ? "border" : "border-$a");
             endforeach;
         }
@@ -2878,12 +2881,13 @@ class BootstrapShortcodes {
         if ($atts['del']) {
             $add = explode(' ', $atts['del']);
             foreach ($del as $d):
+		$d = esc_attr($d);
                 $class[] = ($d == "all" ? "border-0" : "border-$d-0");
             endforeach;
         }
-        $class[] = ($atts['size']) ? 'rounded-' . $atts['size'] : '';
-        $class[] = ($atts['radius']) ? ($atts['radius'] == "all") ? 'rounded' : 'rounded-' . $atts['radius'] : '';
-        $class[] = ($atts['color']) ? 'border-' . $atts['color'] : '';
+        $class[] = ($atts['size']) ? 'rounded-' . esc_attr($atts['size']) : '';
+        $class[] = ($atts['radius']) ? ($atts['radius'] == "all") ? 'rounded' : 'rounded-' . esc_attr($atts['radius']) : '';
+        $class[] = ($atts['color']) ? 'border-' . esc_attr($atts['color']) : '';
 
         $return = sprintf('%s', do_shortcode($content));
 
@@ -2999,7 +3003,7 @@ class BootstrapShortcodes {
         $content = $this->deleteTrailingEmptyLines($content);
 
         $class = array();
-        $class[] = 'float-' . $atts['float'];
+        $class[] = 'float-' . esc_attr($atts['float']);
 
         $id = (!empty($atts['id']) ? ' id="' . esc_attr($atts['id']) . '"' : '');
 
@@ -3032,7 +3036,7 @@ class BootstrapShortcodes {
 
             foreach ($data as $d) {
                 $d = explode(',', $d);
-                $data_props .= sprintf(' data-%s="%s"', esc_html($d[0]) , esc_attr(trim($d[1])));
+                $data_props .= sprintf(' data-%s="%s"', esc_attr($d[0]) , esc_attr(trim($d[1])));
             }
         }
 
@@ -3179,7 +3183,7 @@ class BootstrapShortcodes {
                     foreach ($data as $d) {
                         if (!empty($d)) {
                             $d = explode(',', $d);
-                            $tag->setAttribute('data-' . $d[0], trim($d[1]));
+                            $tag->setAttribute(esc_attr('data-' . $d[0]), wp_kses_post(trim($d[1])));
                         }
                     }
                 }
@@ -3321,7 +3325,7 @@ class BootstrapShortcodes {
             $tags = $dom->getElementsByTagName($found);
             foreach ($tags as $tag) {
                 // Set the title attribute
-                $tag->setAttribute($prefix . $key, $value);
+                $tag->setAttribute(esc_attr($prefix . $key), wp_kses_post($value));
             }
         }
 
@@ -3380,7 +3384,7 @@ class BootstrapShortcodes {
      *-------------------------------------------------------------------------------------*/
     function close_icon($dismiss) {
 
-        return '<button type="button" class="close" data-dismiss="' . $dismiss . '" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+        return '<button type="button" class="close" data-dismiss="' . esc_attr($dismiss) . '" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
     }
 
     /*--------------------------------------------------------------------------------------

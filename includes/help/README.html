@@ -3,11 +3,17 @@
 <p>WordPress plugin that provides shortcodes for easier use of the Bootstrap styles and components in your content.</p>
 <p><strong>Bootstrap 4 Shortcodes for WordPress</strong> creates a simple, out of the way button just above the WordPress TinyMCE editor (next to the &quot;Add Media&quot; button) which pops up the plugin&#39;s documentation and shortcode examples for reference and handy &quot;Insert Example&quot; links to send the example shortcodes straight to the editor. There are no additional TinyMCE buttons to clutter up your screen, just great, easy to use shortcodes!</p>
 <h2 id="requirements">Requirements</h2>
-<p><img src="https://img.shields.io/wordpress/v/complete-bootstrap-4-shortcodes.svg" alt="Tested in WordPress"> <img src="https://img.shields.io/badge/PHP-5.3%2B-blue.svg" alt="PHP 5.3+"> <img src="https://img.shields.io/badge/Bootstrap-4.5.x-6f5499.svg" alt="Bootstrap"></p>
+<p><img src="https://img.shields.io/wordpress/v/complete-bootstrap-4-shortcodes.svg" alt="Tested in WordPress"> <img src="https://img.shields.io/badge/PHP-7.0%2B-blue.svg" alt="PHP 7.0+"> <img src="https://img.shields.io/badge/Bootstrap-4.6.x-6f5499.svg" alt="Bootstrap"></p>
 <p>This plugin won&#39;t do anything if you don&#39;t have WordPress theme built with the <a href="https://getbootstrap.com/">Bootstrap</a> framework. <strong>This plugin does not include the Bootstrap framework</strong>. The icon shortcodes require Font Awesome 5 or better.</p>
-<p>The plugin is tested to work with <code class="d-block p-4">Bootstrap 4.5</code> and <code class="d-block p-4">WordPress 5.6</code> and <strong>requires PHP 5.3 or better</strong>.</p>
+<p>The plugin is tested to work with <code class="d-block p-4">Bootstrap 4.6</code> and <code class="d-block p-4">WordPress 5.8</code> and <strong>requires PHP 7.0 or better</strong>.</p>
 <p>Wordpress is not able to process nested shortcodes - like a <code class="d-block p-4">card</code> inside a <code class="d-block p-4">card</code> - correctly; see <a href="https://codex.wordpress.org/Shortcode_API#Nested_Shortcodes" target="_blank">Wordpress: Nested Shortcodes</a>. Some of the shortcodes have aliases with the extension <code>-outer</code> to allow nesting.</p>
 <h2 id="shortcode-reference">Shortcode Reference</h2>
+<form action="https://www.paypal.com/donate" method="post" target="_blank">
+<input type="hidden" name="hosted_button_id" value="PQDNJGKMLHAFU" />
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />
+Thanks for your consideration!
+</form>
 <a id="layout_header" class="text-decoration-none" href="#layout"><h3>Layout</h3></a>
 <ul>
     <li><a href="#grid">Grid</a></li>
@@ -138,7 +144,7 @@
     <tbody>
         <tr>
             <td>fluid</td>
-            <td>Create a full width container, spanning the entire width of the viewport. (see <a href="https://getbootstrap.com/docs/4.5/layout/overview/#fluid">Bootstrap documentation</a> for details). This overrides the size parameter.</td>
+            <td>Create a full width container, spanning the entire width of the viewport. (see <a href="https://getbootstrap.com/docs/4.6/layout/overview/#fluid">Bootstrap documentation</a> for details). This overrides the size parameter.</td>
             <td>optional</td>
             <td>🚩 (flag)</td>
             <td></td>
@@ -341,7 +347,7 @@
         </tr>
     </tbody>
 </table>
-<p><a href="https://getbootstrap.com/docs/4.5/layout/grid/">Bootstrap grid documentation</a>.</p>
+<p><a href="https://getbootstrap.com/docs/4.6/layout/grid/">Bootstrap grid documentation</a>.</p>
 <hr>
 <h3 id="responsive-embeds">Responsive Embeds</h3>
 <pre><code class="d-block p-4">
@@ -390,7 +396,7 @@
         </tr>
     </tbody>
 </table>
-<p><a href="https://getbootstrap.com/docs/4.5/utilities/embed/">Bootstrap responsive embed documentation</a></p>
+<p><a href="https://getbootstrap.com/docs/4.6/utilities/embed/">Bootstrap responsive embed documentation</a></p>
 <hr>
 <h3 id="responsive-utilities">Responsive Utilities</h3>
 <pre><code class="d-block p-4">
@@ -459,7 +465,7 @@
         </tr>
     </tbody>
 </table>
-<p><a href="https://getbootstrap.com/docs/4.5/utilities/display/#hiding-elements">Bootstrap display properties documentation</a></p>
+<p><a href="https://getbootstrap.com/docs/4.6/utilities/display/#hiding-elements">Bootstrap display properties documentation</a></p>
 <hr>
 <h3 id="components">Components</h3>
 <h3 id="cards">Cards</h3>
@@ -995,7 +1001,7 @@
         </tr>
     </tbody>
 </table>
-<p><a href="https://getbootstrap.com/docs/4.5/components/card/">Bootstrap card documentation</a></p>
+<p><a href="https://getbootstrap.com/docs/4.6/components/card/">Bootstrap card documentation</a></p>
 <hr>
 <h3 id="icons">Icons</h3>
 <div class="alert alert-warning"><strong>Note:</strong> The <code>[icon]</code> and <code>[icon-stack]</code> shortcodes depend on the Font Awesome 5 Icon Library, either from your theme or the official Font Awesome plugin.</div>
@@ -1222,7 +1228,7 @@
         </tr>
     </tbody>
 </table>
-<p><a href="https://getbootstrap.com/docs/4.5/components/buttons/">Bootstrap button documentation</a></p>
+<p><a href="https://getbootstrap.com/docs/4.6/components/buttons/">Bootstrap button documentation</a></p>
 <hr>
 <h3 id="button-groups">Button Groups</h3>
 <p>The tag <code>[button-group-outer]</code> allows nesting of button groups.</p>
@@ -1350,7 +1356,7 @@
         </tr>
     </tbody>
 </table>
-<p><a href="https://getbootstrap.com/docs/4.5/components/button-group/">Bootstrap button groups documentation</a></p>
+<p><a href="https://getbootstrap.com/docs/4.6/components/button-group/">Bootstrap button groups documentation</a></p>
 <hr>
 <h3 id="button-dropdowns">Button Dropdowns</h3>
 <p>Button Dropdowns can be accomplished by combining the [button-group] shortcode, the &quot;data&quot; parameters of the [button] shortcode, and [dropdown] or [dropdown-menu] shortcode as follows.</p>
@@ -1585,7 +1591,7 @@
         </tr>
     </tbody>
 </table>
-<p><a href="https://getbootstrap.com/docs/4.5/components/dropdowns/">Bootstrap button dropdowns documentation</a></p>
+<p><a href="https://getbootstrap.com/docs/4.6/components/dropdowns/">Bootstrap button dropdowns documentation</a></p>
 <hr>
 <h3 id="navs">Navs</h3>
 <pre><code class="d-block p-4">
@@ -1747,7 +1753,7 @@
         </tr>
     </tbody>
 </table>
-<p><a href="https://getbootstrap.com/docs/4.5/components/navs/">Bootstrap button navs documentation</a></p>
+<p><a href="https://getbootstrap.com/docs/4.6/components/navs/">Bootstrap button navs documentation</a></p>
 <hr>
 <h3 id="navigation-bars">Navigation Bars</h3>
 <h4 id="navigation-bars-collapsible">Collapsible Navigation Bar</h4>
@@ -2048,7 +2054,7 @@
         </tr>
     </tbody>
 </table>
-<p><a href="https://getbootstrap.com/docs/4.5/components/breadcrumb/">Bootstrap breadcrumb documentation</a></p>
+<p><a href="https://getbootstrap.com/docs/4.6/components/breadcrumb/">Bootstrap breadcrumb documentation</a></p>
 <hr>
 <h3 id="badges">Badges</h3>
 <pre><code class="d-block p-4">
@@ -2096,7 +2102,7 @@
         </tr>
     </tbody>
 </table>
-<p><a href="https://getbootstrap.com/docs/4.5/components/badge/">Bootstrap badge documentation</a></p>
+<p><a href="https://getbootstrap.com/docs/4.6/components/badge/">Bootstrap badge documentation</a></p>
 <hr>
 <h3 id="jumbotron">Jumbotron</h3>
 <pre><code class="d-block p-4">
@@ -2144,7 +2150,7 @@
         </tr>
     </tbody>
 </table>
-<p><a href="https://getbootstrap.com/docs/4.5/components/jumbotron/">Bootstrap jumbotron documentation</a></p>
+<p><a href="https://getbootstrap.com/docs/4.6/components/jumbotron/">Bootstrap jumbotron documentation</a></p>
 <hr>
 <h3 id="alerts">Alerts</h3>
 <pre><code class="d-block p-4">
@@ -2199,7 +2205,7 @@
         </tr>
     </tbody>
 </table>
-<p><a href="https://getbootstrap.com/docs/4.5/components/alerts/">Bootstrap alert documentation</a></p>
+<p><a href="https://getbootstrap.com/docs/4.6/components/alerts/">Bootstrap alert documentation</a></p>
 <hr>
 <h3 id="progress-bars">Progress Bars</h3>
 <pre><code class="d-block p-4">
@@ -2313,7 +2319,7 @@
         </tr>
     </tbody>
 </table>
-<p><a href="https://getbootstrap.com/docs/4.5/components/progress/">Bootstrap progress bars documentation</a></p>
+<p><a href="https://getbootstrap.com/docs/4.6/components/progress/">Bootstrap progress bars documentation</a></p>
 <hr>
 <h3 id="media-objects">Media Objects</h3>
 <p>The tag <code>[media-outer]</code> allows to nest media objects inside a media object.</p>
@@ -2442,7 +2448,7 @@
     </tbody>
 </table>
 <p><strong>NOTE: <code>media-object</code> should contain an image, or linked image, inserted using the WordPress TinyMCE editor or the <code>img-gen</code> tag.</strong></p>
-<p><a href="https://getbootstrap.com/docs/4.5/components/media-object/">Bootstrap media objects documentation</a></p>
+<p><a href="https://getbootstrap.com/docs/4.6/components/media-object/">Bootstrap media objects documentation</a></p>
 <hr>
 <h3 id="list-groups">List Groups</h3>
 <h4 id="basic-example-lst-grp">Basic Example</h4>
@@ -2612,7 +2618,7 @@
         </tr>
     </tbody>
 </table>
-<p><a href="https://getbootstrap.com/docs/4.5/components/list-group/">Bootstrap list groups documentation</a></p>
+<p><a href="https://getbootstrap.com/docs/4.6/components/list-group/">Bootstrap list groups documentation</a></p>
 <hr>
 <h3 id="content">Content</h3>
 <h3 id="code">Code</h3>
@@ -2668,7 +2674,7 @@
         </tr>
     </tbody>
 </table>
-<p><a href="https://getbootstrap.com/docs/4.5/content/code/">Bootstrap code documentation</a></p>
+<p><a href="https://getbootstrap.com/docs/4.6/content/code/">Bootstrap code documentation</a></p>
 <hr>
 <h3 id="tables">Tables</h3>
 <pre><code class="d-block p-4">
@@ -2727,7 +2733,7 @@
         </tr>
         <tr>
             <td>responsive</td>
-            <td>Wrap the table in a div with the class &quot;table-responsive&quot; (see <a href="https://getbootstrap.com/docs/4.5/content/tables/#always-responsive">Bootstrap responsive table documentation</a>)</td>
+            <td>Wrap the table in a div with the class &quot;table-responsive&quot; (see <a href="https://getbootstrap.com/docs/4.6/content/tables/#always-responsive">Bootstrap responsive table documentation</a>)</td>
             <td>optional</td>
             <td>🚩 (flag)</td>
             <td></td>
@@ -2748,7 +2754,7 @@
         </tr>
     </tbody>
 </table>
-<p><a href="https://getbootstrap.com/docs/4.5/content/tables/">Bootstrap table documentation</a></p>
+<p><a href="https://getbootstrap.com/docs/4.6/content/tables/">Bootstrap table documentation</a></p>
 <hr>
 <h3 id="images">Images</h3>
 <pre><code class="d-block p-4">
@@ -2806,7 +2812,7 @@
         </tr>
     </tbody>
 </table>
-<p><a href="https://getbootstrap.com/docs/4.5/content/images/">Bootstrap images documentation</a></p>
+<p><a href="https://getbootstrap.com/docs/4.6/content/images/">Bootstrap images documentation</a></p>
 <hr>
 <h3 id="images-gen">Dynamic Dummy Image Generator</h3>
 <pre><code class="d-block p-4">
@@ -2893,7 +2899,7 @@
         </tr>
     </tbody>
 </table>
-<p><a href="https://getbootstrap.com/docs/4.5/content/images/">Bootstrap images documentation</a></p>
+<p><a href="https://getbootstrap.com/docs/4.6/content/images/">Bootstrap images documentation</a></p>
 <hr>
 <h3 id="figures">Figures</h3>
 <pre><code class="d-block p-4">
@@ -2972,7 +2978,7 @@
         </tr>
     </tbody>
 </table>
-<p><a href="https://getbootstrap.com/docs/4.5/content/figures/">Bootstrap figures documentation</a></p>
+<p><a href="https://getbootstrap.com/docs/4.6/content/figures/">Bootstrap figures documentation</a></p>
 <hr>
 <h3 id="blockquote">Blockquote</h3>
 <pre><code class="d-block p-4">
@@ -3053,7 +3059,7 @@
         </tr>
     </tbody>
 </table>
-<p><a href="https://getbootstrap.com/docs/4.5/content/typography/#blockquotes">Bootstrap blockquote documentation</a></p>
+<p><a href="https://getbootstrap.com/docs/4.6/content/typography/#blockquotes">Bootstrap blockquote documentation</a></p>
 <hr>
 <h3 id="lead-body-copy">Lead body copy</h3>
 <pre><code class="d-block p-4">
@@ -3094,7 +3100,7 @@
         </tr>
     </tbody>
 </table>
-<p><a href="https://getbootstrap.com/docs/4.5/content/typography/#lead">Bootstrap lead documentation</a></p>
+<p><a href="https://getbootstrap.com/docs/4.6/content/typography/#lead">Bootstrap lead documentation</a></p>
 <hr>
 <h3 id="wrap-section">Wrap section</h3>
 <pre><code class="d-block p-4">
@@ -3142,7 +3148,7 @@
         </tr>
     </tbody>
 </table>
-<p><a href="https://getbootstrap.com/docs/4.5/content/typography/#lead">Bootstrap lead documentation</a></p>
+<p><a href="https://getbootstrap.com/docs/4.6/content/typography/#lead">Bootstrap lead documentation</a></p>
 <hr>
 <h3 id="utilities">Utilities</h3>
 <h3 id="border">Border</h3>
@@ -3215,7 +3221,7 @@
         </tr>
     </tbody>
 </table>
-<p><a href="https://getbootstrap.com/docs/4.5/utilities/borders/">Bootstrap border classes documentation</a></p>
+<p><a href="https://getbootstrap.com/docs/4.6/utilities/borders/">Bootstrap border classes documentation</a></p>
 <hr>
 <h3 id="color">Color</h3>
 <p>Use color utilities to quickly style the <code>text color</code> and <code>background color</code> of an element.</p>
@@ -3264,7 +3270,7 @@
         </tr>
     </tbody>
 </table>
-<p><a href="https://getbootstrap.com/docs/4.5/utilities/colors/">Bootstrap color classes documentation</a></p>
+<p><a href="https://getbootstrap.com/docs/4.6/utilities/colors/">Bootstrap color classes documentation</a></p>
 <hr>
 <h3 id="flex">Flex</h3>
 <pre><code class="d-block p-4">
@@ -3428,7 +3434,7 @@
         </tr>
     </tbody>
 </table>
-<p><a href="https://getbootstrap.com/docs/4.5/utilities/flex/">Bootstrap flex documentation</a></p>
+<p><a href="https://getbootstrap.com/docs/4.6/utilities/flex/">Bootstrap flex documentation</a></p>
 <hr>
 <h3 id="html-snippets">HTML snippets</h3>
 <p>Allow any html code. This shortcode has no parameters.</p>
@@ -3637,7 +3643,7 @@
         </tr>
     </tbody>
 </table>
-<p><a href="https://getbootstrap.com/docs/4.5/components/tooltips/">Bootstrap tooltip documentation</a></p>
+<p><a href="https://getbootstrap.com/docs/4.6/components/tooltips/">Bootstrap tooltip documentation</a></p>
 <hr>
 <h3 id="popover">Popover</h3>
 <pre><code class="d-block p-4">
@@ -3701,7 +3707,7 @@
         </tr>
     </tbody>
 </table>
-<p><a href="https://getbootstrap.com/docs/4.5/components/popovers/">Bootstrap popovers documentation</a></p>
+<p><a href="https://getbootstrap.com/docs/4.6/components/popovers/">Bootstrap popovers documentation</a></p>
 <hr>
 <h3 id="collapse">Collapse</h3>
 <h5>Accordion example</h5>
@@ -3757,7 +3763,7 @@
         </tr>
     </tbody>
 </table>
-<p><a href="https://getbootstrap.com/docs/4.5/components/collapse/">Bootstrap collapse documentation</a></p>
+<p><a href="https://getbootstrap.com/docs/4.6/components/collapse/">Bootstrap collapse documentation</a></p>
 <hr>
 <h3 id="carousel">Carousel</h3>
 <pre><code class="d-block p-4">
@@ -3942,7 +3948,7 @@
         </tr>
     </tbody>
 </table>
-<p><a href="https://getbootstrap.com/docs/4.5/components/carousel/">Bootstrap carousel documentation</a></p>
+<p><a href="https://getbootstrap.com/docs/4.6/components/carousel/">Bootstrap carousel documentation</a></p>
 <hr>
 <h3 id="modal">Modal</h3>
 <pre><code class="d-block p-4">
@@ -4147,6 +4153,6 @@
         </tr>
     </tbody>
 </table>
-<p><a href="https://getbootstrap.com/docs/4.5/components/modal/">Bootstrap modal documentation</a></p>
+<p><a href="https://getbootstrap.com/docs/4.6/components/modal/">Bootstrap modal documentation</a></p>
 <hr>
 <!-- pandoc --to gfm --from html --standalone includes/help/README.html -->

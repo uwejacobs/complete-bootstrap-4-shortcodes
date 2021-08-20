@@ -20,16 +20,16 @@ shortcodes\!
 
 ![Tested in
 WordPress](https://img.shields.io/wordpress/v/complete-bootstrap-4-shortcodes.svg)
-![PHP 5.3+](https://img.shields.io/badge/PHP-5.3%2B-blue.svg)
-![Bootstrap](https://img.shields.io/badge/Bootstrap-4.5.x-6f5499.svg)
+![PHP 7.0+](https://img.shields.io/badge/PHP-7.0%2B-blue.svg)
+![Bootstrap](https://img.shields.io/badge/Bootstrap-4.6.x-6f5499.svg)
 
 This plugin won't do anything if you don't have WordPress theme built
 with the [Bootstrap](https://getbootstrap.com/) framework. **This plugin
 does not include the Bootstrap framework**. The icon shortcodes require
 Font Awesome 5 or better.
 
-The plugin is tested to work with `Bootstrap 4.5` and `WordPress 5.6`
-and **requires PHP 5.3 or better**.
+The plugin is tested to work with `Bootstrap 4.6` and `WordPress 5.8`
+and **requires PHP 7.0 or better**.
 
 Wordpress is not able to process nested shortcodes - like a `card`
 inside a `card` - correctly; see [Wordpress: Nested
@@ -175,7 +175,7 @@ cases where you want to wrap a container.
 
 | Parameter | Description                                                                                                                                                                                                         | Required | Values                 | Default |
 | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ---------------------- | ------- |
-| fluid     | Create a full width container, spanning the entire width of the viewport. (see [Bootstrap documentation](https://getbootstrap.com/docs/4.5/layout/overview/#fluid) for details). This overrides the size parameter. | optional | 🚩 (flag)               |         |
+| fluid     | Create a full width container, spanning the entire width of the viewport. (see [Bootstrap documentation](https://getbootstrap.com/docs/4.6/layout/overview/#fluid) for details). This overrides the size parameter. | optional | 🚩 (flag)               |         |
 | size      | Use the container size to create responsive containers where the max-width of the container will change on different screen sizes/viewports.                                                                        | optional | sm, md, lg or xl       |         |
 | id        | Name the container for processing in custom CSS or JavaScript.                                                                                                                                                      | optional | Unique text identifier |         |
 | class     | Any extra classes you want to add                                                                                                                                                                                   | optional | any text               | none    |
@@ -215,7 +215,7 @@ cases where you want to wrap a container.
 | data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text               | none    |
 
 [Bootstrap grid
-documentation](https://getbootstrap.com/docs/4.5/layout/grid/).
+documentation](https://getbootstrap.com/docs/4.6/layout/grid/).
 
 -----
 
@@ -237,7 +237,7 @@ responsive.
 | data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text                 | none    |
 
 [Bootstrap responsive embed
-documentation](https://getbootstrap.com/docs/4.5/utilities/embed/)
+documentation](https://getbootstrap.com/docs/4.6/utilities/embed/)
 
 -----
 
@@ -258,7 +258,7 @@ documentation](https://getbootstrap.com/docs/4.5/utilities/embed/)
 | data          | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text               | none    |
 
 [Bootstrap display properties
-documentation](https://getbootstrap.com/docs/4.5/utilities/display/#hiding-elements)
+documentation](https://getbootstrap.com/docs/4.6/utilities/display/#hiding-elements)
 
 -----
 
@@ -610,7 +610,7 @@ optional
 any text
 
 [Bootstrap card
-documentation](https://getbootstrap.com/docs/4.5/components/card/)
+documentation](https://getbootstrap.com/docs/4.6/components/card/)
 
 -----
 
@@ -730,7 +730,7 @@ Documentation](https://fontawesome.com/how-to-use/on-the-web/referencing-icons/b
 | target    | Where to open the link for tag `a`                                                                                                              | optional | \_self, \_blank, \_parent, \_top                                      | \_self            |
 
 [Bootstrap button
-documentation](https://getbootstrap.com/docs/4.5/components/buttons/)
+documentation](https://getbootstrap.com/docs/4.6/components/buttons/)
 
 -----
 
@@ -785,7 +785,7 @@ The tag `[button-group-outer]` allows nesting of button groups.
 | data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text               | none    |
 
 [Bootstrap button groups
-documentation](https://getbootstrap.com/docs/4.5/components/button-group/)
+documentation](https://getbootstrap.com/docs/4.6/components/button-group/)
 
 -----
 
@@ -881,7 +881,7 @@ shortcode, the "data" parameters of the \[button\] shortcode, and
 | data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text | none    |
 
 [Bootstrap button dropdowns
-documentation](https://getbootstrap.com/docs/4.5/components/dropdowns/)
+documentation](https://getbootstrap.com/docs/4.6/components/dropdowns/)
 
 -----
 
@@ -931,7 +931,7 @@ documentation](https://getbootstrap.com/docs/4.5/components/dropdowns/)
 | data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text               | none    |
 
 [Bootstrap button navs
-documentation](https://getbootstrap.com/docs/4.5/components/navs/)
+documentation](https://getbootstrap.com/docs/4.6/components/navs/)
 
 -----
 
@@ -1068,7 +1068,7 @@ parent breakpoint.
 | data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text               | none    |
 
 [Bootstrap breadcrumb
-documentation](https://getbootstrap.com/docs/4.5/components/breadcrumb/)
+documentation](https://getbootstrap.com/docs/4.6/components/breadcrumb/)
 
 -----
 
@@ -1086,7 +1086,7 @@ documentation](https://getbootstrap.com/docs/4.5/components/breadcrumb/)
 | data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text               | none    |
 
 [Bootstrap badge
-documentation](https://getbootstrap.com/docs/4.5/components/badge/)
+documentation](https://getbootstrap.com/docs/4.6/components/badge/)
 
 -----
 
@@ -1104,7 +1104,7 @@ documentation](https://getbootstrap.com/docs/4.5/components/badge/)
 | data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text               | none    |
 
 [Bootstrap jumbotron
-documentation](https://getbootstrap.com/docs/4.5/components/jumbotron/)
+documentation](https://getbootstrap.com/docs/4.6/components/jumbotron/)
 
 -----
 
@@ -1123,7 +1123,7 @@ documentation](https://getbootstrap.com/docs/4.5/components/jumbotron/)
 | data        | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text                                                        | none    |
 
 [Bootstrap alert
-documentation](https://getbootstrap.com/docs/4.5/components/alerts/)
+documentation](https://getbootstrap.com/docs/4.6/components/alerts/)
 
 -----
 
@@ -1156,7 +1156,7 @@ documentation](https://getbootstrap.com/docs/4.5/components/alerts/)
 | data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text                                                        | none    |
 
 [Bootstrap progress bars
-documentation](https://getbootstrap.com/docs/4.5/components/progress/)
+documentation](https://getbootstrap.com/docs/4.6/components/progress/)
 
 -----
 
@@ -1208,7 +1208,7 @@ body.
 inserted using the WordPress TinyMCE editor or the `img-gen` tag.**
 
 [Bootstrap media objects
-documentation](https://getbootstrap.com/docs/4.5/components/media-object/)
+documentation](https://getbootstrap.com/docs/4.6/components/media-object/)
 
 -----
 
@@ -1292,7 +1292,7 @@ documentation](https://getbootstrap.com/docs/4.5/components/media-object/)
 | data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text                                                              | none    |
 
 [Bootstrap list groups
-documentation](https://getbootstrap.com/docs/4.5/components/list-group/)
+documentation](https://getbootstrap.com/docs/4.6/components/list-group/)
 
 -----
 
@@ -1313,7 +1313,7 @@ documentation](https://getbootstrap.com/docs/4.5/components/list-group/)
 | data       | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text               | none    |
 
 [Bootstrap code
-documentation](https://getbootstrap.com/docs/4.5/content/code/)
+documentation](https://getbootstrap.com/docs/4.6/content/code/)
 
 -----
 
@@ -1334,12 +1334,12 @@ documentation](https://getbootstrap.com/docs/4.5/content/code/)
 | striped    | Set "striped" table style (see Bootstrap documentation)                                                                                                                         | optional | 🚩 (flag)               |         |
 | hover      | Set "hover" table style (see Bootstrap documentation)                                                                                                                           | optional | 🚩 (flag)               |         |
 | condensed  | Set "condensed" table style (see Bootstrap documentation)                                                                                                                       | optional | 🚩 (flag)               |         |
-| responsive | Wrap the table in a div with the class "table-responsive" (see [Bootstrap responsive table documentation](https://getbootstrap.com/docs/4.5/content/tables/#always-responsive)) | optional | 🚩 (flag)               |         |
+| responsive | Wrap the table in a div with the class "table-responsive" (see [Bootstrap responsive table documentation](https://getbootstrap.com/docs/4.6/content/tables/#always-responsive)) | optional | 🚩 (flag)               |         |
 | class      | Any extra classes you want to add                                                                                                                                               | optional | any text               | none    |
 | data       | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters).                                 | optional | any text               | none    |
 
 [Bootstrap table
-documentation](https://getbootstrap.com/docs/4.5/content/tables/)
+documentation](https://getbootstrap.com/docs/4.6/content/tables/)
 
 -----
 
@@ -1364,7 +1364,7 @@ tag.
 | data       | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text | none    |
 
 [Bootstrap images
-documentation](https://getbootstrap.com/docs/4.5/content/images/)
+documentation](https://getbootstrap.com/docs/4.6/content/images/)
 
 -----
 
@@ -1457,7 +1457,7 @@ FF0855 (= #FF0855 as background color)</td>
 </table>
 
 [Bootstrap images
-documentation](https://getbootstrap.com/docs/4.5/content/images/)
+documentation](https://getbootstrap.com/docs/4.6/content/images/)
 
 -----
 
@@ -1485,7 +1485,7 @@ documentation](https://getbootstrap.com/docs/4.5/content/images/)
 | data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text               | none    |
 
 [Bootstrap figures
-documentation](https://getbootstrap.com/docs/4.5/content/figures/)
+documentation](https://getbootstrap.com/docs/4.6/content/figures/)
 
 -----
 
@@ -1515,7 +1515,7 @@ documentation](https://getbootstrap.com/docs/4.5/content/figures/)
 | data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text               | none    |
 
 [Bootstrap blockquote
-documentation](https://getbootstrap.com/docs/4.5/content/typography/#blockquotes)
+documentation](https://getbootstrap.com/docs/4.6/content/typography/#blockquotes)
 
 -----
 
@@ -1532,7 +1532,7 @@ documentation](https://getbootstrap.com/docs/4.5/content/typography/#blockquotes
 | data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text               | none    |
 
 [Bootstrap lead
-documentation](https://getbootstrap.com/docs/4.5/content/typography/#lead)
+documentation](https://getbootstrap.com/docs/4.6/content/typography/#lead)
 
 -----
 
@@ -1550,7 +1550,7 @@ documentation](https://getbootstrap.com/docs/4.5/content/typography/#lead)
 | data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. Example: `data="columns,3\|index,1"` expands to `data-columns="3" data-index="1"`. | optional | any text               | none    |
 
 [Bootstrap lead
-documentation](https://getbootstrap.com/docs/4.5/content/typography/#lead)
+documentation](https://getbootstrap.com/docs/4.6/content/typography/#lead)
 
 -----
 
@@ -1579,7 +1579,7 @@ buttons, or any other element.
 | data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text                                                                            | none    |
 
 [Bootstrap border classes
-documentation](https://getbootstrap.com/docs/4.5/utilities/borders/)
+documentation](https://getbootstrap.com/docs/4.6/utilities/borders/)
 
 -----
 
@@ -1601,7 +1601,7 @@ element.
 | data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text                                                                                                | none    |
 
 [Bootstrap color classes
-documentation](https://getbootstrap.com/docs/4.5/utilities/colors/)
+documentation](https://getbootstrap.com/docs/4.6/utilities/colors/)
 
 -----
 
@@ -1642,7 +1642,7 @@ documentation](https://getbootstrap.com/docs/4.5/utilities/colors/)
 | data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters).                          | optional | any text                              | none    |
 
 [Bootstrap flex
-documentation](https://getbootstrap.com/docs/4.5/utilities/flex/)
+documentation](https://getbootstrap.com/docs/4.6/utilities/flex/)
 
 -----
 
@@ -1729,7 +1729,7 @@ Quickly and easily clear floated content within a container.
 | html      | Allow HTML in the tooltip text             | optional | 🚩 (flag)                       |         |
 
 [Bootstrap tooltip
-documentation](https://getbootstrap.com/docs/4.5/components/tooltips/)
+documentation](https://getbootstrap.com/docs/4.6/components/tooltips/)
 
 -----
 
@@ -1751,7 +1751,7 @@ documentation](https://getbootstrap.com/docs/4.5/components/tooltips/)
 | trigger   | Allow HTML in the popover text             | optional | click, hover, focus, manual    | click   |
 
 [Bootstrap popovers
-documentation](https://getbootstrap.com/docs/4.5/components/popovers/)
+documentation](https://getbootstrap.com/docs/4.6/components/popovers/)
 
 -----
 
@@ -1785,7 +1785,7 @@ Create an accordion by wrapping `[card]`s in `[accordion]`.
 | data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. | optional | any text               |                 |
 
 [Bootstrap collapse
-documentation](https://getbootstrap.com/docs/4.5/components/collapse/)
+documentation](https://getbootstrap.com/docs/4.6/components/collapse/)
 
 -----
 
@@ -1890,7 +1890,7 @@ none
 | data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text               | none    |
 
 [Bootstrap carousel
-documentation](https://getbootstrap.com/docs/4.5/components/carousel/)
+documentation](https://getbootstrap.com/docs/4.6/components/carousel/)
 
 -----
 
@@ -1948,6 +1948,6 @@ documentation](https://getbootstrap.com/docs/4.5/components/carousel/)
 | data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text               | none    |
 
 [Bootstrap modal
-documentation](https://getbootstrap.com/docs/4.5/components/modal/)
+documentation](https://getbootstrap.com/docs/4.6/components/modal/)
 
 -----

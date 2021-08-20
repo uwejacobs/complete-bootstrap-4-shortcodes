@@ -1,11 +1,11 @@
 === Bootstrap 4 Shortcodes for WordPress ===
 Contributors: uwejacobs
 Tags: bootstrap,shortcode,shortcodes,responsive,grid,flex,lorem ipsum,dummy image generator
-Donate link: 
+Donate link: paypal.me/ujsoftware
 Requires at least: 3.8
 Tested up to: 5.8
 Requires PHP: 7.0
-Stable tag: 4.5.12
+Stable tag: 4.6.0
 License: MIT License
 License URI: https://mit-license.org/
 
@@ -18,12 +18,12 @@ Plenty of great WordPress plugins focus on providing or including the Bootstrap 
 
 This plugin creates a simple, out of the way button just above the WordPress TinyMCE editor (next to the "Add Media" button) which pops up the plugin's documentation and shortcode examples for reference and handy "Insert Example" links to send the example shortcodes straight to the editor. There are no additional TinyMCE buttons to clutter up your screen, just great, easy to use shortcodes!
 
-Check the demo page "Bootstrap 4 Shortcodes Demo 4.5.10" after activation for ready to use shortcodes examples.
+Check the demo page "Bootstrap 4 Shortcodes Demo 4.6.0" after activation for ready to use shortcodes examples.
 
 For questions, support, or to contribute to this plugin, check out [our GitHub project](https://github.com/uwejacobs/complete-bootstrap-4-shortcodes).
 
 == Overview ==
-See the shortcodes in action on our [demo page](https://ujsoftware.com/bootstrap-4-shortcodes-demo-4-5-12/).
+See the shortcodes in action on our [demo page](https://ujsoftware.com/bootstrap-4-shortcodes-demo-4-6-0/).
 
 = Layout: =
 * Grid
@@ -90,6 +90,13 @@ See the shortcodes in action on our [demo page](https://ujsoftware.com/bootstrap
 16. The above shortcode example rendered with WordPress
 
 == Changelog ==
+= 4.6.0 =
+* Updated bootstrap to 4.6
+* Updated fontawesome to 5.15.4
+* Escaped all output consistently
+* PHP 7.0 required
+* Added donation link (thanks for your consideration)
+
 = 4.5.12 =
 * Tested with Wordpress 5.8
 * Added option to assign class to the nav-item itself in addition to the link

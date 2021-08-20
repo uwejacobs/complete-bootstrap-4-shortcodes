@@ -1,18 +1,18 @@
 <?php
   
 // ======================================================================== //		
-// PHP Version notice if version < 5.3
+// PHP Version notice if version < 7.0
 // ======================================================================== // 
 
     function php_version_notice() {
         $class = 'notice notice-error';
-        $message = __( '<strong>Bootstrap 4 Shortcodes for WordPress</strong> requires PHP version 5.3 or later. You are running PHP version ' . PHP_VERSION . '. Please upgrade to a supported version of PHP.', 'sample-text-domain' );
+        $message = __( '<strong>Bootstrap 4 Shortcodes for WordPress</strong> requires PHP version 7.0 or later. You are running PHP version ' . PHP_VERSION . '. Please upgrade to a supported version of PHP.', 'sample-text-domain' );
 
         printf( '<div class="%1$s"><p>%2$s</p></div>', $class, $message ); 
     }
 
-    //Only run this if the PHP version is less than 5.3
-    if (version_compare(PHP_VERSION, '5.3.0', '<')) {
+    //Only run this if the PHP version is less than 7.0
+    if (version_compare(PHP_VERSION, '7.0.0', '<')) {
         add_action( 'admin_notices', 'php_version_notice' );
     }
 
@@ -126,11 +126,9 @@
     function enqueue_bs_plugin_scripts($plugin_array)
     {
         wp_register_style( 'bootstrap-shortcodes-help', plugins_url( 'complete-bootstrap-4-shortcodes/includes/help/css/bootstrap-shortcodes-help.css' ) );
-        wp_register_script( 'bootstrap', plugins_url( 'complete-bootstrap-4-shortcodes/includes/help/js/bootstrap.min.js' ) );
-        wp_register_script( 'popper', plugins_url( 'complete-bootstrap-4-shortcodes/includes/help/js/popper.min.js' ) );
+        wp_register_script( 'bootstrap', plugins_url( 'complete-bootstrap-4-shortcodes/includes/help/js/bootstrap.bundle.min.js' ) );
         wp_register_style( 'fontawesome', plugins_url( 'complete-bootstrap-4-shortcodes/includes/help/css/fontawesome.min.css' ) );
         wp_enqueue_style( 'bootstrap-shortcodes-help' );
-        wp_enqueue_script( 'popper' );
         wp_enqueue_script( 'bootstrap' );
         wp_enqueue_style( 'fontawesome' );
 
@@ -170,12 +168,10 @@
 
         wp_register_style( 'bootstrap-shortcodes-help', plugins_url( 'complete-bootstrap-4-shortcodes/includes/help/css/bootstrap-shortcodes-help.css' ) );
         wp_register_style( 'bootstrap', plugins_url( 'complete-bootstrap-4-shortcodes/includes/help/css/bootstrap.min.css' ) );
-        wp_register_script( 'bootstrap', plugins_url( 'complete-bootstrap-4-shortcodes/includes/help/js/bootstrap.min.js' ) );
-	wp_register_script( 'popper', plugins_url( 'complete-bootstrap-4-shortcodes/includes/help/js/popper.min.js' ) );
+        wp_register_script( 'bootstrap', plugins_url( 'complete-bootstrap-4-shortcodes/includes/help/js/bootstrap.bundle.min.js' ) );
         wp_enqueue_style( 'bootstrap-shortcodes-help' );
         wp_enqueue_style( 'bootstrap' );
         wp_enqueue_script( 'bootstrap' );
-        wp_enqueue_script( 'popper' );
 
 
         echo '<button type="button" data-toggle="modal" data-target="#bootstrap-shortcodes-help"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAA3lBMVEUAAABZPXpWPXxWPHxWPXxXPHxXQHpVPn1WPXxWPXxXPX1WPXxWPXxWPXxWPXxWPXxVPn1TO31WPn1VPXlWPXxZQX9hSoWKeKT////o5e64rshqVIv29fh9apr8/P27scvCudDg2+fo5O1XP335+Pqom7t1YZRgSISGdKFbQ4D9/f2Ofqjk4er6+vt4ZJaCcJ6qnr339vn08/fx7/T7+vyvo8H6+fttV417aJmzqMSUhazi3uh4ZZf+/v55ZZetob/8+/xcRIFxW5Grnr7Nxtjz8fbTzN2xpsOai7BwW5A5ZpDEAAAAFHRSTlMALqbo56UsWvn4WKT+/eajLStWKigdCssAAAABYktHRBibaYUeAAAAB3RJTUUH4wsICSsl3MXI0wAAAOtJREFUOMuF03tTgkAUBfArKgYaWK52yxS1oiylh1r5Rsoe3/8LuWg4NS1nz187ww84u3OXiDJGViiTy5skUzgQqbFs+T54LoVJhoApUhaDHJUwKFGyqtaS/BV7cML7nJ7VMWA+byhB04vTakvRuVCBy5/llRQ+AtcS3CDQvdV84Y65p+zQD+LcPzzyU4C3OfB15zAcKcHzyzavY1lygkqKEfMUghnzvIvAQtaoI7BkDleqkrt5iN5C5ne8TV5HGHxE/8/B95J8fn3/HjnN0B7qxt6hPAYulS149Y6IbCCs4/h6m0Un5f9uhWgDHJpYkq/KzR0AAAAldEVYdGRhdGU6Y3JlYXRlADIwMTktMTEtMDhUMDk6NDM6MzcrMDA6MDCC18JaAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDE5LTExLTA4VDA5OjQzOjM3KzAwOjAw84p65gAAAABJRU5ErkJggg=="></button>';

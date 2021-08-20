@@ -328,9 +328,8 @@ class LoremIpsum
      * Output
      *
      * Does the rest of the processing of the strings. This includes wrapping
-     * the strings in HTML tags, handling transformations with the ability of
-     * back referencing and determining if the passed array should be converted
-     * into a string or not.
+     * the strings in HTML tags  and determining if the passed array should be
+     * converted into a string or not.
      *
      * @access private
      * @param  array   $strings an array of generated strings
@@ -351,12 +350,7 @@ class LoremIpsum
 
             foreach ($strings as $key => $string) {
                 foreach ($tags as $tag) {
-                    // Detects / applies back reference
-                    if ($tag[0] == '<') {
-                        $string = str_replace('$1', $string, $tag);
-                    } else {
-                        $string = sprintf('<%1$s>%2$s</%1$s>', $tag, $string);
-                    }
+                    $string = sprintf('<%1$s>%2$s</%1$s>', esc_attr($tag), esc_html($string));
 
                     $strings[$key] = $string;
                 }
