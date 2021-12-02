@@ -3,7 +3,7 @@
 Plugin Name: Complete Bootstrap 4 Shortcodes
 Plugin URI: https://github.com/uwejacobs/complete-bootstrap-4-shortcodes
 Description: The plugin adds shortcodes for most Bootstrap 4 elements.
-Version: 4.6.0
+Version: 4.6.1
 Author: Uwe Jacobs
 Author URI:
 License: MIT
@@ -78,7 +78,7 @@ class BootstrapShortcodes {
     // ======================================================================== //
     function bootstrap_shortcodes_tooltip_script() {
         global $post;
-        if (has_shortcode($post->post_content, 'tooltip')) {
+        if (isset($post->post_content) && has_shortcode($post->post_content, 'tooltip')) {
             // Bootstrap tooltip js
             wp_enqueue_script('bootstrap-shortcodes-tooltip', BS_SHORTCODES_URL . 'js/bootstrap-shortcodes-tooltip.js', array(
                 'jquery'
@@ -97,7 +97,7 @@ class BootstrapShortcodes {
     // ======================================================================== //
     function bootstrap_shortcodes_popover_script() {
         global $post;
-        if (has_shortcode($post->post_content, 'popover')) {
+        if (isset($post->post_content) && has_shortcode($post->post_content, 'popover')) {
             // Bootstrap popover js
             wp_enqueue_script('bootstrap-shortcodes-popover', BS_SHORTCODES_URL . 'js/bootstrap-shortcodes-popover.js', array(
                 'jquery'
@@ -114,7 +114,7 @@ class BootstrapShortcodes {
     // ======================================================================== //
     function bootstrap_shortcodes_accordion_icon_script() {
         global $post;
-        if (has_shortcode($post->post_content, 'accordion')) {
+        if (isset($post->post_content) && has_shortcode($post->post_content, 'accordion')) {
             // Bootstrap accordion icon js
             wp_enqueue_script('bootstrap-shortcodes-accordion-icon', BS_SHORTCODES_URL . 'js/bootstrap-shortcodes-accordion-icon.js', array(
                 'jquery'
@@ -185,6 +185,7 @@ class BootstrapShortcodes {
             'icon-stack',
             'img',
             'img-gen',
+            'img-srcset',
             'embed-responsive',
             'jumbotron',
             'lorem-ipsum',
@@ -2351,6 +2352,27 @@ class BootstrapShortcodes {
         $return = $this->adddata($tag, $return, $atts['data']);
 
         return $return;
+    }
+
+    function bs_img_srcset($atts, $content = null) {
+        $atts = array_change_key_case((array)$atts, CASE_LOWER);
+        $atts = shortcode_atts(array(
+            "img_id" => false,
+            "file" => false,
+            "text" => false,
+            "bg" => false,
+            "color" => false,
+            "alt" => false,
+            "class" => false,
+            "data" => false
+        ) , $atts);    
+
+        $img_id = ($atts['img_id']) ? $atts['img_id'] : '';
+        $img_srcset = wp_get_attachment_image_srcset( $img_id );
+error_log(print_r($img_srcset,1));
+        $img_sizes = wp_get_attachment_image_sizes( $img_id );
+error_log(print_r($img_sizes,1));
+        return '<img class="img-fluid wp-image-' . esc_attr($img_id) . '" loading="lazy" src="' . wp_get_attachment_image_url( $img_id ) . '" srcset="' . esc_attr( $img_srcset ) . '" sizes="' . esc_attr( $img_sizes ) . '">';
     }
 
     /*--------------------------------------------------------------------------------------
