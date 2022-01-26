@@ -3,7 +3,7 @@ Contributors: uwejacobs
 Tags: bootstrap,shortcode,shortcodes,responsive,grid,flex,lorem ipsum,dummy image generator
 Donate link: paypal.me/ujsoftware
 Requires at least: 3.8
-Tested up to: 5.8.2
+Tested up to: 5.9
 Requires PHP: 7.0
 Stable tag: 4.6.1
 License: MIT License
