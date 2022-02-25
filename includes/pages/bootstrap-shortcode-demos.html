@@ -1,1783 +1,229 @@
-<h2>Rows and Columns</h2>
-
-[card]
-[card-header class="lead"]3 same size columns on medium and larger screens[/card-header]
-[card-body class="p4"]
-[row]
-  [column md="4" class="bg-info"]
-    Column 1 (33%)
-    [lorem-ipsum]
-  [/column]
-  [column md="4" class="bg-success"]
-    Column 2 (33%)
-    [lorem-ipsum/]
-  [/column]
-  [column md="4" class="bg-danger"]
-    Column 3 (33%)
-    [lorem-ipsum/]
-  [/column]
-[/row]
-[/card-body]
-[card-footer]Narrow your browser window to see the columns stack. [/card-footer]
-[/card]
-
-<hr class="m-5 wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-
-[card]
-[card-header class="lead"]3 columns[/card-header]
-[card-body class="p4"]
-[row]
-[column xs="3" class="bg-info"]
-Column 1 (25%)[lorem-ipsum/]
-[/column]
-[column xs="6" class="bg-success"]
-Column 2 (50%)[lorem-ipsum sentences="2"/]
-[/column]
-[column xs="3" class="bg-danger"]
-Column 3 (25%)[lorem-ipsum/]
-[/column]
-[/row]
-[/card-body]
-[card-footer]These columns will not stack when you narrow your browser window. [/card-footer]
-[/card]
-
-<hr class="m-5 wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-
-[card]
-[card-header class="lead"]2 columns with an offset in between[/card-header]
-[card-body class="p4"]
-[row]
-[column xs="3" class="bg-info"]
-Column 1 (25%)[lorem-ipsum/]
-[/column]
-[column xs="6" offset-xs="3" class="bg-danger"]
-Column 2 (50%)[lorem-ipsum/]
-[/column]
-[/row]
-[/card-body]
-[card-footer]These columns will not stack when you narrow your browser window. [/card-footer]
-[/card]
-
-<hr class="m-5 wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-
-[card]
-    [card-header class="lead"]Nested Rows and Columns[/card-header]
-    [card-body class="p4"]
-        [row-outer]
-            [column-outer xs="3" class="bg-info text-center"]
-                Col 1
-                [row]
-                    [column xs="6"]Col 1.1[/column]
-                    [column xs="6"]Col 1.2[/column]
-                [/row]
-            [/column-outer]
-            [column-outer xs="6" class="bg-success text-center"]
-                Col 2
-                [row]
-                    [column xs="6"]Col 2.1[/column]
-                    [column xs="6"]Col 2.2[/column]
-                [/row]
-            [/column-outer]
-            [column-outer xs="3" class="bg-danger text-center"]
-                Col 3
-                [row]
-                    [column xs="6"]Col 3.1[/column]
-                    [column xs="6"]Col 3.2[/column]
-                [/row]
-            [/column-outer]
-        [/row-outer]
-    [/card-body]
-    [card-footer]These columns will not stack when you narrow your browser window. [/card-footer]
-[/card]
-
-<h2 class="mt-5">Responsive Embed</h2>
-
-[card]
-[card-header class="lead"]Embedded Video[/card-header]
-[card-body class="p4"]
-[embed-responsive ratio="16by9"]
-<p>No real video</p>
-[/embed-responsive]
-[/card-body]
-[card-footer]Narrow your browser window to see the video size adjust. [/card-footer]
-[/card]
-
-<h2 class="mt-5">Responsive Utilities</h2>
-
-[card]
-[card-header class="lead"]Show text depending on screen size[/card-header]
-[card-body class="p4"]
-[card-title]Sample 1: This text disappears on small and extra small screens.[/card-title]
-[responsive block="md" hidden="xs"]
-[lorem-ipsum class="bg-success"/]
-[/responsive]
-[card-title]Sample 2: This text will not be shown on large and extra large screens.[/card-title]
-[responsive block="xs" hidden="lg"]
-[lorem-ipsum class="bg-info"/]
-[/responsive]
-[/card-body]
-[card-footer]Narrow and widen your browser window to see the effect. [/card-footer]
-[/card]
-
-<h2 class="mt-5">Cards</h2>
-
-[card-outer]
-[card-header class="lead"]Simple card with a body element[/card-header]
-[card-body-outer class="p4"]
-[card]
-[card-body]
-[list-group flush]
-[list-group-item]Cras justo odio[/list-group-item]
-[list-group-item]Dapibus ac facilisis in[/list-group-item]
-[list-group-item]Vestibulum at eros[/list-group-item]
-[/list-group]
-[/card-body]
-[/card]​
-[/card-body-outer]
-[card-footer]List group is flush with the card[/card-footer]
-[/card-outer]
-
-<hr class="m-5 wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-
-[card-outer]
-[card-header class="lead"]Kitchen Sink[/card-header]
-[card-body-outer class="p4"]
-​​​[card class="w-50"]
-[card-img top]
-[img responsive][img-gen size="200" text="Card Image Top"]​[/img]
-[/card-img]
-[card-body]
-[card-title]Card Title[/card-title]
-Some quick example text to build on the card title and make up the bulk of the card's content.
-[/card-body]
-[list-group flush]
-[list-group-item]Cras justo odio[/list-group-item]
-[list-group-item]Dapibus ac facilisis in[/list-group-item]
-[list-group-item]Vestibulum at eros[/list-group-item]
-[/list-group]
-[card-body]
-Lorem Ipsup Dolor Sit
-[/card-body]
-[/card]
-[/card-body-outer]
-[card-footer]List group is flush with the card. Links in footer are next to each other.[/card-footer]
-[/card-outer]
-
-<hr class="m-5 wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-
-[card-outer]
-[card-header class="lead"]Simple card with image cap[/card-header]
-[card-body-outer class="p4"]
-[card class="w-25"]
-[card-img top]
-[img responsive][img-gen bg="f00" text="Sample Image"][/img]
-[/card-img]
-[card-body]
-[card-title]Card Title[/card-title]
-Lorem ipsum dolor sit.
-[/card-body]
-[/card]
-[/card-body-outer]
-[card-footer]Image caps are supported with the <code>[[card-img]]</code> shortcode and the <code>top</code> or <code>bottom</code> flag.[/card-footer]
-[/card-outer]
-
-<hr class="m-5 wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-
-[card-outer]
-[card-header class="lead"]Simple card with image overlay[/card-header]
-[card-body-outer class="p4"]
-[card class="w-25"]
-[card-img]
-[img responsive][img-gen bg="f00" text=" "][/img]
-[/card-img]
-[card-img-overlay]
-[card-title]Card Title[/card-title]
-Lorem ipsum dolor sit.
-[/card-img-overlay]
-[/card]
-[/card-body-outer]
-[card-footer]Image overlay cards are supported with the <code>[[card-img-overlay]]</code> shortcode.[/card-footer]
-[/card-outer]
-
-<hr class="m-5 wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-
-[card-outer]
-[card-header class="lead"]Card with header and footer[/card-header]
-[card-body-outer class="p4"]
-[card class="w-25"]
-[card-header]Example Header[/card-header]
-[card-body]
-[card-title]Card Title[/card-title]
-Lorem ipsum dolor sit.
-[/card-body]
-[card-footer]Example footer.[/card-footer]
-[/card]
-[/card-body-outer]
-[card-footer]Card header and card footers are supported with the <code>[[card-header]]</code> and <code>[[card-footer]]</code> shortcodes.[/card-footer]
-[/card-outer]
-
-<hr class="m-5 wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-
-[card-outer]
-[card-header class="lead"]Card group[/card-header]
-[card-body-outer class="p4"]
-[card-group]
-[card class="bg-info"]
-[card-body]
-[card-title]Card Title[/card-title]
-Lorem ipsum dolor sit.
-[/card-body]
-[/card]
-[card class="bg-success"]
-[card-body]
-[card-title]Card Title[/card-title]
-Cras justo odio.
-[/card-body]
-[/card]
-[card class="bg-danger"]
-[card-body]
-[card-title]Card Title[/card-title]
-Dapibus ac facilisis in.
-[/card-body]
-[/card]
-[/card-group]​
-[/card-body-outer]
-[card-footer]Use card groups to render cards as a single, attached element with equal width and height columns.[/card-footer]
-[/card-outer]
-
-<hr class="m-5 wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-
-[card-outer]
-[card-header class="lead"]Card deck[/card-header]
-[card-body-outer class="p4"]
-[card-deck]
-[card class="bg-info"]
-[card-body]
-[card-title]Card Title[/card-title]
-Lorem ipsum dolor sit.
-[/card-body]
-[/card]
-[card class="bg-success"]
-[card-body]
-[card-title]Card Title[/card-title]
-Cras justo odio.
-[/card-body]
-[/card]
-[card class="bg-danger"]
-[card-body]
-[card-title]Card Title[/card-title]
-Dapibus ac facilisis in.
-[/card-body]
-[/card]
-[/card-deck]
-[/card-body-outer]
-[card-footer]Use a card deck for a set of equal width and height cards that aren’t attached to one another.[/card-footer]
-[/card-outer]
-
-<hr class="m-5 wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-
-[card-outer]
-[card-header class="lead"]Card columns[/card-header]
-[card-body-outer class="p4"]
-[card-columns]
-[card class="bg-info"]
-[card-body]
-[card-title]Card Title[/card-title]
-Lorem ipsum dolor sit.
-[/card-body]
-[/card]
-[card]
-[card-body class="bg-success"]
-[card-title]Card Title[/card-title]
-Cras justo odio.
-[/card-body]
-[/card]
-[card class="bg-danger"]
-[card-body]
-[card-title]Card Title[/card-title]
-Dapibus ac facilisis in.
-[/card-body]
-[/card]
-[card class="bg-info"]
-[card-body]
-[card-title]Card Title[/card-title]
-Euismod cubilia mattis sed habitasse.
-[/card-body]
-[/card]
-[card]
-[card-body class="bg-success"]
-[card-title]Card Title[/card-title]
-Arcu porta aptent lacus.
-[/card-body]
-[/card]
-[card class="bg-danger"]
-[card-body]
-[card-title]Card Title[/card-title]
-Quisque est eget.
-[/card-body]
-[/card]
-[card class="bg-info"]
-[card-body]
-[card-title]Card Title[/card-title]
-Imperdiet dapibus ridiculus.
-[/card-body]
-[/card]
-[card]
-[card-body class="bg-success"]
-[card-title]Card Title[/card-title]
-Eros mi mauris ultricies.
-[/card-body]
-[/card]
-[card class="bg-danger"]
-[card-body]
-[card-title]Card Title[/card-title]
-Nascetur commodo imperdiet.
-[/card-body]
-[/card]
-[/card-columns]
-[/card-body-outer]
-[card-footer]Cards can be organized into Masonry-like columns with just CSS by wrapping them in <code>[[card-columns]]</code>.[/card-footer]
-[/card-outer]
-
-<hr class="m-5 wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-
-[card-outer]
-[card-header class="lead"]Cards with shadows[/card-header]
-[card-body-outer class="p4"]
-[card-deck]
-[card class="w-25 shadow-none"]
-[card-body]
-[card-title]No Shadow[/card-title]
-[lorem-ipsum]
-[/card-body]
-[/card]​
-[card class="w-25 shadow-sm"]
-[card-body]
-[card-title]Small Shadow[/card-title]
-[lorem-ipsum]
-[/card-body]
-[/card]​
-[card class="w-25 shadow"]
-[card-body]
-[card-title]Regular Shadow[/card-title]
-[lorem-ipsum]
-[/card-body]
-[/card]​
-[card class="w-25 shadow-lg"]
-[card-title]Large Shadow[/card-title]
-[card-body]
-[card-title]Large Shadow[/card-title]
-[lorem-ipsum]
-[/card-body]
-[/card]​
-[/card-deck]
-[/card-body-outer]
-[card-footer]Use the <code>shadow</code> utilities to add a shadow to the cards.[/card-footer]
-[/card-outer]
-
-<h2 class="mt-5">Icons</h2>
-
-[card-outer]
-[card-header class="lead"]Free Icons[/card-header]
-[card-body-outer class="p4"]
-[list-group flush]
-[list-group-item][icon prefix="fab" name="facebook"] Facebook[/list-group-item]
-[list-group-item][icon name="arrow-left"] Arrow Lft[/list-group-item]
-[list-group-item][icon name="arrow-right"] Arrow Right[/list-group-item]
-[list-group-item][icon name="arrow-up"] Arrow Up[/list-group-item]
-[list-group-item][icon name="arrow-down"] Arrow Down[/list-group-item]
-[list-group-item][icon prefix="far" name="folder-open"] Folder Open[/list-group-item]
-[list-group-item][icon prefix="fas" name="cloud"] Cloud[/list-group-item]
-[list-group-item][icon prefix="fas" name="coffee"] Coffee[/list-group-item]
-[list-group-item][icon prefix="fas" name="car"] Car[/list-group-item]
-[list-group-item][icon prefix="fas" name="file"] File[/list-group-item]
-[list-group-item][icon prefix="fas" name="bars"] Bars[/list-group-item]
-[list-group-item][icon prefix="fas" name="thumbs-up"] Thumbs Up[/list-group-item]
-[/list-group]
-[/card-body-outer]
-[card-footer]See the <a href="https://fontawesome.com/icons?d=gallery&amp;m=free" target="blank" rel="noopener noreferrer">Font Awesome Gallery</a> for more icons.[/card-footer]
-[/card-outer]
-
-<hr class="m-5 wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-
-[card]
-[card-header class="lead"]Stacked Icons[/card-header]
-[card-body class="p4"]
-[icon-stack]
-[icon name="camera" class="fa-stack-1x"]
-[icon name="ban" class="fa-stack-2x text-danger"]
-[/icon-stack]​​​
-[/card-body]
-[card-footer]The second icon is bigger than the first.[/card-footer]
-[/card]
-
-<h2 class="mt-5">Buttons</h2>
-
-[card]
-[card-header class="lead"]Standard buttons[/card-header]
-[card-body class="p4"]
-[button type="primary"]Primary[/button]
-[button type="secondary"]Secondary[/button]
-[button type="success"]Success[/button]
-[button type="danger"]Danger[/button]
-[button type="warning"]Warning[/button]
-[button type="info"]Info[/button]
-[button type="light"]Light[/button]
-[button type="dark"]Dark[/button]
-[button type="link"]Link[/button]
-[button tag="a" link="https://wordpress.org/plugins/complete-bootstrap-4-shortcodes/" target="_blank"]Hyperlink[/button]
-[/card-body]
-[card-footer][/card-footer]
-[/card]
-
-<hr class="m-5 wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-
-[card]
-[card-header class="lead"]Outlined buttons[/card-header]
-[card-body class="p4"]
-[button type="primary" outline]Primary[/button]
-[button type="secondary" outline]Secondary[/button]
-[button type="success" outline]Success[/button]
-[button type="danger" outline]Danger[/button]
-[button type="warning" outline]Warning[/button]
-[button type="info" outline]Info[/button]
-[button type="light" outline]Light[/button]
-[button type="dark" outline]Dark[/button]
-[button type="link" outline]Link[/button]
-[button outline tag="a" link="https://wordpress.org/plugins/complete-bootstrap-4-shortcodes/" target="_blank"]Hyperlink[/button]
-[/card-body]
-[card-footer][/card-footer]
-[/card]
-
-<hr class="m-5 wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-
-[card]
-[card-header class="lead"]Button size[/card-header]
-[card-body class="p4"]
-[button size="sm"]Small[/button]
-[button size="md"]Medium[/button]
-[button size="lg"]Large[/button]
-[/card-body]
-[card-footer][/card-footer]
-[/card]
-
-<hr class="m-5 wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-
-[card]
-[card-header class="lead"]Active buttons[/card-header]
-[card-body class="p4"]
-[button active]Button[/button]
-[button type="link" active]Link[/button]
-[/card-body]
-[card-footer][/card-footer]
-[/card]
-
-<hr class="m-5 wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-
-[card]
-[card-header class="lead"]Disabled buttons[/card-header]
-[card-body class="p4"]
-[button disabled]Button[/button]
-[button type="link" disabled]Link[/button]
-[/card-body]
-[card-footer][/card-footer]
-[/card]
-
-<hr class="m-5 wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-
-[card]
-[card-header class="lead"]Block level buttons[/card-header]
-[card-body class="p4"]
-[button block]Button 1[/button]
-[button type="secondary" block]Button 2[/button]
-[/card-body]
-[card-footer][/card-footer]
-[/card]
-
-<h2 class="mt-5">Button Groups</h2>
-
-[card]
-[card-header class="lead"]Basic example[/card-header]
-[card-body class="p4"]
-[button-group size="lg" justified]
-[button] Left [/button]
-[button] Middle [/button]
-[button] Right [/button]
-[/button-group]
-[/card-body]
-[card-footer]The large button group is justified and vertical. [/card-footer]
-[/card]
-
-<hr class="m-5 wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-
-[card]
-[card-header class="lead"]Button Toolbar[/card-header]
-[card-body class="p4"]
-[button-toolbar]
-[button-group class="mr-2"]
-[button] Left 1 [/button]
-[button] Middle 1 [/button]
-[button] Right 1 [/button]
-[/button-group]
-[button-group class="mr-2"]
-[button] Left 2 [/button]
-[button] Middle 2 [/button]
-[button] Right 2 [/button]
-[/button-group]
-[button-group]
-[button] Single [/button]
-[/button-group]
-[/button-toolbar]
-[/card-body]
-[card-footer]Combine sets of button groups into button toolbars for more complex components. Use utility classes as needed to space out groups, buttons, and more.[/card-footer]
-[/card]
-
-<h2 class="mt-5">Dropdowns</h2>
-
-[card]
-[card-header class="lead"]Single Button Dropdown[/card-header]
-[card-body class="p4"]
-[dropdown]
-[button type="warning" dropdown] Action[/button]
-[dropdown-menu]
-[dropdown-header] Header[/dropdown-header]
-[dropdown-item link="#"]Action[/dropdown-item]
-[dropdown-item link="#"]Another action[/dropdown-item]
-[dropdown-item link="#"]Something else here[/dropdown-item]
-[dropdown-divider]
-[dropdown-item link="#"]Separated link[/dropdown-item]
-[/dropdown-menu]
-[/dropdown]
-[/card-body]
-[card-footer]Any single [<code>button</code>] or link can be turned into a dropdown toggle with some markup changes.[/card-footer]
-[/card]
-
-<hr class="m-5 wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-
-[card]
-[card-header class="lead"]Split Button Dropdown[/card-header]
-[card-body class="p4"]
-[button-group]
-[button type="danger"] Split Action[/button]
-[button type="danger" dropdown split][/button]
-[dropdown-menu]
-[dropdown-item link="#"]Action[/dropdown-item]
-[dropdown-item link="#"]Another action[/dropdown-item]
-[dropdown-item link="#"]Something else here[/dropdown-item]
-[dropdown-divider]
-[dropdown-item link="#"]Separated link[/dropdown-item]
-[/dropdown-menu]
-[/button-group]
-[/card-body]
-[card-footer]Similarly, create split button dropdowns with virtually the same markup as single button dropdowns, but with the addition of <code>split</code> for proper spacing around the dropdown caret.[/card-footer]
-[/card]
-
-<hr class="m-5 wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-
-[card]
-[card-header class="lead"]Drop Variations[/card-header]
-[card-body class="p4"]
-[button-group drop="up"]
-[button] Drop Up [/button]
-[button dropdown][/button]
-[dropdown-menu]
-[dropdown-item link="#"] Action 1 [/dropdown-item]
-[dropdown-item link="#"] Action 2 [/dropdown-item]
-[dropdown-divider]
-[dropdown-item link="#"] Separated Action [/dropdown-item]
-[/dropdown-menu]
-[/button-group]
-[button-group drop="left"]
-[button] Drop left [/button]
-[button dropdown][/button]
-[dropdown-menu]
-[dropdown-item link="#"] Action 1 [/dropdown-item]
-[dropdown-item link="#"] Action 2 [/dropdown-item]
-[dropdown-divider]
-[dropdown-item link="#"] Separated Action [/dropdown-item]
-[/dropdown-menu]
-[/button-group]
-[button-group drop="right"]
-[button] Drop right [/button]
-[button dropdown][/button]
-[dropdown-menu]
-[dropdown-item link="#"] Action 1 [/dropdown-item]
-[dropdown-item link="#"] Action 2 [/dropdown-item]
-[dropdown-divider]
-[dropdown-item link="#"] Separated Action [/dropdown-item]
-[/dropdown-menu]
-[/button-group]
-[/card-body]
-[card-footer]Use <code>drop="up|left|right"</code> to show the dropdown over, left or right to the button or link.[/card-footer]
-[/card]
-
-<h2 class="mt-5">Navs</h2>
-
-[card]
-[card-header class="lead"]Simple Navigation Links[/card-header]
-[card-body class="p4"]
-[nav tabs]
-[nav-item link="#"] Link1 [/nav-item]
-[nav-item link="#"] Link2 [/nav-item]
-[nav-item link="#"] Link3 [/nav-item]
-[/nav]
-[/card-body]
-[card-footer][/card-footer]
-[/card]
-
-<hr class="m-5 wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-
-[card]
-[card-header class="lead"]Navigation Link and Dropdown with Pills[/card-header]
-[card-body class="p4"]
-[nav pills]
-[nav-item link="#" active] Active [/nav-item]
-[nav-item dropdown link="#"] Drop
-[dropdown-menu]
-  [dropdown-item link="#"] Link1 [/dropdown-item]
-  [dropdown-item link="#"] Link2 [/dropdown-item]
-[/dropdown-menu]
-[/nav-item]
-[nav-item link="#" disabled] Disabled [/nav-item]
-[/nav]
-[/card-body]
-[card-footer]Note: The [<code>dropdown-menu</code>] has to be inside the [<code>nav-item</code>]. [/card-footer]
-[/card]
-
-<hr class="m-5 wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-
-[card]
-[card-header class="lead"]Navigation Link and Dropdown with Tabs[/card-header]
-[card-body class="p4"]
-[nav tabs]
-[nav-item link="#" active] Active [/nav-item]
-[nav-item dropdown link="#"] Drop [dropdown-menu]
-  [dropdown-item link="#"] Link1 [/dropdown-item]
-  [dropdown-item link="#"] Link2 [/dropdown-item]
-[/dropdown-menu]
-[/nav-item]
-[nav-item link="#" disabled] Disabled [/nav-item]
-[/nav]
-[/card-body]
-[card-footer]Note: The [<code>dropdown-menu</code>] has to be inside the [<code>nav-item</code>]. [/card-footer]
-[/card]
-
-
-<hr class="m-5 wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-
-[card]
-[card-header class="lead"]Collapsible Navigation Bar[/card-header]
-[card-body class="p4"]
-<p>Light Color:</p>
-[navbar expand="md" class="navbar-light bg-light"]
-  [navbar-brand link="#"][img-gen type="circle" responsive size="150x50" text="Brand"][/navbar-brand]
-  [navbar-toggler]
-  [navbar-content]
-    [nav bar class="ml-auto"]
-      [nav-item link="#" active]Home[/nav-item]
-      [nav-item link="#"]Link[/nav-item]
-      [nav-item link="#"]Another Link[/nav-item]
-      [nav-item dropdown link="#"]Dropdown
-        [dropdown-menu]
-          [dropdown-header]Header[/dropdown-header]
-          [dropdown-item link="#"]Action[/dropdown-item]
-          [dropdown-item link="#"]Another action[/dropdown-item]
-          [dropdown-item link="#"]Something else here[/dropdown-item]
-          [dropdown-divider]
-          [dropdown-item link="#"]Separated link[/dropdown-item]
-        [/dropdown-menu]
-      [/nav-item]
-      [nav-item link="#" disabled]Disabled[/nav-item]
-    [/nav]
-  [/navbar-content]
-[/navbar]
-<p>Dark Color:</p>
-[navbar expand="md" class="navbar-dark bg-dark"]
-  [navbar-brand link="#"][img-gen type="circle" responsive size="150x50" text="Brand"][/navbar-brand]
-  [navbar-toggler]
-  [navbar-content]
-    [nav bar class="mr-auto"]
-      [nav-item link="#" active]Home[/nav-item]
-      [nav-item link="#"]Link[/nav-item]
-      [nav-item link="#"]Another Link[/nav-item]
-      [nav-item dropdown link="#"]Dropdown
-        [dropdown-menu]
-          [dropdown-header]Header[/dropdown-header]
-          [dropdown-item link="#"]Action[/dropdown-item]
-          [dropdown-item link="#"]Another action[/dropdown-item]
-          [dropdown-item link="#"]Something else here[/dropdown-item]
-          [dropdown-divider]
-          [dropdown-item link="#"]Separated link[/dropdown-item]
-        [/dropdown-menu]
-      [/nav-item]
-      [nav-item link="#" disabled]Disabled[/nav-item]
-    [/nav]
-  [/navbar-content]
-[/navbar]
-[/card-body]
-[card-footer]Narrow your browser window to see the menu bar collapse.[/card-footer]
-[/card]
-
-<hr class="m-5 wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-
-[card]
-[card-header class="lead"]Vertical Navigation Bar[/card-header]
-[card-body class="p4"]
-[navbar class="navbar-light bg-light"]
-    [nav bar class="mr-auto"]
-      [nav-item link="#" active]Home[/nav-item]
-      [nav-item link="#"]Link[/nav-item]
-      [nav-item link="#"]Another Link[/nav-item]
-      [nav-item dropdown link="#"]Dropdown
-        [dropdown-menu]
-          [dropdown-header]Header[/dropdown-header]
-          [dropdown-item link="#"]Action[/dropdown-item]
-          [dropdown-item link="#"]Another action[/dropdown-item]
-          [dropdown-item link="#"]Something else here[/dropdown-item]
-          [dropdown-divider]
-          [dropdown-item link="#"]Separated link[/dropdown-item]
-        [/dropdown-menu]
-      [/nav-item]
-      [nav-item link="#" disabled]Disabled[/nav-item]
-    [/nav]
-[/navbar]
-[/card-body]
-[card-footer]No Branding or toggler with the vertical navigation bar.[/card-footer]
-[/card]
-
-<h2 class="mt-5">Breadcrumb</h2>
-
-[card]
-[card-header class="lead"]Breadcrumb style links[/card-header]
-[card-body class="p4"]
-[breadcrumb]
-[breadcrumb-item link="#"] Pictures [/breadcrumb-item]
-[breadcrumb-item link="#"] Vacation [/breadcrumb-item]
-[breadcrumb-item link="#" active] 2020 [/breadcrumb-item]
-[/breadcrumb]
-[/card-body]
-[card-footer]Use <code>active</code> for the currently active breadcrumb.[/card-footer]
-[/card]
-
-<h2 class="mt-5">Badge</h2>
-
-[card class="w-50"]
-[card-header class="lead"]Badge styles[/card-header]
-[card-body class="p4"]
-New Messages[badge] 9 [/badge]​[br]
-New Messages[badge class="bg-primary"] 9 [/badge]​[br]
-New Messages[badge right] 9 [/badge]​
-[/card-body]
-[card-footer]Use utility <code>class</code> to format the badge and <code>right</code> to float the badge to align to the right of its container.[/card-footer]
-[/card]
-
-<h2 class="mt-5">Jumbotron</h2>
-
-[card]
-[card-header class="lead"]Normal Jumbotron[/card-header]
-[card-body class="p4"]
-[jumbotron]
-<h3>Header Line</h3>
-[lorem-ipsum]
-[/jumbotron]
-[/card-body]
-[card-footer][/card-footer]
-[/card]
-
-<hr class="m-5 wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-
-[card]
-[card-header class="lead"]Fluid Jumbotron[/card-header]
-[card-body class="p4"]
-[jumbotron fluid]
-<h3>Header Line</h3>
-[lorem-ipsum]
-[/jumbotron]
-[/card-body]
-[card-footer]The fluid jumbotron is still confined to its parent's container.[/card-footer]
-[/card]
-
-<h2 class="mt-5">Alerts</h2>
-
-[card]
-[card-header class="lead"]Alerts[/card-header]
-[card-body class="p4"]
-[alert] <strong> Default </strong> [lorem-ipsum words="4" tag='span'] [/alert][alert type="primary"] <strong> Primary </strong> [lorem-ipsum words="4" tag='span'] [/alert]
-[alert type="secondary"] <strong> Secondary </strong> [lorem-ipsum words="4" tag='span'] [/alert]
-[alert type="success"] <strong> Success </strong> [lorem-ipsum words="4" tag='span'] [/alert]
-[alert type="info"] <strong> Info </strong> [lorem-ipsum words="4" tag='span'] [/alert]
-[alert type="warning"] <strong> Warning </strong> [lorem-ipsum words="4" tag='span'] [/alert]
-[alert type="danger"] <strong> Danger </strong> [lorem-ipsum words="4" tag='span'] [/alert]
-[alert type="dark"] <strong> Dark </strong> [lorem-ipsum words="4" tag='span'] [/alert]
-[alert type="light"] <strong> Light </strong> [lorem-ipsum words="4" tag='span'] [/alert]
-[/card-body]
-[card-footer]Use the [code inline]alert-link[/code] class to quickly provide matching colored links within any alert. [/card-footer]
-[/card]
-
-<hr class="m-5 wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-
-[card]
-[card-header class="lead"]Dismissible Alerts[/card-header]
-[card-body class="p4"]
-[alert dismissible type="primary"] <strong> Primary </strong> [lorem-ipsum words="4" tag='span'] [/alert]
-[alert dismissible type="secondary"] <strong> Secondary </strong> [lorem-ipsum words="4" tag='span'] [/alert]
-[alert dismissible type="success"] <strong> Success </strong> [lorem-ipsum words="4" tag='span'] [/alert]
-[alert dismissible type="info"] <strong> Info </strong> [lorem-ipsum words="4" tag='span'] [/alert]
-[alert dismissible type="warning"] <strong> Warning </strong> [lorem-ipsum words="4" tag='span'] [/alert]
-[alert dismissible type="danger"] <strong> Danger </strong> [lorem-ipsum words="4" tag='span'] [/alert]
-[alert dismissible type="dark"] <strong> Dark </strong> [lorem-ipsum words="4" tag='span'] [/alert]
-[alert dismissible type="light"] <strong> Light </strong> [lorem-ipsum words="4" tag='span'] [/alert]
-[/card-body]
-[card-footer][/card-footer]
-[/card]
-
-<hr class="m-5 wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-
-[card]
-[card-header class="lead"]Dismissible Alerts with Fade Effect[/card-header]
-[card-body class="p4"]
-[alert dismissible fade type="primary"] <strong> Primary </strong> [lorem-ipsum words="4" tag='span'] [/alert]
-[alert dismissible fade type="secondary"] <strong> Secondary </strong> [lorem-ipsum words="4" tag='span'] [/alert]
-[alert dismissible fade type="success"] <strong> Success </strong> [lorem-ipsum words="4" tag='span'] [/alert]
-[alert dismissible fade type="info"] <strong> Info </strong> [lorem-ipsum words="4" tag='span'] [/alert]
-[alert dismissible fade type="warning"] <strong> Warning </strong> [lorem-ipsum words="4" tag='span'] [/alert]
-[alert dismissible fade type="danger"] <strong> Danger </strong> [lorem-ipsum words="4" tag='span'] [/alert]
-[alert dismissible fade type="dark"] <strong> Dark </strong> [lorem-ipsum words="4" tag='span'] [/alert]
-[alert dismissible fade type="light"] <strong> Light </strong> [lorem-ipsum words="4" tag='span'] [/alert]
-[/card-body]
-[card-footer][/card-footer]
-[/card]
-
-<h2 class="mt-5">Progress Bar</h2>
-
-[card]
-[card-header class="lead"]Progress Bar Styles[/card-header]
-[card-body class="p4"]
-[card-header]Simple[/card-header]
-[progress]
-[progress-bar percent="50"]
-[/progress]
-[card-header]Striped[/card-header]
-[progress]
-[progress-bar striped percent="50"]
-[/progress]
-[card-header]Striped and Animated[/card-header]
-[progress]
-[progress-bar striped animated percent="50"]
-[/progress]
-[card-header]Stacked[/card-header]
-[progress]
-[progress-bar striped percent="50"]
-[progress-bar striped percent="25" type="success"]
-[progress-bar striped percent="5" type="danger"]
-[/progress]
-[card-header]Stacked and Labeled[/card-header]
-[progress]
-[progress-bar label percent="50"]
-[progress-bar label percent="25" type="success"]
-[progress-bar label percent="5" type="danger"]
-[/progress]
-[/card-body]
-[card-footer][/card-footer]
-[/card]
-
-<h2 class="mt-5">Media Object</h2>
-
-[card]
-[card-header class="lead"]Top Aligned Media[/card-header]
-[card-body class="p4"]
-[media]
-[media-object class="mr-3"]
-[img responsive][img-gen size="150" text="Demo"][/img]
-[/media-object]
-[media-body]
-Header
-[lorem-ipsum sentences="3"]
-[/media-body]
-[/media]
-[/card-body]
-[card-footer][/card-footer]
-[/card]
-
-<hr class="m-5 wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-
-[card]
-[card-header class="lead"]Center Aligned[/card-header]
-[card-body class="p4"]
-[media]
-[media-object align="center" class="mr-3"]
-[img responsive][img-gen size="150" text="Demo"][/img]
-[/media-object]
-[media-body]
-Header
-[lorem-ipsum sentences="3"]
-[/media-body]
-[/media]
-[/card-body]
-[card-footer][/card-footer]
-[/card]
-
-<hr class="m-5 wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-
-[card]
-[card-header class="lead"]Bottom Aligned[/card-header]
-[card-body class="p4"]
-[media]
-[media-object align="end" class="mr-3"]
-[img responsive][img-gen size="150" text="Demo"][/img]
-[/media-object]
-[media-body]
-Header
-[lorem-ipsum sentences="3"]
-[/media-body]
-[/media]
-[/card-body]
-[card-footer][/card-footer]
-[/card]
-
-<hr class="m-5 wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-
-[card]
-[card-header class="lead"]Nested[/card-header]
-[card-body class="p4"]
-[media-outer]
-[media-object class="mr-3"]
-[img responsive][img-gen size="150" text="Demo"][/img]
-[/media-object]
-[media-body-outer]
-Outer Header
-[lorem-ipsum sentences="3"]
-[media]
-[media-object class="mr-3"]
-[img responsive][img-gen size="150" text="Demo"][/img]
-[/media-object]
-[media-body]
-Inner Header
-[lorem-ipsum sentences="3"]
-[/media-body]
-[/media]
-[/media-body-outer]
-[/media-outer]
-[/card-body]
-[card-footer][/card-footer]
-[/card]
-
-<h2 class="mt-5">List Groups</h2>
-
-[card]
-[card-header class="lead"]Basic List Group[/card-header]
-[card-body class="p4"]
-[list-group]
-[list-group-item]
-[lorem-ipsum]
-[/list-group-item]
-[list-group-item]
-[lorem-ipsum]
-[/list-group-item]
-[list-group-item]
-[lorem-ipsum]
-[/list-group-item]
-[/list-group]
-[/card-body]
-[card-footer][/card-footer]
-[/card]
-
-<hr class="m-5 wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-
-[card]
-[card-header class="lead"]Linked Items[/card-header]
-[card-body class="p4"]
-[list-group linked]
-[list-group-item active]<a href="#">Active</a>[/list-group-item]
-[list-group-item disabled]<a href="#">Disabled</a>[/list-group-item]
-[list-group-item]<a href="#">Link 1</a>[/list-group-item]
-[list-group-item]<a href="#">Link 2</a>[/list-group-item]
-[/list-group]
-[/card-body]
-[card-footer][/card-footer]
-[/card]
-
-<hr class="m-5 wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-
-[card]
-[card-header class="lead"]Media List Group[/card-header]
-[card-body class="p4"]
-[list-group media]
-[media list-group]
-[media-object class="mr-3"]
-[img responsive][img-gen size="150" text="Demo 1" bg="f00"][/img]
-[/media-object]
-[media-body]
-<h3>Header 1</h3>
-[lorem-ipsum sentences="3"]
-[/media-body]
-[/media]
-[media list-group class="mt-4"]
-[media-object class="mr-3"]
-[img responsive][img-gen size="150" text="Demo 2" bg="0f0"][/img]
-[/media-object]
-[media-body]
-<h3>Header 2</h3>
-[lorem-ipsum sentences="3"]
-[/media-body]
-[/media]
-[media list-group class="mt-4"]
-[media-object class="mr-3"]
-[img responsive][img-gen size="150" text="Demo 3" bg="00f"][/img]
-[/media-object]
-[media-body]
-<h3>Header 3</h3>
-[lorem-ipsum sentences="3"]
-[/media-body]
-[/media]
-[/list-group]​
-[/card-body]
-[card-footer]Use the [code inline]media[/code] flag at the [code inline][list-group][/code] tag and the [code inline]list-group[/code] flag at the [code inline][media][/code] tag.[/card-footer]
-[/card]
-
-<h2 class="mt-5">Code</h2>
-[card]
-[card-header class="lead"]Code Snippet[/card-header]
-[card-body class="p4"]
-[code]&lt;h4 id="-modal-footer-parameters"&gt;modal-footer parameters&lt;/h4&gt;<br>&lt;table&gt;<br>&lt;thead&gt;<br>&lt;tr&gt;<br>&lt;th&gt;Parameter&lt;/th&gt;<br>&lt;th&gt;Description&lt;/th&gt;<br>&lt;th&gt;Required&lt;/th&gt;<br>&lt;th&gt;Values&lt;/th&gt;<br>q&lt;th&gt;Default&lt;/th&gt;<br>&lt;/tr&gt;<br>&lt;/thead&gt;<br>&lt;tbody&gt;<br>&lt;tr&gt;<br>&lt;td&gt;class&lt;/td&gt;<br>&lt;td&gt;Any extra classes you want to add&lt;/td&gt;<br>&lt;td&gt;optional&lt;/td&gt;<br>&lt;td&gt;any text&lt;/td&gt;<br>&lt;td&gt;none&lt;/td&gt;<br>&lt;/tr&gt;<br>&lt;tr&gt;<br>&lt;td&gt;data&lt;/td&gt;<br>&lt;td&gt;Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at &lt;a href="#container-parameters"&gt;container parameters&lt;/a&gt;.&lt;/td&gt;<br>&lt;td&gt;optional&lt;/td&gt;<br>&lt;td&gt;any text&lt;/td&gt;<br>&lt;td&gt;none&lt;/td&gt;<br>&lt;/tr&gt;<br>&lt;/tbody&gt;<br>&lt;/table&gt;<br>[/code]
-[/card-body]
-[card-footer]
-[/card-footer]
-[/card]
-
-<hr class="m-5 wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-
-<p>[card]<br>[card-header class="lead"]Scrollable Code Snippet[/card-header]<br>[card-body class="p4"]</p>
-<p>[code scrollable]<br>&lt;h4 id="-modal-footer-parameters"&gt;modal-footer parameters&lt;/h4&gt;<br>&lt;table&gt;<br>&lt;thead&gt;<br>&lt;tr&gt;<br>&lt;th&gt;Parameter&lt;/th&gt;<br>&lt;th&gt;Description&lt;/th&gt;<br>&lt;th&gt;Required&lt;/th&gt;<br>&lt;th&gt;Values&lt;/th&gt;<br>q&lt;th&gt;Default&lt;/th&gt;<br>&lt;/tr&gt;<br>&lt;/thead&gt;<br>&lt;tbody&gt;<br>&lt;tr&gt;<br>&lt;td&gt;class&lt;/td&gt;<br>&lt;td&gt;Any extra classes you want to add&lt;/td&gt;<br>&lt;td&gt;optional&lt;/td&gt;<br>&lt;td&gt;any text&lt;/td&gt;<br>&lt;td&gt;none&lt;/td&gt;<br>&lt;/tr&gt;<br>&lt;tr&gt;<br>&lt;td&gt;data&lt;/td&gt;<br>&lt;td&gt;Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at &lt;a href="#container-parameters"&gt;container parameters&lt;/a&gt;.&lt;/td&gt;<br>&lt;td&gt;optional&lt;/td&gt;<br>&lt;td&gt;any text&lt;/td&gt;<br>&lt;td&gt;none&lt;/td&gt;<br>&lt;/tr&gt;<br>&lt;/tbody&gt;<br>&lt;/table&gt;<br>[/code]</p>
-<p>[/card-body]<br>[card-footer][/card-footer]<br>[/card]</p>
-
-<hr class="m-5 wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-
-<p>[card]<br>[card-header class="lead"]Inline Code[/card-header]<br>[card-body class="p4"]</p>
-<p>Use the [code inline]media[/code] flag at the [code inline]list-group[/code] tag and the [code inline]listgroup[/code] flag at the [code inline]media[/code] tag.</p>
-<p>[/card-body]<br>[card-footer][/card-footer]<br>[/card]</p>
-
-<hr class="m-5 wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-
-<h2 class="mt-5">Tables</h2>
-
-[table-wrap responsive bordered striped class="xxx yyy zzz"]
-<table>
-<thead>
-<tr>
-<th>Header 1</th>
-<th>Header 2</th>
-<th>Header 3</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>A</td>
-<td>1</td>
-<td>5%</td>
-</tr>
-<tr>
-<td>B</td>
-<td>2</td>
-<td>10%</td>
-</tr>
-<tr>
-<td>C</td>
-<td>3</td>
-<td>15%</td>
-</tr>
-<tr>
-<td>D</td>
-<td>4</td>
-<td>20%</td>
-</tr>
-<tr>
-<td>E</td>
-<td>5</td>
-<td>25%</td>
-</tr>
-<tr>
-<td>F</td>
-<td>6</td>
-<td>30%</td>
-</tr>
-<tr>
-<td>G</td>
-<td>7</td>
-<td>35%</td>
-</tr>
-<tr>
-<td>H</td>
-<td>8</td>
-<td>40%</td>
-</tr>
-<tr>
-<td>I</td>
-<td>9</td>
-<td>45%</td>
-</tr>
-<tr>
-<td>J</td>
-<td>10</td>
-<td>50%</td>
-</tr>
-<tr>
-<td>K</td>
-<td>11</td>
-<td>55%</td>
-</tr>
-</tbody>
-<tfoot>
-<tr>
-<th colspan="3">Total</th>
-</tr>
-</tfoot>
-</table>
-[/table-wrap]
-
-<h2 class="mt-5">Images</h2>
-
-[card]
-[card-header class="lead"]Images[/card-header]
-[card-body class="p4"]
-[img-gen size="200" file="jpg" bg="C00" color="ff0" text="Normal"]
-[img responsive][img-gen size="200" file="jpg" bg="C00" color="ff0" text="Responsive"][/img]
-[/card-body]
-[card-footer] Some bootstrap themes already have their <code>[[img]]</code> tag set to [code inline]responsive[/code]. [/card-footer]
-[/card]
-
-<hr class="m-5 wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-
-[card]
-[card-header class="lead"]Image Borders and Thumbnails[/card-header]
-[card-body class="p4"]
-[img responsive thumbnail class="mr-3"][img-gen size="200" file="jpg" bg="C00" color="ff0" text="Normal"][/img]
-[img responsive thumbnail class="mr-3"][border radius="all"][img-gen size="200" file="jpg" bg="C00" color="ff0" text="Rounded"][/border][/img]
-[img responsive thumbnail class="mr-3"][border radius="all" size="lg"][img-gen size="200" file="jpg" bg="C00" color="ff0" text="Rounded Large"][/border][/img]
-[img responsive thumbnail class="mr-3"][border radius="circle"][img-gen size="200" file="jpg" bg="C00" color="ff0" text="Circle"][/border][/img]
-[img responsive thumbnail class="mr-3"][border radius="pill"][img-gen size="200x150" file="jpg" bg="C00" color="ff0" text="Pill"][/border][/img]
-[/card-body]
-[card-footer] Images generated with [code inline]img-gen[/code]. [/card-footer]
-[/card]
-
-<h2 class="mt-5">Figures</h2>
-
-[card]
-[card-header class="lead"]Image with Text above[/card-header]
-[card-body class="p4"]
-[figure class="p-2"]
-  [figure-caption]A caption for the below image.[/figure-caption]
-  [img-gen size="300" class="rounded"]
-[/figure]
-[figure class="p-2"]
-  [figure-caption class="text-right"]A caption for the below image.[/figure-caption]
-  [img-gen size="300" class="rounded"]
-[/figure]
-[/card-body]
-[card-footer] Images generated with [code inline]img-gen[/code]. [/card-footer]
-[/card]
-
-<hr class="m-5 wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-
-[card]
-[card-header class="lead"]Image with Text below[/card-header]
-[card-body class="p4"]
-[figure class="p-2"]
-  [img-gen size="300" class="rounded"]
-  [figure-caption]A caption for the above image.[/figure-caption]
-[/figure]
-[figure class="p-2"]
-  [img-gen size="300" class="rounded"]
-  [figure-caption class="text-right"]A caption for the above image.[/figure-caption]
-[/figure]
-[/card-body]
-[card-footer] Images generated with [code inline]img-gen[/code]. [/card-footer]
-[/card]
-
-<h2 class="mt-5">Blockquote</h2>
-
-[card]
-[card-header class="lead"]Blockquote[/card-header]
-[card-body class="p4"]
-[blockquote]
-[lorem-ipsum sentences="2"]
-[blockquote-footer]
-Automatically created by lorem ipsum generator
-[/blockquote-footer]
-[/blockquote]​
-[/card-body]
-[card-footer] Images generated with [code inline]img-gen[/code]. [/card-footer]
-[/card]
-
-<h2 class="mt-5">Lead</h2>
-
-[card]
-[card-header class="lead"]Lead[/card-header]
-[card-body class="p4"]
-[lead][lorem-ipsum sentences="1"][/lead]
-[lorem-ipsum sentences="1"]
-[/card-body]
-[card-footer] First paragraph uses [code inline]lead[/code]. [/card-footer]
-[/card]
-
-<h2 class="mt-5">​Border</h2>
-
-[card]
-[card-header class="lead"]Colored Text Examples[/card-header]
-[card-body class="p4"]
-[border color="dark"] [lorem-ipsum class="p-3"] [/border]
-[border radius="pill" color="danger"] [lorem-ipsum class="p-3"] [/border]
-[border radius="top" color="info"] [lorem-ipsum class="p-3"] [/border]
-[/card-body]
-[card-footer] [/card-footer]
-[/card]
-
-<h2 class="mt-5">Color</h2>
-
-[card]
-[card-header class="lead"]Colored Text Examples[/card-header]
-[card-body class="p4"]
-[color bg="primary" text="white"][lorem-ipsum class="p-2"][/color]
-[color bg="info" text="black"][lorem-ipsum class="p-2"][/color]
-[/card-body]
-[card-footer] [/card-footer]
-[/card]
-
-<h2 class="mt-5">Flex</h2>
-
-[card]
-[card-header class="lead"]Flex Row[/card-header]
-[card-body class="p4"]
-[flex class="p-3 bg-secondary text-white"]
-[flex-item class="p-2 bg-info"]Flex item 1[/flex-item]
-[flex-item class="p-2 bg-warning"]Flex item 2[/flex-item]
-[flex-item class="p-2 bg-primary"]Flex item 3[/flex-item]
-[flex-item class="p-2 bg-info"]Flex item 4[/flex-item]
-[flex-item class="p-2 bg-warning"]Flex item 5[/flex-item]
-[flex-item class="p-2 bg-primary"]Flex item 6[/flex-item]
-[/flex]
-[/card-body]
-[card-footer] [/card-footer]
-[/card]
-
-<hr class="m-5 wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-
-[card]
-[card-header class="lead"]Flex Reverse Row[/card-header]
-[card-body class="p4"]
-[flex direction="row-reverse" class="p-3 bg-secondary text-white"]
-[flex-item class="p-2 bg-info"]Flex item 1[/flex-item]
-[flex-item class="p-2 bg-warning"]Flex item 2[/flex-item]
-[flex-item class="p-2 bg-primary"]Flex item 3[/flex-item]
-[flex-item class="p-2 bg-info"]Flex item 4[/flex-item]
-[flex-item class="p-2 bg-warning"]Flex item 5[/flex-item]
-[flex-item class="p-2 bg-primary"]Flex item 6[/flex-item]
-[/flex]
-[/card-body]
-[card-footer] [/card-footer]
-[/card]
-
-<hr class="m-5 wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-
-[card]
-[card-header class="lead"]Inline Flex[/card-header]
-[card-body class="p4"]
-[flex inline class="p-3 bg-secondary text-white"]
-[flex-item class="p-2 bg-info"]Flex item 1[/flex-item]
-[flex-item class="p-2 bg-warning"]Flex item 2[/flex-item]
-[flex-item class="p-2 bg-primary"]Flex item 3[/flex-item]
-[flex-item class="p-2 bg-info"]Flex item 4[/flex-item]
-[flex-item class="p-2 bg-warning"]Flex item 5[/flex-item]
-[flex-item class="p-2 bg-primary"]Flex item 6[/flex-item]
-[/flex]
-[/card-body]
-[card-footer] [/card-footer]
-[/card]
-
-<hr class="m-5 wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-
-[card]
-[card-header class="lead"]Inline Reverse Row Flex[/card-header]
-[card-body class="p4"]
-[flex inline direction="row-reverse" class="p-3 bg-secondary text-white"]
-[flex-item class="p-2 bg-info"]Flex item 1[/flex-item]
-[flex-item class="p-2 bg-warning"]Flex item 2[/flex-item]
-[flex-item class="p-2 bg-primary"]Flex item 3[/flex-item]
-[flex-item class="p-2 bg-info"]Flex item 4[/flex-item]
-[flex-item class="p-2 bg-warning"]Flex item 5[/flex-item]
-[flex-item class="p-2 bg-primary"]Flex item 6[/flex-item]
-[/flex]
-[/card-body]
-[card-footer] [/card-footer]
-[/card]
-
-<hr class="m-5 wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-
-[card]
-[card-header class="lead"]Flex Column[/card-header]
-[card-body class="p4"]
-[flex direction="column" class="p-3 bg-secondary text-white"]
-[flex-item class="p-2 bg-info"]Flex item 1[/flex-item]
-[flex-item class="p-2 bg-warning"]Flex item 2[/flex-item]
-[flex-item class="p-2 bg-primary"]Flex item 3[/flex-item]
-[flex-item class="p-2 bg-info"]Flex item 4[/flex-item]
-[flex-item class="p-2 bg-warning"]Flex item 5[/flex-item]
-[flex-item class="p-2 bg-primary"]Flex item 6[/flex-item]
-[/flex]
-[/card-body]
-[card-footer] [/card-footer]
-[/card]
-
-<hr class="m-5 wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-
-[card]
-[card-header class="lead"]Flex Reverse Column[/card-header]
-[card-body class="p4"]
-[flex direction="column-reverse" class="p-3 bg-secondary text-white"]
-[flex-item class="p-2 bg-info"]Flex item 1[/flex-item]
-[flex-item class="p-2 bg-warning"]Flex item 2[/flex-item]
-[flex-item class="p-2 bg-primary"]Flex item 3[/flex-item]
-[flex-item class="p-2 bg-info"]Flex item 4[/flex-item]
-[flex-item class="p-2 bg-warning"]Flex item 5[/flex-item]
-[flex-item class="p-2 bg-primary"]Flex item 6[/flex-item]
-[/flex]
-[/card-body]
-[card-footer] [/card-footer]
-[/card]
-
-<hr class="m-5 wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-
-[card]
-[card-header class="lead"]Flex Justify Center[/card-header]
-[card-body class="p4"]
-[flex justify="center" class="p-3 bg-secondary text-white"]
-[flex-item class="p-2 bg-info"]Flex item 1[/flex-item]
-[flex-item class="p-2 bg-warning"]Flex item 2[/flex-item]
-[flex-item class="p-2 bg-primary"]Flex item 3[/flex-item]
-[flex-item class="p-2 bg-info"]Flex item 4[/flex-item]
-[flex-item class="p-2 bg-warning"]Flex item 5[/flex-item]
-[flex-item class="p-2 bg-primary"]Flex item 6[/flex-item]
-[/flex]
-[/card-body]
-[card-footer] [/card-footer]
-[/card]
-
-<hr class="m-5 wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-
-<style>.h150px{height:150px;}</style>
-[card]
-[card-header class="lead"]Flex Align Items Center[/card-header]
-[card-body class="p4"]
-[flex align-items="center" class="h150px p-3 bg-secondary text-white"]
-[flex-item class="p-2 bg-info"]Flex item 1[/flex-item]
-[flex-item class="p-2 bg-warning"]Flex item 2[/flex-item]
-[flex-item class="p-2 bg-primary"]Flex item 3[/flex-item]
-[flex-item class="p-2 bg-info"]Flex item 4[/flex-item]
-[flex-item class="p-2 bg-warning"]Flex item 5[/flex-item]
-[flex-item class="p-2 bg-primary"]Flex item 6[/flex-item]
-[/flex]
-[/card-body]
-[card-footer] The flex container has a fixed height of 150px. [/card-footer]
-[/card]
-
-<hr class="m-5 wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-
-[card]
-[card-header class="lead"]Flex Item Self-Align[/card-header]
-[card-body class="p4"]
-[flex class="p-3 bg-secondary text-white"]
-[flex-item class="p-2 bg-info"]Flex[br]item[br]1[/flex-item]
-[flex-item align="start" class="p-2 bg-warning"]Flex item 2[/flex-item]
-[flex-item class="p-2 bg-primary"]Flex[br]item[br]3[/flex-item]
-[flex-item align="center" class="p-2 bg-info"]Flex item 4[/flex-item]
-[flex-item class="p-2 bg-warning"]Flex[br]item[br]5[/flex-item]
-[flex-item align="end" class="p-2 bg-primary"]Flex item 6[/flex-item]
-[/flex]
-[/card-body]
-[card-footer] 2 is aligned at <code>start</code>, 4 at <code>center</code> and 6 at <code>end</code> [/card-footer]
-[/card]
-
-<hr class="m-5 wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-
-[card]
-[card-header class="lead"]Flex Wrap[/card-header]
-[card-body class="p4"]
-[card-title]No Wrap[/card-title]
-[flex class="p-3 bg-secondary text-white"]
-[flex-item class="p-2 bg-info"]Flex item 1[/flex-item]
-[flex-item class="p-2 bg-warning"]Flex item 2[/flex-item]
-[flex-item class="p-2 bg-primary"]Flex item 3[/flex-item]
-[flex-item class="p-2 bg-info"]Flex item 4[/flex-item]
-[flex-item class="p-2 bg-warning"]Flex item 5[/flex-item]
-[flex-item class="p-2 bg-primary"]Flex item 6[/flex-item]
-[flex-item class="p-2 bg-info"]Flex item 7[/flex-item]
-[flex-item class="p-2 bg-warning"]Flex item 8[/flex-item]
-[flex-item class="p-2 bg-primary"]Flex item 9[/flex-item]
-[flex-item class="p-2 bg-danger"]Flex item 10[/flex-item]
-[flex-item class="p-2 bg-info"]Flex item 11[/flex-item]
-[flex-item class="p-2 bg-warning"]Flex item 12[/flex-item]
-[flex-item class="p-2 bg-primary"]Flex item 13[/flex-item]
-[flex-item class="p-2 bg-info"]Flex item 14[/flex-item]
-[flex-item class="p-2 bg-warning"]Flex item 15[/flex-item]
-[flex-item class="p-2 bg-primary"]Flex item 16[/flex-item]
-[flex-item class="p-2 bg-info"]Flex item 17[/flex-item]
-[flex-item class="p-2 bg-warning"]Flex item 18[/flex-item]
-[flex-item class="p-2 bg-primary"]Flex item 19[/flex-item]
-[flex-item class="p-2 bg-danger"]Flex item 20[/flex-item]
-[/flex]
-[card-title]Wrap[/card-title]
-[flex wrap="true" class="p-3 bg-secondary text-white"]
-[flex-item class="p-2 bg-info"]Flex item 1[/flex-item]
-[flex-item class="p-2 bg-warning"]Flex item 2[/flex-item]
-[flex-item class="p-2 bg-primary"]Flex item 3[/flex-item]
-[flex-item class="p-2 bg-info"]Flex item 4[/flex-item]
-[flex-item class="p-2 bg-warning"]Flex item 5[/flex-item]
-[flex-item class="p-2 bg-primary"]Flex item 6[/flex-item]
-[flex-item class="p-2 bg-info"]Flex item 7[/flex-item]
-[flex-item class="p-2 bg-warning"]Flex item 8[/flex-item]
-[flex-item class="p-2 bg-primary"]Flex item 9[/flex-item]
-[flex-item class="p-2 bg-danger"]Flex item 10[/flex-item]
-[flex-item class="p-2 bg-info"]Flex item 11[/flex-item]
-[flex-item class="p-2 bg-warning"]Flex item 12[/flex-item]
-[flex-item class="p-2 bg-primary"]Flex item 13[/flex-item]
-[flex-item class="p-2 bg-info"]Flex item 14[/flex-item]
-[flex-item class="p-2 bg-warning"]Flex item 15[/flex-item]
-[flex-item class="p-2 bg-primary"]Flex item 16[/flex-item]
-[flex-item class="p-2 bg-info"]Flex item 17[/flex-item]
-[flex-item class="p-2 bg-warning"]Flex item 18[/flex-item]
-[flex-item class="p-2 bg-primary"]Flex item 19[/flex-item]
-[flex-item class="p-2 bg-danger"]Flex item 20[/flex-item]
-[/flex]
-[card-title]Reverse Wrap[/card-title]
-[flex wrap="reverse" class="p-3 bg-secondary text-white"]
-[flex-item class="p-2 bg-info"]Flex item 1[/flex-item]
-[flex-item class="p-2 bg-warning"]Flex item 2[/flex-item]
-[flex-item class="p-2 bg-primary"]Flex item 3[/flex-item]
-[flex-item class="p-2 bg-info"]Flex item 4[/flex-item]
-[flex-item class="p-2 bg-warning"]Flex item 5[/flex-item]
-[flex-item class="p-2 bg-primary"]Flex item 6[/flex-item]
-[flex-item class="p-2 bg-info"]Flex item 7[/flex-item]
-[flex-item class="p-2 bg-warning"]Flex item 8[/flex-item]
-[flex-item class="p-2 bg-primary"]Flex item 9[/flex-item]
-[flex-item class="p-2 bg-danger"]Flex item 10[/flex-item]
-[flex-item class="p-2 bg-info"]Flex item 11[/flex-item]
-[flex-item class="p-2 bg-warning"]Flex item 12[/flex-item]
-[flex-item class="p-2 bg-primary"]Flex item 13[/flex-item]
-[flex-item class="p-2 bg-info"]Flex item 14[/flex-item]
-[flex-item class="p-2 bg-warning"]Flex item 15[/flex-item]
-[flex-item class="p-2 bg-primary"]Flex item 16[/flex-item]
-[flex-item class="p-2 bg-info"]Flex item 17[/flex-item]
-[flex-item class="p-2 bg-warning"]Flex item 18[/flex-item]
-[flex-item class="p-2 bg-primary"]Flex item 19[/flex-item]
-[flex-item class="p-2 bg-danger"]Flex item 20[/flex-item]
-[/flex]
-[/card-body]
-[card-footer] [/card-footer]
-[/card]
-
-<hr class="m-5 wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-
-[card]
-[card-header class="lead"]Flex Row Fill[/card-header]
-[card-body class="p4"]
-[flex class="p-3 bg-secondary text-white"]
-[flex-item fill class="p-2 bg-info"]Flex item 1[/flex-item]
-[flex-item fill class="p-2 bg-warning"]Flex item 2[/flex-item]
-[flex-item fill class="p-2 bg-primary"]Flex item 3[/flex-item]
-[/flex]
-[/card-body]
-[card-footer] [/card-footer]
-[/card]
-
-<hr class="m-5 wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-
-[card]
-[card-header class="lead"]Flex Grow[/card-header]
-[card-body class="p4"]
-[flex class="p-3 bg-secondary text-white"]
-[flex-item grow class="p-2 bg-info"]Flex grow item 1[/flex-item]
-[flex-item class="p-2 bg-warning"]Flex item 2[/flex-item]
-[flex-item class="p-2 bg-primary"]Flex item 3[/flex-item]
-[/flex]
-[/card-body]
-[card-footer] [/card-footer]
-[/card]
-
-<hr class="m-5 wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-
-[card]
-[card-header class="lead"]Flex Shrink[/card-header]
-[card-body class="p4"]
-[flex class="p-3 bg-secondary text-white"]
-[flex-item shrink class="p-2 bg-info"]Flex shrink item 1[/flex-item]
-[flex-item class="w-50 p-2 bg-warning"]Flex item 2[/flex-item]
-[flex-item class="w-50 p-2 bg-primary"]Flex item 3[/flex-item]
-[/flex]
-[/card-body]
-[card-footer] [/card-footer]
-[/card]
-
-<hr class="m-5 wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-
-[card]
-[card-header class="lead"]Flex No Shrink[/card-header]
-[card-body class="p4"]
-[flex class="p-3 bg-secondary text-white"]
-[flex-item no-shrink class="p-2 bg-info"]Flex no-shrink item 1[/flex-item]
-[flex-item class="w-50 p-2 bg-warning"]Flex item 2[/flex-item]
-[flex-item class="w-50 p-2 bg-primary"]Flex item 3[/flex-item]
-[/flex]
-[/card-body]
-[card-footer] [/card-footer]
-[/card]
-
-<h2 class="mt-5">Tooltip</h2>
-
-[card]
-[card-header class="lead"]Tooltip Examples[/card-header]
-[card-body class="p4"]
-[tooltip title="I'm the title" placement="auto" animation][button outline class="mr-3"] Auto [/button][/tooltip]
-[tooltip title="I'm the title" placement="left"][button outline class="mr-3"] Left [/button][/tooltip]
-[tooltip title="I'm the title" placement="top"][button outline class="mr-3"] Top [/button][/tooltip]
-[tooltip title="I'm the title" placement="bottom"][button outline class="mr-3"] Bottom [/button][/tooltip]
-[tooltip title="I'm the title" placement="right"][button outline class="mr-3"] Right [/button][/tooltip]
-[tooltip title="I'm the <b>title</b> with <u>HTML</u>" placement="top" html][button outline] HTML [/button][/tooltip]
-[/card-body]
-[card-footer] Tooltips work best with [code inline][button][/code]s or links but can be attached to any element. [/card-footer]
-[/card]
-
-<h2 class="mt-5">Popover</h2>
-
-[card]
-[card-header class="lead"]popover Examples[/card-header]
-[card-body class="p4"]
-[popover title="I'm the title" content="And this is the content" placement="auto" animation][button outline class="mr-3"] Auto [/button][/popover]
-[popover title="I'm the title" content="And this is the content" placement="left"][button outline class="mr-3"] Left [/button][/popover]
-[popover title="I'm the title" content="And this is the content" placement="top"][button outline class="mr-3"] Top [/button][/popover]
-[popover title="I'm the title" content="And this is the content" placement="bottom"][button outline class="mr-3"] Bottom [/button][/popover]
-[popover title="I'm the title" content="And this is the content" placement="right"][button outline class="mr-3"] Right [/button][/popover]
-[popover title="I'm the <b>title</b> with <u>HTML</u>" content="And this is the <b>content</b> <u>with even more</u> <em>HTML</em>" placement="top" html][button outline] HTML [/button][/popover]
-[/card-body]
-[card-footer] Popovers work best with [code inline][button][/code]s or links but can be attached to any element. [/card-footer]
-[/card]
-
-<h2 class="mt-5">Accordion</h2>
-
-[card-outer]
-[card-header class="lead"]Basic Accordion[/card-header]
-[card-body-outer class="p4"]
-[accordion]
-    [card show]
-        [card-header] Header 1 [/card-header]
-        [card-body] [lorem-ipsum] [/card-body]
+<!-- wp:html -->
+<style type="text/css">
+.main-accordion span.large { font-size: 1.40625rem !important; }
+</style>
+<p>A successful online presence requires more than just a great and engaging webpage. We offer a turnkey end-to-end solution that covers all aspects from registering the domain name to opening and configuring web hosting to registering business listing accounts to designing and publishing the webpage to collecting analytics data:</p>
+
+<p class="small">(Click on headline to see the details.)</p>
+
+[accordion class="main-accordion mb-2"]
+    [card class="mb-3 border-bottom"]
+        [card-header]<span class="large"><i class="fas fa-fw fa-2x mr-2 fa-globe-americas"></i> Domain Name</span>[/card-header]
+        [card-body] We will register your domain name (yourdomain.com) should you not yet have one. Otherwise, we configure your existing one to point to the application hosting that we will set up for you. [/card-body]
     [/card]
-    [card]
-        [card-header] Header 2 [/card-header]
-        [card-body][lorem-ipsum][/card-body]
+    [card class="mb-3 border-bottom"]
+        [card-header]<span class="large"><i class="fas fa-fw fa-2x mr-2 fa-server"></i> Application Hosting Services</span>[/card-header]
+        [card-body]
+<p>We highly recommend setting up your web hosting with iFastNet. The company offers everything needed for a secure WordPress installation with the latest software and provides plenty of features that cost extra at other hosting providers.<br>Disclaimer: We are not associated with iFastNet and will not receive any commission for our endorsement.</p>
+<p>The <a href="https://ifastnet.com/portal/sharedhosting.php" target="_blank" rel="noopener noreferrer">shared hosting solution by iFastNet</a> includes all the necessary resources you will need to successfully manage your online presence and plenty of add-on resources available to accommodate growth. The system is built upon a powerful combination of servers and the latest Linux operating system (&gt;96% of the world’s top 1 million servers run on Linux). iFastNet incorporated only the best-of-breed hosting technologies that give you the control you want, the reliability you need, and the features your visitors will appreciate!</p>
+<ul>
+<li>Cisco Powered Network, Red Hat Linux Servers, Intel Processors, Apache Web Servers, CloudLinux, MySQL</li>
+<li>Super Premium: Unlimited diskspace, 250GB bandwidth, 20 addon domains, 100 email accounts</li>
+<li>Ultimate Premium: Unlimited diskspace, bandwidth, addon domains, and email accounts</li>
+<li> Remote MySQL, Free SSL Certificates (Let's Encrypt), HTTP/2 Support</li>
+<li>24/7 Monitoring, Firewall Protection, Web Firewall, SiteLock, Spam Filter Spam Assassin, Hotlink Protection, Leech Protect, UPS Power Back-up/Back-up Generator</li>
+<li>Unlimited email forwarders, Auto responders, Catch-All email address</li>
+<li>cPanel, WordPress, PHP, MySQL, PhpMyAdmin, full .htaccess control, custom cron jobs, mime types</li>
+<li>Free 24/7 tech support</li>
+</ul>
+<p>The Super Premium plan is sufficient for most websites. We recommend upgrading to the Ultimate Premium plan for sites with videos or many high-resolution images.</p>
+        [/card-body]
     [/card]
-    [card]
-        [card-header] Header 3 [/card-header]
-        [card-body][lorem-ipsum][/card-body]
+    [card class="mb-3 border-bottom"]
+        [card-header]<span class="large"><i class="fab fa-fw fa-2x mr-2 fa-expeditedssl"></i> SSL (Secure Socket Layer) certificate</span>[/card-header]
+        [card-body]
+<p>Today's online shoppers are savvy about online security. Before completing a transaction or sharing personal information via online forms with you, online visitors need to know that your website can be trusted. Secure Socket Layer (SSL) Certificates provide a visual indicator that your website is legitimate and secure.</p>
+<img src="/wp-content/uploads/2022/02/browser-bar-lock.png" alt="browser bar with closed lock">
+<p>By default, all iFastNet powered websites include a free Let’s Encrypt SSL certificate that provides the Secure Socket Layer (SSL) required to protect any part of your website where a customer may enter sensitive information. The certificate is valid for 90-days and will automatically renew for the next 90 days.</p>
+<p><u>Seals</u></p>
+<p>Premium SSL Certificates come with a trust seal that you can place on your website. It proved to increase visitor confidence and customer conversions. With Google and other major web browsers pushing the entire web towards HTTPS, Let’s Encrypt is ideal for taking the first step into the world of HTTPS. Let’s Encrypt is a great choice for smaller sites and blogs but it does not offer any site seals. Enterprise-level sites that handle sensitive data benefit from a premium SSL Certificate. For an e-commerce platform or any business that takes online payment directly, the safety of your customer data is crucial – something for which you’ll always want to ensure the maximum level of security and protection. While Let’s Encrypt can provide SSL protection, it can’t offer the comprehensive coverage and reliability provided by a premium SSL Certificate.</p>
+<p>We usually install the Let's Encrypt certificate but can help with a Trust Site Seal if deemed necessary by you.</p>
+        [/card-body]
+    [/card]
+    [card class="mb-3 border-bottom"]
+        [card-header]<span class="large"><i class="fas fa-fw fa-2x mr-2 fa-inbox"></i> Email accounts</span>[/card-header]
+        [card-body]We will create the master email account <i>info@yourdomain.com</i> and add forwarders to your personal email. The info email address will be used throughout the website. This way you don't have to keep an eye on yet another email account.[/card-body]
+    [/card]
+    [card class="mb-3 border-bottom"]
+        [card-header]<span class="large"><i class="fab fa-fw fa-2x mr-2 fa-wordpress"></i> WordPress</span>[/card-header]
+        [card-body]
+<p>We design the websites in the <a href="https://wordpress.org/" target="_blank" rel="noopener noreferrer">WordPress Content Management System</a> that provides content control of all parts of the website. WordPress is a free and open-source content management system written in PHP and paired with a MySQL or MariaDB database. Features include a plugin architecture and a template system, referred to within WordPress as Themes. As one of the most popular content management system solutions in use, WordPress is installed on 43% of the top 10 million websites as of October 2021. The WordPress plugin architecture allows users to extend the features and functionality of a website. As of December 2021, WordPress.org has over 55,000 plugins available, each of which offers custom functions and features that enable users to tailor their sites to their specific needs.
+<p><strong>Theme</strong></p>
+</p><p>WK Wow is a beautiful, attractive, and free WordPress theme. The theme can be used as the framework for all kinds of personal and professional websites. Its design and layout make it perfect to showcase your articles. This theme is based on Bootstrap 4 and adapts beautifully to all screen sizes. It is also compatible with WooCommerce and Contact Form 7. </p>
+<ul>
+<li><a href="https://wordpress.org/themes/wk-wow/" target="_blank" rel="noopener noreferrer">WK Wow Bootstrap 4 theme</a></li>
+<li>WK Wow client theme</li>
+</ul>
+<p>We expanded the theme with a client theme to add additional customizations and shortcodes.</p>
+<p><strong>Plugins</strong></p>
+<p> From the thousands of available plugins, we usually install and configure at least the following:</p>
+<ul>
+<li><a href="https://wordpress.org/plugins/broken-link-checker/" target="_blank" rel="noopener noreferrer">Broken Link Checker</a></li>
+<li><a href="https://wordpress.org/plugins/complete-bootstrap-4-shortcodes/" target="_blank" rel="noopener noreferrer">Complete Bootstrap 4 shortcodes</a></li>
+<li><a href="https://wordpress.org/plugins/contact-form-7/" target="_blank" rel="noopener noreferrer">Contact Form 7</a></li>
+<li>Core Functionality</li>
+<li><a href="https://wordpress.org/plugins/disable-comments/" target="_blank" rel="noopener noreferrer">Disable Comments</a></li>
+<li><a href="https://wordpress.org/plugins/display-posts-shortcode/" target="_blank" rel="noopener noreferrer">Display Posts</a></li>
+<li><a href="https://wordpress.org/plugins/flamingo/" target="_blank" rel="noopener noreferrer">Flamingo</a></li>
+<li><a href="https://wordpress.org/plugins/font-awesome/" target="_blank" rel="noopener noreferrer">Font Awesome</a></li>
+<li><a href="https://wordpress.org/plugins/mailpoet/" target="_blank" rel="noopener noreferrer">MailPoet</a></li>
+<li><a href="https://wordpress.org/plugins/media-library-assistant/" target="_blank" rel="noopener noreferrer">Media Library Assistant</a></li>
+<li><a href="https://wordpress.org/plugins/owm-weather/" target="_blank" rel="noopener noreferrer">OWM Weather</a></li>
+<li><a href="https://wordpress.org/plugins/post-expirator/" target="_blank" rel="noopener noreferrer">PublishPress Future</a></li>
+<li><a href="https://wordpress.org/plugins/simple-site-map-page/" target="_blank" rel="noopener noreferrer">Simple Site Map Page</a></li>
+<li><a href="https://wordpress.org/plugins/google-site-kit/" target="_blank" rel="noopener noreferrer">Site Kit by Google</a></li>
+<li><a href="https://wordpress.org/plugins/w3-total-cache/" target="_blank" rel="noopener noreferrer">W3 Total Cache</a></li>
+<li><a href="https://wordpress.org/plugins/opening-hours/" target="_blank" rel="noopener noreferrer">We’re Open!</a></li>
+<li><a href="https://wordpress.org/plugins/wp-google-maps/" target="_blank" rel="noopener noreferrer">WP Google Maps</a></li>
+<li><a href="https://wordpress.org/plugins/duplicate-post/" target="_blank" rel="noopener noreferrer">Yoast Duplicate Post</a></li>
+<li><a href="https://wordpress.org/plugins/wordpress-seo/" target="_blank" rel="noopener noreferrer">Yoast SEO</a></li>
+</ul>
+<p>These ready-to-use plugins - some installed on thousands of other websites - have been carefully selected by us and cut down on developing and testing time. Several plugins also come in a paid-for Pro version, but the standard version is usually sufficient to get started.</p>
+<p><strong>User Account</strong></p>
+<p>We create one WordPress user account with the Editor role. This allows someone without a web developer background to maintain parts of the website.</p>
+        [/card-body]
+    [/card]
+    [card class="mb-3 border-bottom"]
+        [card-header]<span class="large"><i class="fab fa-fw fa-2x mr-2 fa-google"></i> Google Account</span>[/card-header]
+        [card-body
+<p>]We create a Google account with the login yourdomain@gmail.com or something similar, subject to availability. The account will be used to register your business listings and analytics accounts whenever they allow a Google login. This way, we do not need your credentials during web development and you have fewer credentials to deal with.</p>
+        [/card-body]
+    [/card]
+    [card class="mb-3 border-bottom"]
+        [card-header]<span class="large"><i class="fas fa-fw fa-2x mr-2 fa-store"></i> Business Profiles</span>[/card-header]
+        [card-body]
+<p>Local search engines promote a business location in proximity to the searcher as well as its reputation and core details. This new form of local optimization was born as a result of major search engines such as Google, Microsoft Bing, Yahoo, and DuckDuckGo, to name of few.</p>
+<p>We will register your business with Google My Business, Microsoft Bing Places, and Yelp and enter your basic business information. We also upload your logo plus some pictures.</p>
+<p>Sometimes, these listings already exist but haven't been claimed yet. In this case, we will take over the listing on your behalf. Google and Microsoft verify ownership by sending a postcard with a code to the business address. Once this code is entered at the listing, the business is verified and shows up in searches.</p>
+        [/card-body]
+    [/card]
+    [card class="mb-3 border-bottom"]
+        [card-header]<span class="large"><i class="fas fa-fw fa-2x mr-2 fa-share-square"></i> Social Media</span>[/card-header]
+        [card-body]
+<p>We will create a Facebook Business Page for you and enter the basic business information. It is not a separate Facebook account but a page where the assigned user roles govern the access level. Your personal Facebook accounts are added as admins and allow you to maintain everything on the page. An admin can choose to interact with the page as the page owner (the standard) or with his personal account.</p>
+<p>Then we will create the Instagram account for the business and link it to the Facebook page. </p>
+        [/card-body]
+    [/card]
+    [card class="mb-3 border-bottom"]
+        [card-header]<span class="large"><i class="fas fa-fw fa-2x mr-2 fa-chart-line"></i> Analytics and Performance</span>[/card-header]
+        [card-body]
+<p>We will create the Google Tag Manager, Google Analytics, Google Search Console, and Bing Webmaster accounts for your business and connect them to the website.</p>
+<p><u>Google Tag Manager</u></p>
+<p>Google Tag Manager is a tag management system (TMS) that allows you to quickly and easily update measurement codes and related code fragments collectively known as tags on your website or mobile app. Once the small segment of Tag Manager code has been added to your project, you can safely and easily deploy analytics and measurement tag configurations from a web-based user interface.</p>
+<p>When Tag Manager is installed, your website or app will be able to communicate with the Tag Manager servers. You can then use Tag Manager's web-based user interface to set up tags, establish triggers that cause your tag to fire when certain events occur, and create variables that can be used to simplify and automate your tag configurations.</p>
+<p>A collection of tags, triggers, variables, and related configurations installed on a given website or mobile app is called a container. A Tag Manager container can replace all other manually-coded tags on a site or app, including tags from Google Ads, Google Analytics, Floodlight, and 3rd party tags. </p>
+<p><a href="https://support.google.com/tagmanager/answer/6102821?hl=en" target="_blank" rel="noopener noreferrer">Click here for an overview of Google Tag Manager.</a></p>
+<p><u>Google Analytics</u></p>
+<p>Google Analytics is an enterprise-class web analytics solution that gives you rich insights into your website traffic and marketing effectiveness.</p>
+<p><strong>Note:</strong> The creation of Google Analytics goals and reports is not part of the standard proposal but it is important to capture these metrics from day 1.</p>
+<ul>
+<li>Get the data you need, organized in the way you want to see it with custom reports.</li>
+<li>Reports can be scheduled for delivery via email, daily, weekly, monthly, etc.</li>
+<li>Complete campaign tracking capabilities.</li>
+<li>Mobile Tracking - Track mobile websites, mobile apps, and web-enabled mobile devices, including both high-end and non-JavaScript-enabled phones.</li>
+<li>Understand visitor intent, find out what your customers are looking for and speed up time to conversion.</li>
+<li>Data Export - Export your data with the Google Analytics Data Export API or email and export your data directly from the Google Analytics interface into Excel, CSV, PDF, and tab-delimited files.</li>
+</ul>
+<p><a href="https://marketingplatform.google.com/about/analytics/" target="_blank" rel="noopener noreferrer">Click here for a complete list of the features in Google Analytics.</a></p>
+<p><u>Google Search Console and Bing Webmaster Tools</u></p>
+<p>Google Search Console and Bing Webmaster Tools are web services that allow webmasters to check indexing status and optimize the visibility of their websites.</p>
+<p>The service includes tools that let webmasters</p>
+<ul>
+<li>Submit and check a sitemap.</li>
+<li>Check the crawl rate and view statistics about when Googlebot or BingBot accesses a particular site.</li>
+<li>Write and check a robots.txt file to help discover pages that are blocked accidentally.</li>
+<li>List internal and external pages that link to the website.</li>
+<li>Get a list of links that Googlebot or BinfBot had difficulty crawling, including the that the bot received when accessing the URLs in question.</li>
+<li>See what keyword searches on Google or Microsoft led to the site being listed on the results page plus the total clicks, total impressions, and the average click-through rates of such listings.</li>
+</ul>
+        [/card-body]
+    [/card]
+    [card class="mb-3 border-bottom"]
+        [card-header]<span class="large"><i class="fas fa-fw fa-2x mr-2 fa-user-shield"></i> Google reCAPTCHA</span>[/card-header]
+        [card-body]
+<p>Google offers reCAPTCHA v2 and v3 to help you protect your sites from fraudulent activities, spam, and abuse. We will create the keys for both versions and connect them to your website. The reCATCHA is then placed on all pages with user submittable forms. The user only sees a small badge, and the verification happens in the background.</p>
+<img src="/wp-content/uploads/2022/02/recaptcha.png" alt="Google reCAPTCHA badge">
+        [/card-body]
+    [/card]
+    [card class="mb-3 border-bottom"]
+        [card-header]<span class="large"><i class="fas fa-fw fa-2x mr-2 fa-code"></i> Custom Webpage Design</span>[/card-header]
+        [card-body]
+<p>We are passionate about quality and want to ensure your “virtual location” truly reflects the image your visitors expect. Not only will we custom design a look and feel to your requirements, but your site will be coded to industry standards to ensure your website is fast loading, functional, and search engine friendly.</p>
+<p>Custom web site design includes:</p>
+<ul>
+<li>Custom design of the outer framework (e.g. header and footer) that is common on all web pages</li>
+<li>Custom design of the page content (site map with inner detail pages):
+  <ul>
+    <li>Home Page (with map, image slider and newsletter subscription form)</li>
+    <li>Contact Us (including form with an email to the info address)</li>
+    <li><i>Other pages as needed</i></li>
+    <li>Site Map</li>
+    <li>Privacy policy (boilerplate)</li>
+    <li>Terms of service (boilerplate)</li>
+    <li><strong>Note:</strong> The privacy policy and terms of services are mandatory for the analytics and reCAPTCHA accounts.</li>
+  </ul>
+</li>
+</ul>
+        [/card-body]
+    [/card]
+    [card class="mb-3 border-bottom"]
+        [card-header]<span class="large"><i class="fas fa-fw fa-2x mr-2 fa-search"></i> SEO (Search Engine Optimization)</span>[/card-header]
+        [card-body]
+<p>All pages are carefully optimized with code, keywords, and features that target a search engine’s ranking requirements and the keywords a consumer will use when they search locally for a product or service. And looking to the future of the Mobile-Web, all location pages are embedded with Geo-Metatags that specify a location’s “ICBM” address using latitude and longitude coordinates.</p>
+<p>We apply unique metadata to pages, products, articles, and events. Metadata is structured information hidden behind your web pages within the source code. It describes the website content on your web pages in a structured way. Metadata primarily consists of basic descriptive text, keywords, and dates that help search engines determine who you are and how to index your web property. WordPress is designed to apply unique metadata for anything published, in an effort for all site content to get indexed and not just the home page.</p>
+        [/card-body]
+    [/card]
+    [card class="mb-3 border-bottom"]
+        [card-header]<span class="large"><i class="fas fa-fw fa-2x mr-2 fa-envelope-open-text"></i> Newsletter Email List</span>[/card-header]
+        [card-body]
+<p>We install the free WordPress plugin MailPoet to manage the newsletter. With MailPoet, your website visitors can sign up as newsletter subscribers and build your mailing list, all without leaving your WordPress admin.
+The newsletter builder integrates perfectly with WordPress, so any website owner can create beautiful emails from scratch or by using responsive templates that display flawlessly across all devices. Schedule your newsletters or send them right away in just a few clicks.</p>
+<p>Features:</p>
+<ul>
+<li>Small site owners with lists of 1,000 subscribers or fewer get the Premium for free</li>
+<li>Create and add a newsletter subscription form to your website</li>
+<li>Manage your subscribers and subscriber lists in WordPress</li>
+<li>Build and send newsletters with WordPress</li>
+<li>Create automatic emails to send new post notifications</li>
+<li>Send automated welcome emails</li>
+<li>Email through MailPoet’s Sending Service with a deliverability rate greater than 98%</li>
+<li>Insightful stats on your audience engagement</li>
+<li>Compliant with CAN-SPAM Act</li>
+</ul>
+        [/card-body]
+    [/card]
+    [card class="mb-3 border-bottom"]
+        [card-header]<span class="large"><i class="fas fa-fw fa-2x mr-2 fa-upload"></i> Publish Webpage</span>[/card-header]
+        [card-body]
+<p>In case your domain name or web hosting was not with iFastNet, we will help to configure your current domain name service so that it points to the new website. This switch takes about 24 hours to propagate through the internet.</p>
+        [/card-body]
+    [/card]
+    [card class="mb-3 border-bottom"]
+        [card-header]<span class="large"><i class="fas fa-fw fa-2x mr-2 fa-file-code"></i> Site Index for Search Engines Crawlers</span>[/card-header]
+        [card-body]
+<p>Every search engine provider uses crawlers to scan the internet for website content using the XML sitemap protocol. This sitemap informs the search engines exactly what to index so that their “spiders” don’t have to guess which pages contain relevant content. This results in optimal indexing of all your web pages, images, and documents - not just the homepage.</p>
+<p>We will set up your website so that crawlers always find the latest sitemap with all pages, posts, images, and documents.</p>
+        [/card-body]
+    [/card]
+    [card class="mb-3 border-bottom"]
+        [card-header]<span class="large"><i class="fas fa-fw fa-2x mr-2 fa-book"></i> Basic Documentation</span>[/card-header]
+        [card-body]
+<p>Once the website is live, we will provide you with at least the following documentation:</p>
+<ul>
+<li>List of accounts with user id and password</li>
+<li>How to take ownership of the Google account</li>
+<li>How to get into the Google My Business, Microsoft Bing, and Yelp accounts</li>
+<li>How to get into the Facebook Business page and Instagram account</li>
+<li>How to get into the WordPress user account</li>
+<li>How to manage the newsletter plugin</li>
+<li>How to add images</li>
+</ul>
+        [/card-body]
     [/card]
 [/accordion]
-[/card-body-outer]
-[card-footer] [/card-footer]
-[/card-outer]
-
-<h2 class="mt-5">Carousel</h2>
-
-[card]
-[card-header class="lead"]Carousel with text[/card-header]
-[card-body class="p4"]
-[carousel]
-[carousel-item active][lorem-ipsum tag="div"][/carousel-item]
-[carousel-item][lorem-ipsum tag="div"][/carousel-item]
-[carousel-item][lorem-ipsum tag="div"][/carousel-item]
-[carousel-item][lorem-ipsum tag="div"][/carousel-item]
-[/carousel]
-[/card-body]
-[card-footer] Card body adjust to paragraph height. [/card-footer]
-[/card]
-
-<hr class="m-5 wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-
-[card]
-[card-header class="lead"]Standard Carousel[/card-header]
-[card-body class="p4"]
-[carousel]
-[carousel-item active][img-gen responsive size="1200x200" text="Slide 1"][/carousel-item]
-[carousel-item][img-gen responsive size="1200x200" text="Slide 2" bg="C0C0C0"][/carousel-item]
-[carousel-item][img-gen responsive size="1200x200" text="Slide 3" bg="F00000"][/carousel-item]
-[carousel-item][img-gen responsive size="1200x200" text="Slide 4" bg="00F000"][/carousel-item]
-[/carousel]
-[/card-body]
-[card-footer] 4 slides, pause, no controls, no indicator, wrap, interval 5000ms[/card-footer]
-[/card]
-
-<hr class="m-5 wp-block-separator has-text-color has-background has-black-background-color has-black-color is-style-wide"/>
-
-[card]
-[card-header class="lead"]Customized Carousel[/card-header]
-[card-body class="p4"]
-[carousel pause="false" interval="1000" controls indicators fade]
-[carousel-item active]
-    [img-gen responsive size="1200x200" text=" "]
-    [carousel-caption] Caption 1 [/carousel-caption]
-[/carousel-item]
-[carousel-item]
-    [img-gen responsive size="1200x200" text=" " bg="C0C0C0"]
-    [carousel-caption] Caption 2 [/carousel-caption]
-[/carousel-item]
-[carousel-item]
-    [img-gen responsive size="1200x200" text=" " bg="F00000"]
-    [carousel-caption] Caption 3 [/carousel-caption]
-[/carousel-item]
-[carousel-item]
-    [img-gen responsive size="1200x200" text=" " bg="00F000"]
-    [carousel-caption] Caption 4 [/carousel-caption]
-[/carousel-item]
-[/carousel]
-[/card-body]
-[card-footer] 4 slides, no pause, controls, indicator, wrap, interval 1000ms [/card-footer]
-[/card]
-
-<h2 class="mt-5">Modal</h2>
-
-[card]
-[card-header class="lead"]Standard Modal Examples[/card-header]
-[card-body class="p4"]
-[button type="info" modal="example-modal-1"] No Backdrop [/button]
-[modal fade id="example-modal-1" backdrop="false"]
-[modal-header]Standard No Backdrop[/modal-header]
-[modal-body]
-[lorem-ipsum]
-[/modal-body]
-[modal-footer]
-[button type="secondary"] Lorem [/button]
-[button type="primary"] Ipsum [/button]
-[/modal-footer]
-[/modal]
-[button type="info" modal="example-modal-2"] Backdrop [/button]
-[modal fade id="example-modal-2" backdrop="true"]
-[modal-header]Standard Backdrop[/modal-header]
-[modal-body]
-[lorem-ipsum]
-[/modal-body]
-[modal-footer]
-[button type="secondary"] Lorem [/button]
-[button type="primary"] Ipsum [/button]
-[/modal-footer]
-[/modal]
-
-[button type="info" modal="example-modal-3"] Static Backdrop [/button]
-[modal fade id="example-modal-3" backdrop="static"]
-[modal-header]Standard Static Backdrop[/modal-header]
-[modal-body]
-[lorem-ipsum]
-[/modal-body]
-[modal-footer]
-[button type="secondary"] Lorem [/button]
-[button type="primary"] Ipsum [/button]
-[/modal-footer]
-[/modal]
-[/card-body]
-[card-footer]  [/card-footer]
-[/card]
-
-[card]
-[card-header class="lead"]Centered Small Modal Examples[/card-header]
-[card-body class="p4"]
-[button type="info" modal="example-modal-sm-1"] No Backdrop [/button]
-[modal size="sm" fade centered id="example-modal-sm-1" backdrop="false"]
-[modal-header]Small Centered No Backdrop[/modal-header]
-[modal-body]
-[lorem-ipsum]
-[/modal-body]
-[modal-footer]
-[button type="secondary"] Lorem [/button]
-[button type="primary"] Ipsum [/button]
-[/modal-footer]
-[/modal]
-[button type="info" modal="example-modal-sm2"] Backdrop [/button]
-[modal size="sm" fade centered id="example-modal-sm2" backdrop="true"]
-[modal-header]Small Centered Backdrop[/modal-header]
-[modal-body]
-[lorem-ipsum]
-[/modal-body]
-[modal-footer]
-[button type="secondary"] Lorem [/button]
-[button type="primary"] Ipsum [/button]
-[/modal-footer]
-[/modal]
-
-[button type="info" modal="example-modal-sm3"] Static Backdrop [/button]
-[modal size="sm" fade centered id="example-modal-sm3" backdrop="static"]
-[modal-header]Small Centered Static Backdrop[/modal-header]
-[modal-body]
-[lorem-ipsum]
-[/modal-body]
-[modal-footer]
-[button type="secondary"] Lorem [/button]
-[button type="primary"] Ipsum [/button]
-[/modal-footer]
-[/modal]
-[/card-body]
-[card-footer]  [/card-footer]
-[/card]
-
-<h2 class="mt-5">Float and Clearfix</h2>
-
-[card]
-[card-header class="lead"]Float and Clearfix Examples[/card-header]
-[card-body class="p4"]
-[clearfix class="bg-warning"]
-[float float="none"] No Float [/float]
-[float float="left"] Left Float [/float]
-[/clearfix]
-[clearfix class="mt-3 bg-warning"]
-[float float="left"] Left Float [/float]
-[float float="right"] Right Float [/float]
-[/clearfix]
-[clearfix class="mt-3 bg-warning"]
-[float float="none"] No Float [/float]
-[float float="right"] Right Float [/float]
-[/clearfix]
-[clearfix class="mt-3 bg-warning"]
-[float float="left"] Float Left [/float]
-[img-gen class="float-right" size="200" text="Image Right Float"]
-[/clearfix]
-[clearfix class="mt-3 bg-warning"]
-[img-gen class="float-left" size="200" text="Image Left Float"]
-[img-gen class="float-right" size="200" text="Image Right Float"]
-[/clearfix]
-[clearfix class="mt-3 bg-info"]
-[button class="btn-secondary float-left"]Example Button floated left[/button]
-[button class="btn-secondary float-right"]Example Button floated right[/button]
-[/clearfix]
-[/card-body]
-[card-footer]  [/card-footer]
-[/card]
-
-<h2 class="mt-5">Wrapper</h2>
-
-[card]
-[card-header class="lead"]Wrapper Example (set color for icon and text)[/card-header]
-[card-body class="p4"]
-
-[wrapper type="span" class="text-success d-flex"]
-[icon name="arrow-right" class="mr-2 fa-2x"]
-[lorem-ipsum]
-[/wrapper]
-
-[/card-body]
-[card-footer] Icon and Text inside [code inline]span[/code] with "success" color. [/card-footer]
-[/card]
-
-<script>
-(function () {
-  'use strict';
-  jQuery('a[href="#"]').click(function (event) {
-    event.preventDefault();
-  });
-})();
-</script>
+<div class="alert alert-info p-5 my-5"><i class="fas fa-exclamation-circle fa-2x mr-2"></i>We do not believe in holding a client’s online presence hostage by keeping control over any assets. All accounts are opened on your behalf and at the end of the project, the credentials will be delivered to you. All generated artifacts from this proposal will be your sole property with no recurring licensing fees to us.</div>
+<div id="contact-us" class="border border-dark p-3 mt-3">
+<h2>Contact us to set up a call</h2>
+[contact-form-7 id="7" title="Contact form"]
+</div>
+<!-- /wp:html -->

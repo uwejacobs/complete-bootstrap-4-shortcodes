@@ -39,6 +39,9 @@ nesting.
 
 ## Shortcode Reference
 
+![](https://www.paypal.com/en_US/i/scr/pixel.gif) Thanks for your
+consideration\!
+
 [](#layout)
 
 ### Layout
@@ -221,7 +224,7 @@ documentation](https://getbootstrap.com/docs/4.6/layout/grid/).
 
 ### Responsive Embeds
 
-    [embed-responsive ratio="16by9"]  [/embed-responsive]
+    [embed-responsive ratio="16by9"] [/embed-responsive]
 
 Wrap `<iframe>`, `<embed>`, `<video>`, and `<object>` elements to make
 them
@@ -711,23 +714,24 @@ Documentation](https://fontawesome.com/how-to-use/on-the-web/referencing-icons/b
 
 #### \[button\] parameters
 
-| Parameter | Description                                                                                                                                     | Required | Values                                                                | Default           |
-| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------- | --------------------------------------------------------------------- | ----------------- |
-| id        | Name the container for processing in custom CSS or JavaScript.                                                                                  | optional | Unique text identifier                                                | bs4-button-\#\#\# |
-| type      | The type of the button                                                                                                                          | optional | primary, secondary, success, info, warning, danger, dark, light, link | primary           |
-| size      | The size of the button                                                                                                                          | optional | sm, md, lg                                                            | md                |
-| block     | Whether the button should be a block-level button                                                                                               | optional | 🚩 (flag)                                                              |                   |
-| dropdown  | Whether the button triggers a dropdown menu (see [Button Dropdowns](#button-dropdowns))                                                         | optional | 🚩 (flag)                                                              |                   |
-| modal     | Whether the button triggers a modal popup (see [Modal](#modal))                                                                                 | optional | The id of the modal                                                   |                   |
-| active    | Apply the "active" style                                                                                                                        | optional | 🚩 (flag)                                                              |                   |
-| disabled  | Whether the button will be disabled                                                                                                             | optional | 🚩 (flag)                                                              |                   |
-| split     | Create a split button dropdown next to another button or link                                                                                   | optional | 🚩 (flag)                                                              |                   |
-| outline   | Turn the button into a bordered/outlined button                                                                                                 | optional | 🚩 (flag)                                                              |                   |
-| class     | Any extra classes you want to add                                                                                                               | optional | any text                                                              | none              |
-| data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text                                                              | none              |
-| tag       | The html tag of the button                                                                                                                      | optional | `button` or `a`                                                       | button            |
-| link      | The url you want the tag `a` to link to                                                                                                         | optional | any valid link                                                        | \\\#              |
-| target    | Where to open the link for tag `a`                                                                                                              | optional | \_self, \_blank, \_parent, \_top                                      | \_self            |
+| Parameter  | Description                                                                                                                                     | Required | Values                                                                | Default           |
+| ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------- | --------------------------------------------------------------------- | ----------------- |
+| id         | Name the container for processing in custom CSS or JavaScript.                                                                                  | optional | Unique text identifier                                                | bs4-button-\#\#\# |
+| type       | The type of the button                                                                                                                          | optional | primary, secondary, success, info, warning, danger, dark, light, link | primary           |
+| size       | The size of the button                                                                                                                          | optional | sm, md, lg                                                            | md                |
+| block      | Whether the button should be a block-level button                                                                                               | optional | 🚩 (flag)                                                              |                   |
+| dropdown   | Whether the button triggers a dropdown menu (see [Button Dropdowns](#button-dropdowns))                                                         | optional | 🚩 (flag)                                                              |                   |
+| modal      | Whether the button triggers a modal popup (see [Modal](#modal))                                                                                 | optional | The id of the modal                                                   |                   |
+| active     | Apply the "active" style                                                                                                                        | optional | 🚩 (flag)                                                              |                   |
+| disabled   | Whether the button will be disabled                                                                                                             | optional | 🚩 (flag)                                                              |                   |
+| split      | Create a split button dropdown next to another button or link                                                                                   | optional | 🚩 (flag)                                                              |                   |
+| outline    | Turn the button into a bordered/outlined button                                                                                                 | optional | 🚩 (flag)                                                              |                   |
+| tag        | The html tag of the button                                                                                                                      | optional | `button` or `a`                                                       | button            |
+| link       | The url you want the tag `a` to link to                                                                                                         | optional | any valid link                                                        | \#                |
+| target     | Where to open the link for tag `a`                                                                                                              | optional | \_self, \_blank, \_parent, \_top                                      | \_self            |
+| aria-label | If there is no text inside the button then an aria-label attribute can be used to give the button an accessible name                            | optional | Any text                                                              |                   |
+| class      | Any extra classes you want to add                                                                                                               | optional | any text                                                              | none              |
+| data       | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text                                                              | none              |
 
 [Bootstrap button
 documentation](https://getbootstrap.com/docs/4.6/components/buttons/)
@@ -927,7 +931,8 @@ documentation](https://getbootstrap.com/docs/4.6/components/dropdowns/)
 | dropdown  | Whether the item activates a "dropdown" menu                                                                                                    | optional | 🚩 (flag)               |         |
 | active    | Whether the item has the "active" style applied                                                                                                 | optional | 🚩 (flag)               |         |
 | disabled  | Whether the item is disabled                                                                                                                    | optional | 🚩 (flag)               |         |
-| class     | Any extra classes you want to add                                                                                                               | optional | any text               | none    |
+| listclass | Any extra classes you want to add to the list                                                                                                   | optional | any text               | none    |
+| class     | Any extra classes you want to add to the link                                                                                                   | optional | any text               | none    |
 | data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text               | none    |
 
 [Bootstrap button navs
@@ -1152,6 +1157,9 @@ documentation](https://getbootstrap.com/docs/4.6/components/alerts/)
 | type      | The type of the progress bar                                                                                                                    | optional | primary, secondary, success, info, warning, danger, light, dark | primary |
 | striped   | Whether enclosed progress bars will be striped                                                                                                  | optional | 🚩 (flag)                                                        |         |
 | animated  | Whether enclosed progress bars will be animated                                                                                                 | optional | 🚩 (flag)                                                        |         |
+| title     | The title of the progress bar for screen readers                                                                                                | optional | Any text                                                        |         |
+| minimum   | The minimum value of the progress bar for screen readers                                                                                        | optional | Any number                                                      | 0       |
+| maximum   | The maximum value of the progress bar for screen readers                                                                                        | optional | Any number                                                      | 100     |
 | class     | Any extra classes you want to add                                                                                                               | optional | any text                                                        | none    |
 | data      | Data attribute and value pairs separated by a comma. Pairs separated by pipe. See example at [\[container\] parameters](#container-parameters). | optional | any text                                                        | none    |
 

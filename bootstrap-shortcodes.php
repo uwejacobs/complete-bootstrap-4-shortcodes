@@ -3,7 +3,7 @@
 Plugin Name: Complete Bootstrap 4 Shortcodes
 Plugin URI: https://github.com/uwejacobs/complete-bootstrap-4-shortcodes
 Description: The plugin adds shortcodes for most Bootstrap 4 elements.
-Version: 4.6.2
+Version: 4.6.3
 Author: Uwe Jacobs
 Author URI:
 License: MIT
@@ -248,7 +248,8 @@ class BootstrapShortcodes {
             "target" => '_self',
             "type" => 'primary',
             "size" => false,
-            "modal" => false,
+	    "modal" => false,
+	    "aria-label" => false,
             "class" => false,
             "data" => false
         ) , $save_atts);
@@ -272,6 +273,8 @@ class BootstrapShortcodes {
         $class[] = ($this->is_flag('split', $save_atts)) ? 'dropdown-toggle-split' : '';
         $class[] = ($atts['class']) ? $atts['class'] : '';
 
+	$aria_label = ($this->is_flag('dropdown', $save_atts) || $this->is_flag('split', $save_atts) ) ? ' aria-label="Menu Dropdown Toggle"' : '';
+
         $button_data = array();
         $button_data[] = ($this->is_flag('dropdown', $save_atts)) ? 'toggle,dropdown' : '';
         if ($atts['modal']) {
@@ -287,12 +290,12 @@ class BootstrapShortcodes {
         );
 
         if ($atts['tag'] == 'a') {
-            $str = '<a role="button" href="' . esc_url($atts['link']) . '" target="' . $atts['target'] . '">';
+            $str = '<a role="button" href="' . esc_url($atts['link']) . '" target="' . $atts['target'] . $aria_label . '">';
             $wrap_before = ($content && $this->testdom($content, $search_tags)) ? '' : $str;
             $wrap_after = ($content && $this->testdom($content, $search_tags)) ? '' : '</a>';
         }
         else {
-            $wrap_before = ($content && $this->testdom($content, $search_tags)) ? '' : '<button>';
+            $wrap_before = ($content && $this->testdom($content, $search_tags)) ? '' : '<button' . $aria_label . '>';
             $wrap_after = ($content && $this->testdom($content, $search_tags)) ? '' : '</button>';
         }
 
@@ -476,7 +479,7 @@ class BootstrapShortcodes {
 
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        return sprintf('<div%s role="menu"%s%s>%s</div>', $id, $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
+        return sprintf('<div%s%s%s>%s</div>', $id, $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
     }
 
     /*--------------------------------------------------------------------------------------
@@ -706,7 +709,9 @@ class BootstrapShortcodes {
         $a_class[] = ($this->is_flag('dropdown', $save_atts)) ? 'dropdown-toggle' : '';
         $a_class[] = ($this->is_flag('active', $save_atts)) ? 'active' : '';
         $a_class[] = ($this->is_flag('disabled', $save_atts)) ? 'disabled' : '';
-        $a_aria = ($this->is_flag('disabled', $save_atts)) ? ' aria-disabled="true"' : '';
+	$a_aria = ($this->is_flag('disabled', $save_atts)) ? ' aria-disabled="true"' : '';
+
+	$aria_label = ($this->is_flag('dropdown', $save_atts)) ? ' aria-label="Menu Dropdown Toggle"' : '';
 
         $id = (!empty($atts['id']) ? ' id="' . esc_attr($atts['id']) . '"' : '');
 
@@ -717,7 +722,7 @@ class BootstrapShortcodes {
         //* If we have a dropdown shortcode inside the content we end the link before the dropdown shortcode, else all content goes inside the link
         $content = ($this->is_flag('dropdown', $save_atts)) ? str_replace('[dropdown-menu]', '</a>[dropdown-menu]', $content) : $content;
 
-        return sprintf('<li%8$s%1$s><a href="%2$s"%3$s%4$s%5$s%6$s>%7$s</a></li>', $this->class_output($li_class, $atts['listclass']) , esc_url($atts['link']) , $this->class_output($a_class, $atts["class"]) , ($this->is_flag('dropdown', $save_atts)) ? ' data-toggle="dropdown"' : '', $data_props, $a_aria, do_shortcode($content), $id);
+        return sprintf('<li%8$s%1$s%9$s><a href="%2$s"%3$s%4$s%5$s%6$s>%7$s</a></li>', $this->class_output($li_class, $atts['listclass']) , esc_url($atts['link']) , $this->class_output($a_class, $atts["class"]) , ($this->is_flag('dropdown', $save_atts)) ? ' data-toggle="dropdown"' : '', $data_props, $a_aria, do_shortcode($content), $id, $aria_label);
     }
 
     /*--------------------------------------------------------------------------------------
@@ -1162,11 +1167,12 @@ class BootstrapShortcodes {
         $wrap_before = '';
         $wrap_after = '';
 
-        $id = (isset($GLOBALS['accordion'])) ? ' id="bs4-heading-' . esc_attr($GLOBALS['accordion_card']) . '"' : '';
-        $wrap_before .= ($this->testdom($content, $search_tags)) ? '' : '<div class="card-header"' . $id . '>';
+	$id = (isset($GLOBALS['accordion'])) ? ' id="bs4-heading-' . esc_attr($GLOBALS['accordion_card']) . '"' : '';
+	$role = (isset($GLOBALS['accordion'])) ? ' role="tab"' : '';
+        $wrap_before .= ($this->testdom($content, $search_tags)) ? '' : '<div class="card-header"' . $id . $role . '>';
         $wrap_after .= ($this->testdom($content, $search_tags)) ? '' : '</div>';
 
-        $wrap_before .= (isset($GLOBALS['accordion'])) ? sprintf('<button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#bs4-collapse-%1$s" aria-controls="bs4-collapse-%1$s" aria-expanded="%2$s">', esc_attr($GLOBALS['accordion_card']), esc_attr($GLOBALS['accordion_card_show']) ? 'true' : 'false') : '';
+        $wrap_before .= (isset($GLOBALS['accordion'])) ? sprintf('<button class="btn btn-block text-left" type="button" data-toggle="collapse" data-target="#bs4-collapse-%1$s" aria-controls="bs4-collapse-%1$s" aria-expanded="%2$s">', esc_attr($GLOBALS['accordion_card']), esc_attr($GLOBALS['accordion_card_show']) ? 'true' : 'false') : '';
         $wrap_before .= (isset($GLOBALS['accordion'])) ? '<i class="fa fa-plus float-right"></i>' : '';
         $wrap_after .= (isset($GLOBALS['accordion'])) ? '</button>' : '';
 
@@ -1372,8 +1378,11 @@ class BootstrapShortcodes {
             // "animated"
             // "label"
             "id" => false,
-            "type" => false,
-            "percent" => false,
+            "title" => false,
+	    "type" => false,
+	    "percent" => false,
+	    "minimum" => 0,
+	    "maximum" => 100,
             "class" => false,
             "data" => false
         ) , $save_atts);
@@ -1387,10 +1396,11 @@ class BootstrapShortcodes {
         $class[] = ($this->is_flag('animated', $save_atts)) ? 'progress-bar-animated' : '';
 
         $id = (!empty($atts['id']) ? ' id="' . esc_attr($atts['id']) . '"' : '');
+        $title = (!empty($atts['title']) ? ' title="' . esc_attr($atts['title']) . '"' : '');
 
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        return sprintf('<div%s%s role="progressbar" %s%s>%s</div>', $id, $this->class_output($class, $atts["class"]) , ($atts['percent']) ? ' style="width: ' . (int)$atts['percent'] . '%;"' : '', $data_props, ($atts['percent']) ? sprintf('<span%s>%s</span>', (!$this->is_flag('label', $save_atts)) ? ' class="sr-only"' : '', (int)$atts['percent'] . '%') : '');
+        return sprintf('<div%s%s%s role="progressbar" %s%s aria-valuenow="%s" aria-valuemin="%s" aria-valuemax="%s0">%s</div>', $id, $title, $this->class_output($class, $atts["class"]) , ($atts['percent']) ? ' style="width: ' . (int)$atts['percent'] . '%;"' : '', $data_props, (int)$atts['percent'], (int)$atts['minimum'], (int)$atts['maximum'], ($atts['percent']) ? sprintf('<span%s>%s</span>', (!$this->is_flag('label', $save_atts)) ? ' class="sr-only"' : '', (int)$atts['percent'] . '%') : '');
     }
 
     /*--------------------------------------------------------------------------------------
@@ -1961,7 +1971,7 @@ class BootstrapShortcodes {
 
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        $return = sprintf('<div%s id="%s" data-ride="carousel"%s%s%s%s>%s<div class="carousel-inner" role="listbox">%s</div>%s</div>', $this->class_output($class, $atts['class']) , $id , ($atts['interval']) ? sprintf(' data-interval="%d"', esc_attr($atts['interval'])) : '', ($atts['pause']) ? sprintf(' data-pause="%s"', esc_attr($atts['pause'])) : '', ($atts['wrap']) ? sprintf(' data-wrap="%s"', esc_attr($atts['wrap'])) : '', $data_props, ($this->is_flag('indicators', $save_atts)) ? '<ol class="carousel-indicators">' . implode($indicators) . '</ol>' : '', $content, ($this->is_flag('controls', $save_atts)) ? $controls : '');
+        $return = sprintf('<div%s id="%s" data-ride="carousel"%s%s%s%s>%s<div class="carousel-inner">%s</div>%s</div>', $this->class_output($class, $atts['class']) , $id , ($atts['interval']) ? sprintf(' data-interval="%d"', esc_attr($atts['interval'])) : '', ($atts['pause']) ? sprintf(' data-pause="%s"', esc_attr($atts['pause'])) : '', ($atts['wrap']) ? sprintf(' data-wrap="%s"', esc_attr($atts['wrap'])) : '', $data_props, ($this->is_flag('indicators', $save_atts)) ? '<ol class="carousel-indicators">' . implode($indicators) . '</ol>' : '', $content, ($this->is_flag('controls', $save_atts)) ? $controls : '');
 
         $return = $this->addclass($item_tags, $return, $item_class);
         $return = $this->addclass($item_tags, $return, $active_class, '1');
@@ -1991,11 +2001,14 @@ class BootstrapShortcodes {
         $class[] = 'carousel-item';
         $class[] = ($this->is_flag('active', $save_atts)) ? 'active' : '';
 
-        $id = (!empty($atts['id']) ? ' id="' . esc_attr($atts['id']) . '"' : '');
+        if (isset($GLOBALS['carousel_inner_count'])) $GLOBALS['carousel_inner_count']++;
+        else $GLOBALS['carousel_inner_count'] = 0;
+
+	$id = (!empty($atts['id']) ? esc_attr($atts['id']) : 'bs4-carousel-inner-' . esc_attr($GLOBALS['carousel_inner_count']));
 
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        return sprintf('<div%s%s%s>%s</div>', $id, $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
+        return sprintf('<div id="%s"%s%s>%s</div>', $id, $this->class_output($class, $atts["class"]) , $data_props, do_shortcode($content));
     }
 
     /*--------------------------------------------------------------------------------------
