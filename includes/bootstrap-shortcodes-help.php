@@ -92,7 +92,7 @@ $html = file_get_contents(dirname(__FILE__) . '/help/README.html');
 // ======================================================================== //
 ?>
 
-<div id="bootstrap-shortcodes-help" class="modal fade d-none" style="display:none">
+<div id="bootstrap-shortcodes-help" class="modal fade">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">

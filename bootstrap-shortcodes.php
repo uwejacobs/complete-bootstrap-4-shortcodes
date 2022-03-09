@@ -3,7 +3,7 @@
 Plugin Name: Complete Bootstrap 4 Shortcodes
 Plugin URI: https://github.com/uwejacobs/complete-bootstrap-4-shortcodes
 Description: The plugin adds shortcodes for most Bootstrap 4 elements.
-Version: 4.6.3
+Version: 4.6.4
 Author: Uwe Jacobs
 Author URI:
 License: MIT
@@ -1400,7 +1400,7 @@ class BootstrapShortcodes {
 
         $data_props = $this->parse_data_attributes($atts['data']);
 
-        return sprintf('<div%s%s%s role="progressbar" %s%s aria-valuenow="%s" aria-valuemin="%s" aria-valuemax="%s0">%s</div>', $id, $title, $this->class_output($class, $atts["class"]) , ($atts['percent']) ? ' style="width: ' . (int)$atts['percent'] . '%;"' : '', $data_props, (int)$atts['percent'], (int)$atts['minimum'], (int)$atts['maximum'], ($atts['percent']) ? sprintf('<span%s>%s</span>', (!$this->is_flag('label', $save_atts)) ? ' class="sr-only"' : '', (int)$atts['percent'] . '%') : '');
+        return sprintf('<div%s%s%s role="progressbar" %s%s aria-valuenow="%s" aria-valuemin="%s" aria-valuemax="%s">%s</div>', $id, $title, $this->class_output($class, $atts["class"]) , ($atts['percent']) ? ' style="width: ' . (int)$atts['percent'] . '%;"' : '', $data_props, (int)$atts['percent'], (int)$atts['minimum'], (int)$atts['maximum'], ($atts['percent']) ? sprintf('<span%s>%s</span>', (!$this->is_flag('label', $save_atts)) ? ' class="sr-only"' : '', (int)$atts['percent'] . '%') : '');
     }
 
     /*--------------------------------------------------------------------------------------

@@ -67,7 +67,9 @@
         include( BS_SHORTCODES_DIR . 'bootstrap-shortcodes-help.php');
     }
 
-    add_action( 'admin_footer', 'bootstrap_shortcodes_help' );
+    add_action( 'admin_footer-post.php', 'bootstrap_shortcodes_help' );
+    add_action( 'admin_footer-post-new.php', 'bootstrap_shortcodes_help' );
+
 
 // ======================================================================== // 
 
