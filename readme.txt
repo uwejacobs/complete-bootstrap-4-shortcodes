@@ -3,7 +3,7 @@ Contributors: uwejacobs
 Tags: bootstrap,shortcode,shortcodes,responsive,grid,flex,lorem ipsum,dummy image generator
 Donate link: paypal.me/ujsoftware
 Requires at least: 3.8
-Tested up to: 5.9
+Tested up to: 5.9.2
 Requires PHP: 7.0
 Stable tag: 4.6.4
 License: MIT License
@@ -23,7 +23,6 @@ Check the demo page "Bootstrap 4 Shortcodes Demo 4.6.4" after activation for rea
 For questions, support, or to contribute to this plugin, check out [our GitHub project](https://github.com/uwejacobs/complete-bootstrap-4-shortcodes).
 
 == Overview ==
-See the shortcodes in action on our [demo page](https://ujsoftware.com/bootstrap-4-shortcodes-demo-4.6.4/).
 
 = Layout: =
 * Grid

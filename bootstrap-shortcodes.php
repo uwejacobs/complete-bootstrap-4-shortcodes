@@ -2382,9 +2382,7 @@ class BootstrapShortcodes {
 
         $img_id = ($atts['img_id']) ? $atts['img_id'] : '';
         $img_srcset = wp_get_attachment_image_srcset( $img_id );
-error_log(print_r($img_srcset,1));
         $img_sizes = wp_get_attachment_image_sizes( $img_id );
-error_log(print_r($img_sizes,1));
         return '<img class="img-fluid wp-image-' . esc_attr($img_id) . '" loading="lazy" src="' . wp_get_attachment_image_url( $img_id ) . '" srcset="' . esc_attr( $img_srcset ) . '" sizes="' . esc_attr( $img_sizes ) . '">';
     }
 
@@ -3459,7 +3457,6 @@ $x = $content;
             $content = str_replace("<br />\n", '', $content);
             $content = str_replace("<p></p>", '', $content);
         }
-if($x != $content) error_log($x . '\n\n' . $content);
         return $content;
     }
 
